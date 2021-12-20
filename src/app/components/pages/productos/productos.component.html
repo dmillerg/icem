@@ -1,0 +1,75 @@
+<div class="container" [@scaleAnimation]="'enter'">
+    <div #especification style="transform: translateY(-100px);"></div>
+    <div class="row ">
+        <div class="col-sm-2" [@listAnimation]="categorias.length">
+            <div class="lineatitulo">
+                <div class="linea bg-dark"></div>
+                <h3 style="margin-bottom: 20px;">Categorías</h3>
+                <div class="linea bg-dark"></div>
+            </div>
+            <div class="category-list" *ngFor="let item of categorias">
+                <div [id]="item.nombre" class="category-item" (click)="swichtProductos($event, item.id)">
+                    <div class="category-text-item">
+                        <div>{{item.nombre}}</div>
+                        <!-- Cras justo odio -->
+                    </div>
+                    <!-- <span class="badge bg-primary rounded-pill">14</span> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-10 animado">
+            <div>
+                <app-productos-especificacion [oculto]="producto_especificacion" [producto]="producto" [id]="id"
+                    [categoria]="category"></app-productos-especificacion>
+            </div>
+            <!-- <div class="row" [hidden]="!producto_especificacion">
+                <div class="col-sm-4" *ngFor="let item of productos">
+                    <app-producto [producto]="item" [emisor]="swicthEspecification($event)">
+                    </app-producto>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="row p-4"></div>
+
+</div>
+<div class="container">
+    <div class="row animado" style="width: 100%; position: relative;">
+        <div class="col-sm-2">
+            <div class="mitad bg-firstcolor text-center text-firstcolor"
+                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 30px;left: 40px;">
+            </div>
+            <div class="mitad bg-white text-center text-white"
+                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 25px;left: 35px;">
+            </div>
+            <div class="mitad bg-firstcolor text-center text-firstcolor"
+                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 20px;left: 30px;">
+            </div>
+            <div class="mitad bg-white text-center text-white"
+                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 15px;left: 25px;">
+            </div>
+            <div class="mitad bg-firstcolor text-center text-firstcolor"
+                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 10px;left: 20px;">
+            </div>
+            <div class="mitad bg-white text-center text-white"
+                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 5px;left: 15px;">
+            </div>
+            <div class="mitad bg-firstcolor text-center text-white"
+                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); position: absolute;">
+                <h5><strong>Productos</strong></h5>
+            </div>
+
+        </div>
+
+        <div class="col-sm-10 " style="display: flex; flex-direction: row;overflow-x: auto; "
+            [@listAnimation]="productos.length">
+            <div *ngFor="let item of productos" style="width: 16rem;">
+                <app-producto [producto]="item" style="margin-inline: 20px;"
+                    (emisor)="swicthEspecification($event, especification)">
+                </app-producto>
+            </div>
+            <div style="width: 30px;height: 100%;position: absolute;right: 0;background: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, white 60%);
+            "></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,160 @@
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+
+body {
+    margin: 0;
+}
+
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: 48px;
+}
+
+p {
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 1px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.header {
+    position: relative;
+    text-align: center;
+    color: white;
+    background-blend-mode: hard-light;
+}
+
+.logo {
+    width: 35%;
+}
+
+.inner-header {
+    height: 35vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.flex {
+    /*Flexbox for containers*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.waves {
+    position: relative;
+    width: 100%;
+    height: 15vh;
+    margin-bottom: -7px;
+    /*Fix for safari gap*/
+    min-height: 100px;
+    max-height: 150px;
+}
+
+.content {
+    position: relative;
+    height: 20vh;
+    text-align: center;
+    background-color: white;
+}
+
+
+
+
+.nav-mine {
+    margin: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    transition: 500ms;
+    cursor: pointer;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.74);
+}
+
+.nav-mine:hover {
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.74);
+    color: var(--firstcolor);
+    font-weight: 900px;
+    font: bold;
+    transition: 500ms;
+    margin: 15px;
+}
+
+.buscador {
+    display: flex;
+    flex-direction: row;
+}
+
+.shape {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border: 5px solid #32557f;
+}
+
+.shape12 {
+    border-radius: 10px 20px 30px 40px/30px;
+}
+
+.back-transparent {
+    background: rgba(0, 0, 0, .1);
+    transition: 500ms;
+}
+
+.back-transparent:hover {
+    background: rgba(0, 0, 0, .8);
+    transition: 500ms;
+}
+
+.back-oscuro {
+    background: rgba(0, 0, 0, .9);
+    transition: 500ms;
+}
+
+.title-navbar {
+    /* transform: translateX(-200px);
+    transition: 500ms; */
+}
+
+.active {
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.74);
+    color: rgb(59, 65, 142);
+}
+
+.navbar-toggle:focus .back-transparent {
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.navbar-fondo {
+    -webkit-clip-path: polygon(0 0, 100% 0, 86% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 86% 100%, 0% 100%);
+    width: 100%;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+}
+
+.navbar-fondo2{
+    -webkit-clip-path: polygon(0 0, 100% 0, 86% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 86% 100%, 0% 100%);
+    width: 100%;
+    height: 350px;
+}
+
+.navbar-content {
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+.image {
+    width: 100%;
+    height: 300px;
+}
+
+

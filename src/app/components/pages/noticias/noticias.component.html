@@ -1,0 +1,17 @@
+<div class="container" [@scaleAnimation]="'enter'">
+  <div class="producto-section">
+    <h1 class="title-section2 text-section"><strong>Noticias...</strong></h1>
+    <div class="row p-4"></div>
+  </div>
+  <div class="row p-2"></div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row" [@listAnimation]="noticiaScrap.length">
+        <div *ngFor="let item of noticiaScrap" class="col-sm-3">
+          <app-noticia-item [noticia]="item" (emisor)="cambiarNoticia($event)"></app-noticia-item>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row p-4"></div>
+</div>

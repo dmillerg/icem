@@ -1,0 +1,152 @@
+<!-- Footer -->
+<footer class="text-center text-lg-start text-white container-fluid bg-firstcolor" style="
+
+
+
+-webkit-clip-path: polygon(0 41%, 9% 11%, 95% 11%, 95% 5%, 10% 5%, 12% 0, 100% 0, 100% 100%, 0 100%); clip-path: polygon(0 41%, 9% 11%, 95% 11%, 95% 5%, 10% 5%, 12% 0, 100% 0, 100% 100%, 0 100%);
+">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+
+        <!-- <div class="rounded-circle icon-footer">
+            <img class="" src="assets/icon-icem.png">
+        </div> -->
+        <!-- Section: Links -->
+        <section class="">
+            <!--Grid row-->
+            <div class="row p-4"></div>
+            <div class="row p-4"></div>
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <div [ngClass]="{'autenticar': showLogin, 'autenticado': !showLogin}" [hidden]="showLogin">
+                        <h5 class="text-uppercase">ICEM
+                        </h5>
+
+                        <p>
+                            Empresa Cubana especializada en la fabricación y comercialización de equipos médicos, instrumentos ortopédicos y ayudas técnicas, mobiliario clínico, gastronómicos y de oficina, estanterías, soluciones constructivas diversas, perfiles conformados en frío
+                            y servicios a sus clientes nacionales.
+                        </p>
+                    </div>
+                    <form #formlogin [ngClass]="{'autenticar': !showLogin, 'autenticado': showLogin}" [hidden]="!showLogin">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Usuario</label>
+                            <input type="email" name="usuario" [(ngModel)]="usuario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                            <input type="password" name="password" [(ngModel)]="password" class="form-control" id="exampleInputPassword1">
+                            <p class="text-danger" [hidden]="!errorAuth">usuario o contraseña incorrecta</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="login()">Autenticar</button>
+                        <button type="submit" class="btn btn-danger" (click)="cancelarLogin()" style="margin-left: 10px;">Cancelar</button>
+                    </form>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0 text-center">
+                    <h5 class="text-uppercase">Información</h5>
+
+                    <ul class="list-unstyled mb-0">
+
+                        <li>
+                            <p href="#!" class="text-white">
+                                <i class="fa fa-map-marker"></i> Avenida 114 S/N e/85 y Autopista Este Oeste, Marianao-La Habana, Cuba
+                            </p>
+                        </li>
+                        <li>
+                            <p href="#!" class="text-white">
+                                <i class="fa fa-phone" style="rotate: 90deg;"></i> Teléfono: (+53)7 260-04 21 al 29
+                            </p>
+                        </li>
+                        <li>
+                            <p href="#!" class="text-white">
+                                <i class="fa fa-envelope"></i> Email: comercial@icem.cu
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0 text-center">
+                    <h5 class="text-uppercase">Enlaces</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="http://plataforma-educativa.gesta.cu/" target="_blank" class="enlace">GESTA</a>
+                        </li>
+                        <li>
+                            <a href="https://www.gelect.cu/" target="_blank" class="enlace">GELECT</a>
+                        </li>
+                        <li>
+                            <a href="http://www.disaic.cu/" target="_blank" class="enlace">DISAIC</a>
+                        </li>
+                        <li>
+                            <a href="https://www.mindus.gob.cu/es" target="_blank" class="enlace">MINDUS</a>
+                        </li>
+                        <li>
+                            <a href="#!" target="_blank"  class="enlace">CATÁLOGOS</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+
+                    <img src="assets/map.jpg" (click)="verMapa()" class="img-fluid img-thumbnail map-elevation" style="cursor: zoom-in;">
+                </div>
+                <!--Grid column-->
+
+
+            </div>
+            <!--Grid row-->
+        </section>
+        <!-- Section: Links -->
+
+        <hr class="mb-4" />
+
+        <!-- Section: CTA -->
+        <section class="">
+            <p class="d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-firstcolor btn-rounded" [ngClass]="{'autenticar': showLogin, 'autenticado': !showLogin}" (click)="showLogins(formlogin)">
+                    <i class="fa fa-user"></i>
+                    <!-- <img src="./../../../assets/icono-kuroko.png" style="height: 25px;"> -->
+                    {{btn_message}}
+                </button>
+            </p>
+        </section>
+        <!-- Section: CTA -->
+
+        <hr class="mb-10" />
+
+        <!-- Section: Social media -->
+        <section class="mb-4 text-center">
+            <!-- Facebook -->
+            <a class="btn btn-outline-primary btn-floating m-1 rounded-circle" href="https://www.facebook.com/ICEMCuba"  target="_blank" role="button"><i class="fab fa-facebook-f"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-outline-success btn-floating m-1 rounded-circle" href="https://www.google.com/search?client=firefox-b-d&q=icem+cuba" target="_blank" role="button"><i
+                    class="fab fa-google"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-outline-warning btn-floating m-1 rounded-circle correo" href="https://www.facebook.com/ICEMCuba" target="_blank" role="button"><i class="fa fa-envelope"></i></a>
+
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+
+    <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.4)">
+        © 2020 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">EzraProd</a>.Todos los derechos reservados
+        <p>Ultima actualización del contenido: Domingo, Octubre 3, 2021 - 12:17pm</p>
+
+    </div>
+    <!-- Copyright -->
+</footer>
+
+<!-- End of .container -->

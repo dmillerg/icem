@@ -1,0 +1,14 @@
+<div class="container" [@scaleAnimation]="'enter'">
+    <div class="row p-4"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div *ngFor="let item of busqueda" class="card card-mine text-start" (click)="verMas(item)">
+                <h3 class="h3">{{item.titulo}}</h3>
+                <p style="font-size: small;">{{item.fecha}}</p>
+                <p>{{item.descripcion}}</p>
+                <p>localizacion: {{item.tipo}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row p-4"></div>
+</div>

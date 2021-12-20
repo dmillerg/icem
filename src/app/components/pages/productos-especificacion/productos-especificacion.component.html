@@ -1,0 +1,26 @@
+<div class="container" [@scaleAnimation]="'enter'">
+    <div class="row text-center"></div>
+    <div class="row text-end" style="padding-block: 2%;font-size: small;">
+        <div class="col-sm-6">
+            <img class="imagen img-fluid" [src]="producto.imagen" />
+        </div>
+        <div class="col-sm-6 text-start">
+            <div class="title-text text-start">
+                <h1 class="number text-section"><strong>{{id}}</strong></h1>
+                <h1 class="text-firstcolor" style="position: absolute;bottom: 5px;"><strong>{{producto.titulo}}</strong></h1>
+            </div>
+            <p>{{producto.fecha}}</p>
+            <p><strong>Categoría:</strong> {{categoria}}</p>
+        </div>
+        <div class="col-sm-12 text-start" style="padding-left: 10%;">
+          <h3 class="h3" [hidden]="producto.descripcion.length == 0">Descripción</h3>
+            <p>{{producto.descripcion}}</p>
+            <h3 class="h3" [hidden]="producto.usos.length == 0">Usos</h3>
+            <p>{{producto.usos}}</p>
+            <h3 class="h3" [hidden]="producto.especificaciones.length == 0">Especificaciones</h3>
+            <p>{{producto.especificaciones}}</p>
+            <h3 class="h3" [hidden]="producto.garantia.length == 0">Garantía</h3>
+            <p>{{producto.garantia}}</p>
+        </div>
+    </div>
+</div>

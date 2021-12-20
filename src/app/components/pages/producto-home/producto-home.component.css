@@ -1,0 +1,37 @@
+
+.title-text {
+    width: 100%;
+    float: left;
+    position: relative;
+    padding-inline: 20px;
+}
+
+.descripcion-text {
+    font-size: small;
+}
+
+.linea {
+    height: 5px;
+    width: 90%;
+}
+
+.linea-active {
+    height: 100%;
+    background: linear-gradient(-90deg, rgb(59, 65, 142) 70%, rgb(245, 17, 245) );
+}
+
+.image {
+    margin-top: 30px;
+    width: 90%;
+}
+
+.img {
+    position: relative;
+}
+
+.img-backlogo-bottom-rigth{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40%;
+}

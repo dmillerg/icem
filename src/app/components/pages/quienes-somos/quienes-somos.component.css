@@ -1,0 +1,80 @@
+.padd {
+  padding: 40px;
+  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
+}
+
+.mision {
+  transform: translateX(20px) translateY(20px);
+  transition: 500ms;
+}
+
+.vision {
+  transform: translateX(-20px) translateY(-20px);
+  transition: 500ms;
+}
+
+.objeto-social {
+  padding: 2%;
+  color: white;
+}
+
+.fotos-title {
+  width: 25%;
+  height: 200px;
+  transform: translateY(-20px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-miembros{
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding-block: 2%;
+}
+
+p{
+  font-size: small;
+}
+
+.card-rigth{
+  background:  linear-gradient(#08f, rgb(245, 17, 245));
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+}
+
+.card-left{
+  background:  linear-gradient(#08f, rgb(245, 17, 245));
+  box-shadow: 0 2px 8px 0 rgba( 31, 38, 135, 0.37 );
+}
+
+strong{
+  font-style: oblique;
+}
+
+.card{
+  margin-bottom: 10px;
+}
+
+.card:hover{
+  transform: scale(1.02);
+  transition: 500ms;
+}
+
+.contenedor{
+  width: 100%;
+  height: 60%;
+  position: relative;
+}
+
+.imagen-icem{
+  width: 30%;
+  height: 100%;
+  max-width: 350px;
+  min-width: 350px;
+  border-bottom-right-radius: 80%;
+
+}
+

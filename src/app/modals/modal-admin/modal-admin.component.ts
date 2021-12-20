@@ -1,0 +1,243 @@
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SessionStorageService } from 'ngx-webstorage';
+import { Categoria } from 'src/app/models/categoria';
+import { Desarrollo } from 'src/app/models/desarrollo';
+import { Noticia } from 'src/app/models/noticias';
+import { Producto } from 'src/app/models/producto';
+import { Quienes } from 'src/app/models/quienes';
+import { Scrap } from 'src/app/models/scrap';
+import { Usuario } from 'src/app/models/usuario';
+import { ApiService } from 'src/app/services/api.service';
+import { ModalCategoriaComponent } from '../modal-categoria/modal-categoria.component';
+import { ModalDesarrolloComponent } from '../modal-desarrollo/modal-desarrollo.component';
+import { ModalNoticiaComponent } from '../modal-noticia/modal-noticia.component';
+import { ModalProductoComponent } from '../modal-producto/modal-producto.component';
+import { ModalQuienesComponent } from '../modal-quienes/modal-quienes.component';
+import { ModalScrapComponent } from '../modal-scrap/modal-scrap.component';
+import { ModalUsuarioComponent } from '../modal-usuario/modal-usuario.component';
+
+@Component({
+  selector: 'app-modal-admin',
+  templateUrl: './modal-admin.component.html',
+  styleUrls: ['./modal-admin.component.css'],
+})
+export class ModalAdminComponent implements OnInit {
+  modalHeader: string = '';
+  modalSubHeader: string = '';
+
+  actiModal: NgbActiveModal;
+  productos: boolean = true;
+  noticias: boolean = false;
+  categorias: boolean = false;
+  desarrollos: boolean = false;
+  usuarios: boolean = false;
+  chat: boolean = false;
+  quienes: boolean = false;
+  scrap: boolean = false;
+
+  usuario: Usuario;
+  @Output() emisor: EventEmitter<string> = new EventEmitter<string>();
+
+  activo: string = 'Productos';
+  productosarray: Producto[] = [];
+  noticiasarray: Noticia[] = [];
+  categoriaarray: Categoria[] = [];
+  desarrolloarray: Desarrollo[] = [];
+  usuariosarray: Usuario[] = [];
+  quienesarray: Quienes[] = [];
+  scraparray: Scrap[] = [];
+
+  constructor(
+    private activeModal: NgbActiveModal,
+    private api: ApiService,
+    private modalService: NgbModal,
+    private storage: SessionStorageService
+  ) {
+    this.actiModal = activeModal;
+  }
+
+  ngOnInit(): void {
+    this.usuario = this.storage.retrieve('usuario');
+  }
+
+  cambiarTabla(event) {
+    // console.log(event.target.innerText);
+    this.cambiarFalseAll();
+    switch (event.target.innerText) {
+      case 'Productos':
+        this.productos = true;
+        break;
+      case 'Noticias':
+        this.noticias = true;
+        break;
+      case 'Categorias':
+        this.categorias = true;
+        break;
+      case 'Desarrollos':
+        this.desarrollos = true;
+        break;
+      case 'Usuarios':
+        this.usuarios = true;
+        break;
+      case 'Chat':
+        this.chat = true;
+        break;
+      case 'Quienes':
+        this.quienes = true;
+        break;
+      case 'Scraps':
+        this.scrap = true;
+        break;
+    }
+    this.activo = event.target.innerText;
+  }
+
+  cambiarFalseAll() {
+    this.productos = false;
+    this.categorias = false;
+    this.noticias = false;
+    this.desarrollos = false;
+    this.usuarios = false;
+    this.chat = false;
+    this.quienes = false;
+    this.scrap = false
+  }
+
+  agregar() {
+    var modal = undefined;
+    switch (this.activo) {
+      case 'Productos':
+        modal = this.modalService.open(ModalProductoComponent, { size: 'lg' });
+        modal.componentInstance.modalHeader = 'Producto';
+        modal.componentInstance.modalSubHeader =
+          'para la comercializacion y venta';
+        modal.result.then((result) => {
+          if (result) {
+            this.loadProductos();
+          }
+        });
+        break;
+      case 'Noticias':
+        modal = this.modalService.open(ModalNoticiaComponent, { size: 'lg' });
+        modal.componentInstance.modalHeader = 'Noticia';
+        modal.componentInstance.modalSubHeader = 'lo mas reciente en el ICEM';
+        modal.result.then((result) => {
+          if (result) {
+            this.loadNoticia();
+          }
+        });
+        break;
+      case 'Categorias':
+        modal = this.modalService.open(ModalCategoriaComponent, { size: 'lg' });
+        modal.componentInstance.modalHeader = 'Categoria';
+        modal.componentInstance.modalSubHeader =
+          'tipos de productos de la empresa';
+        modal.result.then((result) => {
+          if (result) {
+            this.loadCategorias();
+          }
+        });
+        break;
+      case 'Desarrollos':
+        modal = this.modalService.open(ModalDesarrolloComponent, {
+          size: 'lg',
+        });
+        modal.componentInstance.modalHeader = 'Desarrollo';
+        modal.componentInstance.modalSubHeader =
+          'en pruebas para su posterior venta';
+        modal.result.then((result) => {
+          if (result) {
+            this.loadDesarrollo();
+          }
+        });
+        break;
+      case 'Usuarios':
+        modal = this.modalService.open(ModalUsuarioComponent, { size: 'lg' });
+        modal.componentInstance.modalHeader = 'Usuario';
+        modal.componentInstance.modalSubHeader = 'Administrador de la pagina';
+        modal.result.then((result) => {
+          if (result) {
+            this.loadUsuario();
+          }
+        });
+        break;
+      case 'Quienes':
+        modal = this.modalService.open(ModalQuienesComponent, { size: 'lg' });
+        modal.componentInstance.modalHeader = 'Quienes';
+        modal.componentInstance.modalSubHeader = 'Personas integrantes del equipo';
+        modal.result.then((result) => {
+          if (result) {
+            this.loadQuienes();
+          }
+        });
+        break;
+        case 'Scraps':
+        modal = this.modalService.open(ModalScrapComponent, { size: 'lg' });
+        modal.componentInstance.modalHeader = 'Scraps';
+        modal.componentInstance.modalSubHeader = 'Scraps de los sitios';
+        modal.result.then((result) => {
+          if (result) {
+            this.loadScraps();
+          }
+        });
+        break;
+    }
+  }
+
+  logout() {
+    this.actiModal.close(true);
+  }
+
+  loadProductos() {
+    this.api.getProducto().subscribe((result) => {
+      if (result.length > 0) this.productosarray = result;
+      else this.productosarray = [];
+    });
+  }
+
+  loadNoticia() {
+    this.api.getNoticias().subscribe((result) => {
+      if (result.length > 0) this.noticiasarray = result;
+      else this.noticiasarray = [];
+    });
+  }
+
+  loadCategorias() {
+    this.api.getCategorias().subscribe((result) => {
+      if (result.length > 0) this.categoriaarray = result;
+      else this.categoriaarray = [];
+    });
+  }
+
+  loadDesarrollo() {
+    this.api.getDesarrollos().subscribe((result) => {
+      if (result.length > 0) this.desarrolloarray = result;
+      else this.desarrolloarray = [];
+    });
+  }
+
+  loadUsuario() {
+    this.api.getUsuarios().subscribe((result) => {
+      if (result.length > 0) {
+        this.usuariosarray = result.filter((item) => item != result[0]);
+      } else this.usuariosarray = [];
+    });
+  }
+
+  loadQuienes() {
+    this.api.getQuienes().subscribe((result) => {
+      if (result.length > 0) {
+        this.quienesarray = result;
+      } else this.quienesarray = [];
+    });
+  }
+
+  loadScraps() {
+    this.api.getScraps().subscribe((result) => {
+      if (result.length > 0) {
+        this.scraparray = result;
+      } else this.scraparray = [];
+    });
+  }
+}

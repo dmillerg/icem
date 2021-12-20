@@ -1,0 +1,10 @@
+.producto-section {
+  margin-left: 3%;
+  transform: translateY(20px);
+}
+.title-section2 {
+  font-style: oblique;
+  font-size: 4vw 7vh;
+  /* transform: translateY(-20px); */
+  transition: 500ms;
+}

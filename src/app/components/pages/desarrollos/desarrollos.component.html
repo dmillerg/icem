@@ -1,0 +1,12 @@
+<div class="container" [@scaleAnimation]="'enter'">
+    <div class="producto-section">
+        <h1 class="title-section2 text-section"><strong>Nuevos desarrollos...</strong></h1>
+        <div class="row p-4"></div>
+    </div>
+    <div class="row" [@listAnimation]="desarrollos.length">
+        <div *ngFor="let item of desarrollos" class="col-sm-4">
+            <app-desarrollo-item [desarrollo]="item"></app-desarrollo-item>
+        </div>
+    </div>
+    <div class="row p-4"></div>
+</div>

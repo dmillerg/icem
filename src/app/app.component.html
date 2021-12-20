@@ -1,0 +1,10 @@
+<div  (scroll)="onScrolling()" id="scroll" style="overflow-y: scroll;height: 100%;overflow-x: none;">
+    <div #scroll></div>
+    <app-navbar [back_class]="back_final"></app-navbar>
+    <div class="row p-4" style="width: 100%;"></div>
+    <div class="row p-4" style="width: 100%;"></div>
+    <router-outlet></router-outlet>
+    <div class="row p-4" style="width: 100%;"></div>
+    <app-footer></app-footer>
+    <button id="btnScroll" class="btn-up btn btn-firstcolor rounded-circle btn-scala-up" (click)="onScroll(scroll)"><i class="fa fa-arrow-up"></i></button>
+</div>

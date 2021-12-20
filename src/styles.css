@@ -1,0 +1,198 @@
+/* You can add global styles to this file, and also import other style files */
+
+.color-primary {
+  background-color: #246c9c;
+}
+
+.color-secondary {
+  background-color: #304357;
+}
+
+.color-darkest {
+  background-color: rgb(54, 54, 54);
+}
+
+.centrado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* .modal-dialog {
+    background: rgba(7, 7, 7, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(17.5px);
+    -webkit-backdrop-filter: blur(17.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+} */
+
+.modal-content {
+  background: rgba(7, 7, 7, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(17.5px);
+  -webkit-backdrop-filter: blur(17.5px);
+  border-radius: 10px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.modal-body {
+  background: rgba(7, 7, 7, 0.01);
+}
+
+.modal-header {
+  background: rgba(7, 7, 7, 0.01);
+}
+
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+body {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+
+:root {
+  --firstcolor: rgb(59, 65, 142);
+  --firstcolor-hover: rgb(73, 79, 168);
+  --firstcolor-section: rgba(59, 64, 142, 0.281);
+  --theme-color: rgb(255,255,255);
+}
+
+.bg-theme{
+  background-color: var(--theme-color);
+}
+
+.bg-firstcolor {
+  background-color: var(--firstcolor);
+}
+
+.btn-firstcolor {
+  background-color: var(--firstcolor);
+  color: white;
+}
+
+.btn-firstcolor:hover {
+  background-color: var(--firstcolor-hover);
+  color: white;
+  transition: ease-in-out .3s;
+}
+
+.btn-outline-firstcolor {
+  background-color: transparent;
+  border: 1px solid var(--firstcolor);
+  color: var(--firstcolor);
+  border-radius: 0.2em;
+  padding: 15px;
+}
+
+.btn-outline-firstcolor:hover {
+  background-color: var(--firstcolor);
+  border: 1px solid var(--firstcolor);
+  color: white;
+  border-radius: 0.2em;
+  padding: 15px;
+  transition: ease-in-out .3s;
+}
+
+.text-firstcolor {
+  color: var(--firstcolor);
+}
+
+.text-section {
+  color: var(--firstcolor-section);
+}
+
+.number {
+  font-size: 150px;
+}
+
+.card-firstcolor {
+  border: 0.1px solid var(--firstcolor);
+  -webkit-box-shadow: 0px 0px 14px -2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 14px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 14px -2px rgba(0, 0, 0, 0.2);
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+
+}
+
+.card-firstcolor:hover {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--firstcolor);
+  transition: ease-in-out 0.3s;
+}
+
+div.card-firstcolor h1, h2, h3, h4 {
+  color: var(--firstcolor);
+}
+
+.card-mine {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border-radius: 0.2em;
+  box-shadow: 0 4px 8px 0 rgba(31, 38, 135, 0.37);
+}
+
+@font-face {
+  font-family: MyriadPro-BoldCond;
+  src: url('fonts/MyriadPro-BoldCond.otf');
+}
+
+@font-face {
+  font-family: ModernWarfare-8MM6z;
+  src: url('fonts/ModernWarfare-8MM6z.ttf');
+}
+
+@font-face {
+  font-family: MyriadPro-Light;
+  src: url('fonts/MyriadPro-Light.otf');
+}
+
+@font-face {
+  font-family: MyriadPro-SemiboldSemiExt;
+  src: url('fonts/MyriadPro-SemiboldSemiExt.otf');
+}
+
+body {
+  /* font-family: MyriadPro-SemiboldSemiExt; */
+}
+
+.animado {
+  opacity: 0;
+  transform: translateY(50%);
+  transition: 0.5s;
+}
+
+.activoitem {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 1s;
+}
+
+.row-icem-left{
+  width: 70%;
+  height: 100px;
+  -webkit-clip-path: polygon(0 0, 89% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 89% 0, 100% 100%, 0 100%);
+}
+
+.modal-title{
+  text-shadow: 1px 2px 5px rgba(0 ,0 ,0,0.4);
+}
+
+.table-content{
+  height: 400px;
+  overflow-y: auto;
+}

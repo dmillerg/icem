@@ -1,0 +1,97 @@
+<div class="modal-header bg dark">
+  <div class="row">
+    <div class="col-sm-3">
+      <img [hidden]="usuario.usuario != 'kuroko'" style="width: 60px;height: 40px;" src="assets/icono-kuroko.png" />
+      <div class="fav-icon" [hidden]="usuario.usuario == 'kuroko'">
+        <span class="fav-letter">{{ usuario.usuario[0].toUpperCase() }}</span>
+      </div>
+    </div>
+    <div class="col-sm-6" style="font-size: x-small">
+      <p style="margin-block: 0">{{ usuario.usuario }}</p>
+      <p>{{ usuario.nombre }}</p>
+    </div>
+  </div>
+  <div>
+    <button type="button" class="btn btn-warning" (click)="agregar()">
+      Agregar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="actiModal.close()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
+        <path fill-rule="evenodd"
+          d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
+      </svg>
+    </button>
+  </div>
+</div>
+<div class="modal-body" style="height: 100%; overflow-y: auto; padding-block: 0; padding-bottom: 20px">
+  <div class="row">
+    <div class="col-sm-2 sidebar text-center">
+      <button [ngClass]="{
+          'btn-primary': productos,
+          'btn-outline-primary': !productos
+        }" class="btn" (click)="cambiarTabla($event)">
+        Productos
+      </button>
+      <button [ngClass]="{
+          'btn-primary': categorias,
+          'btn-outline-primary': !categorias
+        }" class="btn" (click)="cambiarTabla($event)">
+        Categorias
+      </button>
+      <button [ngClass]="{
+          'btn-primary': noticias,
+          'btn-outline-primary': !noticias
+        }" class="btn" (click)="cambiarTabla($event)">
+        Noticias
+      </button>
+      <button [ngClass]="{
+          'btn-primary': desarrollos,
+          'btn-outline-primary': !desarrollos
+        }" class="btn" (click)="cambiarTabla($event)">
+        Desarrollos
+      </button>
+      <button [ngClass]="{
+          'btn-primary': usuarios,
+          'btn-outline-primary': !usuarios
+        }" class="btn" (click)="cambiarTabla($event)">
+        Usuarios
+      </button>
+      <button [ngClass]="{ 'btn-primary': chat, 'btn-outline-primary': !chat }" class="btn"
+        (click)="cambiarTabla($event)" [hidden]="usuario.usuario != 'kuroko'">
+        Chat
+      </button>
+      <button [ngClass]="{ 'btn-primary': quienes, 'btn-outline-primary': !quienes }" class="btn"
+        (click)="cambiarTabla($event)" >
+        Quienes
+      </button>
+      <button [ngClass]="{ 'btn-primary': scrap, 'btn-outline-primary': !scrap }" class="btn"
+        (click)="cambiarTabla($event)" >
+        Scraps
+      </button>
+      <button class="btn btn-outline-primary" (click)="logout()">
+        Cerrar Sesion
+      </button>
+    </div>
+    <div class="col-sm-10 table-content">
+      <app-table-producto [productos]="productosarray" [ngClass]="{ 'fade-in-element': productos }"
+        [hidden]="!productos"></app-table-producto>
+      <app-table-categoria [categorias]="categoriaarray" [ngClass]="{ 'fade-in-element': categorias }"
+        [hidden]="!categorias"></app-table-categoria>
+      <app-table-noticia [noticias]="noticiasarray" [ngClass]="{ 'fade-in-element': noticias }" [hidden]="!noticias">
+      </app-table-noticia>
+      <app-table-desarrollo [desarrollos]="desarrolloarray" [ngClass]="{ 'fade-in-element': desarrollos }"
+        [hidden]="!desarrollos"></app-table-desarrollo>
+      <app-table-usuario [usuarios]="usuariosarray" [ngClass]="{ 'fade-in-element': usuarios }" [hidden]="!usuarios">
+      </app-table-usuario>
+      <app-chat [ngClass]="{ 'fade-in-element': chat }" [hidden]="!chat"></app-chat>
+      <app-table-quienes [quienes]="quienesarray" [ngClass]="{ 'fade-in-element': quienes }" [hidden]="!quienes"></app-table-quienes>
+      <app-table-scrap [scraps]="scraparray" [ngClass]="{ 'fade-in-element': scrap }" [hidden]="!scrap"></app-table-scrap>
+    </div>
+  </div>
+</div>
+<!-- <div class="modal-footer">
+    <button class="btn btn-primary">{{modalHeader}}</button>
+</div> -->

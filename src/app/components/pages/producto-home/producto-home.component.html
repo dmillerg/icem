@@ -1,0 +1,26 @@
+<div class="card card-mine" [@scaleAnimation]="'enter'">
+    <img class="img-backlogo-bottom-rigth" src="assets/logo-mitad-left.png">
+
+    <div class="title-text text-start">
+        <h1 class="number text-section"><strong>{{contador}}</strong></h1>
+        <h1 class="text-firstcolor" style="position: absolute;bottom: 5px;"><strong>{{producto.titulo}}</strong></h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 descripcion-text">
+                <p>{{producto.descripcion}}</p>
+            </div>
+        </div>
+        <div class="row linea">
+            <div class="col-sm-6 linea-active bg-firstcolor"></div>
+            <div class="col-sm-6"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 img">
+            <img [src]="producto.imagen" class="img-fluid image">
+            <button class="btn btn-firstcolor" (click)="verMas()" style="position: absolute;right: 10px;bottom: 0;">Ver mas</button>
+        </div>
+    </div>
+    <div class="row p-4"></div>
+</div>

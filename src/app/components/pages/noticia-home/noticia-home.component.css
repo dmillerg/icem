@@ -1,0 +1,7 @@
+.card:hover{
+width: 19rem;
+}
+
+.card-body{
+    position: relative;
+}

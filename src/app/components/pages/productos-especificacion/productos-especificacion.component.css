@@ -1,0 +1,14 @@
+.imagen {
+ 
+}
+
+h1 {
+    font-style: oblique;
+}
+
+.title-text {
+    width: 100%;
+    float: left;
+    position: relative;
+    padding-inline: 20px;
+}

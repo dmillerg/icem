@@ -1,0 +1,20 @@
+FontName (Eurostile-BoldOblique)
+FullName (Eurostile Bold Oblique)
+AppleName (Eurostile BoldOblique)
+AppleFONDID 14840
+FamilyName (Eurostile)
+version (001.002)
+isFixedPitch false
+CharacterSet (isoadobe+euro.cs)
+Encoding (StandardEncoding)
+ItalicAngle -12
+CapHeight 750
+UnderlinePosition -100
+UnderlineThickness 50
+StemWidth 172
+Serif false
+Pi false
+SuperiorBaseline 302
+MSMenuName (Eurostile Bold)
+VPStyle (I)
+PCFileNamePrefix (EUBO_)
