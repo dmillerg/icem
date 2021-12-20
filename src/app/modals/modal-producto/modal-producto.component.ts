@@ -26,6 +26,7 @@ export class ModalProductoComponent implements OnInit {
     usos: '',
     especificaciones: '',
     garantia: '',
+    precio: 0,
   };
 
   categorias: Categoria[];
@@ -41,6 +42,7 @@ export class ModalProductoComponent implements OnInit {
     usos: '',
     especificaciones: '',
     garantia: '',
+    precio: 0,
   };
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;

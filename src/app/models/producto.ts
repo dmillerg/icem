@@ -8,4 +8,5 @@ export interface Producto {
   usos: string;
   especificaciones: string;
   garantia: string;
+  precio:number;
 }
