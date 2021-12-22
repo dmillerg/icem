@@ -24,12 +24,11 @@
 .linea {
     height: 5px;
     width: 90%;
-    background-color: #08f;
 }
 
 .linea-active {
     height: 100%;
-    background: linear-gradient(-90deg, #08f, rgb(245, 17, 245));
+    background: linear-gradient(-90deg, rgb(59, 65, 142) 70%, rgb(245, 17, 245) );
 }
 
 .image {

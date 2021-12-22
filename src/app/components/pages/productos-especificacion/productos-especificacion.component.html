@@ -11,8 +11,10 @@
             </div>
             <p>{{producto.fecha}}</p>
             <p><strong>Categoría:</strong> {{categoria}}</p>
+            <p><strong>Precio:</strong>${{producto.precio}}</p>
         </div>
-        <div class="col-sm-12 text-start" style="padding-left: 10%;">
+        <div class="col-sm-12 text-start" >
+            <p></p>
           <h3 class="h3" [hidden]="producto.descripcion.length == 0">Descripción</h3>
             <p>{{producto.descripcion}}</p>
             <h3 class="h3" [hidden]="producto.usos.length == 0">Usos</h3>

@@ -4,6 +4,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 import { Categoria } from 'src/app/models/categoria';
 import { Desarrollo } from 'src/app/models/desarrollo';
 import { Noticia } from 'src/app/models/noticias';
+import { Posts } from 'src/app/models/posts';
 import { Producto } from 'src/app/models/producto';
 import { Quienes } from 'src/app/models/quienes';
 import { Scrap } from 'src/app/models/scrap';
@@ -12,6 +13,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ModalCategoriaComponent } from '../modal-categoria/modal-categoria.component';
 import { ModalDesarrolloComponent } from '../modal-desarrollo/modal-desarrollo.component';
 import { ModalNoticiaComponent } from '../modal-noticia/modal-noticia.component';
+import { ModalPostsComponent } from '../modal-posts/modal-posts.component';
 import { ModalProductoComponent } from '../modal-producto/modal-producto.component';
 import { ModalQuienesComponent } from '../modal-quienes/modal-quienes.component';
 import { ModalScrapComponent } from '../modal-scrap/modal-scrap.component';
@@ -35,6 +37,7 @@ export class ModalAdminComponent implements OnInit {
   chat: boolean = false;
   quienes: boolean = false;
   scrap: boolean = false;
+  posts: boolean = false;
 
   usuario: Usuario;
   @Output() emisor: EventEmitter<string> = new EventEmitter<string>();
@@ -47,6 +50,7 @@ export class ModalAdminComponent implements OnInit {
   usuariosarray: Usuario[] = [];
   quienesarray: Quienes[] = [];
   scraparray: Scrap[] = [];
+  postsarray: Posts[] = [];
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -89,6 +93,9 @@ export class ModalAdminComponent implements OnInit {
       case 'Scraps':
         this.scrap = true;
         break;
+      case 'Posts':
+        this.posts = true;
+        break;
     }
     this.activo = event.target.innerText;
   }
@@ -102,6 +109,7 @@ export class ModalAdminComponent implements OnInit {
     this.chat = false;
     this.quienes = false;
     this.scrap = false
+    this.posts = false;
   }
 
   agregar() {
@@ -172,13 +180,23 @@ export class ModalAdminComponent implements OnInit {
           }
         });
         break;
-        case 'Scraps':
+      case 'Scraps':
         modal = this.modalService.open(ModalScrapComponent, { size: 'lg' });
         modal.componentInstance.modalHeader = 'Scraps';
         modal.componentInstance.modalSubHeader = 'Scraps de los sitios';
         modal.result.then((result) => {
           if (result) {
             this.loadScraps();
+          }
+        });
+        break;
+      case 'Posts':
+        modal = this.modalService.open(ModalPostsComponent, { size: 'lg' });
+        modal.componentInstance.modalHeader = 'Posts';
+        modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
+        modal.result.then((result) => {
+          if (result) {
+            this.loadPosts();
           }
         });
         break;
@@ -238,6 +256,14 @@ export class ModalAdminComponent implements OnInit {
       if (result.length > 0) {
         this.scraparray = result;
       } else this.scraparray = [];
+    });
+  }
+
+  loadPosts() {
+    this.api.getPosts().subscribe((result) => {
+      if (result.length > 0) {
+        this.postsarray = result;
+      } else this.postsarray = [];
     });
   }
 }

@@ -22,6 +22,7 @@ export class FooterComponent implements OnInit {
   errorAuth: boolean = false;
 
   autenticado: boolean = false;
+  fechaAct: string = '';
 
   constructor(
     private modalService: NgbModal,
@@ -34,6 +35,7 @@ export class FooterComponent implements OnInit {
       if (this.storage.retrieve('usuario')) {
         this.user_auth = this.storage.retrieve('usuario');
         this.btn_message = 'Administrar';
+        this.fechaActualizacion();
       }
     } catch (e) {
       console.log(e);
@@ -111,13 +113,11 @@ export class FooterComponent implements OnInit {
   }
 
   fechaActualizacion() {
-    let query = 'SELECT ultima_sesion FROM usuarios';
-    let mayor = new Date();
+    let query = 'SELECT ultsession FROM usuarios ORDER BY ultsession DESC';
     this.api.all(query).subscribe(result => {
-      console.log(result[0]);
-      for (let i = 0; i < result; i++) {
-
-      }
+      console.log(result);
+      this.fechaAct = result[0].ultsession;
     })
   }
+
 }

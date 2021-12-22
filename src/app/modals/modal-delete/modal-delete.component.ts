@@ -68,6 +68,14 @@ export class ModalDeleteComponent implements OnInit {
           (err) => this.devolverResult(false, err)
         );
         break;
+      case 'Posts':
+        this.api.deletePosts(this.modalId).subscribe(
+          (result) => {
+            this.devolverResult(true, result.toString());
+          },
+          (err) => this.devolverResult(false, err)
+        );
+        break;
       default:
         break;
     }

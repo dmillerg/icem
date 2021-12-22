@@ -71,6 +71,10 @@
         (click)="cambiarTabla($event)" >
         Scraps
       </button>
+      <button [ngClass]="{ 'btn-primary': posts, 'btn-outline-primary': !posts }" class="btn"
+        (click)="cambiarTabla($event)" >
+        Posts
+      </button>
       <button class="btn btn-outline-primary" (click)="logout()">
         Cerrar Sesion
       </button>
@@ -89,6 +93,7 @@
       <app-chat [ngClass]="{ 'fade-in-element': chat }" [hidden]="!chat"></app-chat>
       <app-table-quienes [quienes]="quienesarray" [ngClass]="{ 'fade-in-element': quienes }" [hidden]="!quienes"></app-table-quienes>
       <app-table-scrap [scraps]="scraparray" [ngClass]="{ 'fade-in-element': scrap }" [hidden]="!scrap"></app-table-scrap>
+      <app-table-posts [posts]="postsarray" [ngClass]="{ 'fade-in-element': posts }" [hidden]="!posts"></app-table-posts>
     </div>
   </div>
 </div>

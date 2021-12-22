@@ -1,5 +1,8 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import localEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localEs, 'es');
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,7 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { FooterComponent } from './components/footer/footer.component';
-import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { HomeComponent } from './components/pages/home/home.component';
 import { ProductoComponent } from './components/pages/producto/producto.component';
 import { MenuInicioComponent } from './components/pages/menu-inicio/menu-inicio.component';
@@ -46,6 +49,8 @@ import { ModalQuienesComponent } from './modals/modal-quienes/modal-quienes.comp
 import { TableQuienesComponent } from './components/tables/table-quienes/table-quienes.component';
 import { ModalScrapComponent } from './modals/modal-scrap/modal-scrap.component';
 import { TableScrapComponent } from './components/tables/table-scrap/table-scrap.component';
+import { ModalPostsComponent } from './modals/modal-posts/modal-posts.component';
+import { TablePostsComponent } from './components/tables/table-posts/table-posts.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +70,7 @@ import { TableScrapComponent } from './components/tables/table-scrap/table-scrap
     ModalMapaComponent,
     ModalProductoComponent,
     ModalAdminComponent,
+    ModalPostsComponent,
     DesarrollosComponent,
     DesarrolloItemComponent,
     TableProductoComponent,
@@ -74,6 +80,7 @@ import { TableScrapComponent } from './components/tables/table-scrap/table-scrap
     TableUsuarioComponent,
     TableQuienesComponent,
     TableScrapComponent,
+    TablePostsComponent,
     ModalDeleteComponent,
     ModalCategoriaComponent,
     ModalNoticiaComponent,
@@ -98,6 +105,7 @@ import { TableScrapComponent } from './components/tables/table-scrap/table-scrap
     FormsModule,
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'es' },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent]

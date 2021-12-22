@@ -12,6 +12,7 @@ import { Chat } from '../models/chat';
 import { Buscar } from '../models/buscar';
 import { Quienes } from '../models/quienes';
 import { Scrap } from '../models/scrap';
+import { Posts } from '../models/posts';
 @Injectable({
   providedIn: 'root',
 })
@@ -592,4 +593,40 @@ export class ApiService {
     return this.http.delete(direccion, { headers: headers, params: params });
   }
 
+  /**
+   * Obtener los posts en base de datos
+   * @param limit cantidad de posts a devolver
+   * @returns
+   */
+   getPosts(limit: number = 0): Observable<Posts[]> {
+    const headers = { 'content-type': 'application/json' };
+    let direccion = this.url + 'posts/' + limit.toString();
+    return this.http.get<Posts[]>(direccion, { headers: headers });
+  }
+
+  /**
+   * Guarda una nuevo post
+   * @param formData datos del post
+   * @returns
+   */
+   addPosts(formData) {
+    const headers = { 'content-type': 'application/json' };
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'savePosts';
+    return this.http.post(direccion, formData);
+  }
+
+   /**
+   * Elimina un posts
+   * @param id posts a eliminar
+   * @returns
+   */
+    deletePosts(id: number = -1) {
+      let direccion = this.url + 'deletePosts/' + id.toString();
+      const headers = { 'content-type': 'application/json' };
+      const params = {
+        token: this.storage.retrieve('usuario').token,
+      };
+      return this.http.delete(direccion, { headers: headers, params: params });
+    }
 }

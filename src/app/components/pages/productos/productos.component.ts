@@ -92,7 +92,7 @@ export class ProductosComponent implements OnInit {
   loadProductos() {
     this.api.getProducto(0, -1, this.producto.id).subscribe((result) => {
       this.productos = result;
-      this.productoss = result;
+      this.productoss = this.productos;
       if (!this.producto_especificacion) {
         this.producto = this.productos[0];
         this.changeCategory(this.producto.categoria);
@@ -124,31 +124,22 @@ export class ProductosComponent implements OnInit {
   }
 
   swicthEspecification(sss, especification: HTMLElement) {
-    console.log(especification);
-    // this.onScroll();
     especification.scrollIntoView({behavior: "smooth"});
     try {
       if (this.storage.retrieve('producto')) {
         this.producto = this.storage.retrieve('producto');
+        this.api.getCategoriaById(this.producto.categoria).subscribe((result)=>{
+          this.category= result.nombre;
+        })
+        this.productos = this.productoss.filter((item)=>item.id != this.producto.id);
         if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
           this.id = '0' + this.producto.id;
         } else this.id = this.producto.id.toString();
       }
+     
     } catch (e) {
       console.log(e);
     }
-  }
-
-  onScroll() {
-    let cant = 10;
-    const anim = setInterval(() => {
-      if (document.getElementById('scroll').scrollTop > 300) {
-        cant += 1.5;
-        document.getElementById('scroll').scrollTop -= cant;
-      } else {
-        clearInterval(anim);
-      }
-    }, 10);
   }
 
   cargaInicial(){

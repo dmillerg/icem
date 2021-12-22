@@ -28,7 +28,6 @@ export class NoticiaItemComponent implements OnInit {
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    console.log(this.noticia);
     // this.api.getNoticiaFoto(this.noticia.id).subscribe(
     //   (result) => {},
     //   (error) => {

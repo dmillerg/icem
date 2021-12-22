@@ -76,9 +76,19 @@ export class NoticiasComponent implements OnInit {
     this.api.cargaNoticias().subscribe((result)=>{
       console.log('scrap', result);
       this.noticiaScrap = result;
-    })
+      let not: string = this.storage.retrieve('noticia').id;
+      document.getElementById(not.toString()).scrollIntoView({behavior: 'smooth'});
+    }) 
   }
 
+  click(){
+    let not: string = this.storage.retrieve('noticia').id;
+      console.log('19560' === not);
+      console.log(typeof '19560');
+      console.log(typeof not.toString());
+      console.log('19560' === not.toString());
+      document.getElementById(not.toString()).scrollIntoView({behavior: 'smooth'});
+  }
   loadImage(id) {
     this.img = false;
     this.api.getNoticiaFoto(id).subscribe(

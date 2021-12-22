@@ -1,4 +1,4 @@
-<div class="card card-mine"  [@scaleAnimation]="'enter'" (click)="cambiarNoticia(noticia)">
+<div class="card card-mine" [id]="noticia.id"  [@scaleAnimation]="'enter'" (click)="cambiarNoticia(noticia)">
   <div class="ribbon" >
     <img [src]="noticia.logo" >  
   </div>

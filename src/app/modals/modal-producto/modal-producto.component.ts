@@ -42,7 +42,7 @@ export class ModalProductoComponent implements OnInit {
     usos: '',
     especificaciones: '',
     garantia: '',
-    precio: 0,
+    precio: 0.0,
   };
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
@@ -66,6 +66,7 @@ export class ModalProductoComponent implements OnInit {
       this.producto_pasado.usos = this.producto.usos;
       this.producto_pasado.especificaciones = this.producto.especificaciones;
       this.producto_pasado.garantia = this.producto.garantia;
+      this.producto_pasado.precio = this.producto.precio;
     }
   }
 
@@ -84,9 +85,10 @@ export class ModalProductoComponent implements OnInit {
     formData.append('usos',this.producto.usos.toString());
     formData.append('especificaciones',this.producto.especificaciones.toString());
     formData.append('garantia',this.producto.garantia.toString());
+    formData.append('precio',this.producto.precio.toString());
     // console.log("formData :",formData);
     // console.log("producto :",this.producto);
-    console.log(this.modalAction)
+    console.log(this.modalAction, this.modalAction== "Editar");
     if(this.modalAction =="Editar"){
       this.api.updateProducto(formData, this.producto.id).subscribe((result)=>{
         console.log(result);
