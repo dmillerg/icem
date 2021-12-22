@@ -3,13 +3,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Categoria } from 'src/app/models/categoria';
+import { Posts } from 'src/app/models/posts';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
 
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
     query(':enter',
-      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1  })))],
+      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 })))],
       { optional: true }
     ),
     query(':leave',
@@ -39,7 +40,9 @@ export class ProductosComponent implements OnInit {
   productos: Producto[] = [];
   productoss: Producto[] = [];
   categorias: Categoria[] = [];
+  posts: Posts[] = [];
   anterior: string = '';
+  comentarios: boolean = false;
   producto_especificacion: boolean = false;
   producto: Producto = {
     id: -1,
@@ -79,6 +82,7 @@ export class ProductosComponent implements OnInit {
     }
     this.loadCategorias();
     this.loadProductos();
+    this.loadPosts();
   }
 
   loadCategorias() {
@@ -87,6 +91,12 @@ export class ProductosComponent implements OnInit {
       result.forEach(item => this.categorias.push(item));
       this.anterior = this.categorias[0].nombre;
     });
+  }
+
+  loadPosts() {
+    this.api.getPosts().subscribe((result) => {
+      this.posts = result;
+    })
   }
 
   loadProductos() {
@@ -113,8 +123,9 @@ export class ProductosComponent implements OnInit {
   swichtProductos(item, cat) {
     console.log(item, cat);
     this.api.getProducto(0, cat).subscribe((result) => {
-      if(cat != -1){
-      this.productos = this.productoss.filter((item) => item.categoria == cat);}else{
+      if (cat != -1) {
+        this.productos = this.productoss.filter((item) => item.categoria == cat);
+      } else {
         this.productos = result;
       }
     });
@@ -124,36 +135,40 @@ export class ProductosComponent implements OnInit {
   }
 
   swicthEspecification(sss, especification: HTMLElement) {
-    especification.scrollIntoView({behavior: "smooth"});
+    especification.scrollIntoView({ behavior: "smooth" });
     try {
       if (this.storage.retrieve('producto')) {
         this.producto = this.storage.retrieve('producto');
-        this.api.getCategoriaById(this.producto.categoria).subscribe((result)=>{
-          this.category= result.nombre;
+        this.api.getCategoriaById(this.producto.categoria).subscribe((result) => {
+          this.category = result.nombre;
         })
-        this.productos = this.productoss.filter((item)=>item.id != this.producto.id);
+        this.productos = this.productoss.filter((item) => item.id != this.producto.id);
         if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
           this.id = '0' + this.producto.id;
         } else this.id = this.producto.id.toString();
       }
-     
+
     } catch (e) {
       console.log(e);
     }
   }
 
-  cargaInicial(){
+  cargaInicial() {
     let scroll = document.getElementById('scroll');
-    let animados  = document.querySelectorAll('.animado');
-    scroll.addEventListener("scroll", function(){
-      for(let i = 0; i< animados.length; i ++){
-        let animado= <HTMLElement>animados[i]
-        if(animado.offsetTop - 600  < scroll.scrollTop){
+    let animados = document.querySelectorAll('.animado');
+    scroll.addEventListener("scroll", function () {
+      for (let i = 0; i < animados.length; i++) {
+        let animado = <HTMLElement>animados[i]
+        if (animado.offsetTop - 600 < scroll.scrollTop) {
           animado.classList.add('activoitem');
           // console.log('scroll ', scroll.scrollTop,' animado ' , animado.offsetTop)
         }
       }
-      
+
     });
+  }
+
+  abrirComentarios() {
+    this.comentarios = !this.comentarios;
   }
 }

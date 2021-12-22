@@ -70,3 +70,16 @@
     clip-path: polygon(0 0, 100% 0, 86% 100%, 0% 100%);
 
 }
+
+.barra-superior{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+}
+
+.burbuja-comentario{
+    border-radius: 0.5em;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    margin-block: 10px;
+}

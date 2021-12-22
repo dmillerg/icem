@@ -17,7 +17,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-10 animado">
+        <div class="animado" [ngClass]="{ 'col-sm-7': comentarios , 'col-sm-10' : !comentarios}">
+            <div class="barra-superior"><button class="btn btn-outline-firstcolor" (click)="abrirComentarios()" title="ver posts"><i
+                        class="bi bi-chat-square-text"></i></button>
+                <button class="btn btn-outline-firstcolor" title="descargar catalogos">
+                    <i class="bi bi-journal-text"></i>
+                </button>
+            </div>
+
             <div>
                 <app-productos-especificacion [oculto]="producto_especificacion" [producto]="producto" [id]="id"
                     [categoria]="category"></app-productos-especificacion>
@@ -28,6 +35,14 @@
                     </app-producto>
                 </div>
             </div> -->
+        </div>
+        <div [ngClass]="{ 'd-none': !comentarios , 'col-sm-3' : comentarios}" [@listAnimation]="posts.length">
+
+            <div *ngFor="let item of posts" class="burbuja-comentario bg-firstcolor text-white">
+                <h5 class="h5">{{item.alias}}</h5>
+                <p>{{item.correo}}</p>
+                <p>{{item.comentario}}</p>
+            </div>
         </div>
     </div>
     <div class="row p-4"></div>
