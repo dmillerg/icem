@@ -25,9 +25,12 @@
                     Nuevos Desarrollos</li>
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" [(ngModel)]="titulo" name="titulo" type="search" placeholder="Buscar..."
-                    aria-label="Search">
-                <button class="btn btn-outline-firstcolor" style="height: 40px;display: flex;align-items: center;justify-content: center;" (click)="buscar()"><i class="fa fa-search"></i></button>
+                <input class="form-control me-2" [(ngModel)]="titulo" name="titulo" type="search"
+                    placeholder="Buscar..." aria-label="Search">
+                <button class="btn btn-outline-firstcolor"
+                    style="height: 40px;display: flex;align-items: center;justify-content: center;position: relative;" (click)="buscar()">
+                    <div class="pista pista-off pista-bottom">buscar</div>
+                    <i class="fa fa-search"></i></button>
             </form>
         </div>
     </div>
@@ -95,7 +98,8 @@ text-shadow: rgba(0,0,0,0.2) 3px 5px 2px;">Empresa Cubana de Equipos Médicos
             <div style="position: relative;">
                 <h1><strong class="text-white h1" style="font-family: MyriadPro-BoldCond;">Empresa
                         Cubana de Equipos Médicos </strong>
-                    <h4 class="text-white h4" style="font-family: MyriadPro-BoldCond;">Para su inversión presente y futura</h4>
+                    <h4 class="text-white h4" style="font-family: MyriadPro-BoldCond;">Para su inversión presente y
+                        futura</h4>
                 </h1>
             </div>
         </div>

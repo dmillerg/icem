@@ -3,4 +3,6 @@ export interface Posts {
   alias: string;
   correo: string;
   comentario: string;
+  fecha:string;
+  id_producto: number;
 }

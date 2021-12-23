@@ -13,6 +13,7 @@ import { Buscar } from '../models/buscar';
 import { Quienes } from '../models/quienes';
 import { Scrap } from '../models/scrap';
 import { Posts } from '../models/posts';
+import { Respuesta } from '../models/respuesta';
 @Injectable({
   providedIn: 'root',
 })
@@ -548,7 +549,7 @@ export class ApiService {
    * @param limit cantidad de scraps a devolver
    * @returns
    */
-   getScraps(limit: number = 0): Observable<Scrap[]> {
+  getScraps(limit: number = 0): Observable<Scrap[]> {
     const headers = { 'content-type': 'application/json' };
     let direccion = this.url + 'scrap/' + limit.toString();
     return this.http.get<Scrap[]>(direccion, { headers: headers });
@@ -595,12 +596,12 @@ export class ApiService {
 
   /**
    * Obtener los posts en base de datos
-   * @param limit cantidad de posts a devolver
+   * @param id_producto cantidad de posts a devolver
    * @returns
    */
-   getPosts(limit: number = 0): Observable<Posts[]> {
+  getPosts(id_producto: number = -1): Observable<Posts[]> {
     const headers = { 'content-type': 'application/json' };
-    let direccion = this.url + 'posts/' + limit.toString();
+    let direccion = this.url + 'posts/' + id_producto.toString();
     return this.http.get<Posts[]>(direccion, { headers: headers });
   }
 
@@ -609,24 +610,72 @@ export class ApiService {
    * @param formData datos del post
    * @returns
    */
-   addPosts(formData) {
+  addPosts(formData) {
     const headers = { 'content-type': 'application/json' };
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'savePosts';
     return this.http.post(direccion, formData);
   }
 
-   /**
-   * Elimina un posts
-   * @param id posts a eliminar
+  /**
+  * Elimina un posts
+  * @param id posts a eliminar
+  * @returns
+  */
+  deletePosts(id: number = -1) {
+    let direccion = this.url + 'deletePosts/' + id.toString();
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.delete(direccion, { headers: headers, params: params });
+  }
+
+  /**
+* Obtener las respuestas en base de datos
+* @param id_post cantidad de respuesta a devolver
+* @returns
+*/
+  getRespuestas(id_post: number = -1): Observable<Respuesta[]> {
+    const headers = { 'content-type': 'application/json' };
+    let direccion = this.url + 'respuesta/' + id_post.toString();
+    return this.http.get<Respuesta[]>(direccion, { headers: headers });
+  }
+
+  /**
+   * Guarda una nueva respuesta
+   * @param formData datos de la respuesta
    * @returns
    */
-    deletePosts(id: number = -1) {
-      let direccion = this.url + 'deletePosts/' + id.toString();
-      const headers = { 'content-type': 'application/json' };
-      const params = {
-        token: this.storage.retrieve('usuario').token,
-      };
-      return this.http.delete(direccion, { headers: headers, params: params });
-    }
+  addRespuesta(formData) {
+    const headers = { 'content-type': 'application/json' };
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'saveRespuesta';
+    return this.http.post(direccion, formData);
+  }
+
+  /**
+  * Elimina una respuesta
+  * @param id respuesta a eliminar
+  * @returns
+  */
+  deleteRespuesta(id: number = -1) {
+    let direccion = this.url + 'deleteRespuesta/' + id.toString();
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.delete(direccion, { headers: headers, params: params });
+  }
+
+  /**
+ * Obtiene todas las respuestas de un post
+ * @param id post a obtener respuestas
+ * @returns
+ */
+  respuestasByPost(idpost: number = -1): Observable<any[]> {
+    let direccion = this.url + 'respbypost/' + idpost.toString();
+    const headers = { 'content-type': 'application/json' };
+    return this.http.get<any[]>(direccion);
+  }
 }

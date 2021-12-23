@@ -18,9 +18,15 @@
             </div>
         </div>
         <div class="animado" [ngClass]="{ 'col-sm-7': comentarios , 'col-sm-10' : !comentarios}">
-            <div class="barra-superior"><button class="btn btn-outline-firstcolor" (click)="abrirComentarios()" title="ver posts"><i
-                        class="bi bi-chat-square-text"></i></button>
-                <button class="btn btn-outline-firstcolor" title="descargar catalogos">
+            <div class="barra-superior">
+                <button class="btn centrado"
+                    [ngClass]="{ 'btn-outline-firstcolor': !comentarios , 'btn-firstcolor' : comentarios}"
+                    (click)="abrirComentarios()" style="position: relative;">
+                    <div class="pista pista-off pista-bottom">Ver comentarios</div>
+                    <i class="bi bi-chat-square-text"></i>
+                </button>
+                <button class="btn btn-outline-firstcolor centrado" style="position: relative;">
+                    <div class="pista pista-off pista-bottom">Descargar ficha técnica</div>
                     <i class="bi bi-journal-text"></i>
                 </button>
             </div>
@@ -36,12 +42,56 @@
                 </div>
             </div> -->
         </div>
-        <div [ngClass]="{ 'd-none': !comentarios , 'col-sm-3' : comentarios}" [@listAnimation]="posts.length">
+        <div [ngClass]="{ 'hide': !comentarios , 'col-sm-3' : comentarios}" 
+            style="position: relative">
+            <div class="barra-superior">
+                <button id="btn-filter" class="btn btn-outline-firstcolor" (click)="abrirFiltro()"
+                    style="position: relative;">
+                    <div class="pista pista-off pista-bottom" (click)="abrirFiltro()">Filtrar por alias</div>
+                    <i class="bi bi-funnel"></i>
+                </button>
+                <form id="form" class="form-filter"><input id="input" name="filtro" [(ngModel)]="filtro"
+                        (ngModelChange)="filtrar()" class="filter-input" placeholder="alias..."></form>
+                <button class="btn" (click)="abrirComentar()"
+                    [ngClass]="{ 'btn-firstcolor': comentar , 'btn-outline-firstcolor' : !comentar}"
+                    style="position: relative;">
+                    <div class="pista pista-off pista-bottom">Comentar producto</div>
+                    <i class="bi bi-pen"></i>
+                </button>
+            </div>
+            <div class="bg-firstcolor fila" style="width: 90%;"></div>
+            <div class="bg-firstcolor fila" style="width: 80%;"></div>
+            <form class="box-outline" [ngClass]="{ 'hide': !comentar }" style="padding: 15px;position: relative;">
+                <p class="text-firstcolor"><i class="bi bi-person"></i> alias:</p>
+                <input placeholder="alias" name="alias" [(ngModel)]="alias" class="input-outline" required>
+                <p class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</p>
+                <input placeholder="correo" type="email" name="correo" [(ngModel)]="correo" class="input-outline"
+                    required>
+                <p class="text-firstcolor"><i class="bi bi-chat-dots"></i> comentario:</p>
+                <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline"
+                    required></textarea>
+                <button class="btn btn-firstcolor" (click)="enviarPosts()" style="width: 100%;"
+                    [disabled]="!validarComentario()">
+                    <div class="pista pista-off pista-left">Enviar</div>
+                    <i class="bi bi-send"></i>
+                </button>
 
-            <div *ngFor="let item of posts" class="burbuja-comentario bg-firstcolor text-white">
-                <h5 class="h5">{{item.alias}}</h5>
-                <p>{{item.correo}}</p>
-                <p>{{item.comentario}}</p>
+            </form>
+            <div style="max-height: 400px;overflow-y: auto;overflow-x: hidden;" [@listAnimation]="posts.length">
+                
+                <div *ngFor="let item of posts" class="burbuja-comentario bg-firstcolor text-white"
+                    style="position: relative;">
+                    <h5 class="h5"><i class="bi bi-person"></i>{{item.alias}}</h5>
+                    <p>{{item.correo}}</p>
+                    <p style="position: absolute;right: 5px;bottom: 1px;font-size: small;transform: translateY(10px);">
+                        {{item.fecha | date: 'dd/MM/YYYY'}}</p>
+                    <p>{{item.comentario}}</p>
+                    <div class="barra-inferior">
+                        <p>Cantidad de respuestas: {{item.respuestas.length}}</p>
+                    </div>
+                </div>
+                <p class="text-firstcolor text-center" *ngIf="posts.length==0">No hay comentarios acerca de este
+                    producto</p>
             </div>
         </div>
     </div>

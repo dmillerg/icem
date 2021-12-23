@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.component';
 import { ModalPostsComponent } from 'src/app/modals/modal-posts/modal-posts.component';
+import { ModalRespuestaComponent } from 'src/app/modals/modal-respuesta/modal-respuesta.component';
 import { Posts } from 'src/app/models/posts';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -42,6 +43,17 @@ export class TablePostsComponent implements OnInit {
     let modal = this.modalService.open(ModalDeleteComponent, { size: 'sm' });
     modal.componentInstance.modalId = posts.id;
     modal.componentInstance.modalHeader = 'Posts';
+    modal.result.then((result) => {
+      if (result) {
+        this.loadPosts();
+      }
+    });
+  }
+
+  responderPost(posts: Posts){
+    let modal = this.modalService.open(ModalRespuestaComponent, { size: 'lg' });
+    modal.componentInstance.id_post = posts.id;
+    modal.componentInstance.modalHeader = 'Responder';
     modal.result.then((result) => {
       if (result) {
         this.loadPosts();

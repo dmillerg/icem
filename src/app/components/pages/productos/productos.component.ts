@@ -1,6 +1,7 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { post } from 'jquery';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Categoria } from 'src/app/models/categoria';
 import { Posts } from 'src/app/models/posts';
@@ -40,7 +41,7 @@ export class ProductosComponent implements OnInit {
   productos: Producto[] = [];
   productoss: Producto[] = [];
   categorias: Categoria[] = [];
-  posts: Posts[] = [];
+
   anterior: string = '';
   comentarios: boolean = false;
   producto_especificacion: boolean = false;
@@ -58,6 +59,16 @@ export class ProductosComponent implements OnInit {
   };
   id: string = '';
   category: string = '';
+  filtro: string = '';
+
+  posts: any[] = [];
+  posts_complete: any[] = [];
+
+  alias: string = '';
+  correo: string = '';
+  comentario: string = '';
+
+  comentar: boolean = false;
 
   constructor(
     private api: ApiService,
@@ -94,8 +105,13 @@ export class ProductosComponent implements OnInit {
   }
 
   loadPosts() {
-    this.api.getPosts().subscribe((result) => {
-      this.posts = result;
+    this.api.getPosts(this.producto.id).subscribe((result) => {
+      if (result.length > 0) {
+        this.convertirPost(result);
+      } else {
+        this.posts_complete = [];
+        this.posts = [];
+      }
     })
   }
 
@@ -142,12 +158,11 @@ export class ProductosComponent implements OnInit {
         this.api.getCategoriaById(this.producto.categoria).subscribe((result) => {
           this.category = result.nombre;
         })
-        this.productos = this.productoss.filter((item) => item.id != this.producto.id);
         if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
           this.id = '0' + this.producto.id;
         } else this.id = this.producto.id.toString();
       }
-
+      this.loadPosts();
     } catch (e) {
       console.log(e);
     }
@@ -170,5 +185,70 @@ export class ProductosComponent implements OnInit {
 
   abrirComentarios() {
     this.comentarios = !this.comentarios;
+  }
+
+  abrirComentar() {
+    this.comentar = !this.comentar;
+  }
+
+  abrirFiltro() {
+    if (document.getElementById('form').classList.contains('activo')) {
+      document.getElementById('form').classList.remove('activo');
+      document.getElementById('input').classList.remove('activo');
+      document.getElementById('btn-filter').classList.remove('activo');
+    } else {
+      document.getElementById('form').classList.add('activo');
+      document.getElementById('input').classList.add('activo');
+      document.getElementById('btn-filter').classList.add('activo');
+    }
+  }
+
+  filtrar() {
+    this.posts = this.posts_complete.filter((item) => item.alias.includes(this.filtro));
+  }
+
+  validarComentario() {
+    return this.alias.length > 0 && this.correo.length > 0 && this.comentario.length > 0;
+  }
+
+  enviarPosts() {
+    let formData: FormData = new FormData();
+    formData.append('alias', this.alias);
+    formData.append('correo', this.correo);
+    formData.append('comentario', this.comentario);
+    formData.append('id_producto', this.producto.id.toString());
+    this.api.addPosts(formData).subscribe((result) => {
+      this.loadPosts();
+      this.abrirComentar();
+    }, (error) => {
+      console.log(error);
+    })
+  }
+
+  convertirPost(post_before: Posts[]) {
+    this.posts = [];
+    this.posts_complete = [];
+    post_before.forEach((element) => {
+      this.api.respuestasByPost(element.id).subscribe((result) => {
+        this.posts.push({
+          id: element.id,
+          alias: element.alias,
+          correo: element.correo,
+          comentario: element.comentario,
+          fecha: element.fecha,
+          id_producto: element.id_producto,
+          respuestas: result,
+        });
+        this.posts_complete.push({
+          id: element.id,
+          alias: element.alias,
+          correo: element.correo,
+          comentario: element.comentario,
+          fecha: element.fecha,
+          id_producto: element.id_producto,
+          respuestas: result,
+        });
+      })
+    })
   }
 }

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+
 .color-primary {
   background-color: #246c9c;
 }
@@ -59,10 +60,15 @@ body {
   --firstcolor: rgb(59, 65, 142);
   --firstcolor-hover: rgb(73, 79, 168);
   --firstcolor-section: rgba(59, 64, 142, 0.281);
-  --theme-color: rgb(255,255,255);
+  --theme-color: rgb(255, 255, 255);
+  --dimen-tooltip: -70px;
 }
 
-.bg-theme{
+.bg-section {
+  background-color: var(--firstcolor-section);
+}
+
+.bg-theme {
   background-color: var(--theme-color);
 }
 
@@ -73,11 +79,13 @@ body {
 .btn-firstcolor {
   background-color: var(--firstcolor);
   color: white;
+  padding: 15px;
 }
 
 .btn-firstcolor:hover {
   background-color: var(--firstcolor-hover);
   color: white;
+  padding: 15px;
   transition: ease-in-out .3s;
 }
 
@@ -165,10 +173,6 @@ div.card-firstcolor h1, h2, h3, h4 {
   src: url('fonts/MyriadPro-SemiboldSemiExt.otf');
 }
 
-body {
-  /* font-family: MyriadPro-SemiboldSemiExt; */
-}
-
 .animado {
   opacity: 0;
   transform: translateY(50%);
@@ -181,18 +185,93 @@ body {
   transition: 1s;
 }
 
-.row-icem-left{
+.row-icem-left {
   width: 70%;
   height: 100px;
   -webkit-clip-path: polygon(0 0, 89% 0, 100% 100%, 0 100%);
   clip-path: polygon(0 0, 89% 0, 100% 100%, 0 100%);
 }
 
-.modal-title{
-  text-shadow: 1px 2px 5px rgba(0 ,0 ,0,0.4);
+.modal-title {
+  text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-.table-content{
+.table-content {
   height: 400px;
   overflow-y: auto;
+}
+
+/* Clases para usar el tooltip, el contenedor debe tener position
+ relative o absolute de lo contrario no va a funcionar correctamente */
+.pista {
+  position: absolute;
+  padding: 10px;
+  box-shadow: 0 0 5px 5px var(--firstcolor-section);
+  border-radius: 0.5em;
+  color: var(--firstcolor);
+  border: solid 1px var(--firstcolor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-small;
+  background-color: var(--theme-color);
+  transform: translateY(100%);
+  z-index: 99;
+}
+
+.pista-rigth {
+  right: var(--dimen-tooltip);
+}
+
+.pista-left {
+  left: var(--dimen-tooltip);
+}
+
+.pista-top {
+  top: var(--dimen-tooltip);
+}
+
+.pista-bottom {
+  bottom: var(--dimen-tooltip);
+}
+
+.pista-off {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all .3s;
+}
+
+.btn:hover .pista-off {
+  transform: translate(0);
+  opacity: 1;
+  transition: all .3s;
+}
+
+/* ------- HASTA AQUI ------ */
+
+.fila {
+  height: 1.5px;
+  margin-block: 10px;
+}
+
+::placeholder {
+  color: var(--firstcolor);
+}
+
+.box-outline{
+  border: solid 1px var(--firstcolor);
+  box-shadow: 0 0 5px 5px var(--firstcolor-section);
+  border-radius: 0.2em;
+}
+
+.input-outline{
+  outline: rgba(59, 64, 142, 0.281);
+  padding: 5px;
+  border: solid 1px var(--firstcolor);
+  border-radius: 0.2em;
+  width: 100%;
+}
+
+:disabled{
+  cursor: not-allowed;
 }

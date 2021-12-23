@@ -1,36 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Posts } from 'src/app/models/posts';
+import { Respuesta } from 'src/app/models/respuesta';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-  selector: 'app-modal-posts',
-  templateUrl: './modal-posts.component.html',
-  styleUrls: ['./modal-posts.component.css'],
+  selector: 'app-modal-respuesta',
+  templateUrl: './modal-respuesta.component.html',
+  styleUrls: ['./modal-respuesta.component.css'],
 })
-export class ModalPostsComponent implements OnInit {
+export class ModalRespuestaComponent implements OnInit {
   modalHeader: string = '';
   modalSubHeader: string = '';
   modalAction: string = 'Agregar';
   actiModal: NgbActiveModal;
   disableButton;
+  id_post: number = -1;
 
-  posts: Posts = {
+  respuesta: Respuesta = {
     id: -1,
-    alias: '',
-    correo: '',
-    comentario: '',
+    respuesta: '',
     fecha: '',
-    id_producto: -1,
+    id_post: -1,
   };
 
-  posts_pasado: Posts = {
+  respuesta_pasado: Respuesta = {
     id: -1,
-    alias: '',
-    correo: '',
-    comentario: '',
+    respuesta: '',
     fecha: '',
-    id_producto: -1,
+    id_post: -1,
   };
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
@@ -42,21 +39,19 @@ export class ModalPostsComponent implements OnInit {
 
   rellenarSiEditas() {
     if (this.modalHeader == 'Editar') {
-      this.posts_pasado.id = this.posts.id;
-      this.posts_pasado.alias = this.posts.alias;
-      this.posts_pasado.correo = this.posts.correo;
-      this.posts_pasado.comentario = this.posts.comentario;
+      this.respuesta_pasado.id = this.respuesta.id;
+      this.respuesta_pasado.respuesta = this.respuesta.respuesta;
+      this.respuesta_pasado.fecha = this.respuesta.fecha;
+      this.respuesta_pasado.id_post = this.respuesta.id_post;
     }
   }
 
-  addUpdatePosts() {
+  addUpdateRespuesta() {
     let formData = new FormData();
-    formData.append('id', this.posts.id.toString());
-    formData.append('alias', this.posts.alias.toString());
-    formData.append('correo', this.posts.correo.toString());
-    formData.append('comentario', this.posts.comentario.toString());
-    formData.append('fecha', this.posts.fecha.toString());
-    formData.append('id_producto', this.posts.id_producto.toString());
+    formData.append('id', this.respuesta.id.toString());
+    formData.append('respuesta', this.respuesta.respuesta.toString());
+    formData.append('fecha', this.respuesta.fecha.toString());
+    formData.append('id_post', this.id_post.toString());
 
     if (this.modalAction == 'Editar') {
       // this.api.updatePosts(formData, this.posts.id).subscribe(
@@ -70,13 +65,13 @@ export class ModalPostsComponent implements OnInit {
       //   }
       // );
     } else {
-      this.api.addPosts(formData).subscribe(
+      this.api.addRespuesta(formData).subscribe(
         (result) => {
-          this.actiModal.close('Posts');
+          this.actiModal.close('Respuesta');
           console.log(result);
         },
         (error) => {
-          this.actiModal.close('Posts');
+          this.actiModal.close('Respuesta');
           console.log(error);
         }
       );

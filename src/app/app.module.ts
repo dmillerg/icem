@@ -51,6 +51,7 @@ import { ModalScrapComponent } from './modals/modal-scrap/modal-scrap.component'
 import { TableScrapComponent } from './components/tables/table-scrap/table-scrap.component';
 import { ModalPostsComponent } from './modals/modal-posts/modal-posts.component';
 import { TablePostsComponent } from './components/tables/table-posts/table-posts.component';
+import { ModalRespuestaComponent } from './modals/modal-respuesta/modal-respuesta.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { TablePostsComponent } from './components/tables/table-posts/table-posts
     ModalProductoComponent,
     ModalAdminComponent,
     ModalPostsComponent,
+    ModalRespuestaComponent,
     DesarrollosComponent,
     DesarrolloItemComponent,
     TableProductoComponent,
