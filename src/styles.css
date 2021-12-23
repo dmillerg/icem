@@ -184,6 +184,12 @@ div.card-firstcolor h1, h2, h3, h4 {
   transform: translateY(0);
   transition: 1s;
 }
+/* .modal-content{
+  transform: translateY(50%);
+  background-color: transparent;
+  box-shadow: 0 0 0 0 transparent;
+  border: none;
+} */
 
 .row-icem-left {
   width: 70%;

@@ -8,6 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalMapaComponent implements OnInit {
   actiModal: NgbActiveModal;
+  zoom: number = 1;
   constructor(private activeModal: NgbActiveModal) {
     this.actiModal = this.actiModal;
   }
@@ -16,7 +17,17 @@ export class ModalMapaComponent implements OnInit {
 
   }
 
-  zoomMap(){
+  zoomIn() {
+    this.zoom += 0.1;
+    document.getElementById('imagen').style.transform = "scale(" + this.zoom + ")";
+  }
 
+  zoomOut() {
+    this.zoom -= 0.1;
+    document.getElementById('imagen').style.transform = "scale(" + this.zoom + ")";
+  }
+
+  zoomChange(){
+    document.getElementById('imagen').style.transform = "scale(" + this.zoom + ")";
   }
 }
