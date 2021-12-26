@@ -42,8 +42,7 @@
                 </div>
             </div> -->
         </div>
-        <div [ngClass]="{ 'hide': !comentarios , 'col-sm-3' : comentarios}" 
-            style="position: relative">
+        <div [ngClass]="{ 'hide': !comentarios , 'col-sm-3' : comentarios}" style="position: relative">
             <div class="barra-superior">
                 <button id="btn-filter" class="btn btn-outline-firstcolor" (click)="abrirFiltro()"
                     style="position: relative;">
@@ -77,8 +76,9 @@
                 </button>
 
             </form>
-            <div style="max-height: 400px;overflow-y: auto;overflow-x: hidden;" [@listAnimation]="posts.length">
-                
+            <div style="max-height: 400px;overflow-y: auto;overflow-x: hidden; padding-top: 10px;"
+                [@listAnimation]="posts.length">
+
                 <div *ngFor="let item of posts" class="burbuja-comentario bg-firstcolor text-white"
                     style="position: relative;">
                     <h5 class="h5"><i class="bi bi-person"></i>{{item.alias}}</h5>
@@ -102,31 +102,29 @@
     <div class="row animado" style="width: 100%; position: relative;">
         <div class="col-sm-2">
             <div class="mitad bg-firstcolor text-center text-firstcolor"
-                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 30px;left: 40px;">
+                style="position: absolute;top: 30px;left: 40px;">
             </div>
-            <div class="mitad bg-white text-center text-white"
-                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 25px;left: 35px;">
-            </div>
-            <div class="mitad bg-firstcolor text-center text-firstcolor"
-                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 20px;left: 30px;">
-            </div>
-            <div class="mitad bg-white text-center text-white"
-                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 15px;left: 25px;">
+            <div class="mitad bg-white text-center text-white" style="position: absolute;top: 25px;left: 35px;">
             </div>
             <div class="mitad bg-firstcolor text-center text-firstcolor"
-                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 10px;left: 20px;">
+                style="position: absolute;top: 20px;left: 30px;">
             </div>
-            <div class="mitad bg-white text-center text-white"
-                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );position: absolute;top: 5px;left: 15px;">
+            <div class="mitad bg-white text-center text-white" style="position: absolute;top: 15px;left: 25px;">
             </div>
-            <div class="mitad bg-firstcolor text-center text-white"
-                style="box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); position: absolute;">
+            <div class="mitad bg-firstcolor text-center text-firstcolor"
+                style="position: absolute;top: 10px;left: 20px;">
+            </div>
+            <div class="mitad bg-white text-center text-white" style="position: absolute;top: 5px;left: 15px;">
+            </div>
+
+            <div class="mitad bg-firstcolor text-center text-white" style=" position: absolute;">
                 <h5><strong>Productos</strong></h5>
             </div>
 
         </div>
 
-        <div class="col-sm-10 " style="display: flex; flex-direction: row;overflow-x: auto;min-height: 200px; "
+        <div class="col-sm-10 scroll-mine "
+            style="display: flex; flex-direction: row;overflow-x: auto;min-height: 200px; "
             [@listAnimation]="productos.length">
             <div *ngFor="let item of productos" style="width: 16rem;">
                 <app-producto [producto]="item" style="margin-inline: 20px;"

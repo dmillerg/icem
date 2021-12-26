@@ -25,12 +25,14 @@
                     Nuevos Desarrollos</li>
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" [(ngModel)]="titulo" name="titulo" type="search"
+                <input class="form-control me-2 input-outline" [(ngModel)]="titulo" name="titulo" type="search"
                     placeholder="Buscar..." aria-label="Search">
                 <button class="btn btn-outline-firstcolor"
-                    style="height: 40px;display: flex;align-items: center;justify-content: center;position: relative;" (click)="buscar()">
+                    style="height: 40px;display: flex;align-items: center;justify-content: center;position: relative;"
+                    (click)="buscar()">
                     <div class="pista pista-off pista-bottom">buscar</div>
-                    <i class="fa fa-search"></i></button>
+                    <i class="fa fa-search"></i>
+                </button>
             </form>
         </div>
     </div>
@@ -82,8 +84,11 @@ text-shadow: rgba(0,0,0,0.2) 3px 5px 2px;">Empresa Cubana de Equipos Médicos
 
 <div style="width: 100%;display: flex;flex-direction: row;flex-wrap: wrap;">
     <div style="width: 80%;height: 100%;position: relative;">
-        <div class="navbar-fondo2 bg-firstcolor"
-            style="transform: translateY(60px) translateX(60px);position: absolute;top: 0;"></div>
+        <div class="clip-path-shadow">
+            <div class="navbar-fondo2 bg-firstcolor"
+                style="transform: translateY(60px) translateX(60px);position: absolute;top: 0;">
+            </div>
+        </div>
         <div class="navbar-fondo2 bg-white"
             style="transform: translateY(50px) translateX(50px);position: absolute;top: 0;"></div>
         <div class="navbar-fondo2 bg-firstcolor"
@@ -94,11 +99,11 @@ text-shadow: rgba(0,0,0,0.2) 3px 5px 2px;">Empresa Cubana de Equipos Médicos
             style="transform: translateY(20px) translateX(20px);position: absolute;top: 0;"></div>
         <div class="navbar-fondo2 bg-white"
             style="transform: translateY(10px) translateX(10px);position: absolute;top: 0;"></div>
-        <div class="navbar-fondo bg-firstcolor" style="position: relative;">
+        <div class="navbar-fondo bg-firstcolor" style="position: relative;background: linear-gradient(180deg, rgb(7, 7, 7) 1%, var(--firstcolor)), url('assets/fondo.jpg');background-blend-mode: multiply;">
             <div style="position: relative;">
-                <h1><strong class="text-white h1" style="font-family: MyriadPro-BoldCond;">Empresa
+                <h1><strong class="text-white h1 text-shadow" style="font-family: MyriadPro-BoldCond;">Empresa
                         Cubana de Equipos Médicos </strong>
-                    <h4 class="text-white h4" style="font-family: MyriadPro-BoldCond;">Para su inversión presente y
+                    <h4 class="text-white h4 text-shadow" style="font-family: MyriadPro-BoldCond;">Para su inversión presente y
                         futura</h4>
                 </h1>
             </div>

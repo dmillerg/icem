@@ -93,7 +93,7 @@
             <div class="carousel-item active">
                 <img src="assets/imagenes/carousel1.jpg" style="height: 400px;" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Industrial</h5>
+                    <h5 class="text-shadow">Industrial</h5>
                     <p>Empresa Cubana de equipos medicos.</p>
                 </div>
             </div>
@@ -130,11 +130,11 @@
 </h1>
 
 <!-- Noticia mas reciente -->
-<div class="container animado" style="width: 100%; padding-block: 20px; font-size: small;">
+<div class="container animado" style="width: 100%; padding-block: 20px;">
     <div class="row">
         <div class="col-sm-4 text-start container-image">
-            <img class="logo" [src]="noticia.logo" style="background-color: --firstcolor;">
-            <img class="imagen2 img-fluid noticia-image" [src]="img_noti" />
+            <img class="logo text-white text-center" [src]="noticia.logo" [alt]="noticia.fuente" style="background-color: --firstcolor;">
+            <img class="imagen2 img-fluid noticia-image text-white text-center" [alt]="noticia.titulo" [src]="img_noti" />
         </div>
         <div class="col-sm-8" style="
         background-color: rgba(0, 0, 0, 0.15);

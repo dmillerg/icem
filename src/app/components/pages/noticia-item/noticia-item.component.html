@@ -1,15 +1,16 @@
 <div class="card card-mine" [id]="noticia.id"  [@scaleAnimation]="'enter'" (click)="cambiarNoticia(noticia)">
   <div class="ribbon" >
-    <img [src]="noticia.logo" >  
+    <img [src]="noticia.logo" [alt]="noticia.fuente">  
   </div>
   <div class="row">
 
-    <img class="image" [src]="noticia.imagen" />
+    <img class="image" style="text-align: center;" [src]="noticia.imagen" [alt]="noticia.titulo" />
 
     <div class="body-text" style="padding: 20px;">
       <h5 class="text-firstcolor">{{ noticia.titulo }}</h5>
       <p class="text-section">{{noticia.fecha}}</p>
-      <p style="padding-inline: 10px;">{{ noticia.descripcion }}</p>
+      <p class="scroll-mine" style="padding-inline: 10px; max-height: 150px;
+      overflow-y: auto;">{{ noticia.descripcion }}</p>
     </div>
   </div>
 </div>

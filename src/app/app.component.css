@@ -7,10 +7,20 @@
 
 .btn-scala {
     transform: scale(1.4);
-    transition: 500ms;
+    transition: all .3s;
 }
 
 .btn-scala-up {
     transform: scale(0);
-    transform: 500ms;
+    transition: all .3s;
 }
+
+.arrow-down {
+    width: 7px;
+    height: 10px;
+    background-color: white;
+    -webkit-clip-path: polygon(53% 50%, 0 20%, 20% 0, 100% 50%, 20% 100%, 0 80%, 53% 50%);
+    clip-path: polygon(53% 50%, 0 20%, 20% 0, 100% 50%, 20% 100%, 0 80%, 53% 50%);
+    transform: rotate(270deg);
+}
+

@@ -88,17 +88,6 @@ p {
     flex-direction: row;
 }
 
-.shape {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    border: 5px solid #32557f;
-}
-
-.shape12 {
-    border-radius: 10px 20px 30px 40px/30px;
-}
-
 .back-transparent {
     background: rgba(0, 0, 0, .1);
     transition: 500ms;
@@ -114,10 +103,6 @@ p {
     transition: 500ms;
 }
 
-.title-navbar {
-    /* transform: translateX(-200px);
-    transition: 500ms; */
-}
 
 .active {
     text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.74);
@@ -160,4 +145,3 @@ p {
 .d-flex{
    height: 40px;
 }
-
