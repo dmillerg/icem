@@ -7,21 +7,21 @@
         <button (click)="cambiarFondo()" class="navbar-toggler btn-outline-firstcolor" type="button"
             data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa fa-bars text-white"></i>
+            <i class="fa fa-bars text-white svg-shadow"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item nav-mine active" id="inicio" (click)="navigateTo('inicio')"><i
-                        class="fa fa-home"></i> Inicio </li>
+                        class="fa fa-home svg-shadow"></i> Inicio </li>
                 <li class="nav-item nav-mine" id="productos" (click)="navigateTo('productos')"><i
-                        class="fa fa-medkit"></i> Productos
+                        class="fa fa-medkit svg-shadow"></i> Productos
                 </li>
-                <li class="nav-item nav-mine" id="quienes" (click)="navigateTo('quienes')"><i class="fa fa-users"></i>
+                <li class="nav-item nav-mine" id="quienes" (click)="navigateTo('quienes')"><i class="fa fa-users svg-shadow"></i>
                     Quienes somos</li>
                 <li class="nav-item nav-mine" id="noticias" (click)="navigateTo('noticias')"><i
-                        class="fa fa-book-open"></i> Noticias</li>
-                <li class="nav-item nav-mine" id="nuevos" (click)="navigateTo('nuevos')"><i class="fa fa-gavel"></i>
+                        class="fa fa-book-open svg-shadow"></i> Noticias</li>
+                <li class="nav-item nav-mine" id="nuevos" (click)="navigateTo('nuevos')"><i class="fa fa-gavel svg-shadow"></i>
                     Nuevos Desarrollos</li>
             </ul>
             <form class="d-flex">
@@ -31,7 +31,7 @@
                     style="height: 40px;display: flex;align-items: center;justify-content: center;position: relative;"
                     (click)="buscar()">
                     <div class="pista pista-off pista-bottom">buscar</div>
-                    <i class="fa fa-search"></i>
+                    <i class="fa fa-search svg-shadow"></i>
                 </button>
             </form>
         </div>
@@ -111,6 +111,6 @@ text-shadow: rgba(0,0,0,0.2) 3px 5px 2px;">Empresa Cubana de Equipos Médicos
     </div>
     <div
         style="display: flex;flex-direction: row;align-items: center;justify-content: center;width: 20%;height: 400px;">
-        <img class="image" src="assets/icon-icem-blue.png">
+        <img class="image svg-shadow" src="assets/icon-icem-blue.png">
     </div>
 </div>

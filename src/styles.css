@@ -184,6 +184,7 @@ div.card-firstcolor h1, h2, h3, h4 {
   transform: translateY(0);
   transition: 1s;
 }
+
 /* .modal-content{
   transform: translateY(50%);
   background-color: transparent;
@@ -222,7 +223,7 @@ div.card-firstcolor h1, h2, h3, h4 {
   font-size: xx-small;
   background-color: var(--theme-color);
   transform: translateY(100%);
-  z-index: 99;
+  z-index: 999;
 }
 
 .pista-rigth {
@@ -264,35 +265,36 @@ div.card-firstcolor h1, h2, h3, h4 {
   color: var(--firstcolor);
 }
 
-.box-outline{
+.box-outline {
   border: solid 1px var(--firstcolor);
   box-shadow: 0 0 5px 5px var(--firstcolor-section);
   border-radius: 0.2em;
 }
 
-.input-outline{
+.input-outline {
   outline: rgba(59, 64, 142, 0.281);
   padding: 5px;
-  background-color: transparent;
+  /* background-color: transparent; */
+  color: var(--firstcolor-section);
   border: solid 1px var(--firstcolor);
   border-radius: 0.2em;
   width: 100%;
 }
 
-:disabled{
+:disabled {
   cursor: not-allowed;
 }
 
-.text-shadow{
+.text-shadow {
   text-shadow: 5px 3px 9px rgba(0, 0, 0, 0.4);
 }
 
-.clip-path-shadow{
-  filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.5));
+.clip-path-shadow {
+  filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));
 }
 
 
-.scroll-mine{
+.scroll-mine {
   scrollbar-width: thin;
   scrollbar-color: var(--firstcolor-section) transparent;
 }
@@ -308,4 +310,16 @@ div.card-firstcolor h1, h2, h3, h4 {
 .scroll-mine::-webkit-scrollbar-thumb {
   background-color: var(--firstcolor-section);
   border-radius: 0.5em;
+}
+
+.svg-shadow {
+  filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+}
+
+.box-shadow{
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, .7);
+}
+
+img{
+  image-rendering: -webkit-optimize-contrast;
 }

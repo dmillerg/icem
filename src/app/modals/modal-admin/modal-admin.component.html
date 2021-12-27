@@ -12,17 +12,11 @@
     </div>
   </div>
   <div>
-    <button type="button" class="btn btn-warning" (click)="agregar()">
-      Agregar
+    <button type="button" class="btn btn-warning text-white" (click)="agregar()">
+      <i class="bi bi-plus svg-shadow"></i>
     </button>
     <button type="button" class="btn btn-danger" (click)="actiModal.close()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
-        viewBox="0 0 16 16">
-        <path fill-rule="evenodd"
-          d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
-        <path fill-rule="evenodd"
-          d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
-      </svg>
+      <i class="bi bi-x-lg svg-shadow"></i>
     </button>
   </div>
 </div>
@@ -64,15 +58,15 @@
         Chat
       </button>
       <button [ngClass]="{ 'btn-primary': quienes, 'btn-outline-primary': !quienes }" class="btn"
-        (click)="cambiarTabla($event)" >
+        (click)="cambiarTabla($event)">
         Quienes
       </button>
       <button [ngClass]="{ 'btn-primary': scrap, 'btn-outline-primary': !scrap }" class="btn"
-        (click)="cambiarTabla($event)" >
+        (click)="cambiarTabla($event)">
         Scraps
       </button>
       <button [ngClass]="{ 'btn-primary': posts, 'btn-outline-primary': !posts }" class="btn"
-        (click)="cambiarTabla($event)" >
+        (click)="cambiarTabla($event)">
         Posts
       </button>
       <button class="btn btn-outline-primary" (click)="logout()">
@@ -91,9 +85,12 @@
       <app-table-usuario [usuarios]="usuariosarray" [ngClass]="{ 'fade-in-element': usuarios }" [hidden]="!usuarios">
       </app-table-usuario>
       <app-chat [ngClass]="{ 'fade-in-element': chat }" [hidden]="!chat"></app-chat>
-      <app-table-quienes [quienes]="quienesarray" [ngClass]="{ 'fade-in-element': quienes }" [hidden]="!quienes"></app-table-quienes>
-      <app-table-scrap [scraps]="scraparray" [ngClass]="{ 'fade-in-element': scrap }" [hidden]="!scrap"></app-table-scrap>
-      <app-table-posts [posts]="postsarray" [ngClass]="{ 'fade-in-element': posts }" [hidden]="!posts"></app-table-posts>
+      <app-table-quienes [quienes]="quienesarray" [ngClass]="{ 'fade-in-element': quienes }" [hidden]="!quienes">
+      </app-table-quienes>
+      <app-table-scrap [scraps]="scraparray" [ngClass]="{ 'fade-in-element': scrap }" [hidden]="!scrap">
+      </app-table-scrap>
+      <app-table-posts [posts]="postsarray" [ngClass]="{ 'fade-in-element': posts }" [hidden]="!posts">
+      </app-table-posts>
     </div>
   </div>
 </div>

@@ -4,11 +4,12 @@
     <span aria-hidden="true">&times;</span>
   </button>
   </div> -->
-  <div class="modal-body">
-<img id="imagen" class="img-fluid" (click)="zoomIn()" (auxclick)="zoomOut()" style="width: 100%;height: 100%"
-  src="assets/map.jpg">
-<div style="position: fixed;text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);right: 0;transform: rotate(270deg);">
-  <label for="customRange1" class="form-label text-firstcolor">Zoom</label>
-  <input type="range" class="form-range" name="rangezoom" min="0" max="10" step="0.01" [(ngModel)]="zoom"
-    (ngModelChange)="zoomChange()" id="customRange1">
-</div></div>
+<div class="modal-body">
+  <img id="imagen" class="img-fluid" (click)="zoomIn()" (auxclick)="zoomOut()" style="width: 100%;height: 100%"
+    src="assets/map.jpg">
+  <div class="range">
+    <label for="customRange1" class="form-label text-firstcolor">Zoom</label>
+    <input type="range" class="form-range" name="rangezoom" min="0" max="10" step="0.01" [(ngModel)]="zoom"
+      (ngModelChange)="zoomChange()" id="customRange1">
+  </div>
+</div>

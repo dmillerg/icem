@@ -30,3 +30,8 @@
 .card-mine{
   transition: ease-in-out 0.3s;
 }
+
+img{
+  font-size: small;
+  color: var(--firstcolor-section);
+}
