@@ -203,9 +203,9 @@ div.card-firstcolor h1, h2, h3, h4 {
   text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-.table-content {
-  height: 400px;
-  overflow-y: auto;
+.table-mine {
+  max-height: 400px;
+  overflow-y: scroll;
 }
 
 /* Clases para usar el tooltip, el contenedor debe tener position

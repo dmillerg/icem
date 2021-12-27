@@ -1,10 +1,24 @@
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
+const listAnimation = trigger('listAnimation', [
+  transition('* <=> *', [
+    query(':enter',
+      [style({ transform: 'translateY(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateY(0%)', opacity: 1 })))],
+      { optional: true }
+    ),
+    query(':leave',
+      animate('200ms', style({ opacity: 0 })),
+      { optional: true }
+    )
+  ])
+]);
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
+  animations: [listAnimation]
 })
 export class ChatComponent implements OnInit {
   disable: boolean = true;
@@ -17,21 +31,21 @@ export class ChatComponent implements OnInit {
   cantBorradas: number = 0;
   cantMax: number = 0;
   messageChat: string = 'El chat no contiene ningun mensaje...';
+  id: number = -1;
 
   constructor(private api: ApiService) { }
 
   ngOnInit(): void { }
 
   loadChats() {
-    this.api.getChats().subscribe((result) => {
+    if (this.mensajes.length > 0) {
+      this.id = this.mensajes[this.mensajes.length - 1].id;
+    }
+    console.log(this.id);
+    this.api.getChats(this.id).subscribe((result) => {
       if (result.length > 0) {
-        if (this.mensajes.length > 0) {
-          result = result.filter((item) => this.mensajes[this.mensajes.length - 1].id < item.id);
-          console.log(result);
-        }
-      
+        this.id = result[result.length - 1].id;
         result.forEach((item) => {
-          // console.log('result final =>', item);
           this.convertir(item);
         });
       }

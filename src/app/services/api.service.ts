@@ -348,12 +348,12 @@ export class ApiService {
 
   /**
    * Obtener los chats en base de datos
-   * @param limit cantidad de chats a devolver
+   * @param id de ultimo chat
    * @returns
    */
-  getChats(limit: number = 0): Observable<Chat[]> {
+  getChats(id: number = 0): Observable<Chat[]> {
     const headers = { 'content-type': 'application/json' };
-    let direccion = this.url + 'chats/' + limit.toString();
+    let direccion = this.url + 'chats/' + id.toString();
     return this.http.get<Chat[]>(direccion, { headers: headers });
   }
 
