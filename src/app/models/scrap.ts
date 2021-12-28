@@ -11,4 +11,5 @@ export interface Scrap {
    url: string;
    fuente: string;
    logo: string;
+   activo: boolean;
 }

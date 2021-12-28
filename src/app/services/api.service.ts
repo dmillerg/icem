@@ -669,13 +669,25 @@ export class ApiService {
   }
 
   /**
- * Obtiene todas las respuestas de un post
- * @param id post a obtener respuestas
- * @returns
- */
+   * Obtiene todas las respuestas de un post
+   * @param id post a obtener respuestas
+   * @returns
+   */
   respuestasByPost(idpost: number = -1): Observable<any[]> {
     let direccion = this.url + 'respbypost/' + idpost.toString();
     const headers = { 'content-type': 'application/json' };
     return this.http.get<any[]>(direccion);
+  }
+
+  /**
+  * Prueba un scrap para ver si devuelve correctamente
+  * @param id scrap a probar
+  * @returns
+  */
+  probarScrap(id: number = -1, formData: FormData) {
+    let direccion = this.url + 'probarScrap/' + id.toString();
+    formData.append('token', this.storage.retrieve('usuario').token);
+    const headers = { 'content-type': 'application/json' };
+    return this.http.post(direccion, formData);
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Categoria } from 'src/app/models/categoria';
 import { Scrap } from 'src/app/models/scrap';
 import { ApiService } from 'src/app/services/api.service';
+import { ModalScrapPruebaComponent } from '../modal-scrap-prueba/modal-scrap-prueba.component';
 
 @Component({
   selector: 'app-modal-scrap',
@@ -29,6 +30,7 @@ export class ModalScrapComponent implements OnInit {
     url: '',
     fuente: '',
     logo: '',
+    activo: false,
   };
 
   scrap_pasado: Scrap = {
@@ -44,8 +46,12 @@ export class ModalScrapComponent implements OnInit {
     url: '',
     fuente: '',
     logo: '',
+    activo: false,
   };
-  constructor(private activeModal: NgbActiveModal, private api: ApiService) {
+
+  loadingTest: boolean = false;
+
+  constructor(private activeModal: NgbActiveModal, private api: ApiService, private modalService: NgbModal) {
     this.actiModal = activeModal;
   }
 
@@ -108,5 +114,33 @@ export class ModalScrapComponent implements OnInit {
         }
       );
     }
+  }
+
+  probarScrap() {
+    this.loadingTest = true;
+    let formData = new FormData();
+    formData.append('id', this.scrap.id.toString());
+    formData.append('contenedor', this.scrap.contenedor.toString());
+    formData.append('titulo', this.scrap.titulo.toString());
+    formData.append('fecha', this.scrap.fecha.toString());
+    formData.append('descripcion', this.scrap.descripcion.toString());
+    formData.append('enlace_selector', this.scrap.enlace_selector.toString());
+    formData.append('enlace_attr', this.scrap.enlace_attr.toString());
+    formData.append('imagen_selector', this.scrap.imagen_selector.toString());
+    formData.append('imagen_attr', this.scrap.imagen_attr.toString());
+    formData.append('url', this.scrap.url.toString());
+    formData.append('fuente', this.scrap.fuente.toString());
+    formData.append('logo', this.scrap.logo.toString());
+
+    this.api.probarScrap(-1,formData).subscribe((result) => {
+      let modal = this.modalService.open(ModalScrapPruebaComponent, { size: 'lg' });
+      modal.componentInstance.scrap = result[0];
+      modal.componentInstance.logo = this.scrap.logo;
+      modal.componentInstance.scrap_origen = this.scrap;
+      modal.result.then((result)=>{
+        this.actiModal.close('Scraps');
+      })
+      this.loadingTest = false;
+    })
   }
 }

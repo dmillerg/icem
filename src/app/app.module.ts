@@ -52,6 +52,7 @@ import { TableScrapComponent } from './components/tables/table-scrap/table-scrap
 import { ModalPostsComponent } from './modals/modal-posts/modal-posts.component';
 import { TablePostsComponent } from './components/tables/table-posts/table-posts.component';
 import { ModalRespuestaComponent } from './modals/modal-respuesta/modal-respuesta.component';
+import { ModalScrapPruebaComponent } from './modals/modal-scrap-prueba/modal-scrap-prueba.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { ModalRespuestaComponent } from './modals/modal-respuesta/modal-respuest
     ModalUsuarioComponent,
     ModalQuienesComponent,
     ModalScrapComponent,
+    ModalScrapPruebaComponent,
     NoticiasComponent,
     NoticiaItemComponent,
     ChatComponent,

@@ -1,0 +1,19 @@
+<div class="modal-header bg-warn">
+  <h2 class="modal-title"><strong>{{modalAction}} {{modalHeader}}</strong></h2>
+  <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="actiModal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="centrado" style="position: relative;">
+    <img class="img-fluid" [src]="scrap.imagen">
+    <img class="svg-shadow" style="position: absolute;top: 5px;right: 5px;width: 15%" [src]="logo">
+  </div>
+  <h3>{{scrap.titulo}}</h3>
+  <p>{{scrap.fecha}}</p>
+  <p>{{scrap.descripcion}}</p>
+  <a [href]="scrap.enlace">{{scrap.enlace}}</a>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="toggleActivate()">{{btn_name}}</button>
+</div>

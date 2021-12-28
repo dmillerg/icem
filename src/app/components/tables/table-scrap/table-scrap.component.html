@@ -5,19 +5,37 @@
             <th>fuente</th>
             <!-- <th>password</th> -->
             <th>logo</th>
+            <th>activo</th>
             <th>acciones</th>
         </thead>
         <tr *ngFor="let item of scraps">
             <td>{{item.id}}</td>
             <td>{{item.fuente}}</td>
             <!-- <td>{{item.password}}</td> -->
-            <td><img class="img-fluid" [src]="item.logo"></td>
+            <td>
+                <div class="icon"><img class="img-fluid svg-shadow" [src]="item.logo"></div>
+            </td>
+            <td>
+                <div class="icon centrado"><i *ngIf="item.activo == 1" class="bi bi-check text-success svg-shadow"></i></div>
+                <div class="icon centrado"><i *ngIf="item.activo == 0" class="bi bi-x text-danger svg-shadow"></i> </div>
+            </td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateScrap(item)"> <i
                         class="bi bi-pencil svg-shadow"></i>
                 </button>
                 <button class="btn btn-outline-danger" (click)="delete(item)">
                     <i class="bi bi-trash svg-shadow"></i>
+                </button>
+                <button class="btn btn-outline-info" [disabled]="loadingTest" (click)="probarScrap(item)">
+                    <span *ngIf="loadingTest" class="spinner-border spinner-border-sm svg-shadow" role="status"
+                        aria-hidden="true"></span>
+                    <i *ngIf="!loadingTest" class="bi bi-check2-circle svg-shadow"></i>
+                </button>
+                <button *ngIf="!item.activo" class="btn btn-outline-success" (click)="toggleActivate(item)">
+                    <i class="bi bi-check svg-shadow"></i>
+                </button>
+                <button *ngIf="item.activo" class="btn btn-outline-danger" (click)="toggleActivate(item)">
+                    <i class="bi bi-x svg-shadow"></i>
                 </button>
             </td>
         </tr>

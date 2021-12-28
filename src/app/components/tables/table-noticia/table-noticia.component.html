@@ -15,10 +15,10 @@
             <td>{{item.fecha}}</td>
             <td>{{item.imagen}}</td>
             <td>
-                <button class="btn btn-outline-primary" (click)="updateNoticia(item)"> <i
+                <button [disabled]="item.fuente=='ICEM'" class="btn btn-outline-primary" (click)="updateNoticia(item)"> <i
                         class="bi bi-pencil svg-shadow"></i>
                 </button>
-                <button class="btn btn-outline-danger" (click)="delete(item)">
+                <button [disabled]="item.fuente=='ICEM'" class="btn btn-outline-danger" (click)="delete(item)">
                     <i class="bi bi-trash svg-shadow"></i>
                 </button>
             </td>
