@@ -31,8 +31,8 @@ const listAnimation = trigger('listAnimation', [
         animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
       ]),
       transition(':leave', [
-        style({ transform: 'scale(1)', opacity: 1 }),
-        animate('500ms', style({ transform: 'scale(0)', opacity: 0 })),
+        style({ transform: 'translateX(0)', opacity: 1 }),
+        animate('500ms', style({ transform: 'translateX(-50%)', opacity: 0 })),
       ]),
     ]),
   ],

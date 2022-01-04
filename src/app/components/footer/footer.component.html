@@ -1,6 +1,6 @@
 <!-- Footer -->
 
-<footer class="text-center text-lg-start text-white container-fluid bg-firstcolor" style="clip-path: polygon(0 16%, 6% 4%, 98% 4%, 98% 2%, 8% 2%, 10% 0, 100% 0, 100% 100%, 0 100%);">
+<footer class="text-center text-lg-start text-white container-fluid bg-firstcolor" style="clip-path: polygon(0 16%, 6% 4%, 98% 4%, 98% 2%, 8% 2%, 10% 0, 100% 0, 100% 100%, 0 100%);background: linear-gradient(180deg, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo.jpg');background-blend-mode: multiply;">
     <!-- Grid container -->
     <div class="container p-4 pb-0">
 
@@ -115,7 +115,7 @@
         <!-- Section: CTA -->
         <section class="">
             <p class="d-flex justify-content-center align-items-center">
-                <button type="button" class="btn btn-firstcolor btn-rounded"
+                <button type="button" class="btn btn-firstcolor"
                     [ngClass]="{'autenticar': showLogin, 'autenticado': !showLogin}" (click)="showLogins(formlogin)">
                     <i class="fa fa-user"></i>
                     <!-- <img src="./../../../assets/icono-kuroko.png" style="height: 25px;"> -->
