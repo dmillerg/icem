@@ -1,5 +1,5 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
 const listAnimation = trigger('listAnimation', [
@@ -20,7 +20,7 @@ const listAnimation = trigger('listAnimation', [
   styleUrls: ['./chat.component.css'],
   animations: [listAnimation]
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   disable: boolean = true;
   nombre: string = '';
   mensajes: any[] = [];
@@ -32,8 +32,13 @@ export class ChatComponent implements OnInit {
   cantMax: number = 0;
   messageChat: string = 'El chat no contiene ningun mensaje...';
   id: number = -1;
+  intervalo;
 
   constructor(private api: ApiService) { }
+
+  ngOnDestroy(): void {
+    clearInterval(this.intervalo);
+  }
 
   ngOnInit(): void { }
 
@@ -68,7 +73,7 @@ export class ChatComponent implements OnInit {
     this.disable = !this.disable;
     console.log(this.nombre);
     this.loadChats();
-    setInterval(() => {
+    this.intervalo = setInterval(() => {
       this.loadChats();
     }, 1000);
   }

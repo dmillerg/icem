@@ -60,7 +60,7 @@
             </div>
             <div class="bg-firstcolor fila" style="width: 90%;"></div>
             <div class="bg-firstcolor fila" style="width: 80%;"></div>
-            <form class="box-outline" [ngClass]="{ 'hide': !comentar }" style="padding: 15px;position: relative;">
+            <form class="box-outline" [@scaleAnimation]="'enter'" *ngIf="comentar" style="padding: 15px;position: relative;">
                 <p class="text-firstcolor"><i class="bi bi-person"></i> alias:</p>
                 <input placeholder="alias" name="alias" [(ngModel)]="alias" class="input-outline" required>
                 <p class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</p>

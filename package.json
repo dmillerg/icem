@@ -36,6 +36,7 @@
     "ionicons": "^5.5.3",
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
+    "ngmap": "^1.18.5",
     "ngx-webstorage": "^8.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

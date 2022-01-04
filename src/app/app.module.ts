@@ -5,6 +5,7 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(localEs, 'es');
 
 import { AppRoutingModule } from './app-routing.module';
+import { NgMap } from 'ngmap';
 import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from './components/navbar/navbar.component';

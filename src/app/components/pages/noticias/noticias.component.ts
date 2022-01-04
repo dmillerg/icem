@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
     query(':enter',
-      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1  })))],
+      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 })))],
       { optional: true }
     ),
     query(':leave',
@@ -37,6 +37,10 @@ export class NoticiasComponent implements OnInit {
   noticias: Noticia[];
   noticias_all: Noticia[];
   noticiaScrap: Noticia[];
+  noticia_column1: Noticia[] = [];
+  noticia_column2: Noticia[] = [];
+  noticia_column3: Noticia[] = [];
+  noticia_column4: Noticia[] = [];
   noticia: Noticia = {
     id: -1,
     titulo: '',
@@ -53,41 +57,44 @@ export class NoticiasComponent implements OnInit {
   constructor(private api: ApiService, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
-    // this.api.getNoticias().subscribe((result) => {
-    //   try {
-    //     this.noticias_all = result;
-    //     if (this.storage.retrieve('noticia')) {
-    //       this.noticia = this.storage.retrieve('noticia');
-    //       this.noticias = result.filter(item => item.id != this.noticia.id);
-
-    //     } else {
-    //       this.noticias = result.filter(item => item != result[0]);
-    //       this.noticia = result[0];
-    //     }
-    //     this.loadImage(this.noticia.id);
-    //   } catch (e) {
-    //     console.log('error noticia: ' + e)
-    //   }
-    // });
     this.loadNoticiasScrap();
   }
 
-  loadNoticiasScrap(){
-    this.api.cargaNoticias().subscribe((result)=>{
+  loadNoticiasScrap() {
+    this.api.cargaNoticias().subscribe((result) => {
       console.log('scrap', result);
       this.noticiaScrap = result;
+      this.rellenarColumns();
       let not: string = this.storage.retrieve('noticia').id;
-      document.getElementById(not.toString()).scrollIntoView({behavior: 'smooth'});
-    }) 
+      document.getElementById(not.toString()).scrollIntoView({ behavior: 'smooth' });
+    });
   }
 
-  click(){
+  rellenarColumns() {
+    let cant = this.noticiaScrap.length / 4;
+    for (let i = 0; i < this.noticiaScrap.length; i++) {
+      if (i <= cant) {
+        this.noticia_column1.push(this.noticiaScrap[i]);
+      }
+      if (i > cant && i <= (cant * 2)) {
+        this.noticia_column2.push(this.noticiaScrap[i]);
+      }
+      if (i > (cant * 2) && i <= (cant * 3)) {
+        this.noticia_column3.push(this.noticiaScrap[i]);
+      }
+      if (i > (cant * 3) && i <= (cant * 4)) {
+        this.noticia_column4.push(this.noticiaScrap[i]);
+      }
+    }
+  }
+
+  click() {
     let not: string = this.storage.retrieve('noticia').id;
-      console.log('19560' === not);
-      console.log(typeof '19560');
-      console.log(typeof not.toString());
-      console.log('19560' === not.toString());
-      document.getElementById(not.toString()).scrollIntoView({behavior: 'smooth'});
+    console.log('19560' === not);
+    console.log(typeof '19560');
+    console.log(typeof not.toString());
+    console.log('19560' === not.toString());
+    document.getElementById(not.toString()).scrollIntoView({ behavior: 'smooth' });
   }
   loadImage(id) {
     this.img = false;

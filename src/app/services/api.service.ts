@@ -690,4 +690,23 @@ export class ApiService {
     const headers = { 'content-type': 'application/json' };
     return this.http.post(direccion, formData);
   }
+
+  /**
+   * Inicia la busqueda de scrapp
+   * @param time tiempo de intervalo entre cada scrapp 
+   * @returns 
+   */
+  IniciarScrap(time: Number = 12000) {
+    let direccion = this.url + 'iniciarScrap/' + time.toString();
+    return this.http.get(direccion);
+  }
+
+  /**
+   * Detiene el scrap para que no siga buscando
+   * @returns 
+   */
+  DetenerScrap(){
+    let direccion = this.url + 'detenerScrap';
+    return this.http.get(direccion);
+  }
 }
