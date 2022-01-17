@@ -31,22 +31,18 @@ export class ChatComponent implements OnInit {
   cantBorradas: number = 0;
   cantMax: number = 0;
   messageChat: string = 'El chat no contiene ningun mensaje...';
-  id: number = -1;
 
   constructor(private api: ApiService) { }
 
   ngOnInit(): void { }
 
   loadChats() {
-    if (this.mensajes.length > 0) {
-      this.id = this.mensajes[this.mensajes.length - 1].id;
-    }
-    console.log(this.id);
-    this.api.getChats(this.id).subscribe((result) => {
+    this.api.getChats().subscribe((result) => {
       if (result.length > 0) {
-        this.id = result[result.length - 1].id;
         result.forEach((item) => {
-          this.convertir(item);
+          if (this.mensajes.find((e) => e.id == item.id ) == undefined) {
+            this.convertir(item);
+          }
         });
       }
     });
@@ -59,7 +55,8 @@ export class ChatComponent implements OnInit {
         item.imagen = error.url;
         this.mensajes.push(item);
         this.cantMax = this.mensajes.length;
-        this.scrollBottom();
+        console.log(item.id);
+        document.getElementById(item.id).scrollIntoView({behavior: "smooth"});
       }
     );
   }
@@ -70,7 +67,7 @@ export class ChatComponent implements OnInit {
     this.loadChats();
     setInterval(() => {
       this.loadChats();
-    }, 1000);
+    }, 10000);
   }
 
   enviar() {

@@ -21,7 +21,7 @@
     <p class="text-center text-danger" style="width: 100%;" [hidden]="mensajes.length > 0 || nombre.length == 0">
       {{messageChat}}</p>
     <div *ngFor="let item of mensajes" style="width: 100%; display: flex; flex-direction: row ">
-      <div class="item-sms text-start" style="width: 50%" [ngClass]="{
+      <div class="item-sms text-start" [id]="item.id" style="width: 50%" [ngClass]="{
           'visibility-on': item.nombre != nombre,
           'visibility-off': item.nombre == nombre
         }" (click)=" downloadFile(item.archivo)">
@@ -31,7 +31,7 @@
           {{ item.nombre }} {{ item.fecha | date: "hh:mm:ss" }}
         </p>
       </div>
-      <div class="item-sms text-end" style="width: 50%" [ngClass]="{
+      <div class="item-sms text-end" [id]="item.id" style="width: 50%" [ngClass]="{
           'visibility-off': item.nombre != nombre,
           'visibility-on': item.nombre == nombre
         }" (click)=" downloadFile(item.archivo)">
