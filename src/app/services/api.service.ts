@@ -696,7 +696,7 @@ export class ApiService {
    * @param time tiempo de intervalo entre cada scrapp 
    * @returns 
    */
-  IniciarScrap(time: Number = 12000) {
+  IniciarScrap(time: Number = 60000) {
     let direccion = this.url + 'iniciarScrap/' + time.toString();
     return this.http.get(direccion);
   }
@@ -707,6 +707,15 @@ export class ApiService {
    */
   DetenerScrap(){
     let direccion = this.url + 'detenerScrap';
+    return this.http.get(direccion);
+  }
+
+  /**
+   * obtiene la ultima fecha de actualizacion
+   * @returns 
+   */
+  ultimaActualizacion(){
+    let direccion = this.url + 'ultimaAct';
     return this.http.get(direccion);
   }
 }

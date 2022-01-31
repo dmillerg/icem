@@ -113,8 +113,7 @@ export class FooterComponent implements OnInit {
   }
 
   fechaActualizacion() {
-    let query = 'SELECT ultsession FROM usuarios ORDER BY ultsession DESC';
-    this.api.all(query).subscribe(result => {
+    this.api.ultimaActualizacion().subscribe(result => {
       console.log(result);
       this.fechaAct = result[0].ultsession;
     });
