@@ -139,7 +139,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/ico.ico",
+              "src/icon-icem-blue.ico",
               "src/assets",
               {
                 "glob": "**/*.svg",

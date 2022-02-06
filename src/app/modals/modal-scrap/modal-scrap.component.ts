@@ -90,6 +90,7 @@ export class ModalScrapComponent implements OnInit {
     formData.append('url', this.scrap.url.toString());
     formData.append('fuente', this.scrap.fuente.toString());
     formData.append('logo', this.scrap.logo.toString());
+    formData.append('activo', this.scrap.activo.toString());
 
     if (this.modalAction == 'Editar') {
       this.api.updateScrap(formData, this.scrap.id).subscribe(

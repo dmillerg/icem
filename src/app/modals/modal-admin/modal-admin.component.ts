@@ -191,7 +191,7 @@ export class ModalAdminComponent implements OnInit {
         });
         break;
       case 'Posts':
-        modal = this.modalService.open(ModalPostsComponent, { size: 'lg' });
+        modal = this.modalService.open(ModalPostsComponent, { size: 'lg',backdrop: 'static' });
         modal.componentInstance.modalHeader = 'Posts';
         modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
         modal.result.then((result) => {

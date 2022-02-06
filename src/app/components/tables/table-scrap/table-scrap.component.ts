@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SessionStorageService } from 'ngx-webstorage';
 import { error } from 'protractor';
 import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.component';
 import { ModalScrapPruebaComponent } from 'src/app/modals/modal-scrap-prueba/modal-scrap-prueba.component';
@@ -15,7 +16,9 @@ import { ApiService } from 'src/app/services/api.service';
 export class TableScrapComponent implements OnInit {
   @Input() scraps: Scrap[];
   loadingTest: boolean = false;
-  constructor(private api: ApiService, private modalService: NgbModal) { }
+  loadingScrap: boolean = false;
+  messageScrap: string = 'Iniciar Scrap';
+  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
     this.loadScrap();
@@ -25,9 +28,19 @@ export class TableScrapComponent implements OnInit {
     this.api.getScraps().subscribe((result) => {
       if (result.length > 0) {
         this.scraps = result;
+        this.loadMessage();
       }
-      else this.scraps = [];
+      else {
+        this.scraps = [];
+        this.loadMessage();
+      }
     });
+  }
+
+  loadMessage() {
+    if (this.storage.retrieve('messageScrap')) {
+      this.messageScrap = this.storage.retrieve('messageScrap');
+    }
   }
 
   updateScrap(scrap) {
@@ -87,7 +100,27 @@ export class TableScrapComponent implements OnInit {
     formData.append('logo', item.logo.toString());
     formData.append('activo', !item.activo + "");
     this.api.updateScrap(formData, item.id).subscribe((result) => {
-     this.loadScrap();
+      this.loadScrap();
     })
+  }
+
+  loadScrapin() {
+    if (this.messageScrap == 'Iniciar Scrap') {
+      this.loadingScrap = true;
+      this.messageScrap = 'Iniciando Scrapping...'
+      this.api.IniciarScrap().subscribe((result) => {
+        this.messageScrap = 'Scrapping iniciado cada 1 hora';
+        setTimeout(() => {
+          this.messageScrap = 'Detener Scrapping';
+          this.loadingScrap = false;
+        }, 2000);
+      });
+      this.storage.store('messageScrap', 'Detener Scrap');
+    } else {
+      this.api.DetenerScrap().subscribe((result) => {
+        this.messageScrap = 'Iniciar Scrap';
+        this.storage.store('messageScrap', 'Iniciar Scrap');
+      })
+    }
   }
 }

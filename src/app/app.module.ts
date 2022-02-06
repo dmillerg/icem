@@ -5,6 +5,7 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(localEs, 'es');
 
 import { AppRoutingModule } from './app-routing.module';
+// import { NgMap } from 'ngmap';
 import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -53,6 +54,8 @@ import { ModalPostsComponent } from './modals/modal-posts/modal-posts.component'
 import { TablePostsComponent } from './components/tables/table-posts/table-posts.component';
 import { ModalRespuestaComponent } from './modals/modal-respuesta/modal-respuesta.component';
 import { ModalScrapPruebaComponent } from './modals/modal-scrap-prueba/modal-scrap-prueba.component';
+// import { AngularOpenlayersModule } from "ngx-openlayers";
+// import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
 @NgModule({
   declarations: [

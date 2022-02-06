@@ -6,9 +6,18 @@
   <div class="row p-2"></div>
   <div class="row">
     <div class="col-sm-12">
-      <div class="row" [@listAnimation]="noticiaScrap.length">
-        <div *ngFor="let item of noticiaScrap" class="col-sm-3">
-          <app-noticia-item [noticia]="item" (emisor)="cambiarNoticia($event)"></app-noticia-item>
+      <div class="row" >
+        <div class="col-sm-3"  [@listAnimation]="noticia_column1.length">
+          <app-noticia-item [noticia]="item"  *ngFor="let item of noticia_column1" (emisor)="cambiarNoticia($event)"></app-noticia-item>
+        </div>
+        <div class="col-sm-3" [@listAnimation]="noticia_column2.length">
+          <app-noticia-item [noticia]="item"  *ngFor="let item of noticia_column2" (emisor)="cambiarNoticia($event)"></app-noticia-item>
+        </div>
+        <div class="col-sm-3" [@listAnimation]="noticia_column3.length">
+          <app-noticia-item [noticia]="item"  *ngFor="let item of noticia_column3" (emisor)="cambiarNoticia($event)"></app-noticia-item>
+        </div>
+        <div class="col-sm-3" [@listAnimation]="noticia_column4.length">
+          <app-noticia-item [noticia]="item"  *ngFor="let item of noticia_column4" (emisor)="cambiarNoticia($event)"></app-noticia-item>
         </div>
       </div>
     </div>

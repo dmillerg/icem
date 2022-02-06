@@ -32,10 +32,10 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     try {
+      this.fechaActualizacion();
       if (this.storage.retrieve('usuario')) {
         this.user_auth = this.storage.retrieve('usuario');
         this.btn_message = 'Administrar';
-        this.fechaActualizacion();
       }
     } catch (e) {
       console.log(e);
@@ -117,7 +117,7 @@ export class FooterComponent implements OnInit {
     this.api.all(query).subscribe(result => {
       console.log(result);
       this.fechaAct = result[0].ultsession;
-    })
+    });
   }
 
 }
