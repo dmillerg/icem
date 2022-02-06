@@ -83,12 +83,17 @@
                     style="position: relative;">
                     <h5 class="h5"><i class="bi bi-person"></i>{{item.alias}}</h5>
                     <p>{{item.correo}}</p>
-                    <p style="position: absolute;right: 5px;bottom: 1px;font-size: small;transform: translateY(10px);">
-                        {{item.fecha | date: 'dd/MM/YYYY'}}</p>
+                  
                     <p>{{item.comentario}}</p>
                     <div class="barra-inferior">
-                        <p>Cantidad de respuestas: {{item.respuestas.length}}</p>
+                        <p class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}}</p>
+                       
                     </div>
+                    <div class="lista-respuesta" *ngFor="let item2 of item.respuestas">
+                        <li>{{item2.respuesta}}</li>
+                    </div>
+                    <p style="font-size: small;position: absolute;top: 5px;right: 5px;">
+                        {{item.fecha | date: 'dd/MM/YYYY'}}</p>
                 </div>
                 <p class="text-firstcolor text-center" *ngIf="posts.length==0">No hay comentarios acerca de este
                     producto</p>
