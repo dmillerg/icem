@@ -16,6 +16,10 @@ export class ModalRespuestaComponent implements OnInit {
   disableButton;
   id_post: number = -1;
 
+  alias: string = '';
+  correo: string = '';
+  comentario: string = '';
+
   respuesta: Respuesta = {
     id: -1,
     respuesta: '',
@@ -35,6 +39,17 @@ export class ModalRespuestaComponent implements OnInit {
 
   ngOnInit(): void {
     this.rellenarSiEditas();
+    if (this.id_post > -1) {
+      this.cargarPosts();
+    }
+  }
+
+  cargarPosts() {
+    this.api.getPostsByID(this.id_post).subscribe((result) => {
+      this.alias = result.alias;
+      this.correo = result.correo;
+      this.comentario = result.comentario;
+    })
   }
 
   rellenarSiEditas() {

@@ -47,6 +47,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       if (result.length > 0) {
         result.forEach((item) => {
           if (this.mensajes.find((e) => e.id == item.id ) == undefined) {
+            console.log(item);
             this.convertir(item);
           }
         });
@@ -61,8 +62,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         item.imagen = error.url;
         this.mensajes.push(item);
         this.cantMax = this.mensajes.length;
-        console.log(item.id);
-        document.getElementById(item.id).scrollIntoView({behavior: "smooth"});
+        document.getElementById("final").scrollIntoView({behavior: "smooth"});
       }
     );
   }

@@ -22,6 +22,7 @@ export class ModalPostsComponent implements OnInit {
     comentario: '',
     fecha: '',
     id_producto: -1,
+    cant_resp: 0,
   };
 
   posts_pasado: Posts = {
@@ -31,6 +32,7 @@ export class ModalPostsComponent implements OnInit {
     comentario: '',
     fecha: '',
     id_producto: -1,
+    cant_resp: 0,
   };
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
