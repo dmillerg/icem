@@ -52,7 +52,7 @@ export class FooterComponent implements OnInit {
         target.scrollIntoView({ behavior: 'smooth' })
         this.showLogin = true;
         break;
-      case 'Cerrar sesión':
+      case 'Cerrar sesión': 
         this.showLogin = false;
         this.autenticado = false;
         this.btn_message = 'Iniciar sesión';
