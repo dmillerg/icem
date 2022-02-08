@@ -4,12 +4,19 @@
             <th>id</th>
             <th>alias</th>
             <th>correo</th>
+            <th>visto</th>
+            <th>respuestas</th>
             <th>acciones</th>
         </thead>
         <tr *ngFor="let item of posts">
             <td>{{item.id}}</td>
             <td>{{item.alias}}</td>
             <td>{{item.correo}}</td>
+            <td>
+                <div class="blink" *ngIf="item.cant_resp==0"><span>new</span></div>
+                <div class="blink" *ngIf="item.cant_resp>0"><i class="bi bi-check text-success"></i></div>
+            </td>
+            <td>{{item.cant_resp}}</td>
             <td>
                 <button class="btn btn-outline-success" (click)="responderPost(item)"><i
                         class="bi bi-reply svg-shadow"></i></button>

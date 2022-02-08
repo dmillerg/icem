@@ -5,4 +5,5 @@ export interface Posts {
   comentario: string;
   fecha:string;
   id_producto: number;
+  cant_resp: number;
 }

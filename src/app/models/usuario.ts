@@ -4,4 +4,5 @@ export interface Usuario {
   password: string;
   nombre: string;
   fecha: string;
+  ultsession: string;
 }

@@ -606,6 +606,17 @@ export class ApiService {
   }
 
   /**
+   * Obtiene un posts por un id
+   * @param idPosts del posts a obtener
+   * @returns 
+   */
+  getPostsByID(idPosts: number = -1): Observable<Posts>{
+    const headers = { 'content-type': 'application/json' };
+    let direccion = this.url + 'postsByID/' + idPosts.toString();
+    return this.http.get<Posts>(direccion, { headers: headers });
+  }
+
+  /**
    * Guarda una nuevo post
    * @param formData datos del post
    * @returns
@@ -714,8 +725,8 @@ export class ApiService {
    * obtiene la ultima fecha de actualizacion
    * @returns 
    */
-  ultimaActualizacion(){
-    let direccion = this.url + 'ultimaAct';
-    return this.http.get(direccion);
+  ultimaActualizacion(): Observable<Usuario>{
+    let direccion = this.url + 'fechaultima';
+    return this.http.get<Usuario>(direccion);
   }
 }

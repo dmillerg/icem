@@ -63,6 +63,7 @@ export class NavbarComponent implements OnInit {
   buscar() {
     if (this.titulo.length > 0) {
       this.storage.store('titulo', this.titulo);
+      this.router.navigate(['producto/']);
       this.router.navigate(['buscar/']);
     }
   }

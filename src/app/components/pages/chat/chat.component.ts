@@ -43,15 +43,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnInit(): void { }
 
   loadChats() {
-    if (this.mensajes.length > 0) {
-      this.id = this.mensajes[this.mensajes.length - 1].id;
-    }
-    console.log(this.id);
-    this.api.getChats(this.id).subscribe((result) => {
+    this.api.getChats().subscribe((result) => {
       if (result.length > 0) {
-        this.id = result[result.length - 1].id;
         result.forEach((item) => {
-          this.convertir(item);
+          if (this.mensajes.find((e) => e.id == item.id ) == undefined) {
+            console.log(item);
+            this.convertir(item);
+          }
         });
       }
     });
@@ -64,7 +62,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         item.imagen = error.url;
         this.mensajes.push(item);
         this.cantMax = this.mensajes.length;
-        this.scrollBottom();
+        document.getElementById("final").scrollIntoView({behavior: "smooth"});
       }
     );
   }
@@ -75,7 +73,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.loadChats();
     this.intervalo = setInterval(() => {
       this.loadChats();
-    }, 1000);
+    }, 10000);
   }
 
   enviar() {
