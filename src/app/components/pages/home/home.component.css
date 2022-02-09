@@ -21,7 +21,7 @@
 .title-section {
     font-style: oblique;
     font-size: 4vw 7vh;
-    /* transform: translateY(-30px); */
+    transform: translateY(30px);
     transition: 500ms;
 }
 
@@ -100,4 +100,12 @@
     width: 30%;
     height: 10%;
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.input{
+    color: black;
+}
+
+.input:placeholder{
+    color: var(--firstcolor);
 }

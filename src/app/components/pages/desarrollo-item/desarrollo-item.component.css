@@ -16,7 +16,7 @@
 
 .linea-active {
   height: 100%;
-  background: linear-gradient(-90deg, rgb(59, 65, 142) 70%, rgb(245, 17, 245));
+  background: linear-gradient(-90deg, rgb(59, 65, 142) 70%, black);
 }
 
 .image {
