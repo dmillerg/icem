@@ -56,6 +56,7 @@ export class ProductosComponent implements OnInit {
     especificaciones: '',
     garantia: '',
     precio: 0,
+    disponibilidad: 0
   };
   id: string = '';
   category: string = '';

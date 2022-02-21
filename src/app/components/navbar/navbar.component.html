@@ -25,26 +25,31 @@
                 <li class="nav-item nav-mine" id="nuevos" (click)="navigateTo('nuevos')"><i
                         class="fa fa-gavel svg-shadow"></i>
                     Nuevos Desarrollos</li>
-                <li class="nav-item nav-mine" style="position: relative;"><i class="bi bi-person-fill svg-shadow"></i> Login
-                    <div class="menu">
-                            <li class="nav-contextual"><i class="bi bi-person-circle col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">autenticarse</span></li>
-                            <li class="nav-contextual"><i class="bi bi-person-video2 col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">perfil</span></li>
-                            <li class="nav-contextual"><i class="bi bi-person-plus-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">registrarse</span></li>
-                            <li class="nav-contextual"><i class="bi bi-door-closed-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">cerrar sesión</span></li>
-                    </div>
-                </li>
+               
                 
             </ul>
-            <form class="d-flex">
+            <form class="d-flex form">
                 <input class="form-control me-2 input-outline" [(ngModel)]="titulo" name="titulo" type="search"
                     placeholder="Buscar..." aria-label="Search">
-                <button class="btn btn-outline-firstcolor"
+                <button class="btn btn-outline-firstcolor btn-search"
                     style="height: 40px;display: flex;align-items: center;justify-content: center;position: relative;"
                     (click)="buscar()">
                     <div class="pista pista-off pista-bottom">buscar</div>
                     <i class="fa fa-search svg-shadow"></i>
                 </button>
             </form>
+            <li class="nav-item nav-mine" style="position: relative;"><i class="bi bi-person-fill svg-shadow"></i> Acceder
+                <div class="menu">
+                        <li class="nav-contextual" (click)="test()"><i class="bi bi-person-circle col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">autenticarse</span></li>
+                        <li class="nav-contextual"><i class="bi bi-person-video2 col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">perfil</span></li>
+                        <li class="nav-contextual" (click)="test()"><i class="bi bi-person-plus-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">registrarse</span></li>
+                        <li class="nav-contextual" (click)="test()"><i class="bi bi-kanban-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">administrar</span></li>
+                        <li class="nav-contextual"><i class="bi bi-door-closed-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">cerrar sesión</span></li>
+                </div>
+            </li>
+            <li class="nav-item nav-mine" style="position: relative;"><i class="bi bi-cart3 svg-shadow"></i> pedidos
+                
+            </li>
         </div>
     </div>
 </nav>

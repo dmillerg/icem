@@ -66,6 +66,7 @@ p {
 
 .nav-mine {
     margin: 10px;
+    list-style: none;
     font-size: 14px;
     font-weight: 500;
     color: white;
@@ -80,7 +81,7 @@ p {
     font-weight: 900px;
     font: bold;
     transition: 500ms;
-    margin: 15px;
+    /* margin: 15px; */
 }
 
 .buscador {
@@ -158,26 +159,16 @@ p {
     justify-content: center;
     border-radius: 5px;
     opacity: 0;
-    transform: translateY(-100%);
-    transition: all 0.3s;
+    right: 0;
+    top: 40px;
+    visibility: hidden;
+    transition: all 0.3s ease;
     z-index: 999;
-}
-
-@keyframes contextual {
-    from {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(10%);
-    }
 }
 
 .nav-item:hover .menu {
     opacity: 1;
-    transform: translateY(10%);
+    visibility: visible;
     transition: all .3s;
 }
 
@@ -187,7 +178,7 @@ p {
     text-align: start;
     align-items: center;
     justify-content: center;
-    padding: 15px;
+    padding: 10px;
     width: 100%;
 }
 
@@ -195,4 +186,14 @@ p {
     background-color: var(--firstcolor);
     color: white;
     transition: all .3s;
+}
+
+.form{
+    position: relative;
+}
+
+.form .btn-search{
+    border: none;
+    position: absolute;
+    right: 55px;
 }

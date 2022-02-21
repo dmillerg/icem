@@ -12,6 +12,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalCategoriaComponent } from '../modal-categoria/modal-categoria.component';
 import { ModalDesarrolloComponent } from '../modal-desarrollo/modal-desarrollo.component';
+import { ModalLoginOrRegisterComponent } from '../modal-login-or-register/modal-login-or-register.component';
 import { ModalNoticiaComponent } from '../modal-noticia/modal-noticia.component';
 import { ModalPostsComponent } from '../modal-posts/modal-posts.component';
 import { ModalProductoComponent } from '../modal-producto/modal-producto.component';

@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
+import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-register/modal-login-or-register.component';
+
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +21,7 @@ export class NavbarComponent implements OnInit {
   click: boolean = false;
   titulo: string = '';
 
-  constructor(private router: Router, private storage: SessionStorageService) { }
+  constructor(private router: Router, private storage: SessionStorageService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     console.log(this.router.url, 'asdasd');
@@ -66,5 +69,21 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['producto/']);
       this.router.navigate(['buscar/']);
     }
+  }
+
+  test() {
+    let modal = this.modalService.open(ModalLoginOrRegisterComponent, { backdrop: 'static' });
+    modal.result.then((result) => {
+      this.storage.clear('usuario');
+      const user = {
+        id: result.usuario[0].id,
+        usuario: result.usuario[0].usuario,
+        password: result.usuario[0].password,
+        nombre: result.usuario[0].nombre,
+        fecha: result.usuario[0].fecha,
+        token: result.token,
+      };
+      this.storage.store('usuario', user);
+    })
   }
 }
