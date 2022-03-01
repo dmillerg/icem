@@ -9,13 +9,18 @@
     box-sizing: border-box;
 }
 
-.content-total .btn-close {
+.content-total .btn-closed {
     position: absolute;
     top: 10px;
     right: 10px;
     background-color: transparent;
     z-index: 999;
-    color: var(--firstcolor-section);
+    /* color: var(--firstcolor-section); */
+}
+
+
+.content-total.active  .btn-closed{
+    color: var(--theme-color);
 }
 
 .content-total .content-login {
@@ -75,6 +80,7 @@
     cursor: pointer;
     transition: all .3s ease;
 }
+
 
 .content-total.active .content-blue ul {
     transform: translateX(-64%);
@@ -180,6 +186,7 @@ CSS del login
     color: var(--firstcolor);
     margin-top: -20px;
     text-decoration: none;
+    font-size: 12px;
 }
 
 /***

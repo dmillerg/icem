@@ -18,8 +18,8 @@ import { Respuesta } from '../models/respuesta';
   providedIn: 'root',
 })
 export class ApiService {
-  // url: string = 'http://9d6d-152-207-246-165.ngrok.io/apis/';
-  url: string = 'http://localhost:9706/apis/';
+  // url: string = 'http://d80e-152-206-214-63.ngrok.io/apis';
+  url: string = 'http://localhost:9707/apis/';
 
   constructor(
     private http: HttpClient,
