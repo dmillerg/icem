@@ -56,6 +56,7 @@ export class ProductosComponent implements OnInit {
     especificaciones: '',
     garantia: '',
     precio: 0,
+    disponibilidad: 0
   };
   id: string = '';
   category: string = '';
@@ -86,14 +87,12 @@ export class ProductosComponent implements OnInit {
         if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
           this.id = '0' + this.producto.id;
         } else this.id = this.producto.id.toString();
-        console.log('entro');
       }
     } catch (e) {
       console.log(e);
     }
     this.loadCategorias();
     this.loadProductos();
-    this.loadPosts();
   }
 
   loadCategorias() {
@@ -126,6 +125,7 @@ export class ProductosComponent implements OnInit {
         if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
           this.id = '0' + this.producto.id;
         } else this.id = this.producto.id.toString();
+        this.loadPosts();
       }
     });
   }

@@ -12,3 +12,12 @@ h1 {
     position: relative;
     padding-inline: 20px;
 }
+
+.centrado-horizontal{
+    display: flex;
+}
+
+.centrado-horizontal p{
+    margin-right: 10px;
+    /* transform: translateX(-100%); */
+}

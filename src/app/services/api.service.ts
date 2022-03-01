@@ -623,7 +623,6 @@ export class ApiService {
    */
   addPosts(formData) {
     const headers = { 'content-type': 'application/json' };
-    formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'savePosts';
     return this.http.post(direccion, formData);
   }
@@ -725,8 +724,8 @@ export class ApiService {
    * obtiene la ultima fecha de actualizacion
    * @returns 
    */
-  ultimaActualizacion(): Observable<Usuario>{
+  ultimaActualizacion(): Observable<Usuario[]>{
     let direccion = this.url + 'fechaultima';
-    return this.http.get<Usuario>(direccion);
+    return this.http.get<Usuario[]>(direccion);
   }
 }

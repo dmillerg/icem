@@ -9,4 +9,5 @@ export interface Producto {
   especificaciones: string;
   garantia: string;
   precio:number;
+  disponibilidad: number;
 }

@@ -54,6 +54,7 @@ import { ModalPostsComponent } from './modals/modal-posts/modal-posts.component'
 import { TablePostsComponent } from './components/tables/table-posts/table-posts.component';
 import { ModalRespuestaComponent } from './modals/modal-respuesta/modal-respuesta.component';
 import { ModalScrapPruebaComponent } from './modals/modal-scrap-prueba/modal-scrap-prueba.component';
+import { ModalLoginOrRegisterComponent } from './modals/modal-login-or-register/modal-login-or-register.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -99,6 +100,7 @@ import { ModalScrapPruebaComponent } from './modals/modal-scrap-prueba/modal-scr
     NoticiaItemComponent,
     ChatComponent,
     BusquedaComponent,
+    ModalLoginOrRegisterComponent,
   ],
   imports: [
     BrowserModule,

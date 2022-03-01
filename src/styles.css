@@ -220,10 +220,11 @@ div.card-firstcolor h1, h2, h3, h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: xx-small;
+  font-size: small;
   background-color: var(--theme-color);
   transform: translateY(100%);
   z-index: 999;
+  pointer-events: none;
 }
 
 .pista-rigth {
