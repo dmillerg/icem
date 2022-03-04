@@ -69,7 +69,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     formData.append('password', this.register.password);
     formData.append('correo', this.register.correo);
     this.api.addUsuarios(formData).subscribe((result)=>{
-      this.loginOrRegister();
+      // this.loginOrRegister();
     })
   }
 

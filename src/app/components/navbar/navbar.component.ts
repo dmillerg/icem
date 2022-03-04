@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
+import { ModalAdminComponent } from 'src/app/modals/modal-admin/modal-admin.component';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-register/modal-login-or-register.component';
 
@@ -109,5 +110,12 @@ export class NavbarComponent implements OnInit {
         this.storage.clear('usuario');
       });
     }
+  }
+
+  administrar(){
+    let modal = this.modalService.open(ModalAdminComponent, {
+      size: 'lg',
+      backdrop: 'static',
+    });
   }
 }

@@ -60,7 +60,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.cargaInicial()
     this.api.getProducto(4).subscribe((result) => {
       if (result.length > 0) {
-        console.log(result);
         var direccion = false;
         var cont = 1;
         result.forEach((item) => {

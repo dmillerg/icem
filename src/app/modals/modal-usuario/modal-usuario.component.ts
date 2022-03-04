@@ -66,6 +66,8 @@ export class ModalUsuarioComponent implements OnInit {
     formData.append('password',this.usuario.password.toString());
     formData.append('nombre',this.usuario.nombre.toString());
     formData.append('fecha',this.usuario.fecha.toString());
+    formData.append('correo',this.usuario.correo.toString());
+    formData.append('rol',this.usuario.rol.toString());
 
     console.log(this.modalAction)
     if(this.modalAction =="Editar"){

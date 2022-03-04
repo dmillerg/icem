@@ -35,7 +35,6 @@ export class DesarrolloItemComponent implements OnInit {
     this.api.getDesarrolloFoto(this.desarrollo.id).subscribe(
       (result) => {},
       (error) => {
-        console.log(error);
         this.imagen = error.url;
       }
     );
