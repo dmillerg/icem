@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
+import { ApiService } from 'src/app/services/api.service';
 import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-register/modal-login-or-register.component';
 
 
@@ -20,10 +21,21 @@ export class NavbarComponent implements OnInit {
   back_final = '';
   click: boolean = false;
   titulo: string = '';
+  acceso: string = 'acceder/registrarse';
+  storage2: SessionStorageService;
 
-  constructor(private router: Router, private storage: SessionStorageService, private modalService: NgbModal) { }
+  constructor(private router: Router, private storage: SessionStorageService, private modalService: NgbModal, private api: ApiService) {
+    this.storage2 = storage;
+   }
 
   ngOnInit(): void {
+    if (this.storage.retrieve('usuario')) {
+      this.acceso = this.storage.retrieve('usuario').nombre;
+    }
+    this.storage.observe('usuario').subscribe((e) => {
+      if(e != undefined){
+        this.acceso = e.nombre;}else this.acceso = 'acceder/registrarse'; 
+    })
     console.log(this.router.url, 'asdasd');
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
@@ -82,9 +94,20 @@ export class NavbarComponent implements OnInit {
         password: result.usuario[0].password,
         nombre: result.usuario[0].nombre,
         fecha: result.usuario[0].fecha,
+        correo: result.usuario[0].correo,
+        rol: result.usuario[0].rol,
         token: result.token,
       };
       this.storage.store('usuario', user);
     })
+  }
+
+  cancelarLogin() {
+    const user = this.storage.retrieve('usuario');
+    if (user != undefined) {
+      this.api.logout(user.id).subscribe((result) => {
+        this.storage.clear('usuario');
+      });
+    }
   }
 }

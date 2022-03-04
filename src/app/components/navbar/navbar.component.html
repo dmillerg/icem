@@ -38,13 +38,13 @@
                     <i class="fa fa-search svg-shadow"></i>
                 </button>
             </form>
-            <li class="nav-item nav-mine" style="position: relative;"><i class="bi bi-person-fill svg-shadow"></i> Acceder
+            <li class="nav-item nav-mine" style="position: relative;"><i class="bi bi-person-fill svg-shadow"></i> {{acceso}}
                 <div class="menu">
-                        <li class="nav-contextual" (click)="loginOrRegister('Login')"><i class="bi bi-person-circle col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">autenticarse</span></li>
-                        <li class="nav-contextual"><i class="bi bi-person-video2 col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">perfil</span></li>
-                        <li class="nav-contextual" (click)="loginOrRegister('Register')"><i class="bi bi-person-plus-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">registrarse</span></li>
-                        <li class="nav-contextual"><i class="bi bi-kanban-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">administrar</span></li>
-                        <li class="nav-contextual"><i class="bi bi-door-closed-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">cerrar sesión</span></li>
+                        <li *ngIf="acceso=='acceder/registrarse'" class="nav-contextual" (click)="loginOrRegister('Login')"><i class="bi bi-person-circle col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">autenticarse</span></li>
+                        <li *ngIf="acceso!='acceder/registrarse'" class="nav-contextual"><i class="bi bi-person-video2 col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">perfil</span></li>
+                        <li *ngIf="acceso=='acceder/registrarse'" class="nav-contextual" (click)="loginOrRegister('Register')"><i class="bi bi-person-plus-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">registrarse</span></li>
+                        <li *ngIf="acceso!='acceder/registrarse' && storage2.retrieve('usuario').rol=='admin'" class="nav-contextual"><i class="bi bi-kanban-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">administrar</span></li>
+                        <li *ngIf="acceso!='acceder/registrarse'" class="nav-contextual" (click)="cancelarLogin()"><i class="bi bi-door-closed-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">cerrar sesión</span></li>
                 </div>
             </li>
             <li class="nav-item nav-mine" style="position: relative;"><i class="bi bi-cart3 svg-shadow"></i>

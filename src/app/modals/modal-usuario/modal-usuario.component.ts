@@ -24,6 +24,8 @@ export class ModalUsuarioComponent implements OnInit {
     nombre: '',
     fecha: '',
     ultsession: '',
+    correo: '',
+    rol: '',
   };
 
   usuario_pasado: Usuario = {
@@ -33,6 +35,8 @@ export class ModalUsuarioComponent implements OnInit {
     nombre: '',
     fecha: '',
     ultsession: '',
+    correo: '',
+    rol: '',
   };
 
   confirm: string = '';

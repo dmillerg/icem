@@ -1,8 +1,10 @@
 export interface Usuario {
   id: number;
-  usuario:string;
+  usuario: string;
   password: string;
   nombre: string;
   fecha: string;
   ultsession: string;
+  correo: string;
+  rol: string;
 }

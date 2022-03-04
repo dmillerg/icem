@@ -48,11 +48,30 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     formData.append('usuario', this.login.usuario);
     formData.append('password', this.login.password);
     this.api.login(formData).subscribe((result) => {
+      const user = {
+        id: result.usuario[0].id,
+        usuario: result.usuario[0].usuario,
+        password: result.usuario[0].password,
+        nombre: result.usuario[0].nombre,
+        fecha: result.usuario[0].fecha,
+        correo: result.usuario[0].correo,
+        rol: result.usuario[0].rol,
+        token: result.token,
+      };
       this.actiModal.close(result);
     })
   }
 
   registEr(){
-
+    let formData = new FormData();
+    formData.append('usuario', this.register.usuario);
+    formData.append('nombre', this.register.nombre);
+    formData.append('password', this.register.password);
+    formData.append('correo', this.register.correo);
+    this.api.addUsuarios(formData).subscribe((result)=>{
+      this.loginOrRegister();
+    })
   }
+
+ 
 }
