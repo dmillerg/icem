@@ -12,9 +12,20 @@ export class ModalLoginOrRegisterComponent implements OnInit {
   actiModal: NgbActiveModal;
   activo = false;
 
-  login={
+  modalAction: string = '';
+
+  login = {
     usuario: '',
     password: '',
+  }
+
+  register = {
+    usuario: '',
+    password: '',
+    confirm_pass: '',
+    correo: '',
+    nombre: '',
+    telefono: '',
   }
 
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
@@ -22,6 +33,9 @@ export class ModalLoginOrRegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.modalAction == 'Login'){
+      this.loginOrRegister();
+    }
   }
 
   loginOrRegister() {
@@ -29,12 +43,16 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     this.activo = !this.activo;
   }
 
-  logIn(){
+  logIn() {
     let formData = new FormData()
-    formData.append('usuario',this.login.usuario);
-    formData.append('password',this.login.password);
-    this.api.login(formData).subscribe((result)=>{
+    formData.append('usuario', this.login.usuario);
+    formData.append('password', this.login.password);
+    this.api.login(formData).subscribe((result) => {
       this.actiModal.close(result);
     })
+  }
+
+  registEr(){
+
   }
 }

@@ -17,7 +17,38 @@
             <button class="btn btn-login" (click)="logIn()">Aceptar</button>
         </form>
     </div>
-    <div class="content-register"></div>
+    <div class="content-register">
+        <div class="icono-content"><i class="bi bi-person-fill svg-shadow"></i></div>
+        <form action="" class="form-register">
+            <div class="input-content">
+                <label for="usuario-register">usuario</label>
+                <i class="bi bi-person-fill prefix"></i>
+                <input type="text" class="in" name="usuario-login" id="usuario-login" placeholder="usuario" [(ngModel)]="register.usuario">
+            </div>
+            <div class="input-content">
+                <label for="name-register">nombre y apellidos</label>
+                <i class="bi bi-chat-square-fill prefix"></i>
+                <input type="text" class="in" name="name-login" id="name-register" placeholder="Nombre y apellidos" [(ngModel)]="register.nombre">
+            </div>
+            <div class="input-content">
+                <label for="correo-register">correo</label>
+                <i class="bi bi-envelope-fill prefix"></i>
+                <input type="email" class="in" name="correo-login" id="correo-register" placeholder="correo" [(ngModel)]="register.correo">
+            </div>
+            <div class="input-content">
+                <label for="pass-register">contraseña</label>
+                <i class="bi bi-key-fill prefix"></i>
+                <input type="password" class="in" name="pass-login" id="pass-register" placeholder="contraseña" [(ngModel)]="register.password">
+            </div>
+            <div class="input-content">
+                <label for="pass-confirm-register">confirmar contraseña</label>
+                <i class="bi bi-key-fill prefix"></i>
+                <input type="password" class="in" name="pass-confirm-register" id="pass-confirm-register" placeholder="confirmar contraseña" [(ngModel)]="register.confirm_pass">
+                <p class="text-danger text-center error-text">no coinciden</p>
+            </div>
+            <button class="btn btn-register" (click)="registEr()">Aceptar</button>
+        </form>
+    </div>
     <div class="content-blue" style="background: linear-gradient(0, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo.jpg');background-blend-mode: multiply;">
         <ul>
             <li id="autenticarse" class="li" [ngClass]="{'active': activo}" (click)="loginOrRegister()">autenticarse</li>

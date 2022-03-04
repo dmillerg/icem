@@ -71,8 +71,9 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  test() {
+  loginOrRegister(action: string) {
     let modal = this.modalService.open(ModalLoginOrRegisterComponent, { backdrop: 'static' });
+    modal.componentInstance.modalAction = action;
     modal.result.then((result) => {
       this.storage.clear('usuario');
       const user = {

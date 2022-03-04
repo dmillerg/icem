@@ -41,6 +41,10 @@
     background-color: var(--theme-color);
     border-top-right-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .content-total .content-blue {
@@ -196,4 +200,83 @@ CSS del register
 ******************
 *****************
 **/
+.content-total .content-register .icono-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    background-color: var(--firstcolor-hover);
+    border-radius: 100%;
+}
 
+.content-total .content-register .icono-content i{
+    color: var(--firstcolor);
+    font-size: 50px;
+}
+
+.content-total .content-register .form-register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-total .content-register .form-register .input-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    line-height: 40px;
+    margin-top: 20px;
+}
+
+.content-total .content-register .form-register .input-content input{
+    border-radius: 0.5em;
+    border: 1px solid var(--firstcolor);
+    padding-left: 30px;
+    outline: none;
+    color: var(--firstcolor);
+}
+
+.content-total .content-register .form-register .input-content input:focus{
+    border: 2px solid var(--firstcolor-section);
+    transition: all .3s ease;
+}
+
+.content-total .content-register .form-register .input-content label{
+    color: var(--firstcolor);
+    position: absolute;
+    top: -18px;
+    left: 10px;
+}
+
+.content-total .content-register .form-register .input-content .prefix{
+    position: absolute;
+    left: 10px;
+    color: var(--firstcolor);
+}
+
+.content-total .content-register .form-register .input-content .suffix{
+    position: absolute;
+    right: 10px;
+    color: var(--firstcolor);
+}
+
+.content-total .content-register .btn-register{
+    border: none;
+    background-color: var(--firstcolor);
+    color: var(--theme-color);
+    padding: 10px;
+    width: 70%;
+    margin-top: 20px;
+}
+
+.content-total .content-register .form-register .input-content .error-text{
+    font-size: 12px;
+    width: 90%;
+    position: absolute;
+    bottom: -45px;
+}
