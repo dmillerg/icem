@@ -26,11 +26,12 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   @Input() id: string = '';
   @Input() oculto: boolean = false;
   @Input() categoria: string = '';
+  cantidad: number = 0;
 
   constructor(
     private storage: SessionStorageService,
     private api: ApiService
-  ) {}
+  ) { }
 
 
   ngAfterViewInit(): void {
@@ -42,5 +43,28 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
 
   ngOnInit(): void {
 
+  }
+
+  cant(action: string) {
+    if (action == 'more' && this.cantidad < this.producto.disponibilidad) {
+      this.cantidad++;
+    } else if (action == 'less' && this.cantidad > 0) {
+      this.cantidad--;
+    }
+  }
+
+  addCarrito(){
+    let formData = new FormData();
+    formData.append('user_id',this.storage.retrieve('usuario').id);
+    formData.append('producto_id',this.producto.id.toString());
+    formData.append('cantidad',this.cantidad.toString());
+    formData.append('precio',this.producto.precio.toString());
+
+    this.api.addCarrito(formData).subscribe((result)=>{
+      console.log(result);
+      this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe((e)=>{
+        this.storage.store('carrito', e);
+      });
+    });
   }
 }

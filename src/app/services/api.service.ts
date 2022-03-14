@@ -14,6 +14,7 @@ import { Quienes } from '../models/quienes';
 import { Scrap } from '../models/scrap';
 import { Posts } from '../models/posts';
 import { Respuesta } from '../models/respuesta';
+import { Carrito } from '../models/carrito';
 @Injectable({
   providedIn: 'root',
 })
@@ -609,7 +610,7 @@ export class ApiService {
    * @param idPosts del posts a obtener
    * @returns 
    */
-  getPostsByID(idPosts: number = -1): Observable<Posts>{
+  getPostsByID(idPosts: number = -1): Observable<Posts> {
     const headers = { 'content-type': 'application/json' };
     let direccion = this.url + 'postsByID/' + idPosts.toString();
     return this.http.get<Posts>(direccion, { headers: headers });
@@ -714,7 +715,7 @@ export class ApiService {
    * Detiene el scrap para que no siga buscando
    * @returns 
    */
-  DetenerScrap(){
+  DetenerScrap() {
     let direccion = this.url + 'detenerScrap';
     return this.http.get(direccion);
   }
@@ -723,8 +724,47 @@ export class ApiService {
    * obtiene la ultima fecha de actualizacion
    * @returns 
    */
-  ultimaActualizacion(): Observable<Usuario[]>{
+  ultimaActualizacion(): Observable<Usuario[]> {
     let direccion = this.url + 'fechaultima';
     return this.http.get<Usuario[]>(direccion);
+  }
+
+  /**
+   * Devuelve todos los productos en el carrito
+   * @param user_id del usuario autenticado
+   * @returns 
+   */
+  getCarrito(user_id: number = -1):Observable<Carrito[]> {
+    let direccion = this.url + 'carrito/' + user_id;
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.get<Carrito[]>(direccion, { headers: headers, params: params });
+  }
+
+  /**
+   * Agregar un carrito
+   * @param formData datos de un carrito
+   * @returns 
+   */
+  addCarrito(formData: FormData){
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'carrito';
+    return this.http.post(direccion, formData);
+  }
+
+  /**
+  * Elimina un carrito
+  * @param id carrito a eliminar
+  * @returns
+  */
+   deleteCarrito(id: number = -1) {
+    let direccion = this.url + 'carrito/' + id.toString();
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.delete(direccion, { headers: headers, params: params });
   }
 }

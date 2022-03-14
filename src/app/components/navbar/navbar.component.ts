@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { ModalAdminComponent } from 'src/app/modals/modal-admin/modal-admin.component';
+import { Carrito } from 'src/app/models/carrito';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-register/modal-login-or-register.component';
 
@@ -24,18 +25,27 @@ export class NavbarComponent implements OnInit {
   titulo: string = '';
   acceso: string = 'acceder/registrarse';
   storage2: SessionStorageService;
+  carrito: Carrito[] = [];
 
   constructor(private router: Router, private storage: SessionStorageService, private modalService: NgbModal, private api: ApiService) {
     this.storage2 = storage;
-   }
+  }
 
   ngOnInit(): void {
+    if (this.storage.retrieve('carrito')) {
+      this.carrito = this.storage.retrieve('carrito');
+    }
+    this.storage.observe('carrito').subscribe((e) => {
+      this.carrito = e;
+    });
+    this.listarCarrito();
     if (this.storage.retrieve('usuario')) {
       this.acceso = this.storage.retrieve('usuario').nombre;
     }
     this.storage.observe('usuario').subscribe((e) => {
-      if(e != undefined){
-        this.acceso = e.nombre;}else this.acceso = 'acceder/registrarse'; 
+      if (e != undefined) {
+        this.acceso = e.nombre;
+      } else this.acceso = 'acceder/registrarse';
     })
     console.log(this.router.url, 'asdasd');
     this.router.events.subscribe((e) => {
@@ -112,10 +122,21 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  administrar(){
+  administrar() {
     let modal = this.modalService.open(ModalAdminComponent, {
       size: 'lg',
       backdrop: 'static',
     });
+  }
+
+  listarCarrito() {
+    if (this.storage.retrieve('usuario')) {
+      console.log(this.storage.retrieve('usuario').id)
+      this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe((result) => {
+        console.log(result)
+        this.carrito = result;
+        this.storage.store('carrito', this.carrito);
+      });
+    }
   }
 }

@@ -21,3 +21,26 @@ h1 {
     margin-right: 10px;
     /* transform: translateX(-100%); */
 }
+
+.centrado-horizontal .btn-arrow{
+    padding: 10px;
+    color: var(--theme-color);
+    background-color: var(--firstcolor);
+    transition: all .3s ease;
+}
+
+.centrado-horizontal .btn-arrow:hover{
+    transition: all .3s ease;
+    background-color: var(--firstcolor-hover);
+}
+
+.centrado-horizontal .text-number{
+    border: 1px solid var(--firstcolor);
+    border-radius: 0.5em;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: 40px;
+    text-align: center;
+    outline: none;
+    color: var(--firstcolor);
+}
