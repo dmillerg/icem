@@ -1,4 +1,4 @@
-<div class="scroll-mine" (scroll)="onScrolling()" id="scroll" style="overflow-y: scroll;height: 100%;overflow-x: none;">
+<div [@scaleAnimation]="'enter'" *ngIf="!loading" class="scroll-mine" (scroll)="onScrolling()" id="scroll" style="overflow-y: scroll;height: 100%;overflow-x: none;">
     <div #scroll></div>
     <app-navbar [back_class]="back_final"></app-navbar>
     <div class="row p-4" style="width: 100%;"></div>
@@ -11,3 +11,4 @@
         </div>
     </button>
 </div>
+<app-loading [@scaleAnimation]="'enter'" *ngIf="loading"></app-loading>

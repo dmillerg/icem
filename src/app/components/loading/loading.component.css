@@ -1,0 +1,51 @@
+.contenedor-loading {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-loading .contenedor-centro {
+    width: 160px;
+    height: 160px;
+}
+
+.contenedor-loading .contenedor-centro .img {
+    width: 90%;
+    height: 90%;
+    transition: all 1s ease;
+}
+
+.contenedor-loading .contenedor-centro .img.active {
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
+    transition: all 1s ease;
+}
+
+.contenedor-loading .contenedor-centro .loading {
+    border-right: 15px dotted var(--firstcolor);
+    width: 100%;
+    height: 15px;
+}
+
+.rotated {
+    animation-name: sidetoside;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-direction: alternate;
+}
+
+@keyframes sidetoside {
+    0% {
+        transform: translateX(-70%);
+    }
+
+    100% {
+        transform: translateX(-30%);
+    }
+}
