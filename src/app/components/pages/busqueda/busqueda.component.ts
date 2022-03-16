@@ -28,14 +28,24 @@ export class BusquedaComponent implements OnInit {
   constructor(private storage: SessionStorageService, private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.titulo = this.storage.retrieve('titulo');
+    if (this.storage.retrieve('titulo')) {
+      this.titulo = this.storage.retrieve('titulo');
+    }
+    this.storage.observe('titulo').subscribe((result)=>{
+      if(result){
+        console.log('observe',result);
+        this.titulo = result;
+        this.loadProductos();
+      }
+    })
     this.loadProductos();
   }
 
   loadProductos() {
+   this.busqueda = [];
     this.api.searchProductos(this.titulo).subscribe(result => {
       result.result.forEach(element => {
-        this.api.getProductoFoto(element.id).subscribe(result2=> console.log(result2),error=>{
+        this.api.getProductoFoto(element.id).subscribe(result2 => console.log(result2), error => {
           this.busqueda.push({
             id: element.id,
             titulo: element.titulo,
@@ -49,7 +59,7 @@ export class BusquedaComponent implements OnInit {
             tipo: 'productos'
           });
         })
-        
+
       });
       this.loadNoticias();
     });
