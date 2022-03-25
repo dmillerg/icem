@@ -1,5 +1,6 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { SessionStorageService } from 'ngx-webstorage';
 import { Quienes } from 'src/app/models/quienes';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -36,12 +37,21 @@ export class QuienesSomosComponent implements OnInit {
   integrantes: Quienes[] = [];
 
   video: string = '';
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
     this.cargaInicial();
+    this.cargaInicial2();
     this.loadQuienes();
     this.loadVideo();
+    setTimeout(()=>{
+      if(this.storage.retrieve('quienes')){
+        this.scrollInicial(this.storage.retrieve('quienes'));
+      }
+      this.storage.observe('quienes').subscribe((result)=>{
+        this.scrollInicial(result);
+      })
+    }, 600)
   }
 
   loadQuienes() {
@@ -59,16 +69,27 @@ export class QuienesSomosComponent implements OnInit {
 
   cargaInicial() {
     let scroll = document.getElementById('scroll');
-    let animados = document.querySelectorAll('.animado');
-    scroll.addEventListener("scroll", function () {
-      for (let i = 0; i < animados.length; i++) {
-        let animado = <HTMLElement>animados[i]
-        if ((animado.offsetTop - 600) < scroll.scrollTop) {
-          animado.classList.add('activoitem');
-          // console.log('scroll ', scroll.scrollTop,' animado ' , animado.offsetTop)
-        }
-      }
-
+    scroll.addEventListener("scroll", ()=> {
+      this.cargaInicial2();
     });
+  }
+
+  cargaInicial2(){
+    let scroll = document.getElementById('scroll');
+    let animados = document.querySelectorAll('.animado');
+    for (let i = 0; i < animados.length; i++) {
+      let animado = <HTMLElement>animados[i]
+      if (animado.offsetTop - 600 < scroll.scrollTop) {
+        animado.classList.add('activoitem');
+        // console.log('scroll ', scroll.scrollTop,' animado ' , animado.offsetTop)
+      }
+    }
+  }
+
+  scrollInicial(id: string){
+    let target = document.getElementById(id);
+    console.log(target);
+    
+    target.scrollIntoView({behavior: 'smooth'});
   }
 }

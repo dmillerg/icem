@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { ModalAdminComponent } from 'src/app/modals/modal-admin/modal-admin.component';
 import { Carrito } from 'src/app/models/carrito';
+import { Categoria } from 'src/app/models/categoria';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-register/modal-login-or-register.component';
 
@@ -26,6 +27,7 @@ export class NavbarComponent implements OnInit {
   acceso: string = 'acceder/registrarse';
   storage2: SessionStorageService;
   carrito: Carrito[] = [];
+  categorias: Categoria[] = [];
 
   constructor(private router: Router, private storage: SessionStorageService, private modalService: NgbModal, private api: ApiService) {
     this.storage2 = storage;
@@ -38,6 +40,7 @@ export class NavbarComponent implements OnInit {
     this.storage.observe('carrito').subscribe((e) => {
       this.carrito = e;
     });
+    this.listarCategoriasProductos();
     this.listarCarrito();
     if (this.storage.retrieve('usuario')) {
       this.acceso = this.storage.retrieve('usuario').nombre;
@@ -138,5 +141,19 @@ export class NavbarComponent implements OnInit {
         this.storage.store('carrito', this.carrito);
       });
     }
+  }
+
+  listarCategoriasProductos() {
+    this.api.getCategorias().subscribe((result) => {
+      this.categorias = result;
+    });
+  }
+
+  loadProducto(item) {
+    this.storage.store('categoria', item);
+  }
+
+  loadQuienes(item){
+    this.storage.store('quienes', item);
   }
 }

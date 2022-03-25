@@ -1,5 +1,5 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { post } from 'jquery';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -37,7 +37,7 @@ const listAnimation = trigger('listAnimation', [
     ]),
   ],
 })
-export class ProductosComponent implements OnInit {
+export class ProductosComponent implements OnInit, OnDestroy {
   productos: Producto[] = [];
   productoss: Producto[] = [];
   categorias: Categoria[] = [];
@@ -70,6 +70,7 @@ export class ProductosComponent implements OnInit {
   comentario: string = '';
 
   comentar: boolean = false;
+  categoriaId: number = -1;
 
   constructor(
     private api: ApiService,
@@ -77,8 +78,13 @@ export class ProductosComponent implements OnInit {
     private router: Router
   ) { }
 
+  ngOnDestroy(): void {
+    this.storage.clear('categoria');
+  }
+
   ngOnInit(): void {
     this.cargaInicial();
+    this.cargaInicial2();
     try {
       if (this.storage.retrieve('producto')) {
         this.producto = this.storage.retrieve('producto');
@@ -91,8 +97,16 @@ export class ProductosComponent implements OnInit {
     } catch (e) {
       console.log(e);
     }
+    this.loadAllProductos();
     this.loadCategorias();
     this.loadProductos();
+    this.observeCategoria();
+  }
+
+  loadAllProductos(){
+    this.api.getProducto(0, -1, -1).subscribe((result)=>{
+      this.productoss = result;
+    })
   }
 
   loadCategorias() {
@@ -114,10 +128,19 @@ export class ProductosComponent implements OnInit {
     })
   }
 
+  observeCategoria() {
+    if (this.storage.retrieve('categoria')) {
+      this.categoriaId = this.storage.retrieve('categoria').id;
+    }
+    this.storage.observe('categoria').subscribe((result) => {
+      this.categoriaId = result.id;
+      this.loadProductos();
+    })
+  }
+
   loadProductos() {
-    this.api.getProducto(0, -1, this.producto.id).subscribe((result) => {
+    this.api.getProducto(0, this.categoriaId, this.producto.id).subscribe((result) => {
       this.productos = result;
-      this.productoss = this.productos;
       if (!this.producto_especificacion) {
         this.producto = this.productos[0];
         this.changeCategory(this.producto.categoria);
@@ -170,17 +193,21 @@ export class ProductosComponent implements OnInit {
 
   cargaInicial() {
     let scroll = document.getElementById('scroll');
-    let animados = document.querySelectorAll('.animado');
-    scroll.addEventListener("scroll", function () {
-      for (let i = 0; i < animados.length; i++) {
-        let animado = <HTMLElement>animados[i]
-        if (animado.offsetTop - 600 < scroll.scrollTop) {
-          animado.classList.add('activoitem');
-          // console.log('scroll ', scroll.scrollTop,' animado ' , animado.offsetTop)
-        }
-      }
-
+    scroll.addEventListener("scroll", ()=> {
+      this.cargaInicial2();
     });
+  }
+
+  cargaInicial2(){
+    let scroll = document.getElementById('scroll');
+    let animados = document.querySelectorAll('.animado');
+    for (let i = 0; i < animados.length; i++) {
+      let animado = <HTMLElement>animados[i]
+      if (animado.offsetTop - 600 < scroll.scrollTop) {
+        animado.classList.add('activoitem');
+        // console.log('scroll ', scroll.scrollTop,' animado ' , animado.offsetTop)
+      }
+    }
   }
 
   abrirComentarios() {

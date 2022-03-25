@@ -186,97 +186,110 @@
   </div>
 </div> -->
 <div class="container" [@scaleAnimation]="'enter'">
-    <div class="row p-2"></div>
-    <div class="row">
-        <div class="col-sm-8 text-start" style="padding-inline: 5%; display: flex;flex-direction: column;align-items: center;justify-content: center;">
-            <h1 class="h1 text-firstcolor"><strong>Misión</strong></h1>
-            <p>
-                Declara que es una “organización líder del país en fabricación y comercialización de equipos médicos, instrumentos ortopédicos y ayudas técnicas, mobiliario clínico, gastronómicos y de oficina, estanterías, soluciones constructivas diversas, perfiles
-                conformados en frío y servicios a sus clientes nacionales, distintiva por su calidad, versatilidad, rapidez, competitividad y seguridad a sus clientes.
-            </p>
-        </div>
-        <div class="col-sm-4">
-            <img class="img-fluid svg-shadow" src="assets/empresa-mision.svg" />
-        </div>
+  <div class="row p-4"></div>
+  <div class="row" id="mision">
+    <div class="col-sm-8 text-start"
+      style="padding-inline: 5%; display: flex;flex-direction: column;align-items: center;justify-content: center;">
+      <h1 class="h1 text-firstcolor"><strong>Misión</strong></h1>
+      <p>
+        Declara que es una “organización líder del país en fabricación y comercialización de equipos médicos,
+        instrumentos ortopédicos y ayudas técnicas, mobiliario clínico, gastronómicos y de oficina, estanterías,
+        soluciones constructivas diversas, perfiles
+        conformados en frío y servicios a sus clientes nacionales, distintiva por su calidad, versatilidad, rapidez,
+        competitividad y seguridad a sus clientes.
+      </p>
     </div>
+    <div class="col-sm-4">
+      <img class="img-fluid svg-shadow" src="assets/empresa-mision.svg" />
+    </div>
+  </div>
 
-    <div class="row animado">
-        <div class="col-sm-4">
-            <img class="img-fluid" src="assets/empresa-vision.jpg" />
-        </div>
-        <div class="col-sm-8 text-end" style=" display: flex;flex-direction: column;align-items: center;justify-content: center;">
-            <h1 class="h1 text-firstcolor"><strong>Visión</strong></h1>
-            <p>
-                Modernizará la tecnología y la ingeniería de fabricación de la gama de equipos, instrumentos y medios, muebles, estanterías, productos metálicos y perfiles para satisfacer con competitividad las exigencias del mercado interno y la exportación.
-            </p>
-        </div>
+  <div class="row animado" id="vision">
+    <div class="col-sm-4">
+      <img class="img-fluid" src="assets/empresa-vision.jpg" />
     </div>
+    <div class="col-sm-8 text-end"
+      style=" display: flex;flex-direction: column;align-items: center;justify-content: center;">
+      <h1 class="h1 text-firstcolor"><strong>Visión</strong></h1>
+      <p>
+        Modernizará la tecnología y la ingeniería de fabricación de la gama de equipos, instrumentos y medios, muebles,
+        estanterías, productos metálicos y perfiles para satisfacer con competitividad las exigencias del mercado
+        interno y la exportación.
+      </p>
+    </div>
+  </div>
+  <div class="p-4" id="objetivo"></div>
+  <div class="row animado">
+    <div class="col-sm-8 text-start"
+      style="padding-inline: 5%; display: flex;flex-direction: column;align-items: center;justify-content: center;">
+      <h1 class="h1 text-firstcolor"><strong>Objetivo</strong></h1>
+      <p>
+        Producir y comercializar equipos, instrumentos y mobiliarios, tanto médicos como de oficina; piezas y accesorios
+        de laboratorio, así como componentes para la ortopedia técnica.
+      </p>
+    </div>
+    <div class="col-sm-4">
+      <img class="img-fluid" src="assets/empresa-objetivo.png" />
+    </div>
+  </div>
 
-    <div class="row animado">
-        <div class="col-sm-8 text-start" style="padding-inline: 5%; display: flex;flex-direction: column;align-items: center;justify-content: center;">
-            <h1 class="h1 text-firstcolor"><strong>Objetivo</strong></h1>
-            <p>
-                Producir y comercializar equipos, instrumentos y mobiliarios, tanto médicos como de oficina; piezas y accesorios de laboratorio, así como componentes para la ortopedia técnica.
-            </p>
-        </div>
-        <div class="col-sm-4">
-            <img class="img-fluid" src="assets/empresa-objetivo.png" />
-        </div>
+  <div class="row animado" id="miembros">
+    <div class="col-sm-12" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
+      <img src="assets/empresa-miembros.webp" class="img-fluid">
+      <h1 class="h1 text-firstcolor"><strong>Miembros del equipo</strong> </h1>
     </div>
-
-    <div class="row animado">
-        <div class="col-sm-12" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
-            <img src="assets/empresa-miembros.webp" class="img-fluid">
-            <h1 class="h1 text-firstcolor"><strong>Miembros del equipo</strong> </h1>
-        </div>
-    </div>
+  </div>
 </div>
 
 <div class="container">
-    <div class="row animado centrado" [@listAnimation]="integrantes.length">
-        <div *ngFor="let item of integrantes" class="col-sm-3">
-            <app-quienes-item [quienes]="item" ></app-quienes-item>
-        </div>
+  <div class="row animado centrado" [@listAnimation]="integrantes.length">
+    <div *ngFor="let item of integrantes" class="col-sm-3">
+      <app-quienes-item [quienes]="item"></app-quienes-item>
     </div>
-    <div class="row p-2"></div>
-    <div class="row animado">
-        <div class="row">
-            <div class="col-sm-12" style=" display: flex;flex-direction: column;align-items: center;justify-content: center;">
-                <img src="assets/empresa-actividades.jpg" class="img-fluid">
-            </div>
-        </div>
-        <div class="col-sm-12 text-center">
-            <h3 class="h3"><strong>Las actividades secundarias y de apoyo aprobadas por Resolución 280 del año 2017, dictada por el Director General, son:</strong></h3>
-        </div>
-        <div class="col-sm-6">
-            <ul>
-                <li>Servicio de levantamiento de las necesidades, medición, fabricación, montaje, reparación y mantenimiento de todas nuestras producciones.</li>
-                <li>Servicio de diseño y proyectos en 3D, de toldos, cortinas y mobiliario.</li>
-                <li>Servicio de arrendamiento de toldos y kioscos.</li>
-                <li>Servicio de trabajos especializados en actividades relacionadas con la tornería, fresado, erosión rectificación y tratamiento térmico de metales.</li>
-                <li>Servicio de trabajos especializados en temas eléctricos y mecánicos.</li>
-                <li>Servicio de reparación y montaje de mobiliario.</li>
-                <li>Prestar servicio de elaboración de planos de muebles y espacios.</li>
-                <li>Prestar servicio de conformación, ponche, dobles y acabado superficial.</li>
-                <li>Prestar servicio de post-venta a las producciones.</li>
-            </ul>
-        </div>
-        <div class="col-sm-6">
-            <ul>
-                <li>Montaje y reparación de techos y paredes de panelería ligera.</li>
-                <li>Comercializar perfiles, canales, montantes y luminarias.</li>
-                <li>Producir y comercializar mobiliario gastronómico.</li>
-                <li>Realización del diseño, fabricación y montaje de señaléticas y vinilos.</li>
-                <li>Prestar servicio de parqueo.</li>
-                <li>Prestar servicio de arrendamiento del teatro y los almacenes.</li>
-                <li>Prestar servicios de asesoría especializada para el funcionamiento y puesta en marcha de sus producciones.</li>
-                <li>Prestar servicios gastronómicos a los trabajadores.</li>
-                <li>Producir y comercializar artículos con sobrantes y desechos de materias primas.</li>
-            </ul>
-        </div>
+  </div>
+  <div class="row p-2" id="actividades"></div>
+  <div class="row animado">
+    <div class="row">
+      <div class="col-sm-12" style=" display: flex;flex-direction: column;align-items: center;justify-content: center;">
+        <img src="assets/empresa-actividades.jpg" class="img-fluid">
+      </div>
     </div>
-    <!-- 
+    <div class="col-sm-12 text-center">
+      <h3 class="h3"><strong>Las actividades secundarias y de apoyo aprobadas por Resolución 280 del año 2017, dictada
+          por el Director General, son:</strong></h3>
+    </div>
+    <div class="col-sm-6">
+      <ul>
+        <li>Servicio de levantamiento de las necesidades, medición, fabricación, montaje, reparación y mantenimiento de
+          todas nuestras producciones.</li>
+        <li>Servicio de diseño y proyectos en 3D, de toldos, cortinas y mobiliario.</li>
+        <li>Servicio de arrendamiento de toldos y kioscos.</li>
+        <li>Servicio de trabajos especializados en actividades relacionadas con la tornería, fresado, erosión
+          rectificación y tratamiento térmico de metales.</li>
+        <li>Servicio de trabajos especializados en temas eléctricos y mecánicos.</li>
+        <li>Servicio de reparación y montaje de mobiliario.</li>
+        <li>Prestar servicio de elaboración de planos de muebles y espacios.</li>
+        <li>Prestar servicio de conformación, ponche, dobles y acabado superficial.</li>
+        <li>Prestar servicio de post-venta a las producciones.</li>
+      </ul>
+    </div>
+    <div class="col-sm-6">
+      <ul>
+        <li>Montaje y reparación de techos y paredes de panelería ligera.</li>
+        <li>Comercializar perfiles, canales, montantes y luminarias.</li>
+        <li>Producir y comercializar mobiliario gastronómico.</li>
+        <li>Realización del diseño, fabricación y montaje de señaléticas y vinilos.</li>
+        <li>Prestar servicio de parqueo.</li>
+        <li>Prestar servicio de arrendamiento del teatro y los almacenes.</li>
+        <li>Prestar servicios de asesoría especializada para el funcionamiento y puesta en marcha de sus producciones.
+        </li>
+        <li>Prestar servicios gastronómicos a los trabajadores.</li>
+        <li>Producir y comercializar artículos con sobrantes y desechos de materias primas.</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 
       
      -->
-    <div class="row p-4"></div>
+  <div class="row p-4"></div>
 </div>
