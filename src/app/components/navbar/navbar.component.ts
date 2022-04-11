@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   titulo: string = '';
   acceso: string = 'acceder/registrarse';
   storage2: SessionStorageService;
-  carrito: Carrito[] = [];
+  carrito: any[] = [];
   categorias: Categoria[] = [];
 
   constructor(private router: Router, private storage: SessionStorageService, private modalService: NgbModal, private api: ApiService) {
@@ -138,9 +138,19 @@ export class NavbarComponent implements OnInit {
       this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe((result) => {
         console.log(result)
         this.carrito = result;
+        this.carrito.forEach((e, i) => {
+          this.getProductoFoto(e.id, i);
+        });
         this.storage.store('carrito', this.carrito);
       });
     }
+  }
+
+  getProductoFoto(id: number, position: number) {
+    this.api.getProductoFoto(id).subscribe(result => {
+    }, error => {
+      this.carrito[position].url = error.url;
+    })
   }
 
   listarCategoriasProductos() {
@@ -153,7 +163,7 @@ export class NavbarComponent implements OnInit {
     this.storage.store('categoria', item);
   }
 
-  loadQuienes(item){
+  loadQuienes(item) {
     this.storage.store('quienes', item);
   }
 }

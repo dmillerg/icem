@@ -28,12 +28,14 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     telefono: '',
   }
 
+  success: boolean = true;
+
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
   }
 
   ngOnInit(): void {
-    if(this.modalAction == 'Login'){
+    if (this.modalAction == 'Login') {
       this.loginOrRegister();
     }
   }
@@ -62,16 +64,27 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     })
   }
 
-  registEr(){
+  registEr() {
     let formData = new FormData();
     formData.append('usuario', this.register.usuario);
     formData.append('nombre', this.register.nombre);
     formData.append('password', this.register.password);
     formData.append('correo', this.register.correo);
-    this.api.addUsuarios(formData).subscribe((result)=>{
-      // this.loginOrRegister();
+    this.api.addUsuarios(formData).subscribe((result) => {
+      this.success = true;
+      // this.actiModal.close();
     })
   }
 
- 
+  validateEmail() {
+    return this.register.correo.includes('@') && this.register.correo.includes('.');
+  }
+
+  validateVacio() {
+    return this.register.usuario.length > 0 &&
+      this.register.nombre.length > 0 &&
+      this.register.correo.length > 0 &&
+      this.register.password.length > 0;
+  }
+
 }

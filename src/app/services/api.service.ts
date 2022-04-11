@@ -767,4 +767,10 @@ export class ApiService {
     };
     return this.http.delete(direccion, { headers: headers, params: params });
   }
+
+  sendEmail(){
+    let direccion = this.url + 'send';
+    return this.http.get(direccion);
+  }
+
 }

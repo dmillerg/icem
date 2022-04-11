@@ -18,8 +18,8 @@
         </form>
     </div>
     <div class="content-register">
-        <div class="icono-content"><i class="bi bi-person-fill svg-shadow"></i></div>
-        <form action="" class="form-register">
+        <div *ngIf="!success" class="icono-content"><i class="bi bi-person-fill svg-shadow"></i></div>
+        <form *ngIf="!success" action="" class="form-register">
             <div class="input-content">
                 <label for="usuario-register">usuario</label>
                 <i class="bi bi-person-fill prefix"></i>
@@ -44,10 +44,13 @@
                 <label for="pass-confirm-register">confirmar contraseña</label>
                 <i class="bi bi-key-fill prefix"></i>
                 <input type="password" class="in" name="pass-confirm-register" id="pass-confirm-register" placeholder="confirmar contraseña" [(ngModel)]="register.confirm_pass">
-                <p class="text-danger text-center error-text">no coinciden</p>
+                <p *ngIf="register.confirm_pass!=register.password" class="text-danger text-center error-text">no coinciden las contraseñas</p>
             </div>
-            <button class="btn btn-register" (click)="registEr()">Aceptar</button>
+            <button class="btn btn-register" [disabled]="!validateEmail() || !validateVacio() || register.confirm_pass!=register.password" (click)="registEr()">Aceptar</button>
         </form>
+        <div *ngIf="success" class="message-successful">
+            <label class="text-firstcolor">se ha mandado un mensaje de confirmación a su correo: {{register.correo}}  </label>
+        </div>
     </div>
     <div class="content-blue" style="background: linear-gradient(0, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo.jpg');background-blend-mode: multiply;">
         <ul>

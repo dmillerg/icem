@@ -26,16 +26,16 @@
                 class="fa fa-users svg-shadow"></i>
             Quienes somos
             <div class="menu">
-        <li class="nav-contextual" (click)="loadQuienes('mision')"><i class="fa fa-users col-sm-2" style="margin-right: 10px;"></i><span
-                class="col-sm-10">Mision</span></li>
-        <li class="nav-contextual" (click)="loadQuienes('vision')"><i class="fa fa-users col-sm-2" style="margin-right: 10px;"></i><span
-                class="col-sm-10">Vision</span></li>
-        <li class="nav-contextual" (click)="loadQuienes('objetivo')"><i class="fa fa-users col-sm-2" style="margin-right: 10px;"></i><span
-                class="col-sm-10">Objetivo</span></li>
-        <li class="nav-contextual" (click)="loadQuienes('miembros')"><i class="fa fa-users col-sm-2" style="margin-right: 10px;"></i><span
-                class="col-sm-10">Miembros del equipo</span></li>
-        <li class="nav-contextual" (click)="loadQuienes('actividades')"><i class="fa fa-users col-sm-2" style="margin-right: 10px;"></i><span
-                class="col-sm-10">Actividades</span></li>
+        <li class="nav-contextual" (click)="loadQuienes('mision')"><i class="fa fa-users col-sm-2"
+                style="margin-right: 10px;"></i><span class="col-sm-10">Mision</span></li>
+        <li class="nav-contextual" (click)="loadQuienes('vision')"><i class="fa fa-users col-sm-2"
+                style="margin-right: 10px;"></i><span class="col-sm-10">Vision</span></li>
+        <li class="nav-contextual" (click)="loadQuienes('objetivo')"><i class="fa fa-users col-sm-2"
+                style="margin-right: 10px;"></i><span class="col-sm-10">Objetivo</span></li>
+        <li class="nav-contextual" (click)="loadQuienes('miembros')"><i class="fa fa-users col-sm-2"
+                style="margin-right: 10px;"></i><span class="col-sm-10">Miembros del equipo</span></li>
+        <li class="nav-contextual" (click)="loadQuienes('actividades')"><i class="fa fa-users col-sm-2"
+                style="margin-right: 10px;"></i><span class="col-sm-10">Actividades</span></li>
     </div>
     </li>
     <li class="nav-item nav-mine" id="noticias" (click)="navigateTo('noticias')"><i
@@ -78,8 +78,14 @@
             class="bi bi-cart3 svg-shadow"></i>
         <div class="cant-cart">{{carrito.length}}</div>
         <div class="menu">
-    <li *ngFor="let item of carrito" class="nav-contextual" style="width: 250px;">id del producto:{{item.producto_id}}
-        precio: ${{item.precio}} cantidad: {{item.cantidad}}</li>
+    <li *ngFor="let item of carrito" class="nav-contextual" style="width: 250px;">
+        <img style="width: 60px;height: 60px;margin-right: 10px;" [src]="item.url" [alt]="item.url">
+        <div class="info">
+            <label>id del producto:{{item.producto_id}}</label>
+            <label>precio: ${{item.precio}}</label>
+            <label>cantidad: {{item.cantidad}}</label>
+        </div>
+    </li>
     </div>
     </li>
     </div>
