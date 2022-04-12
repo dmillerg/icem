@@ -51,27 +51,30 @@ export class NavbarComponent implements OnInit {
       } else this.acceso = 'acceder/registrarse';
     })
     console.log(this.router.url, 'asdasd');
+    this.activate(this.router.url.substring(1, this.router.url.length))
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         console.log(e.url);
         let url_actual = e.url.substring(1, e.url.length);
         console.log(url_actual);
-        if (this.activo !== url_actual) {
-          document.getElementById(url_actual).classList.add('active');
-          document.getElementById(this.activo).classList.remove('active');
-          this.activo = url_actual;
-        }
+        this.activate(url_actual)
       }
     });
   }
 
-  navigateTo(path) {
-    console.log('actual', this.activo);
-    console.log('nuevo', path);
-    if (this.activo !== path) {
-      document.getElementById(path).classList.add('active');
+  activate(url){
+    if (this.activo !== url) {
+      document.getElementById(url).classList.add('active');
       document.getElementById(this.activo).classList.remove('active');
-      this.activo = path;
+      this.activo = url;
+    }
+  }
+
+  navigateTo(path) {
+    // console.log('actual', this.activo);
+    // console.log('nuevo', path);
+    if (this.activo !== path) {
+      this.activate(path)
       this.router.navigate([path + '/']);
     }
   }
@@ -168,10 +171,6 @@ export class NavbarComponent implements OnInit {
 
   deleteCarrito(id: number = -1, cant: number = 0) {
     this.api.deleteCarrito(id).subscribe(result => {
-      let prod = this.storage.retrieve('producto')
-      prod.disponibilidad += cant;
-
-      this.storage.store('producto', prod);
       this.listarCarrito();
     }, error => this.listarCarrito())
   }

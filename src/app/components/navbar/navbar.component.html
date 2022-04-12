@@ -79,7 +79,7 @@
         <div class="cant-cart">{{carrito.length}}</div>
         <div class="menu">
     <li *ngFor="let item of carrito" class="nav-contextual" style="width: 250px;">
-        
+
         <img style="width: 60px;height: 60px;margin-right: 10px;" [src]="item.url" [alt]="item.url">
         <div class="info">
             <label>id del producto:{{item.producto_id}}</label>
@@ -88,7 +88,8 @@
         </div>
         <button class="btn btn-delete" (click)="deleteCarrito(item.id)"><i class="bi bi-x"></i></button>
     </li>
-    <li class="nav-contextual" style="width: 250px;" *ngIf="carrito.length==0"><label  for="">No hay productos en el carrito</label></li>
+    <li class="nav-contextual" style="width: 250px;" *ngIf="carrito.length==0"><label for="">No hay productos en el
+            carrito</label></li>
     </div>
     </li>
     </div>

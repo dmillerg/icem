@@ -45,7 +45,19 @@ export class ProductosComponent implements OnInit, OnDestroy {
   anterior: string = '';
   comentarios: boolean = false;
   producto_especificacion: boolean = false;
-  producto: Producto = undefined;
+  producto: Producto = {
+    id: -1,
+    titulo: '',
+    descripcion: '',
+    fecha: '',
+    categoria: -1,
+    disponibilidad: 0,
+    especificaciones: '',
+    garantia: '',
+    imagen: '',
+    precio: 0,
+    usos: ''
+  };
   id: string = '';
   category: string = '';
   filtro: string = '';
@@ -154,6 +166,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
         this.productos = this.productoss.filter((item) => item.categoria == cat);
       } else {
         this.productos = result;
+        this.storage.store('productos',process)
       }
     });
     document.getElementById(this.anterior).classList.remove('active');

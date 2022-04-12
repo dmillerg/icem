@@ -32,7 +32,7 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   cantidad: number = 0;
 
   constructor(
-    private storage: SessionStorageService,
+    public storage: SessionStorageService,
     private api: ApiService
   ) { }
 
@@ -46,6 +46,9 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
 
   ngOnInit(): void {
     this.producto = this.storage.retrieve('producto');
+    this.storage.observe('producto').subscribe(e=>{
+      this.producto = e;
+    })
     this.storage.observe('carrito').subscribe(r => {
       this.loadEspecification();
     })
@@ -67,10 +70,8 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
     formData.append('precio', this.producto.precio.toString());
     this.cantidad = 0
     this.api.addCarrito(formData).subscribe((result) => {
-      console.log(result);
       this.loadEspecification();
       this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe(result => {
-        this.carrito = result;
         this.listarCarrito();
       })
     });
@@ -98,8 +99,9 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   }
 
   loadEspecification() {
-    this.api.getProducto(1, this.producto.categoria).subscribe((result) => {
-      this.producto.disponibilidad = result[0].disponibilidad
+    this.api.getProducto(-1, this.producto.categoria).subscribe((result) => {
+      console.log('este es la disponibilidad actual', result);
+      this.producto.disponibilidad = result.filter(e=>e.id==this.producto.id)[0].disponibilidad;
     })
   }
 }

@@ -57,7 +57,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.send();
     this.cargaInicial()
     this.api.getProducto(4).subscribe((result) => {
       if (result.length > 0) {
@@ -112,12 +111,5 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
 
     });
-  }
-
-  send(){
-    this.api.sendEmail().subscribe((result)=>{
-      console.log(result);
-      
-    })
   }
 }

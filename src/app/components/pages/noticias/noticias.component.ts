@@ -65,8 +65,10 @@ export class NoticiasComponent implements OnInit {
       console.log('scrap', result);
       this.noticiaScrap = result;
       this.rellenarColumns();
-      let not: string = this.storage.retrieve('noticia').id;
-      document.getElementById(not.toString()).scrollIntoView({ behavior: 'smooth' });
+      if (this.storage.retrieve('noticias')) {
+        let not: string = this.storage.retrieve('noticia').id;
+        document.getElementById(not.toString()).scrollIntoView({ behavior: 'smooth' });
+      }
     });
   }
 
