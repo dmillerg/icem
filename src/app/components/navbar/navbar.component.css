@@ -162,16 +162,18 @@ p {
     opacity: 0;
     margin-top: -1px;
     right: 10px;
-    top: 40px;
+    top: 30px;
     visibility: hidden;
-    transition: all 0.1s ease;
+    /* pointer-events: none; */
+    transition: all 0.3s ease;
     z-index: 999;
 }
 
 .nav-item:hover .menu {
     opacity: 1;
+    /* pointer-events: fill; */
     visibility: visible;
-    transition: all .1s;
+    transition: all .8s;
 }
 
 .nav-contextual {
@@ -236,4 +238,13 @@ p {
 
 .nav-contextual:hover .btn-delete{
     color: white;
+}
+
+.nav-contextual.active{
+    background-color: var(--firstcolor);
+    color: white;
+}
+
+.nav-contextual.active:hover{
+    background-color: var(--firstcolor-hover);
 }
