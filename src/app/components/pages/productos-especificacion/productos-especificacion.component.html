@@ -10,7 +10,7 @@
                 <h1 class="text-firstcolor" style="position: absolute;bottom: 5px;"><strong>{{producto.titulo}}</strong>
                 </h1>
             </div>
-            <p>{{producto.fecha}}</p>
+            <p>{{producto.fecha | date: 'short'}}</p>
             <p><strong>Categoría:</strong> {{categoria}}</p>
             <div class="centrado-horizontal">
                 <p><strong>Precio:</strong>${{producto.precio}}</p>

@@ -74,6 +74,8 @@ export class HomeComponent implements OnInit, OnDestroy {
             usos: item.usos,
             especificaciones: item.especificaciones,
             garantia: item.garantia,
+            precio: item.precio,
+            disponibilidad: item.disponibilidad,
             direccion: direccion,
             cont: cont,
           });

@@ -134,16 +134,15 @@ export class NavbarComponent implements OnInit {
 
   listarCarrito() {
     if (this.storage.retrieve('usuario')) {
-      console.log(this.storage.retrieve('usuario').id)
       this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe((result) => {
-        console.log(result)
         this.carrito = result;
         this.carrito.forEach((e, i) => {
-          this.getProductoFoto(e.id, i);
+          this.getProductoFoto(e.producto_id, i);
         });
         this.storage.store('carrito', this.carrito);
       });
     }
+
   }
 
   getProductoFoto(id: number, position: number) {
@@ -165,5 +164,15 @@ export class NavbarComponent implements OnInit {
 
   loadQuienes(item) {
     this.storage.store('quienes', item);
+  }
+
+  deleteCarrito(id: number = -1, cant: number = 0) {
+    this.api.deleteCarrito(id).subscribe(result => {
+      let prod = this.storage.retrieve('producto')
+      prod.disponibilidad += cant;
+
+      this.storage.store('producto', prod);
+      this.listarCarrito();
+    }, error => this.listarCarrito())
   }
 }

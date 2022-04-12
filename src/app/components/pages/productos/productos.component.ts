@@ -45,19 +45,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   anterior: string = '';
   comentarios: boolean = false;
   producto_especificacion: boolean = false;
-  producto: Producto = {
-    id: -1,
-    titulo: '',
-    descripcion: '',
-    fecha: '',
-    imagen: '',
-    categoria: -1,
-    usos: '',
-    especificaciones: '',
-    garantia: '',
-    precio: 0,
-    disponibilidad: 0
-  };
+  producto: Producto = undefined;
   id: string = '';
   category: string = '';
   filtro: string = '';

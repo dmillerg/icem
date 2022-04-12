@@ -227,3 +227,13 @@ p {
     transition: all .3s ease;
     color: white;
 }
+
+.nav-contextual .btn-delete{
+    margin-left: 10px;
+    color: var(--firstcolor);
+    transition: all .3s ease;
+}
+
+.nav-contextual:hover .btn-delete{
+    color: white;
+}

@@ -1,6 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
+import { Carrito } from 'src/app/models/carrito';
+import { Categoria } from 'src/app/models/categoria';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -26,6 +28,7 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   @Input() id: string = '';
   @Input() oculto: boolean = false;
   @Input() categoria: string = '';
+  carrito: any[] = [];
   cantidad: number = 0;
 
   constructor(
@@ -42,7 +45,10 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   }
 
   ngOnInit(): void {
-
+    this.producto = this.storage.retrieve('producto');
+    this.storage.observe('carrito').subscribe(r => {
+      this.loadEspecification();
+    })
   }
 
   cant(action: string) {
@@ -53,18 +59,47 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
     }
   }
 
-  addCarrito(){
+  addCarrito() {
     let formData = new FormData();
-    formData.append('user_id',this.storage.retrieve('usuario').id);
-    formData.append('producto_id',this.producto.id.toString());
-    formData.append('cantidad',this.cantidad.toString());
-    formData.append('precio',this.producto.precio.toString());
-
-    this.api.addCarrito(formData).subscribe((result)=>{
+    formData.append('user_id', this.storage.retrieve('usuario').id);
+    formData.append('producto_id', this.producto.id.toString());
+    formData.append('cantidad', this.cantidad.toString());
+    formData.append('precio', this.producto.precio.toString());
+    this.cantidad = 0
+    this.api.addCarrito(formData).subscribe((result) => {
       console.log(result);
-      this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe((e)=>{
-        this.storage.store('carrito', e);
-      });
+      this.loadEspecification();
+      this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe(result => {
+        this.carrito = result;
+        this.listarCarrito();
+      })
     });
+  }
+
+
+  listarCarrito() {
+    if (this.storage.retrieve('usuario')) {
+      this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe((result) => {
+        console.log(result)
+        this.carrito = result;
+        this.carrito.forEach((e, i) => {
+          this.getProductoFoto(e.producto_id, i);
+        });
+        this.storage.store('carrito', this.carrito);
+      });
+    }
+  }
+
+  getProductoFoto(id: number, position: number) {
+    this.api.getProductoFoto(id).subscribe(result => {
+    }, error => {
+      this.carrito[position].url = error.url;
+    })
+  }
+
+  loadEspecification() {
+    this.api.getProducto(1, this.producto.categoria).subscribe((result) => {
+      this.producto.disponibilidad = result[0].disponibilidad
+    })
   }
 }
