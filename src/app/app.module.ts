@@ -57,6 +57,7 @@ import { ModalScrapPruebaComponent } from './modals/modal-scrap-prueba/modal-scr
 import { ModalLoginOrRegisterComponent } from './modals/modal-login-or-register/modal-login-or-register.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ModalCarritoComponent } from './modals/modal-carrito/modal-carrito.component';
+import { TablePedidoComponent } from './components/tables/table-pedido/table-pedido.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -90,6 +91,7 @@ import { ModalCarritoComponent } from './modals/modal-carrito/modal-carrito.comp
     TableQuienesComponent,
     TableScrapComponent,
     TablePostsComponent,
+    TablePedidoComponent,
     ModalDeleteComponent,
     ModalCategoriaComponent,
     ModalNoticiaComponent,

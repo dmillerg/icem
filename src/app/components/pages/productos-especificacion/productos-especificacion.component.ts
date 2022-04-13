@@ -45,6 +45,9 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   }
 
   ngOnInit(): void {
+    setInterval(() => {
+      this.loadEspecification();
+    }, 5000)
     this.producto = this.storage.retrieve('producto');
     this.storage.observe('producto').subscribe(e => {
       this.producto = e;
@@ -99,9 +102,8 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   }
 
   loadEspecification() {
-    this.api.getProducto(-1, this.producto.categoria).subscribe((result) => {
-      console.log('este es la disponibilidad actual', result);
-      this.producto.disponibilidad = result.filter(e => e.id == this.producto.id)[0].disponibilidad;
-    })
+    this.api.getProductosById(this.producto.id).subscribe((result) => {
+      this.producto.disponibilidad = result.disponibilidad;
+    });
   }
 }

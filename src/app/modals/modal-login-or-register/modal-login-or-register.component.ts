@@ -28,7 +28,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     telefono: '',
   }
 
-  success: boolean = true;
+  success: boolean = false;
 
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
@@ -77,7 +77,8 @@ export class ModalLoginOrRegisterComponent implements OnInit {
   }
 
   validateEmail() {
-    return this.register.correo.includes('@') && this.register.correo.includes('.');
+  
+    return this.register.correo.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null;
   }
 
   validateVacio() {

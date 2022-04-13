@@ -4,6 +4,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 import { Categoria } from 'src/app/models/categoria';
 import { Desarrollo } from 'src/app/models/desarrollo';
 import { Noticia } from 'src/app/models/noticias';
+import { Pedido } from 'src/app/models/pedido';
 import { Posts } from 'src/app/models/posts';
 import { Producto } from 'src/app/models/producto';
 import { Quienes } from 'src/app/models/quienes';
@@ -39,6 +40,7 @@ export class ModalAdminComponent implements OnInit {
   quienes: boolean = false;
   scrap: boolean = false;
   posts: boolean = false;
+  pedidos: boolean = false;
 
   usuario: Usuario;
   @Output() emisor: EventEmitter<string> = new EventEmitter<string>();
@@ -52,6 +54,7 @@ export class ModalAdminComponent implements OnInit {
   quienesarray: Quienes[] = [];
   scraparray: Scrap[] = [];
   postsarray: Posts[] = [];
+  pedidosarray: Pedido[] = [];
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -97,6 +100,9 @@ export class ModalAdminComponent implements OnInit {
       case 'Posts':
         this.posts = true;
         break;
+      case 'Pedidos':
+        this.pedidos = true;
+        break;
     }
     this.activo = event.target.innerText;
   }
@@ -111,6 +117,7 @@ export class ModalAdminComponent implements OnInit {
     this.quienes = false;
     this.scrap = false
     this.posts = false;
+    this.pedidos = false;
   }
 
   agregar() {
@@ -192,7 +199,7 @@ export class ModalAdminComponent implements OnInit {
         });
         break;
       case 'Posts':
-        modal = this.modalService.open(ModalPostsComponent, { size: 'lg',backdrop: 'static' });
+        modal = this.modalService.open(ModalPostsComponent, { size: 'lg', backdrop: 'static' });
         modal.componentInstance.modalHeader = 'Posts';
         modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
         modal.result.then((result) => {
@@ -200,6 +207,16 @@ export class ModalAdminComponent implements OnInit {
             this.loadPosts();
           }
         });
+        break;
+        case 'Pedidos':
+        // modal = this.modalService.open(ModalPostsComponent, { size: 'lg', backdrop: 'static' });
+        // modal.componentInstance.modalHeader = 'Posts';
+        // modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
+        // modal.result.then((result) => {
+        //   if (result) {
+        //     this.loadPosts();
+        //   }
+        // });
         break;
     }
   }
@@ -265,6 +282,14 @@ export class ModalAdminComponent implements OnInit {
       if (result.length > 0) {
         this.postsarray = result;
       } else this.postsarray = [];
+    });
+  }
+
+  loadPedidos(){
+    this.api.getPedidos().subscribe((result) => {
+      if (result.length > 0) {
+        this.pedidosarray = result;
+      } else this.pedidosarray = [];
     });
   }
 }

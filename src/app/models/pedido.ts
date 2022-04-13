@@ -4,4 +4,5 @@ export interface Pedido {
    producto_id: number;
    cantidad: number;
    estado: string;
+   fecha: string;
 }

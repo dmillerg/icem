@@ -42,9 +42,9 @@ export class NavbarComponent implements OnInit {
     }
     this.storage.observe('carrito').subscribe((e) => {
       this.carrito = e;
-      this.total_pagar =0;
-      this.carrito.forEach(i=>{
-        this.total_pagar += i.cantidad*i.precio;
+      this.total_pagar = 0;
+      this.carrito.forEach(i => {
+        this.total_pagar += i.cantidad * i.precio;
       })
     });
     this.listarCategoriasProductos();
@@ -69,7 +69,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  activate(url){
+  activate(url) {
     if (this.activo !== url) {
       document.getElementById(url).classList.add('active');
       document.getElementById(this.activo).classList.remove('active');
@@ -111,19 +111,21 @@ export class NavbarComponent implements OnInit {
     let modal = this.modalService.open(ModalLoginOrRegisterComponent, { backdrop: 'static' });
     modal.componentInstance.modalAction = action;
     modal.result.then((result) => {
-      this.storage.clear('usuario');
-      const user = {
-        id: result.usuario[0].id,
-        usuario: result.usuario[0].usuario,
-        password: result.usuario[0].password,
-        nombre: result.usuario[0].nombre,
-        fecha: result.usuario[0].fecha,
-        correo: result.usuario[0].correo,
-        rol: result.usuario[0].rol,
-        token: result.token,
-      };
-      this.storage.store('usuario', user);
-      this.listarCarrito();
+      if (result) {
+        this.storage.clear('usuario');
+        const user = {
+          id: result.usuario[0].id,
+          usuario: result.usuario[0].usuario,
+          password: result.usuario[0].password,
+          nombre: result.usuario[0].nombre,
+          fecha: result.usuario[0].fecha,
+          correo: result.usuario[0].correo,
+          rol: result.usuario[0].rol,
+          token: result.token,
+        };
+        this.storage.store('usuario', user);
+        this.listarCarrito();
+      }
     })
   }
 
@@ -185,8 +187,8 @@ export class NavbarComponent implements OnInit {
     }, error => this.listarCarrito())
   }
 
-  pagarCarrito(){
-    let modal = this.modalService.open(ModalCarritoComponent, {backdrop: 'static'})
+  pagarCarrito() {
+    let modal = this.modalService.open(ModalCarritoComponent, { backdrop: 'static' })
     modal.componentInstance.carrito = this.carrito;
   }
 }

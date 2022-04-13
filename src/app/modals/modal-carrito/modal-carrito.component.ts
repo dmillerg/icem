@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
+import { Carrito } from 'src/app/models/carrito';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -48,5 +49,24 @@ export class ModalCarritoComponent implements OnInit {
     this.api.deleteCarrito(id).subscribe(result => {
       this.listarCarrito();
     }, error => this.listarCarrito())
+  }
+
+  reservar() {
+    this.carrito.forEach((item, i) => {
+      let formData = new FormData();
+      formData.append('user_id', item.user_id.toString());
+      formData.append('producto_id', item.producto_id.toString());
+      formData.append('cantidad', item.cantidad.toString());
+      formData.append('estado', 'reservado');
+      this.api.addPedido(formData).subscribe((result) => {
+        this.carrito = this.carrito.filter(i=>i.id==item.id)
+        this.api.deleteCarrito(item.id).subscribe((r)=>{
+          this.storage.store('carrito',this.carrito)
+        })
+        if (i == this.carrito.length-1) {
+          this.activeModal.close();
+        }
+      })
+    })
   }
 }

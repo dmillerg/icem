@@ -15,6 +15,7 @@ import { Scrap } from '../models/scrap';
 import { Posts } from '../models/posts';
 import { Respuesta } from '../models/respuesta';
 import { Carrito } from '../models/carrito';
+import { Pedido } from '../models/pedido';
 @Injectable({
   providedIn: 'root',
 })
@@ -48,6 +49,16 @@ export class ApiService {
       headers: headers,
       params: params,
     });
+  }
+
+  /**
+   * Obtiene un producto en especifico
+   * @param id del producto
+   * @returns 
+   */
+  getProductosById(id: number = -1): Observable<Producto> {
+    let direccion = this.url + 'producto/' + id.toString();
+    return this.http.get<Producto>(direccion);
   }
 
   /**
@@ -734,7 +745,7 @@ export class ApiService {
    * @param user_id del usuario autenticado
    * @returns 
    */
-  getCarrito(user_id: number = -1):Observable<Carrito[]> {
+  getCarrito(user_id: number = -1): Observable<Carrito[]> {
     let direccion = this.url + 'carrito/' + user_id;
     const headers = { 'content-type': 'application/json' };
     const params = {
@@ -748,7 +759,7 @@ export class ApiService {
    * @param formData datos de un carrito
    * @returns 
    */
-  addCarrito(formData: FormData){
+  addCarrito(formData: FormData) {
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'carrito';
     return this.http.post(direccion, formData);
@@ -759,7 +770,7 @@ export class ApiService {
   * @param id carrito a eliminar
   * @returns
   */
-   deleteCarrito(id: number = -1) {
+  deleteCarrito(id: number = -1) {
     let direccion = this.url + 'carrito/' + id.toString();
     const headers = { 'content-type': 'application/json' };
     const params = {
@@ -768,7 +779,32 @@ export class ApiService {
     return this.http.delete(direccion, { headers: headers, params: params });
   }
 
-  sendEmail(){
+  /**
+   * Obtiene todos los pedidos de los usuarios
+   * @param user_id id del usuario
+   * @returns 
+   */
+  getPedidos(user_id: number = -1): Observable<Pedido[]> {
+    let direccion = this.url + 'pedidos/' + user_id;
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.get<Pedido[]>(direccion, { headers: headers, params: params });
+  }
+
+  /**
+   * Agrega un pedido
+   * @param formData datos de un pedido
+   * @returns 
+   */
+  addPedido(formData: FormData) {
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'pedidos';
+    return this.http.post(direccion, formData);
+  }
+
+  sendEmail() {
     let direccion = this.url + 'send';
     return this.http.get(direccion);
   }
