@@ -10,6 +10,7 @@
             <th>id</th>
             <th>usuario</th>
             <th>producto</th>
+            <th>cantidad</th>
             <th>fecha</th>
             <th>acciones</th>
         </thead>
@@ -17,6 +18,7 @@
             <td>{{item.id}}</td>
             <td>{{item.usuario}}</td>
             <td><img [src]="item.url" style="width: 70px;height: auto;" alt=""></td>
+            <td>{{item.cantidad}}</td>
             <td>{{item.fecha | date: 'short'}}</td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateProducto(item)"> <i
