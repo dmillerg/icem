@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Noticia } from 'src/app/models/noticias';
+import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
 
 const listAnimation = trigger('listAnimation', [
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     logo: '',
   };
 
+
   constructor(private api: ApiService, private storage: SessionStorageService, private router: Router) { }
 
   ngOnDestroy(): void {
@@ -57,6 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.cargarData();
     this.cargaInicial()
     this.api.getProducto(4).subscribe((result) => {
       if (result.length > 0) {
@@ -111,5 +114,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
 
     });
+  }
+
+  cargarData() {
+    this.storage.store('producto', this.productos_recientes[0]);
+    this.storage.store('categoria', { id: -1, nombre: 'Todos' });
   }
 }

@@ -56,6 +56,7 @@ import { ModalRespuestaComponent } from './modals/modal-respuesta/modal-respuest
 import { ModalScrapPruebaComponent } from './modals/modal-scrap-prueba/modal-scrap-prueba.component';
 import { ModalLoginOrRegisterComponent } from './modals/modal-login-or-register/modal-login-or-register.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ModalCarritoComponent } from './modals/modal-carrito/modal-carrito.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -103,6 +104,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     BusquedaComponent,
     ModalLoginOrRegisterComponent,
     LoadingComponent,
+    ModalCarritoComponent,
   ],
   imports: [
     BrowserModule,

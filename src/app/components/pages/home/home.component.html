@@ -91,7 +91,7 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="assets/imagenes/carousel1.jpg" style="height: 400px;" class="d-block w-100" alt="...">
+                <img src="assets/imagenes/carousel1.JPG" style="height: 400px;" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5 class="text-shadow">Industrial</h5>
                     <p>Empresa Cubana de equipos medicos.</p>
@@ -160,7 +160,7 @@
         <h1 class="title-section2 text-section"><strong>Productos...</strong></h1>
     </div>
     <div class="row p-4"></div>
-    <div class="row" [@listAnimation]="productos_recientes.length">
+    <div *ngIf="productos_recientes.length>0" class="row" [@listAnimation]="productos_recientes.length">
         <div *ngFor="let item of productos_recientes" class="col-sm-3">
             <app-producto-home style="font-size: small" [producto]="item" [direccion]="item.direccion"
                 [cont]="item.cont"></app-producto-home>

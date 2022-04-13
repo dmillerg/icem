@@ -8,8 +8,8 @@
                 <div class="linea bg-dark"></div>
             </div>
             <div class="category-list" *ngFor="let item of categorias">
-                <div [id]="item.nombre" class="category-item" (click)="swichtProductos($event, item.id)">
-                    <div class="category-text-item">
+                <div [id]="item.nombre" class="category-item" (click)="swichtProductos($event, item)">
+                    <div class="category-text-item" [ngClass]="{'active': storage.retrieve('categoria').nombre== item.nombre}">
                         <div>{{item.nombre}}</div>
                         <!-- Cras justo odio -->
                     </div>

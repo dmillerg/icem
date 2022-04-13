@@ -141,6 +141,9 @@ export class ProductosComponent implements OnInit, OnDestroy {
   loadProductos() {
     this.api.getProducto(0, this.categoriaId, this.producto.id).subscribe((result) => {
       this.productos = result;
+      if(this.storage.retrieve('producto')){
+        this.storage.store('producto',this.producto);
+      }
       if (!this.producto_especificacion) {
         this.producto = this.productos[0];
         this.changeCategory(this.producto.categoria);
@@ -161,17 +164,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   swichtProductos(item, cat) {
     console.log(item, cat);
-    this.api.getProducto(0, cat).subscribe((result) => {
-      if (cat != -1) {
-        this.productos = this.productoss.filter((item) => item.categoria == cat);
-      } else {
-        this.productos = result;
-        this.storage.store('productos',process)
-      }
-    });
-    document.getElementById(this.anterior).classList.remove('active');
-    document.getElementById(item.target.innerText).classList.add('active');
-    this.anterior = item.target.innerText;
+    this.storage.store('categoria',cat);
   }
 
   swicthEspecification(sss, especification: HTMLElement) {

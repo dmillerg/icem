@@ -1,0 +1,28 @@
+<div class="content-total">
+    <button class="btn btn-closed" (click)="activeModal.close()"><i class="bi bi-x"></i></button>
+    <div class="title">
+        <i class="bi bi-cart3" style="font-size: 30px;color: var(--firstcolor);margin-right: 10px;"></i>
+        <h3>Carrito de compras</h3>
+    </div>
+    <div class="body">
+        <li *ngFor="let item of carrito" class="items">
+            <img [src]="item.url" style="width: 50px;height: 50px;" [alt]="item.producto_id">
+            <div class="data">
+                <label for="">id del producto: {{item.producto_id}}</label>
+                <label for="">precio del producto: ${{item.precio}}</label>
+                <label for="">cantidad: {{item.cantidad}}</label>
+            </div>
+            <label for="" style="color: var(--firstcolor);position: absolute;right: 50px;top: 25px;">${{item.cantidad*item.precio}}</label>
+            <button class="delete" (click)="deleteCarrito(item.id)"><i class="bi bi-trash"></i></button>
+        </li>
+    </div>
+    <li class="items"><label class="total">Total a pagar: ${{total}}</label></li>
+    <ul class="info-list">
+        <li class="info"><label>Reservar asegura que su pedido sera guardado hasta 10 dias despues de su reserva, Esto permitira que pueda ir a buscarlo en esos dias.</label></li>
+        <li class="info"><label>Comprar asegura por completo su pedido y si esta disponible se le enviara a su direccion.(No disponible por el momento)</label></li>
+    </ul>
+    <div class="footer">
+        <button class="btn btn-firstcolor" style="margin-right: 10px;"><i class="bi bi-save" style="margin-right: 10px;"></i>Reservar</button>
+        <button class="btn btn-firstcolor" disabled><i class="bi bi-bag" style="margin-right: 10px;"></i>Comprar</button>
+    </div>
+</div>

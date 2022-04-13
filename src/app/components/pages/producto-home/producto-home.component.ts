@@ -49,6 +49,9 @@ export class ProductoHomeComponent implements OnInit {
 
   verMas() {
     this.storage.store('producto', this.producto);
+    this.api.getCategoriaById(this.producto.categoria).subscribe(result=>{
+      this.storage.store('categoria', result);
+    })
     this.router.navigate(['productos']);
   }
 }

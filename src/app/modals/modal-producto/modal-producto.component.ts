@@ -69,6 +69,7 @@ export class ModalProductoComponent implements OnInit {
       this.producto_pasado.especificaciones = this.producto.especificaciones;
       this.producto_pasado.garantia = this.producto.garantia;
       this.producto_pasado.precio = this.producto.precio;
+      this.producto_pasado.disponibilidad = this.producto.disponibilidad;
     }
   }
 
@@ -88,6 +89,7 @@ export class ModalProductoComponent implements OnInit {
     formData.append('especificaciones',this.producto.especificaciones.toString());
     formData.append('garantia',this.producto.garantia.toString());
     formData.append('precio',this.producto.precio.toString());
+    formData.append('disponibilidad',this.producto.disponibilidad.toString());
     // console.log("formData :",formData);
     // console.log("producto :",this.producto);
     console.log(this.modalAction, this.modalAction== "Editar");

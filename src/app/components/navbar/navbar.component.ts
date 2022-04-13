@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { ModalAdminComponent } from 'src/app/modals/modal-admin/modal-admin.component';
+import { ModalCarritoComponent } from 'src/app/modals/modal-carrito/modal-carrito.component';
 import { Carrito } from 'src/app/models/carrito';
 import { Categoria } from 'src/app/models/categoria';
 import { ApiService } from 'src/app/services/api.service';
@@ -29,6 +30,8 @@ export class NavbarComponent implements OnInit {
   carrito: any[] = [];
   categorias: Categoria[] = [];
 
+  total_pagar: number = 0;
+
   constructor(private router: Router, private storage: SessionStorageService, private modalService: NgbModal, private api: ApiService) {
     this.storage2 = storage;
   }
@@ -39,6 +42,10 @@ export class NavbarComponent implements OnInit {
     }
     this.storage.observe('carrito').subscribe((e) => {
       this.carrito = e;
+      this.total_pagar =0;
+      this.carrito.forEach(i=>{
+        this.total_pagar += i.cantidad*i.precio;
+      })
     });
     this.listarCategoriasProductos();
     this.listarCarrito();
@@ -116,10 +123,12 @@ export class NavbarComponent implements OnInit {
         token: result.token,
       };
       this.storage.store('usuario', user);
+      this.listarCarrito();
     })
   }
 
   cancelarLogin() {
+    this.total_pagar = 0;
     const user = this.storage.retrieve('usuario');
     if (user != undefined) {
       this.api.logout(user.id).subscribe((result) => {
@@ -140,6 +149,7 @@ export class NavbarComponent implements OnInit {
       this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe((result) => {
         this.carrito = result;
         this.carrito.forEach((e, i) => {
+          this.total_pagar += e.precio * e.cantidad;
           this.getProductoFoto(e.producto_id, i);
         });
         this.storage.store('carrito', this.carrito);
@@ -173,5 +183,10 @@ export class NavbarComponent implements OnInit {
     this.api.deleteCarrito(id).subscribe(result => {
       this.listarCarrito();
     }, error => this.listarCarrito())
+  }
+
+  pagarCarrito(){
+    let modal = this.modalService.open(ModalCarritoComponent, {backdrop: 'static'})
+    modal.componentInstance.carrito = this.carrito;
   }
 }

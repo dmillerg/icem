@@ -245,6 +245,11 @@ p {
     color: white;
 }
 
+.nav-contextual.disabled{
+    background-color: var(--firstcolor-hover);
+    color: white;
+}
+
 .nav-contextual.active:hover{
     background-color: var(--firstcolor-hover);
 }
