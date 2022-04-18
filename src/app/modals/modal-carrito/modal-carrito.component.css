@@ -89,3 +89,9 @@
     color: var(--firstcolor);
     font-size: 10px;
 }
+
+.content-total .body .message{
+    font-weight: 900;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

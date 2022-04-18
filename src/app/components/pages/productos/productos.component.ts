@@ -85,17 +85,13 @@ export class ProductosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cargaInicial();
     this.cargaInicial2();
-    try {
-      if (this.storage.retrieve('producto')) {
-        this.producto = this.storage.retrieve('producto');
-        this.producto_especificacion = true;
-        this.changeCategory(this.producto.categoria);
-        if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
-          this.id = '0' + this.producto.id;
-        } else this.id = this.producto.id.toString();
-      }
-    } catch (e) {
-      console.log(e);
+    if (this.storage.retrieve('producto')) {
+      this.producto = this.storage.retrieve('producto');
+      this.producto_especificacion = true;
+      this.changeCategory(this.producto.categoria);
+      if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
+        this.id = '0' + this.producto.id;
+      } else this.id = this.producto.id.toString();
     }
     this.loadAllProductos();
     this.loadCategorias();
@@ -103,8 +99,8 @@ export class ProductosComponent implements OnInit, OnDestroy {
     this.observeCategoria();
   }
 
-  loadAllProductos(){
-    this.api.getProducto(0, -1, -1).subscribe((result)=>{
+  loadAllProductos() {
+    this.api.getProducto(0, -1, -1).subscribe((result) => {
       this.productoss = result;
     })
   }
@@ -141,8 +137,8 @@ export class ProductosComponent implements OnInit, OnDestroy {
   loadProductos() {
     this.api.getProducto(0, this.categoriaId, this.producto.id).subscribe((result) => {
       this.productos = result;
-      if(this.storage.retrieve('producto')){
-        this.storage.store('producto',this.producto);
+      if (this.storage.retrieve('producto')) {
+        this.storage.store('producto', this.producto);
       }
       if (!this.producto_especificacion) {
         this.producto = this.productos[0];
@@ -164,7 +160,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   swichtProductos(item, cat) {
     console.log(item, cat);
-    this.storage.store('categoria',cat);
+    this.storage.store('categoria', cat);
   }
 
   swicthEspecification(sss, especification: HTMLElement) {
@@ -187,12 +183,12 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   cargaInicial() {
     let scroll = document.getElementById('scroll');
-    scroll.addEventListener("scroll", ()=> {
+    scroll.addEventListener("scroll", () => {
       this.cargaInicial2();
     });
   }
 
-  cargaInicial2(){
+  cargaInicial2() {
     let scroll = document.getElementById('scroll');
     let animados = document.querySelectorAll('.animado');
     for (let i = 0; i < animados.length; i++) {
