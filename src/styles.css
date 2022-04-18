@@ -77,6 +77,8 @@ body {
 }
 
 .btn-firstcolor {
+  max-height: 60px; 
+  white-space: nowrap;
   background-color: var(--firstcolor);
   color: white;
   padding: 15px;

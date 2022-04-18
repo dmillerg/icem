@@ -804,6 +804,20 @@ export class ApiService {
     return this.http.post(direccion, formData);
   }
 
+   /**
+  * Elimina un pedido
+  * @param id pedido a eliminar
+  * @returns
+  */
+    deletePedido(id: number = -1) {
+      let direccion = this.url + 'pedidos/' + id.toString();
+      const headers = { 'content-type': 'application/json' };
+      const params = {
+        token: this.storage.retrieve('usuario').token,
+      };
+      return this.http.delete(direccion, { headers: headers, params: params });
+    }
+
   sendEmail() {
     let direccion = this.url + 'send';
     return this.http.get(direccion);

@@ -1,8 +1,10 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { post } from 'jquery';
 import { SessionStorageService } from 'ngx-webstorage';
+import { ModalRespuestaComponent } from 'src/app/modals/modal-respuesta/modal-respuesta.component';
 import { Categoria } from 'src/app/models/categoria';
 import { Posts } from 'src/app/models/posts';
 import { Producto } from 'src/app/models/producto';
@@ -75,7 +77,8 @@ export class ProductosComponent implements OnInit, OnDestroy {
   constructor(
     private api: ApiService,
     private storage: SessionStorageService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnDestroy(): void {
@@ -85,6 +88,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cargaInicial();
     this.cargaInicial2();
+    this.loadUsuario();
     if (this.storage.retrieve('producto')) {
       this.producto = this.storage.retrieve('producto');
       this.producto_especificacion = true;
@@ -97,6 +101,22 @@ export class ProductosComponent implements OnInit, OnDestroy {
     this.loadCategorias();
     this.loadProductos();
     this.observeCategoria();
+  }
+
+  loadUsuario() {
+    if (this.storage.retrieve('usuario')) {
+      this.correo = this.storage.retrieve('usuario').correo;
+      this.alias = this.storage.retrieve('usuario').usuario;
+    }
+    this.storage.observe('usuario').subscribe((result) => {
+      if (result) {
+        this.correo = result.correo;
+        this.alias = result.usuario;
+      } else {
+        this.correo = '';
+        this.alias = '';
+      }
+    })
   }
 
   loadAllProductos() {
@@ -129,14 +149,17 @@ export class ProductosComponent implements OnInit, OnDestroy {
       this.categoriaId = this.storage.retrieve('categoria').id;
     }
     this.storage.observe('categoria').subscribe((result) => {
-      this.categoriaId = result.id;
-      this.loadProductos();
+      if (result) {
+        this.categoriaId = result.id;
+        this.loadProductos();
+      }
     })
   }
 
   loadProductos() {
     this.api.getProducto(0, this.categoriaId, this.producto.id).subscribe((result) => {
       this.productos = result;
+      this.loadPosts();
       if (this.storage.retrieve('producto')) {
         this.storage.store('producto', this.producto);
       }
@@ -146,8 +169,8 @@ export class ProductosComponent implements OnInit, OnDestroy {
         // this.productos = this.productoss.filter(item => item.id != this.productoss[0].id);
         if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
           this.id = '0' + this.producto.id;
-        } else this.id = this.producto.id.toString();
-        this.loadPosts();
+        } else { this.id = this.producto.id.toString(); }
+
       }
     });
   }
@@ -155,6 +178,17 @@ export class ProductosComponent implements OnInit, OnDestroy {
   changeCategory(id) {
     this.api.getCategoriaById(id).subscribe((result) => {
       this.category = result.nombre;
+    });
+  }
+
+  openResponder(item: any) {
+    let modal = this.modalService.open(ModalRespuestaComponent);
+    modal.componentInstance.id_post = item.id;
+    modal.componentInstance.modalHeader = 'Responder';
+    modal.result.then((result) => {
+      if (result) {
+        this.loadPosts();
+      }
     });
   }
 
@@ -209,15 +243,9 @@ export class ProductosComponent implements OnInit, OnDestroy {
   }
 
   abrirFiltro() {
-    if (document.getElementById('form').classList.contains('activo')) {
-      document.getElementById('form').classList.remove('activo');
-      document.getElementById('input').classList.remove('activo');
-      document.getElementById('btn-filter').classList.remove('activo');
-    } else {
-      document.getElementById('form').classList.add('activo');
-      document.getElementById('input').classList.add('activo');
-      document.getElementById('btn-filter').classList.add('activo');
-    }
+    document.getElementById('form').classList.toggle('activo');
+    document.getElementById('input').classList.toggle('activo');
+    document.getElementById('btn-filter').classList.toggle('activo');
   }
 
   filtrar() {

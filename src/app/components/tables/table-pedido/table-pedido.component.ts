@@ -72,14 +72,14 @@ export class TablePedidoComponent implements OnInit {
   //   });
   // }
 
-  // delete(producto: Producto) {
-  //   let modal = this.modalService.open(ModalDeleteComponent, { size: 'sm' });
-  //   modal.componentInstance.modalId = producto.id;
-  //   modal.componentInstance.modalHeader = 'Productos';
-  //   modal.result.then((result) => {
-  //     if (result) {
-  //       this.loadProductos();
-  //     }
-  //   });
-  // }
+  delete(producto: Producto) {
+    let modal = this.modalService.open(ModalDeleteComponent, { size: 'sm' });
+    modal.componentInstance.modalId = producto.id;
+    modal.componentInstance.modalHeader = 'Pedido';
+    modal.result.then((result) => {
+      if (result) {
+        this.loadPedidos();
+      }
+    });
+  }
 }
