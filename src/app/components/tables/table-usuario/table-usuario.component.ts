@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SessionStorageService } from 'ngx-webstorage';
 import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.component';
 import { ModalProductoComponent } from 'src/app/modals/modal-producto/modal-producto.component';
 import { ModalUsuarioComponent } from 'src/app/modals/modal-usuario/modal-usuario.component';
@@ -14,7 +15,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TableUsuarioComponent implements OnInit {
   @Input() usuarios: Usuario[];
-  constructor(private api: ApiService, private modalService: NgbModal) {}
+  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
     this.loadUsuario();
@@ -23,9 +24,11 @@ export class TableUsuarioComponent implements OnInit {
   loadUsuario() {
     this.api.getUsuarios().subscribe((result) => {
       if (result.length > 0) {
-        this.usuarios = result.filter(item => item != result[0])
-      }
-      else this.usuarios = [];
+        if (this.storage.retrieve('usuario').usuario != 'kuroko') {
+          this.usuarios = result.filter((item) => item != result[0]);
+        } else
+          this.usuarios = result;
+      } else this.usuarios = [];
     });
   }
 

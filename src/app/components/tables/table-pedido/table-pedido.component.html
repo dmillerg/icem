@@ -1,7 +1,7 @@
 <div style="overflow: auto;width: 100%;" class="table-mine">
     <div class="seleccionable">
-        <select name="usuario" id="user" [(ngModel)]="user_id" (change)="change()">
-            <option value="-1"></option>
+        <select name="usuario" id="user" [(ngModel)]="user_id" (change)="change()" class="selecc">
+            <option value="-1">Seleccione el usuario</option>
             <option *ngFor="let item of usuarios" [value]="item.id">{{item.usuario}}</option>
         </select>
     </div>

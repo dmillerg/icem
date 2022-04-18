@@ -18,6 +18,7 @@ export class TableScrapComponent implements OnInit {
   loadingTest: boolean = false;
   loadingScrap: boolean = false;
   messageScrap: string = 'Iniciar Scrap';
+  time: number = 0;
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
@@ -108,7 +109,7 @@ export class TableScrapComponent implements OnInit {
     if (this.messageScrap == 'Iniciar Scrap') {
       this.loadingScrap = true;
       this.messageScrap = 'Iniciando Scrapping...'
-      this.api.IniciarScrap().subscribe((result) => {
+      this.api.IniciarScrap(this.time).subscribe((result) => {
         this.messageScrap = 'Scrapping iniciado cada 1 hora';
         setTimeout(() => {
           this.messageScrap = 'Detener Scrapping';
