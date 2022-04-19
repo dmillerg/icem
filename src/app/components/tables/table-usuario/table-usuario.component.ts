@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
+import { ModalAdminResetComponent } from 'src/app/modals/modal-admin-reset/modal-admin-reset.component';
 import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.component';
 import { ModalProductoComponent } from 'src/app/modals/modal-producto/modal-producto.component';
 import { ModalUsuarioComponent } from 'src/app/modals/modal-usuario/modal-usuario.component';
@@ -54,5 +55,10 @@ export class TableUsuarioComponent implements OnInit {
         this.loadUsuario();
       }
     });
+  }
+
+  resetear(usuario: Usuario){
+    let modal = this.modalService.open(ModalAdminResetComponent);
+    modal.componentInstance.usuario = usuario;
   }
 }

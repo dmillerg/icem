@@ -84,6 +84,10 @@ body {
   padding: 15px;
 }
 
+.img-loading {
+  background:transparent url(assets/cargando-icem.gif) center no-repeat;
+  }
+
 .btn-firstcolor:hover {
   background-color: var(--firstcolor-hover);
   color: white;

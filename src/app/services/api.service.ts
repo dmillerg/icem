@@ -804,19 +804,30 @@ export class ApiService {
     return this.http.post(direccion, formData);
   }
 
-   /**
-  * Elimina un pedido
-  * @param id pedido a eliminar
-  * @returns
-  */
-    deletePedido(id: number = -1) {
-      let direccion = this.url + 'pedidos/' + id.toString();
-      const headers = { 'content-type': 'application/json' };
-      const params = {
-        token: this.storage.retrieve('usuario').token,
-      };
-      return this.http.delete(direccion, { headers: headers, params: params });
-    }
+  /**
+ * Elimina un pedido
+ * @param id pedido a eliminar
+ * @returns
+ */
+  deletePedido(id: number = -1) {
+    let direccion = this.url + 'pedidos/' + id.toString();
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.delete(direccion, { headers: headers, params: params });
+  }
+
+/**
+ * Resetea la contrasenna siendo admin ded un usuario
+ * @param formData datos para reiniciar la contrase;a
+ * @returns 
+ */
+  adminResetPassword(formData: FormData) {
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'adminreset/'
+    return this.http.post(direccion, formData);
+  }
 
   sendEmail() {
     let direccion = this.url + 'send';
