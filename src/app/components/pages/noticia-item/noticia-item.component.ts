@@ -22,21 +22,23 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class NoticiaItemComponent implements OnInit {
   @Input() noticia: Noticia;
-  image: string = '';
   @Output() emisor: EventEmitter<Noticia> = new EventEmitter();
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
-    // this.api.getNoticiaFoto(this.noticia.id).subscribe(
-    //   (result) => {},
-    //   (error) => {
-    //     this.image = error.url;
-    //   }
-    // );
+    if (this.noticia.fuente == 'ICEM') {
+      this.api.getNoticiaFoto(this.noticia.id).subscribe(
+        (result) => { },
+        (error) => {
+          this.noticia.imagen = error.url;
+          this.noticia.logo = 'assets/icon-icem-gray.png'
+        }
+      );
+    }
   }
 
   cambiarNoticia(noticia) {
-    window.open(noticia.enlace,'_blank');
+    window.open(noticia.enlace, '_blank');
   }
 }

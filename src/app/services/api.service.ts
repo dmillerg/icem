@@ -362,10 +362,13 @@ export class ApiService {
    * @param id de ultimo chat
    * @returns
    */
-  getChats(id: number = 0): Observable<Chat[]> {
+  getChats(onlyid: number[] = []): Observable<Chat[]> {
+    let direccion = this.url + 'chats'
     const headers = { 'content-type': 'application/json' };
-    let direccion = this.url + 'chats/' + id.toString();
-    return this.http.get<Chat[]>(direccion, { headers: headers });
+    const params = {
+      onlyid: onlyid
+    };
+    return this.http.get<Chat[]>(direccion, { headers: headers, params: params });
   }
 
   /**
@@ -827,6 +830,21 @@ export class ApiService {
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'adminreset/'
     return this.http.post(direccion, formData);
+  }
+
+  /**
+   * Obtiene un sms
+   * @param id para obtener los datos de un sms
+   * @returns 
+   */
+  getChatByID(id: number = -1){
+    let direccion = this.url + 'chat';
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      id: id,
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.get<Chat>(direccion, { headers: headers, params: params });
   }
 
   sendEmail() {

@@ -13,7 +13,7 @@
             <td>{{item.usuario}}</td>
             <!-- <td>{{item.password}}</td> -->
             <td>{{item.nombre}}</td>
-            <td>{{item.fecha}}</td>
+            <td>{{item.fecha | date: 'short'}}</td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateUsuario(item)"> <i
                         class="bi bi-pencil svg-shadow"></i>

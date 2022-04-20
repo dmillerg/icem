@@ -1,3 +1,5 @@
 td {
     width: 6%;
+    max-height: 30px;
+    text-overflow: ellipsis;
 }

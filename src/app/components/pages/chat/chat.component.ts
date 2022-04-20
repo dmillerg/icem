@@ -1,5 +1,6 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Chat } from 'src/app/models/chat';
 import { ApiService } from 'src/app/services/api.service';
 
 const listAnimation = trigger('listAnimation', [
@@ -32,6 +33,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   cantMax: number = 0;
   messageChat: string = 'El chat no contiene ningun mensaje...';
   id: number = -1;
+  id_respondido: number = -1;
+  mensaje_responder: string = '';
   intervalo;
 
   constructor(private api: ApiService) { }
@@ -43,26 +46,45 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnInit(): void { }
 
   loadChats() {
-    this.api.getChats().subscribe((result) => {
+    this.api.getChats(this.onlyID()).subscribe((result) => {
       if (result.length > 0) {
-        result.forEach((item) => {
-          if (this.mensajes.find((e) => e.id == item.id ) == undefined) {
-            console.log(item);
-            this.convertir(item);
-          }
+        result.forEach((item, i) => {
+          console.log(item);
+          this.convertir(item, i==result.length-1);
         });
       }
     });
   }
 
-  convertir(item) {
+  onlyID() {
+    let onlyid: number[] = []
+    this.mensajes.forEach(e => {
+      onlyid.push(e.id);
+    });
+    return onlyid;
+  }
+
+  responderSMS(item: Chat) {
+    this.mensaje_responder = item.sms
+    this.id_respondido = item.id;
+  }
+
+  convertir(item, ultimo: boolean) {
     this.api.getChatFoto(item.id).subscribe(
       (result) => console.log('result', result),
       (error) => {
         item.imagen = error.url;
-        this.mensajes.push(item);
-        this.cantMax = this.mensajes.length;
-        document.getElementById("final").scrollIntoView({behavior: "smooth"});
+        this.api.getChatByID(item.id_respondido).subscribe((result) => {
+          if (result != null) {
+            item.respuesta = result.sms;
+          }
+          this.mensajes.push(item);
+          this.cantMax = this.mensajes.length;
+          // document.getElementById("box-sms").scrollTop = document.getElementById("box-sms").scrollHeight;
+          if (ultimo) {
+            document.getElementById("final").scrollIntoView({ behavior: "smooth" });
+          }
+        })
       }
     );
   }
@@ -86,10 +108,14 @@ export class ChatComponent implements OnInit, OnDestroy {
     formData.append('sms', this.sms.toString());
     formData.append('nombre', this.nombre.toString());
     formData.append('fecha', Date.now().toString());
+    formData.append('respondido', (this.id_respondido > -1).toString());
+    formData.append('id_respondido', this.id_respondido.toString());
     this.api.addChat(formData).subscribe((result) => {
       this.sms = '';
       this.uploadFiles = undefined;
       this.message = '';
+      this.mensaje_responder = '';
+      this.id_respondido = -1;
       this.loadChats();
     });
   }
