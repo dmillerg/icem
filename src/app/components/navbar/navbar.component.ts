@@ -29,6 +29,12 @@ export class NavbarComponent implements OnInit {
   storage2: SessionStorageService;
   carrito: any[] = [];
   categorias: Categoria[] = [];
+  tiempo: any = {
+    hora: '00',
+    minuto: '00',
+    segundo: '00'
+  }
+  intervalo: any;
 
   total_pagar: number = 0;
 
@@ -41,11 +47,14 @@ export class NavbarComponent implements OnInit {
       this.carrito = this.storage.retrieve('carrito');
     }
     this.storage.observe('carrito').subscribe((e) => {
-      this.carrito = e;
-      this.total_pagar = 0;
-      this.carrito.forEach(i => {
-        this.total_pagar += i.cantidad * i.precio;
-      })
+      if (e.length != this.carrito.length) {
+        this.carrito = e;
+        this.total_pagar = 0;
+        this.carrito.forEach(i => {
+          this.total_pagar += i.cantidad * i.precio;
+        })
+        this.cargarTiempoRestante();
+      }
     });
     this.listarCategoriasProductos();
     this.listarCarrito();
@@ -81,6 +90,9 @@ export class NavbarComponent implements OnInit {
     // console.log('actual', this.activo);
     // console.log('nuevo', path);
     if (this.activo !== path) {
+      if (path == 'productos') {
+        this.storage.store('categoria', { id: -1, nombre: 'Todos' });
+      }
       this.activate(path)
       this.router.navigate([path + '/']);
     }
@@ -96,6 +108,54 @@ export class NavbarComponent implements OnInit {
     } else {
       this.back_class = this.back_final;
       this.click = false;
+    }
+  }
+
+  cargarTiempoRestante() {
+    clearInterval(this.intervalo);
+    let date = new Date(Date.parse(this.carrito[0].fecha));
+    let fecha: string = date.getFullYear().toString() + '-' + ((date.getMonth() + 1 < 10) ? '0' + (date.getMonth() + 1) : date.getMonth() + 1).toString() + '-' + ((date.getDate() < 10) ? '0' + date.getDate() : date.getDate()).toString()
+    let hora: string = ((date.getHours() < 10) ? '0' + date.getHours() : date.getHours()).toString() + ':' + ((date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()).toString() + ':' + ((date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds()).toString()
+    let formData = new FormData();
+    formData.append('fecha', fecha + ' ' + hora)
+    let horas = 1
+    this.api.getTiempoRestanteCarrito(formData).subscribe((result) => {
+      this.tiempo.hora = Math.floor(Math.floor(horas - (result.tiempo / 3600)))
+      this.tiempo.minuto = Math.floor(((horas - (result.tiempo / 3600)) - Math.floor(horas - (result.tiempo / 3600))) * 60)
+      this.tiempo.segundo = Math.floor(((horas - (result.tiempo / 3600)) - Math.floor(horas - (result.tiempo / 3600))) * 3600) % 60
+      this.intervalo = setInterval(() => {
+        this.disminuirSec()
+      }, 1000)
+
+    })
+  }
+
+  disminuirSec() {
+    if (this.tiempo.hora == 0 && this.tiempo.minuto == 0 && this.tiempo.segundo == 0) {
+      clearInterval(this.intervalo);
+      this.deleteCarritoTime();
+    } else {
+      if (this.tiempo.segundo == 0) {
+        this.tiempo.segundo = 59;
+        this.disminuirMin();
+      } else {
+        this.tiempo.segundo--;
+      }
+    }
+  }
+
+  disminuirMin() {
+    if (this.tiempo.minuto == 0) {
+      this.tiempo.minuto = 59;
+      this.disminuirHr();
+    } else {
+      this.tiempo.minuto--;
+    }
+  }
+
+  disminuirHr() {
+    if (this.tiempo.hora > 0) {
+      this.tiempo.hora--;
     }
   }
 
@@ -155,6 +215,11 @@ export class NavbarComponent implements OnInit {
           this.getProductoFoto(e.producto_id, i);
         });
         this.storage.store('carrito', this.carrito);
+        if (this.carrito.length > 0) {
+          console.log('entro');
+
+          this.cargarTiempoRestante();
+        }
       });
     }
 
@@ -190,5 +255,16 @@ export class NavbarComponent implements OnInit {
   pagarCarrito() {
     let modal = this.modalService.open(ModalCarritoComponent, { backdrop: 'static' })
     modal.componentInstance.carrito = this.carrito;
+  }
+
+  deleteCarritoTime(){
+    let carLen = this.carrito.length-1;
+    this.carrito.forEach((e, i)=>{
+      this.api.deleteCarrito(e.id).subscribe((result)=>{
+        if(i== carLen){
+        this.listarCarrito();
+        }
+      })
+    })
   }
 }

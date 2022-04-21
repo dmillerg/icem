@@ -82,7 +82,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy(): void {
-    this.storage.clear('categoria');
+    this.storage.store('categoria', {id: -1, nombre: 'Todos'});
   }
 
   ngOnInit(): void {
@@ -157,6 +157,8 @@ export class ProductosComponent implements OnInit, OnDestroy {
   }
 
   loadProductos() {
+    console.log(this.producto);
+    
     this.api.getProducto(0, this.categoriaId, this.producto.id).subscribe((result) => {
       this.productos = result;
       this.loadPosts();

@@ -847,6 +847,17 @@ export class ApiService {
     return this.http.get<Chat>(direccion, { headers: headers, params: params });
   }
 
+  /**
+   * Devuelve el tiempo restante del carrito
+   * @param formData fecha de creado el carrito
+   * @returns 
+   */
+  getTiempoRestanteCarrito(formData: FormData): Observable<any>{
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'carritotimerestante/'
+    return this.http.post<any>(direccion, formData);
+  }
+
   sendEmail() {
     let direccion = this.url + 'send';
     return this.http.get(direccion);
