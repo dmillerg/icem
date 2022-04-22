@@ -47,7 +47,7 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   ngOnInit(): void {
     setInterval(() => {
       this.loadEspecification();
-    }, 5000)
+    }, 10000)
     this.producto = this.storage.retrieve('producto');
     this.storage.observe('producto').subscribe(e => {
       this.producto = e;

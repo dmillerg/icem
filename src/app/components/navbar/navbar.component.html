@@ -63,7 +63,7 @@
     <li *ngIf="acceso=='acceder/registrarse'" class="nav-contextual" (click)="loginOrRegister('Login')"><i
             class="bi bi-person-circle col-sm-2" style="margin-right: 10px;"></i><span
             class="col-sm-10">autenticarse</span></li>
-    <li *ngIf="acceso!='acceder/registrarse'" class="nav-contextual"><i class="bi bi-person-video2 col-sm-2"
+    <li *ngIf="acceso!='acceder/registrarse'" class="nav-contextual" (click)="perfil();"><i class="bi bi-person-video2 col-sm-2"
             style="margin-right: 10px;"></i><span class="col-sm-10">perfil</span></li>
     <li *ngIf="acceso=='acceder/registrarse'" class="nav-contextual" (click)="loginOrRegister('Register')"><i
             class="bi bi-person-plus-fill col-sm-2" style="margin-right: 10px;"></i><span

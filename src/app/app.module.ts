@@ -58,6 +58,7 @@ import { ModalLoginOrRegisterComponent } from './modals/modal-login-or-register/
 import { LoadingComponent } from './components/loading/loading.component';
 import { ModalCarritoComponent } from './modals/modal-carrito/modal-carrito.component';
 import { TablePedidoComponent } from './components/tables/table-pedido/table-pedido.component';
+import { ModalPerfilComponent } from './modals/modal-perfil/modal-perfil.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -107,6 +108,7 @@ import { TablePedidoComponent } from './components/tables/table-pedido/table-ped
     ModalLoginOrRegisterComponent,
     LoadingComponent,
     ModalCarritoComponent,
+    ModalPerfilComponent,
   ],
   imports: [
     BrowserModule,

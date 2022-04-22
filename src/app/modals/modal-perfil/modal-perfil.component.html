@@ -1,0 +1,42 @@
+<div class="container-user">
+    <button class="btn btn-closed" (click)="actiModal.close()"><i class="bi bi-x-lg svg-shadow"></i></button>
+    <div class="side" style="width: 40%;">
+        <div class="icono-content"><i class="bi bi-person-fill svg-shadow"></i></div>
+    </div>
+    <div class="side" style="width: 60%;">
+        <div class="info-content">
+            <i class="bi bi-person-fill"></i>
+            <span>usuario: </span>
+            <input class="in" type="text" name="usuario" [(ngModel)]="usuario.usuario">
+            <i class="bi bi-pencil-fill"></i>
+        </div>
+        <div class="info-content">
+            <i class="bi bi-chat-left-dots-fill"></i>
+            <span>nombre: </span>
+            <input class="in" type="text" name="nombre" [(ngModel)]="usuario.nombre">
+            <i class="bi bi-pencil-fill"></i>
+        </div>
+        <div class="info-content">
+            <i class="bi bi-envelope-fill"></i>
+            <span>correo: </span>
+            <input class="in" type="text" name="correo" [(ngModel)]="usuario.correo">
+            <i class="bi bi-pencil-fill"></i>
+        </div>
+        <div class="info-content">
+            <i class="bi bi-calendar-fill"></i>
+            <span>fecha: </span>
+            <label class="in">{{usuario.fecha | date: 'short'}}</label>
+        </div>
+        <div class="info-content">
+            <i class="bi bi-calendar-fill"></i>
+            <span>rol: </span>
+            <select class="in" [(ngModel)]="usuario.rol">
+                <option></option>
+            </select>
+        </div>
+        <div class="info-content">
+            <button class="btn btn-firstcolor"><i class="bi bi-pencil"></i> Cambiar contraseña</button>
+            <button class="btn btn-firstcolor" disabled><i class="bi bi-cart3"></i>Pedidos</button>
+        </div>
+    </div>
+</div>
