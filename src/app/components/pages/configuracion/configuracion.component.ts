@@ -21,9 +21,12 @@ export class ConfiguracionComponent implements OnInit {
   loadConfiguraciones() {
     this.api.getConfiguraciones().subscribe(result => {
       console.log(result);
-      
       this.configuraciones = result;
     })
+  }
+
+  saveConfig(){
+    this.storage.store('configuraciones', this.configuraciones);
   }
 
 }
