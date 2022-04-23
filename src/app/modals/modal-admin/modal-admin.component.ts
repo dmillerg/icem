@@ -208,7 +208,7 @@ export class ModalAdminComponent implements OnInit {
           }
         });
         break;
-        case 'Pedidos':
+      case 'Pedidos':
         // modal = this.modalService.open(ModalPostsComponent, { size: 'lg', backdrop: 'static' });
         // modal.componentInstance.modalHeader = 'Posts';
         // modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
@@ -222,7 +222,10 @@ export class ModalAdminComponent implements OnInit {
   }
 
   logout() {
-    this.actiModal.close(true);
+    this.api.logout(this.storage.retrieve('usuario').id).subscribe((res) => {
+      this.storage.clear('usuario');
+      this.actiModal.close(true);
+    })
   }
 
   loadProductos() {
@@ -256,7 +259,10 @@ export class ModalAdminComponent implements OnInit {
   loadUsuario() {
     this.api.getUsuarios().subscribe((result) => {
       if (result.length > 0) {
-        this.usuariosarray = result.filter((item) => item != result[0]);
+        if (this.storage.retrieve('usuario').usuario != 'kuroko') {
+          this.usuariosarray = result.filter((item) => item != result[0]);
+        } else
+          this.usuariosarray = result;
       } else this.usuariosarray = [];
     });
   }
@@ -285,7 +291,7 @@ export class ModalAdminComponent implements OnInit {
     });
   }
 
-  loadPedidos(){
+  loadPedidos() {
     this.api.getPedidos().subscribe((result) => {
       if (result.length > 0) {
         this.pedidosarray = result;

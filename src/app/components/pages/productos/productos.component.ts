@@ -1,8 +1,10 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { post } from 'jquery';
 import { SessionStorageService } from 'ngx-webstorage';
+import { ModalRespuestaComponent } from 'src/app/modals/modal-respuesta/modal-respuesta.component';
 import { Categoria } from 'src/app/models/categoria';
 import { Posts } from 'src/app/models/posts';
 import { Producto } from 'src/app/models/producto';
@@ -75,27 +77,25 @@ export class ProductosComponent implements OnInit, OnDestroy {
   constructor(
     private api: ApiService,
     private storage: SessionStorageService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnDestroy(): void {
-    this.storage.clear('categoria');
+    this.storage.store('categoria', {id: -1, nombre: 'Todos'});
   }
 
   ngOnInit(): void {
     this.cargaInicial();
     this.cargaInicial2();
-    try {
-      if (this.storage.retrieve('producto')) {
-        this.producto = this.storage.retrieve('producto');
-        this.producto_especificacion = true;
-        this.changeCategory(this.producto.categoria);
-        if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
-          this.id = '0' + this.producto.id;
-        } else this.id = this.producto.id.toString();
-      }
-    } catch (e) {
-      console.log(e);
+    this.loadUsuario();
+    if (this.storage.retrieve('producto')) {
+      this.producto = this.storage.retrieve('producto');
+      this.producto_especificacion = true;
+      this.changeCategory(this.producto.categoria);
+      if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
+        this.id = '0' + this.producto.id;
+      } else this.id = this.producto.id.toString();
     }
     this.loadAllProductos();
     this.loadCategorias();
@@ -103,8 +103,24 @@ export class ProductosComponent implements OnInit, OnDestroy {
     this.observeCategoria();
   }
 
-  loadAllProductos(){
-    this.api.getProducto(0, -1, -1).subscribe((result)=>{
+  loadUsuario() {
+    if (this.storage.retrieve('usuario')) {
+      this.correo = this.storage.retrieve('usuario').correo;
+      this.alias = this.storage.retrieve('usuario').usuario;
+    }
+    this.storage.observe('usuario').subscribe((result) => {
+      if (result) {
+        this.correo = result.correo;
+        this.alias = result.usuario;
+      } else {
+        this.correo = '';
+        this.alias = '';
+      }
+    })
+  }
+
+  loadAllProductos() {
+    this.api.getProducto(0, -1, -1).subscribe((result) => {
       this.productoss = result;
     })
   }
@@ -133,16 +149,21 @@ export class ProductosComponent implements OnInit, OnDestroy {
       this.categoriaId = this.storage.retrieve('categoria').id;
     }
     this.storage.observe('categoria').subscribe((result) => {
-      this.categoriaId = result.id;
-      this.loadProductos();
+      if (result) {
+        this.categoriaId = result.id;
+        this.loadProductos();
+      }
     })
   }
 
   loadProductos() {
+    console.log(this.producto);
+    
     this.api.getProducto(0, this.categoriaId, this.producto.id).subscribe((result) => {
       this.productos = result;
-      if(this.storage.retrieve('producto')){
-        this.storage.store('producto',this.producto);
+      this.loadPosts();
+      if (this.storage.retrieve('producto')) {
+        this.storage.store('producto', this.producto);
       }
       if (!this.producto_especificacion) {
         this.producto = this.productos[0];
@@ -150,8 +171,8 @@ export class ProductosComponent implements OnInit, OnDestroy {
         // this.productos = this.productoss.filter(item => item.id != this.productoss[0].id);
         if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
           this.id = '0' + this.producto.id;
-        } else this.id = this.producto.id.toString();
-        this.loadPosts();
+        } else { this.id = this.producto.id.toString(); }
+
       }
     });
   }
@@ -162,9 +183,20 @@ export class ProductosComponent implements OnInit, OnDestroy {
     });
   }
 
+  openResponder(item: any) {
+    let modal = this.modalService.open(ModalRespuestaComponent);
+    modal.componentInstance.id_post = item.id;
+    modal.componentInstance.modalHeader = 'Responder';
+    modal.result.then((result) => {
+      if (result) {
+        this.loadPosts();
+      }
+    });
+  }
+
   swichtProductos(item, cat) {
     console.log(item, cat);
-    this.storage.store('categoria',cat);
+    this.storage.store('categoria', cat);
   }
 
   swicthEspecification(sss, especification: HTMLElement) {
@@ -187,12 +219,12 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   cargaInicial() {
     let scroll = document.getElementById('scroll');
-    scroll.addEventListener("scroll", ()=> {
+    scroll.addEventListener("scroll", () => {
       this.cargaInicial2();
     });
   }
 
-  cargaInicial2(){
+  cargaInicial2() {
     let scroll = document.getElementById('scroll');
     let animados = document.querySelectorAll('.animado');
     for (let i = 0; i < animados.length; i++) {
@@ -213,15 +245,9 @@ export class ProductosComponent implements OnInit, OnDestroy {
   }
 
   abrirFiltro() {
-    if (document.getElementById('form').classList.contains('activo')) {
-      document.getElementById('form').classList.remove('activo');
-      document.getElementById('input').classList.remove('activo');
-      document.getElementById('btn-filter').classList.remove('activo');
-    } else {
-      document.getElementById('form').classList.add('activo');
-      document.getElementById('input').classList.add('activo');
-      document.getElementById('btn-filter').classList.add('activo');
-    }
+    document.getElementById('form').classList.toggle('activo');
+    document.getElementById('input').classList.toggle('activo');
+    document.getElementById('btn-filter').classList.toggle('activo');
   }
 
   filtrar() {

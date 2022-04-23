@@ -1,11 +1,36 @@
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/services/api.service';
 
+const listAnimation = trigger('listAnimation', [
+  transition('* <=> *', [
+    query(':enter',
+      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 })))],
+      { optional: true }
+    ),
+    query(':leave',
+      animate('200ms', style({ opacity: 0 })),
+      { optional: true }
+    )
+  ])
+]);
 @Component({
   selector: 'app-modal-login-or-register',
   templateUrl: './modal-login-or-register.component.html',
-  styleUrls: ['./modal-login-or-register.component.css']
+  styleUrls: ['./modal-login-or-register.component.css'],
+  animations: [listAnimation,
+    trigger('scaleAnimation', [
+      transition(':enter', [
+        style({ transform: 'translateX(-50%)', opacity: 0 }),
+        animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(0)', opacity: 1 }),
+        animate('500ms', style({ transform: 'translateX(-50%)', opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class ModalLoginOrRegisterComponent implements OnInit {
 
@@ -28,7 +53,10 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     telefono: '',
   }
 
+  errorLogin: boolean = false;
+
   success: boolean = false;
+  errorRegister: boolean = false;
 
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
@@ -60,7 +88,10 @@ export class ModalLoginOrRegisterComponent implements OnInit {
         rol: result.usuario[0].rol,
         token: result.token,
       };
+      this.errorLogin = false;
       this.actiModal.close(result);
+    }, err => {
+      this.errorLogin = true;
     })
   }
 
@@ -71,13 +102,15 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     formData.append('password', this.register.password);
     formData.append('correo', this.register.correo);
     this.api.addUsuarios(formData).subscribe((result) => {
+      this.errorRegister = true;
       this.success = true;
       // this.actiModal.close();
+    }, error => {
+      this.errorRegister = true;
     })
   }
 
   validateEmail() {
-  
     return this.register.correo.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null;
   }
 

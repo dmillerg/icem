@@ -13,6 +13,12 @@ h1 {
     padding-inline: 20px;
 }
 
+p strong{
+    font-weight: 900;
+    color: var(--firstcolor);
+    margin-right: 10px;
+}
+
 .centrado-horizontal{
     display: flex;
 }

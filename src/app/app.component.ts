@@ -31,7 +31,7 @@ const listAnimation = trigger('listAnimation', [
   ],
 })
 export class AppComponent implements OnInit {
-  
+  rate = 1;
   title = 'ICEM';
   back_class = 'navbar navbar-expand-lg navbar-dark fixed-top';
   back_oscuro = 'back-oscuro';

@@ -47,13 +47,19 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   ngOnInit(): void {
     setInterval(() => {
       this.loadEspecification();
-    }, 10000)
-    this.producto = this.storage.retrieve('producto');
+    }, 5000)
+    if (this.storage.retrieve('producto')) {
+      this.producto = this.storage.retrieve('producto');
+    }
     this.storage.observe('producto').subscribe(e => {
-      this.producto = e;
+      if (e != undefined) {
+        this.producto = e;
+      }
     })
     this.storage.observe('carrito').subscribe(r => {
-      this.loadEspecification();
+      if (r != undefined) {
+        this.loadEspecification();
+      }
     })
   }
 
@@ -103,7 +109,9 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
 
   loadEspecification() {
     this.api.getProductosById(this.producto.id).subscribe((result) => {
+      if(result != null){
       this.producto.disponibilidad = result.disponibilidad;
+      }
     });
   }
 }

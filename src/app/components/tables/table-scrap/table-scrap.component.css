@@ -3,6 +3,27 @@ td {
     background-color: transparent;
 }
 
-.icon{
+.icon {
     background-color: transparent;
 }
+
+.table-mine .in{
+    position: absolute;
+    bottom: 10px;
+    width: 70px;
+    right: 160px;
+    outline: none;
+    line-height: 50px;
+    border: none;
+    border-bottom: 1px solid var(--firstcolor);
+    background-color: transparent;
+    color: var(--firstcolor);
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }

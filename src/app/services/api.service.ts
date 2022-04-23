@@ -362,10 +362,13 @@ export class ApiService {
    * @param id de ultimo chat
    * @returns
    */
-  getChats(id: number = 0): Observable<Chat[]> {
+  getChats(onlyid: number[] = []): Observable<Chat[]> {
+    let direccion = this.url + 'chats'
     const headers = { 'content-type': 'application/json' };
-    let direccion = this.url + 'chats/' + id.toString();
-    return this.http.get<Chat[]>(direccion, { headers: headers });
+    const params = {
+      onlyid: onlyid
+    };
+    return this.http.get<Chat[]>(direccion, { headers: headers, params: params });
   }
 
   /**
@@ -802,6 +805,57 @@ export class ApiService {
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'pedidos';
     return this.http.post(direccion, formData);
+  }
+
+  /**
+ * Elimina un pedido
+ * @param id pedido a eliminar
+ * @returns
+ */
+  deletePedido(id: number = -1) {
+    let direccion = this.url + 'pedidos/' + id.toString();
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.delete(direccion, { headers: headers, params: params });
+  }
+
+/**
+ * Resetea la contrasenna siendo admin ded un usuario
+ * @param formData datos para reiniciar la contrase;a
+ * @returns 
+ */
+  adminResetPassword(formData: FormData) {
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'adminreset/'
+    return this.http.post(direccion, formData);
+  }
+
+  /**
+   * Obtiene un sms
+   * @param id para obtener los datos de un sms
+   * @returns 
+   */
+  getChatByID(id: number = -1){
+    let direccion = this.url + 'chat';
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      id: id,
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.get<Chat>(direccion, { headers: headers, params: params });
+  }
+
+  /**
+   * Devuelve el tiempo restante del carrito
+   * @param formData fecha de creado el carrito
+   * @returns 
+   */
+  getTiempoRestanteCarrito(formData: FormData): Observable<any>{
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'carritotimerestante/'
+    return this.http.post<any>(direccion, formData);
   }
 
   sendEmail() {

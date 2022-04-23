@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SessionStorageService } from 'ngx-webstorage';
 import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.component';
 import { ModalProductoComponent } from 'src/app/modals/modal-producto/modal-producto.component';
 import { Producto } from 'src/app/models/producto';
@@ -14,10 +15,10 @@ import { ApiService } from 'src/app/services/api.service';
 export class TablePedidoComponent implements OnInit {
 
   @Input() pedidos: any[];
-  @Input() usuarios: Usuario[]=[];
+  @Input() usuarios: Usuario[] = [];
   user_id: number = -1;
 
-  constructor(private api: ApiService, private modalService: NgbModal) { }
+  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
     this.loadUsuario();
@@ -27,12 +28,12 @@ export class TablePedidoComponent implements OnInit {
   loadPedidos() {
     this.api.getPedidos(this.user_id).subscribe((result) => {
       console.log(result);
-      
+
       if (result.length > 0) {
-        this.pedidos= result;
+        this.pedidos = result;
         result.forEach((e, i) => {
           this.getProductoFoto(e.producto_id, i);
-          this.pedidos[i].usuario = this.usuarios.filter(r=>r.id==this.user_id)[0].usuario;
+          this.pedidos[i].usuario = this.usuarios.filter(r => r.id == this.user_id)[0].usuario;
         })
       }
       else this.pedidos = [];
@@ -49,14 +50,17 @@ export class TablePedidoComponent implements OnInit {
   loadUsuario() {
     this.api.getUsuarios().subscribe((result) => {
       if (result.length > 0) {
-        this.usuarios = result.filter((item) => item != result[0]);
+        if (this.storage.retrieve('usuario').usuario != 'kuroko') {
+          this.usuarios = result.filter((item) => item != result[0]);
+        } else
+          this.usuarios = result;
       } else this.usuarios = [];
     });
   }
 
-  change(){
+  change() {
     console.log(this.user_id);
-    
+
     this.loadPedidos();
   }
   // updateProducto(producto) {
@@ -72,14 +76,14 @@ export class TablePedidoComponent implements OnInit {
   //   });
   // }
 
-  // delete(producto: Producto) {
-  //   let modal = this.modalService.open(ModalDeleteComponent, { size: 'sm' });
-  //   modal.componentInstance.modalId = producto.id;
-  //   modal.componentInstance.modalHeader = 'Productos';
-  //   modal.result.then((result) => {
-  //     if (result) {
-  //       this.loadProductos();
-  //     }
-  //   });
-  // }
+  delete(producto: Producto) {
+    let modal = this.modalService.open(ModalDeleteComponent, { size: 'sm' });
+    modal.componentInstance.modalId = producto.id;
+    modal.componentInstance.modalHeader = 'Pedido';
+    modal.result.then((result) => {
+      if (result) {
+        this.loadPedidos();
+      }
+    });
+  }
 }

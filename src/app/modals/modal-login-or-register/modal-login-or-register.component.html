@@ -1,17 +1,21 @@
-<div class="content-total">
+<div class="content-total" >
     <button class="btn btn-closed" (click)="actiModal.close()"><i class="bi bi-x-lg svg-shadow"></i></button>
     <div class="content-login">
         <img src="assets/icon-icem-blue.png" alt="logo" class="image-icon svg-shadow">
         <form action="" class="form-login">
+            <p [@scaleAnimation]="'enter'" *ngIf="errorLogin" style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Usuario o
+                contraseña incorrectos, pruebe de nuevo</p>
             <div class="input-content">
                 <label for="usuario-login">usuario</label>
                 <i class="bi bi-person-fill prefix"></i>
-                <input type="text" class="in" name="usuario-login" id="usuario-login" placeholder="usuario o correo" [(ngModel)]="login.usuario">
+                <input type="text" class="in" name="usuario-login" id="usuario-login" placeholder="usuario o correo"
+                    [(ngModel)]="login.usuario">
             </div>
             <div class="input-content">
                 <label for="usuario-login">contraseña</label>
                 <i class="bi bi-key-fill prefix"></i>
-                <input type="password" class="in" name="pass-login" id="pass-login" placeholder="contraseña" [(ngModel)]="login.password">
+                <input type="password" class="in" name="pass-login" id="pass-login" placeholder="contraseña"
+                    [(ngModel)]="login.password">
             </div>
             <a class="olvido">¿olvido su contraseña?</a>
             <button class="btn btn-login" (click)="logIn()">Aceptar</button>
@@ -23,38 +27,53 @@
             <div class="input-content">
                 <label for="usuario-register">usuario</label>
                 <i class="bi bi-person-fill prefix"></i>
-                <input type="text" class="in" name="usuario-login" id="usuario-login" placeholder="usuario" [(ngModel)]="register.usuario">
+                <input type="text" class="in" name="usuario-login" id="usuario-login" placeholder="usuario"
+                    [(ngModel)]="register.usuario">
             </div>
+            <label [@scaleAnimation]="'enter'" *ngIf="register.usuario.length>0 && errorRegister"
+                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">El usuario ya existe, pruebe con otro</label>
             <div class="input-content">
                 <label for="name-register">nombre y apellidos</label>
                 <i class="bi bi-chat-square-fill prefix"></i>
-                <input type="text" class="in" name="name-login" id="name-register" placeholder="Nombre y apellidos" [(ngModel)]="register.nombre">
+                <input type="text" class="in" name="name-login" id="name-register" placeholder="Nombre y apellidos"
+                    [(ngModel)]="register.nombre">
             </div>
             <div class="input-content">
                 <label for="correo-register">correo</label>
                 <i class="bi bi-envelope-fill prefix"></i>
-                <input type="email" class="in" name="correo-login" id="correo-register" placeholder="correo" [(ngModel)]="register.correo">
+                <input type="email" class="in" name="correo-login" id="correo-register" placeholder="correo"
+                    [(ngModel)]="register.correo">
             </div>
+            <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && !validateEmail()"
+                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Este correo no es valido</label>
             <div class="input-content">
                 <label for="pass-register">contraseña</label>
                 <i class="bi bi-key-fill prefix"></i>
-                <input type="password" class="in" name="pass-login" id="pass-register" placeholder="contraseña" [(ngModel)]="register.password">
+                <input type="password" class="in" name="pass-login" id="pass-register" placeholder="contraseña"
+                    [(ngModel)]="register.password">
             </div>
             <div class="input-content">
                 <label for="pass-confirm-register">confirmar contraseña</label>
                 <i class="bi bi-key-fill prefix"></i>
-                <input type="password" class="in" name="pass-confirm-register" id="pass-confirm-register" placeholder="confirmar contraseña" [(ngModel)]="register.confirm_pass">
-                <p *ngIf="register.confirm_pass!=register.password" class="text-danger text-center error-text">no coinciden las contraseñas</p>
+                <input type="password" class="in" name="pass-confirm-register" id="pass-confirm-register"
+                    placeholder="confirmar contraseña" [(ngModel)]="register.confirm_pass">
+                <p *ngIf="register.confirm_pass!=register.password" class="text-danger text-center error-text">no
+                    coinciden las contraseñas</p>
             </div>
-            <button class="btn btn-register" [disabled]="!validateEmail() || !validateVacio() || register.confirm_pass!=register.password" (click)="registEr()">Aceptar</button>
+            <button class="btn btn-register"
+                [disabled]="!validateEmail() || !validateVacio() || register.confirm_pass!=register.password"
+                (click)="registEr()">Aceptar</button>
         </form>
         <div *ngIf="success" class="message-successful">
-            <label class="text-firstcolor">se ha mandado un mensaje de confirmación a su correo: {{register.correo}}  </label>
+            <label class="text-firstcolor">se ha mandado un mensaje de confirmación a su correo: {{register.correo}}
+            </label>
         </div>
     </div>
-    <div class="content-blue" style="background: linear-gradient(0, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo.jpg');background-blend-mode: multiply;">
+    <div class="content-blue"
+        style="background: linear-gradient(0, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo3.png');background-blend-mode: multiply;">
         <ul>
-            <li id="autenticarse" class="li" [ngClass]="{'active': activo}" (click)="loginOrRegister()">autenticarse</li>
+            <li id="autenticarse" class="li" [ngClass]="{'active': activo}" (click)="loginOrRegister()">autenticarse
+            </li>
             <li id="registrarse" class="li" [ngClass]="{'active': !activo}" (click)="loginOrRegister()">registrarse</li>
         </ul>
     </div>

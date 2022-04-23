@@ -26,6 +26,26 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.respuesta-sms{
+  width: 100%;
+  padding: 10px;
+  border-radius: 0.5em;
+  border-left: 5px solid blueviolet;
+  background-color: var(--firstcolor);
+}
+
+.chat-form .message-resp{
+  position: absolute;
+  top: -80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--firstcolor);
+  border-radius: 0.5em;
+  padding: 10px;
+}
+
 input:disabled {
   background-color: rgba(0, 0, 0, 0.2);
 }
@@ -40,7 +60,7 @@ input:disabled {
 }
 
 .item-sms {
-  padding-inline: 30px;
+  padding-inline: 10px;
   padding-block: 5px;
   border-radius: 20px;
   background-color: #08f;

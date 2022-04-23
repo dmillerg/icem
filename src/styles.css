@@ -77,10 +77,16 @@ body {
 }
 
 .btn-firstcolor {
+  max-height: 60px; 
+  white-space: nowrap;
   background-color: var(--firstcolor);
   color: white;
   padding: 15px;
 }
+
+.img-loading {
+  background:transparent url(assets/cargando-icem.gif) center no-repeat;
+  }
 
 .btn-firstcolor:hover {
   background-color: var(--firstcolor-hover);
