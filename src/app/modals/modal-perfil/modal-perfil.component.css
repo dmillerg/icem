@@ -1,0 +1,71 @@
+.container-user{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--theme-color);
+    border-radius: 0.5em;
+}
+
+.container-user .side{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.container-user .btn-closed {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    z-index: 999;
+    /* color: var(--firstcolor-section); */
+}
+
+.container-user .side .icono-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 150px;
+    height: 150px;
+    background-color: var(--firstcolor-hover);
+    border-radius: 100%;
+}
+
+.container-user .side .icono-content i{
+    color: var(--firstcolor);
+    font-size: 70px;
+}
+
+.container-user .side .info-content .in{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--firstcolor);
+    list-style: 40px;
+    width: 50%;
+    margin-right: 10px;
+}
+
+.container-user .side .info-content{
+    color: var(--firstcolor);
+    width: 90%;
+    text-align: start;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.container-user .side .info-content span{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-weight: 500;
+}

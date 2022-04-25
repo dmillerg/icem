@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { ModalAdminComponent } from 'src/app/modals/modal-admin/modal-admin.component';
 import { ModalCarritoComponent } from 'src/app/modals/modal-carrito/modal-carrito.component';
+import { ModalPerfilComponent } from 'src/app/modals/modal-perfil/modal-perfil.component';
 import { Carrito } from 'src/app/models/carrito';
 import { Categoria } from 'src/app/models/categoria';
 import { ApiService } from 'src/app/services/api.service';
@@ -214,6 +215,13 @@ export class NavbarComponent implements OnInit {
       size: 'lg',
       backdrop: 'static',
     });
+  }
+
+  perfil(){
+    let modal = this.modalService.open(ModalPerfilComponent, {
+      size: 'md',
+      backdrop: 'static'
+    })
   }
 
   listarCarrito() {
