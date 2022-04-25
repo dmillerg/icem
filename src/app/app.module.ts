@@ -60,6 +60,7 @@ import { ModalCarritoComponent } from './modals/modal-carrito/modal-carrito.comp
 import { TablePedidoComponent } from './components/tables/table-pedido/table-pedido.component';
 import { ModalAdminResetComponent } from './modals/modal-admin-reset/modal-admin-reset.component';
 import { ModalPerfilComponent } from './modals/modal-perfil/modal-perfil.component';
+import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -111,6 +112,7 @@ import { ModalPerfilComponent } from './modals/modal-perfil/modal-perfil.compone
     ModalCarritoComponent,
     ModalAdminResetComponent,
     ModalPerfilComponent,
+    ConfiguracionComponent,
   ],
   imports: [
     BrowserModule,

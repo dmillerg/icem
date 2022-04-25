@@ -41,6 +41,7 @@ export class ModalAdminComponent implements OnInit {
   scrap: boolean = false;
   posts: boolean = false;
   pedidos: boolean = false;
+  configuracion: boolean = false;
 
   usuario: Usuario;
   @Output() emisor: EventEmitter<string> = new EventEmitter<string>();
@@ -103,6 +104,9 @@ export class ModalAdminComponent implements OnInit {
       case 'Pedidos':
         this.pedidos = true;
         break;
+      case 'Configuracion':
+        this.configuracion = true;
+        break;
     }
     this.activo = event.target.innerText;
   }
@@ -118,6 +122,7 @@ export class ModalAdminComponent implements OnInit {
     this.scrap = false
     this.posts = false;
     this.pedidos = false;
+    this.configuracion = false;
   }
 
   agregar() {

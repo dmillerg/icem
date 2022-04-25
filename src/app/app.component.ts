@@ -1,5 +1,7 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { SessionStorageService } from 'ngx-webstorage';
+import { ApiService } from './services/api.service';
 
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
@@ -39,11 +41,16 @@ export class AppComponent implements OnInit {
   back_final = '';
   loading: boolean = false;
 
+  constructor(public storage: SessionStorageService, private api: ApiService) {
+
+  }
+
   ngOnInit(): void {
+    this.cargarConfigs();
     this.loading = true;
-    setTimeout(()=>{
-      this.loading=false;
-  }, 3000);
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
     this.back_final = this.back_class + ' ' + this.back_transparente;
   }
 
@@ -62,10 +69,16 @@ export class AppComponent implements OnInit {
 
   onScroll(scroll: HTMLElement) {
     console.log(scroll)
-    scroll.scrollIntoView({behavior: "smooth"});
+    scroll.scrollIntoView({ behavior: "smooth" });
   }
 
-  topScroll(event){
+  topScroll(event) {
     console.log(event);
+  }
+
+  cargarConfigs() {
+    this.api.getConfiguraciones().subscribe((result) => {
+      this.storage.store('configuraciones', result)
+    })
   }
 }

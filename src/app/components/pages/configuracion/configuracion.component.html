@@ -1,0 +1,14 @@
+<div class="contenedor-total">
+    <div class="title-contenedor">
+        <h2><i class="bi bi-gear"></i> Configuraciones</h2>
+    </div>
+    <div class="configuraciones-contenedor">
+        <div *ngFor="let item of configuraciones" class="configuracion">
+            <strong>{{item.nombre}}: </strong>
+            <input [name]="item.nombre" [(ngModel)]="item.config">
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="btn btn-firstcolor"><i class="bi bi-hdd" (click)="saveConfig()"> Aplicar los cambios</i></button>
+    </div>
+</div>

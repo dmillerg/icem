@@ -73,11 +73,15 @@
         (click)="cambiarTabla($event)">
         Pedidos
       </button>
+      <button [ngClass]="{ 'btn-primary': configuracion, 'btn-outline-primary': !configuracion }" class="btn"
+        (click)="cambiarTabla($event)">
+        Configuracion
+      </button>
       <button class="btn btn-outline-primary" (click)="logout()">
         Cerrar Sesion
       </button>
     </div>
-    <div class="col-sm-10">
+    <div class="col-sm-10" style="position: relative;">
       <app-table-producto [productos]="productosarray" [ngClass]="{ 'fade-in-element': productos }"
         [hidden]="!productos"></app-table-producto>
       <app-table-categoria [categorias]="categoriaarray" [ngClass]="{ 'fade-in-element': categorias }"
@@ -98,6 +102,7 @@
       <app-table-pedido [pedidos]="pedidosarray" [usuarios]="usuariosarray" [ngClass]="{ 'fade-in-element': pedidos }"
         [hidden]="!pedidos">
       </app-table-pedido>
+      <app-configuracion [ngClass]="{ 'fade-in-element': configuracion }" [hidden]="!configuracion"></app-configuracion>
     </div>
   </div>
 </div>

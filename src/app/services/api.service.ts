@@ -16,6 +16,7 @@ import { Posts } from '../models/posts';
 import { Respuesta } from '../models/respuesta';
 import { Carrito } from '../models/carrito';
 import { Pedido } from '../models/pedido';
+import { Configuracion } from '../models/configuracion';
 @Injectable({
   providedIn: 'root',
 })
@@ -821,11 +822,11 @@ export class ApiService {
     return this.http.delete(direccion, { headers: headers, params: params });
   }
 
-/**
- * Resetea la contrasenna siendo admin ded un usuario
- * @param formData datos para reiniciar la contrase;a
- * @returns 
- */
+  /**
+   * Resetea la contrasenna siendo admin ded un usuario
+   * @param formData datos para reiniciar la contrase;a
+   * @returns 
+   */
   adminResetPassword(formData: FormData) {
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'adminreset/'
@@ -837,7 +838,7 @@ export class ApiService {
    * @param id para obtener los datos de un sms
    * @returns 
    */
-  getChatByID(id: number = -1){
+  getChatByID(id: number = -1) {
     let direccion = this.url + 'chat';
     const headers = { 'content-type': 'application/json' };
     const params = {
@@ -852,10 +853,34 @@ export class ApiService {
    * @param formData fecha de creado el carrito
    * @returns 
    */
-  getTiempoRestanteCarrito(formData: FormData): Observable<any>{
+  getTiempoRestanteCarrito(formData: FormData): Observable<any> {
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'carritotimerestante/'
     return this.http.post<any>(direccion, formData);
+  }
+
+  /**
+   * Obtiene todas las configuraciones de la pagina
+   * @returns 
+   */
+  getConfiguraciones(): Observable<Configuracion[]> {
+    let direccion = this.url + 'configuracion';
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.get<Configuracion[]>(direccion, { headers: headers, params: params });
+  }
+
+  /**
+   * Obtiene los datos de una configuracion
+   * @param formData nombre de la configuracion a buscar
+   * @returns 
+   */
+  getConfiguracion(formData: FormData): Observable<Configuracion> {
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'configuracion/'
+    return this.http.post<Configuracion>(direccion, formData);
   }
 
   sendEmail() {

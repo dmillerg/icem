@@ -1,0 +1,65 @@
+.contenedor-total {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    
+    overflow-y: auto;
+}
+
+.contenedor-total .title-contenedor {
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedor-total .configuraciones-contenedor{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.contenedor-total .configuraciones-contenedor .configuracion{
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    margin: 10px;
+}
+
+.contenedor-total .configuraciones-contenedor .configuracion strong{
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.contenedor-total .configuraciones-contenedor .configuracion input{
+    color: var(--firstcolor);
+    outline: none;
+    border-radius: 0.5em;
+    border: none;
+    box-shadow: 0 0 5px 2px var(--firstcolor-hover);
+    padding-left: 10px;
+}
+
+.contenedor-total .configuraciones-contenedor .configuracion *{
+    width: 48%;
+    height: 50px;
+    text-overflow: ellipsis;
+}
+
+.configuraciones-contenedor .button-container{
+max-width: 150px;
+height: auto;
+position: absolute;
+bottom: 10px;
+right: 10px;
+}
