@@ -11,6 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class ConfiguracionComponent implements OnInit {
 
   configuraciones: Configuracion[] = [];
+  configuraciones2: Configuracion[]=[]
 
   constructor(private api: ApiService, public storage: SessionStorageService) { }
 
@@ -22,6 +23,9 @@ export class ConfiguracionComponent implements OnInit {
     this.api.getConfiguraciones().subscribe(result => {
       console.log(result);
       this.configuraciones = result;
+      this.configuraciones.forEach(e => {
+        this.configuraciones2.push(e)
+      });
     })
   }
 

@@ -10,6 +10,9 @@
     border-radius: 0.5em;
 }
 
+.container-user .side2{
+}
+
 .container-user .side{
     height: 100%;
     display: flex;
@@ -29,7 +32,7 @@
     /* color: var(--firstcolor-section); */
 }
 
-.container-user .side .icono-content{
+.container-user .side2 .icono-content{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +43,7 @@
     border-radius: 100%;
 }
 
-.container-user .side .icono-content i{
+.container-user .side2 .icono-content i{
     color: var(--firstcolor);
     font-size: 70px;
 }

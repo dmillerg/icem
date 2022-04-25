@@ -3,9 +3,9 @@
         <h2><i class="bi bi-gear"></i> Configuraciones</h2>
     </div>
     <div class="configuraciones-contenedor">
-        <div *ngFor="let item of configuraciones" class="configuracion">
+        <div *ngFor="let item of configuraciones2" class="configuracion">
             <strong>{{item.nombre}}: </strong>
-            <input [name]="item.nombre" [(ngModel)]="item.config">
+            <input name="d" [(ngModel)]="item.config">
         </div>
     </div>
     <div class="button-container">
