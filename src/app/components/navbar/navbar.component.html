@@ -82,7 +82,9 @@
         <div class="cant-cart">{{carrito.length}}</div>
         <div class="menu">
     <li class="nav-contextual disabled" disabled style="width: 250px;" *ngIf="carrito.length>0"><label
-            for="">{{(tiempo.hora<10)?'0'+tiempo.hora: tiempo.hora}}:{{(tiempo.minuto<10)?'0'+tiempo.minuto: tiempo.minuto}}:{{(tiempo.segundo<10)?'0'+tiempo.segundo: tiempo.segundo}}
+            for="">
+            Tiempo restante: 
+            {{(tiempo.hora<10)?'0'+tiempo.hora: tiempo.hora}}:{{(tiempo.minuto<10)?'0'+tiempo.minuto: tiempo.minuto}}:{{(tiempo.segundo<10)?'0'+tiempo.segundo: tiempo.segundo}}
         </label></li>
     <li *ngFor="let item of carrito" class="nav-contextual" style="width: 250px;">
 
@@ -125,7 +127,7 @@
         <div class="navbar-fondo2 bg-white"
             style="transform: translateY(10px) translateX(10px);position: absolute;top: 0;"></div>
         <div class="navbar-fondo bg-firstcolor"
-            style="position: relative;background: linear-gradient(180deg, rgb(7, 7, 7) 0%, var(--firstcolor) 20%), url('assets/fondo3.png');background-blend-mode: multiply;">
+            style="position: relative;background: linear-gradient(180deg, rgb(7, 7, 7) 0%, var(--firstcolor) 20%), url('assets/fondo7.png');background-blend-mode: multiply;">
             <div style="position: relative;">
                 <h1><strong class="text-white h1 text-shadow" style="font-family: MyriadPro-BoldCond;">Empresa
                         Cubana de Equipos Médicos </strong>

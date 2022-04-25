@@ -78,6 +78,8 @@ export class AppComponent implements OnInit {
 
   cargarConfigs() {
     this.api.getConfiguraciones().subscribe((result) => {
+      console.log(result, 'configuraciones');
+      
       this.storage.store('configuraciones', result)
     })
   }

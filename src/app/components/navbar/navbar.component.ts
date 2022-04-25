@@ -44,6 +44,10 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.storage.retrieve('configuraciones')){
+      let result = this.storage.retrieve('configuraciones');
+      this.timeConfig = parseInt(result.filter(e => e.nombre="carrito_time")[0].config)
+    }
     this.storage.observe('configuraciones').subscribe((result)=>{
       this.timeConfig = parseInt(result.filter(e => e.nombre="carrito_time")[0].config)
     })
@@ -122,7 +126,9 @@ export class NavbarComponent implements OnInit {
     let hora: string = ((date.getHours() < 10) ? '0' + date.getHours() : date.getHours()).toString() + ':' + ((date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()).toString() + ':' + ((date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds()).toString()
     let formData = new FormData();
     formData.append('fecha', fecha + ' ' + hora)
-    let horas = this.timeConfig;
+    console.log(this.timeConfig);
+    
+    let horas = this.timeConfig
     this.api.getTiempoRestanteCarrito(formData).subscribe((result) => {
       this.tiempo.hora = Math.floor(Math.floor(horas - (result.tiempo / 3600)))
       this.tiempo.minuto = Math.floor(((horas - (result.tiempo / 3600)) - Math.floor(horas - (result.tiempo / 3600))) * 60)

@@ -865,11 +865,7 @@ export class ApiService {
    */
   getConfiguraciones(): Observable<Configuracion[]> {
     let direccion = this.url + 'configuracion';
-    const headers = { 'content-type': 'application/json' };
-    const params = {
-      token: this.storage.retrieve('usuario').token,
-    };
-    return this.http.get<Configuracion[]>(direccion, { headers: headers, params: params });
+    return this.http.get<Configuracion[]>(direccion);
   }
 
   /**
@@ -878,7 +874,7 @@ export class ApiService {
    * @returns 
    */
   getConfiguracion(formData: FormData): Observable<Configuracion> {
-    formData.append('token', this.storage.retrieve('usuario').token);
+    // formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'configuracion/'
     return this.http.post<Configuracion>(direccion, formData);
   }
