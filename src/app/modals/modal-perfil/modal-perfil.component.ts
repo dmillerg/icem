@@ -34,7 +34,7 @@ export class ModalPerfilComponent implements OnInit {
       this.usuario.correo = user.correo;
       this.usuario.nombre = user.nombre;
       this.usuario.fecha = user.fecha;
-      this.usuario.rol = user.rol
+      this.usuario.rol = user.rol;
     }
   }
 

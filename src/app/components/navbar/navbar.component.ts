@@ -219,7 +219,7 @@ export class NavbarComponent implements OnInit {
 
   perfil() {
     let modal = this.modalService.open(ModalPerfilComponent, {
-      size: 'lg',
+      size: 'md',
       backdrop: 'static'
     })
   }
