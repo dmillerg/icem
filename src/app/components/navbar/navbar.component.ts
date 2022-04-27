@@ -47,10 +47,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     if (this.storage.retrieve('configuraciones')) {
       let result = this.storage.retrieve('configuraciones');
+      console.log(result);
+      
       this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config)
     }
     this.storage.observe('configuraciones').subscribe((result) => {
       if (result && result.length > 0) {
+        console.log(result);
+        
         this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config)
       }
     })
@@ -129,6 +133,8 @@ export class NavbarComponent implements OnInit {
     let hora: string = ((date.getHours() < 10) ? '0' + date.getHours() : date.getHours()).toString() + ':' + ((date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()).toString() + ':' + ((date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds()).toString()
     let formData = new FormData();
     formData.append('fecha', fecha + ' ' + hora)
+    // console.log(this.timeConfig);
+    
     let horas = this.timeConfig
     this.api.getTiempoRestanteCarrito(formData).subscribe((result) => {
       this.tiempo.hora = Math.floor(Math.floor(horas - (result.tiempo / 3600)))
@@ -219,7 +225,7 @@ export class NavbarComponent implements OnInit {
 
   perfil() {
     let modal = this.modalService.open(ModalPerfilComponent, {
-      size: 'md',
+      size: 'lg',
       backdrop: 'static'
     })
   }

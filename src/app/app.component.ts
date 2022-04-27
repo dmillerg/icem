@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
 
   cargarConfigs() {
     this.api.getConfiguraciones().subscribe((result) => {
-      this.storage.store('carritotime', result.filter(e=>e.nombre=='carrito_time')[0])
+      this.storage.store('configuraciones', result)
     })
   }
 }

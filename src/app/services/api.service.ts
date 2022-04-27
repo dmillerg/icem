@@ -482,9 +482,9 @@ export class ApiService {
    * @param query consulta sql
    * @returns
    */
-  all(query: string = '') {
+  all(query: string = ''): Observable<any> {
     let direccion = this.url + 'all';
-    return this.http.post(direccion, {
+    return this.http.post<any>(direccion, {
       query: query,
       token: this.storage.retrieve('usuario').token,
     });

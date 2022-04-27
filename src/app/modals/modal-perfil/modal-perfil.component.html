@@ -1,44 +1,80 @@
 <div class="container-perfil">
-    <div class="side" style="width: 35%;">
+    <button class="btn btn-closed" (click)="actiModal.close()"><i class="bi bi-x"></i></button>
+    <div class="side" style="width: 35%;text-align: center;">
         <div class="content-icon">
             <div class="icono-content">
                 <i class="bi bi-person-fill svg-shadow"></i>
             </div>
         </div>
+        <label class="user-data user">{{usuario.usuario}}</label>
+        <label class="user-data data">usuario desde: {{timeUser}}</label>
     </div>
     <div class="side" style="width: 65%;">
-        <h3 class="h3"><strong>Perfil de usuario</strong></h3>
+        <h3 class="h3" style="margin-bottom: 15px;padding-left: 15px;"><strong>Perfil de usuario</strong></h3>
         <form action="">
             <div class="input-perfil">
                 <label for="">Usuario:</label>
-                <input type="text" class="in" name="usuario" [(ngModel)]="usuario.usuario">
+                <input type="text" class="in" name="usuario" [(ngModel)]="usuario.usuario" [disabled]="!edit">
                 <i class="bi bi-person-fill prev"></i>
-                <i class="bi bi-pencil-fill next"></i>
+                <!-- <i class="bi bi-pencil-fill next"></i> -->
             </div>
             <div class="input-perfil">
                 <label for="">Nombre:</label>
-                <input type="text" class="in" name="nombre" [(ngModel)]="usuario.nombre">
+                <input type="text" class="in" name="nombre" [(ngModel)]="usuario.nombre" [disabled]="!edit">
                 <i class="bi bi-chat-fill prev"></i>
-                <i class="bi bi-pencil-fill next"></i>
+                <!-- <i class="bi bi-pencil-fill next"></i> -->
             </div>
             <div class="input-perfil">
                 <label for="">Correo:</label>
-                <input type="text" class="in" name="correo" [(ngModel)]="usuario.correo">
+                <input type="text" class="in" name="correo" [(ngModel)]="usuario.correo" [disabled]="!edit">
                 <i class="bi bi-envelope-fill prev"></i>
-                <i class="bi bi-pencil-fill next"></i>
+                <!-- <i class="bi bi-pencil-fill next"></i> -->
             </div>
             <div class="input-perfil">
                 <label for="">Fecha:</label>
-                <input type="text" class="in" name="fecha" [(ngModel)]="usuario.fecha">
+                <input type="text" class="in" name="fecha" [(ngModel)]="usuario.fecha" disabled>
                 <i class="bi bi-calendar-fill prev"></i>
-                <i class="bi bi-pencil-fill next"></i>
+                <!-- <i class="bi bi-pencil-fill next"></i> -->
             </div>
             <div class="input-perfil">
                 <label for="">Rol:</label>
                 <input type="text" class="in" name="rol" [(ngModel)]="usuario.rol" disabled>
                 <i class="bi bi-person-rolodex prev"></i>
-                <i class="bi bi-pencil-fill next"></i>
+                <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
+            </div>
+            <div class="btn-groups">
+                <button class="btn btn-perfil" (click)="edit=!edit"><i class="bi bi-pencil-fill"></i> Editar
+                    perfil</button>
+                <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
+                    Ver pedidos</button>
+                <button class="btn btn-perfil"><i class="bi bi-unlock-fill"></i> Cambiar contraseña</button>
             </div>
         </form>
+
+        <div id="pedidos" class="sidebar-pedidos">
+            <button id="btn-ampliar" class="btn btn-ampliar" (click)="pedidosCompleteDetails()"><i
+                    class="bi bi-caret-left-fill"></i></button>
+            <h4 class="h4">Pedidos</h4>
+            <div class="table-pedido">
+                <div class="table-head">
+                    <div class="td-pedido-head" style="width: 20%;">Producto</div>
+                    <div class="td-pedido-head" style="width: 20%;">Cantidad</div>
+                    <div class="td-pedido-head" style="width: 20%;">Fecha</div>
+                    <div class="td-pedido-head" style="width: 20%;">Estado</div>
+                    <div class="td-pedido-head" style="width: 20%;">Accion</div>
+                </div>
+                <div class="table-body" *ngFor="let item of pedidos">
+                    <div class="td-pedido" style="width: 20%;">{{item.producto_id}}</div>
+                    <div class="td-pedido" style="width: 20%;">{{item.cantidad}}</div>
+                    <div class="td-pedido" style="width: 20%;">{{item.fecha|date: 'short'}}</div>
+                    <div class="td-pedido" style="width: 20%;">{{item.estado}}</div>
+                    <div class="td-pedido" style="width: 20%;"><button class="btn-firstcolor" style="color: white;"><i class="bi bi-trash"></i></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="imagen-triangulo">
+        <img src="assets/logo-mitad-right.png">
     </div>
 </div>
