@@ -884,4 +884,26 @@ export class ApiService {
     return this.http.get(direccion);
   }
 
+  /**
+   * Calcula el tiempo transcurrido desde una fecha hasta la actualidad
+   * @param fecha hasta la cual calcular el tiempo
+   * @returns 
+   */
+  calcularTiempo(fecha: string =''){
+    let date = new Date(fecha);
+    let resultDate = date.getFullYear()+'/'+ (date.getMonth()+1)+'/'+date.getDate()+' '+ date.getHours()+':'+ date.getMinutes()+':'+ date.getSeconds();
+    let direccion = this.url + 'all';
+    let query =  `SELECT TIMESTAMPDIFF(DAY,'${resultDate}',NOW()) as tiempo`
+    return this.http.post<any>(direccion, {
+      query: query,
+      token: this.storage.retrieve('usuario').token,
+    });
+  }
+
+  changePassword(formData: FormData): Observable<any>{
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'changepass/'
+    return this.http.post<any>(direccion, formData);
+  }
+
 }

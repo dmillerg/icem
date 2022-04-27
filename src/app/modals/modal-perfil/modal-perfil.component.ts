@@ -23,10 +23,16 @@ export class ModalPerfilComponent implements OnInit {
     ultsession: ''
   };
   timeUser: string = '';
-  pedidos: Pedido[] = [];
+  pedidos: any[] = [];
+  show_form_password: boolean = false;
+  pass_old: string = '';
+  new_password: string = '';
+  confirm: string = '';
 
   edit: boolean = false;
   actiModal: NgbActiveModal;
+
+  fechalist: string = '';
 
   constructor(private activeModal: NgbActiveModal, private storage: SessionStorageService, private api: ApiService) {
     this.actiModal = activeModal;
@@ -42,7 +48,7 @@ export class ModalPerfilComponent implements OnInit {
       this.usuario.fecha = user.fecha;
       this.usuario.rol = user.rol;
     }
-    this.api.all(`SELECT TIMESTAMPDIFF(DAY,'${this.usuario.fecha}',NOW()) as tiempo`).subscribe((result) => {
+    this.api.calcularTiempo(this.usuario.fecha).subscribe((result) => {
       this.timeUser = result[0].tiempo + ' dias'
     })
     this.loadPedidos();
@@ -50,23 +56,64 @@ export class ModalPerfilComponent implements OnInit {
   }
 
   loadPedidos() {
+    this.pedidos = [];
     this.api.getPedidos(this.usuario.id).subscribe(result => {
-      this.pedidos = result;
+      result.forEach(e => {
+        this.convertirData(e);
+      })
     })
   }
 
   pedidosDetails() {
-    if (document.getElementById('pedidos').classList.contains('actived')) {
-      document.getElementById('pedidos').classList.remove('actived')
-    }
+    document.getElementById('btn-ampliar').classList.toggle('active');
     document.getElementById('pedidos').classList.toggle('active');
   }
 
-  pedidosCompleteDetails() {
-    document.getElementById('btn-ampliar').classList.toggle('active');
-    if (document.getElementById('pedidos').classList.contains('active')) {
-      document.getElementById('pedidos').classList.remove('active')
+  convertirData(item: any) {
+    let date = new Date(item.fecha)
+    let t = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
+    
+    this.api.calcularTiempo(t+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()).subscribe(r => {
+      this.api.getProductosById(item.producto_id).subscribe(result => {
+        if (this.fechalist != r[0].tiempo + ' dias') {
+          this.fechalist = t;
+          if (r[0].tiempo < 10) {
+            this.fechalist = r[0].tiempo + ' dias';
+          }
+          this.pedidos.push({ fechalist: this.fechalist });
+        }
+        item.producto = result;
+        this.pedidos.push(item)
+      })
+    });
+  }
+
+
+  eliminarPedido(item: any) {
+    this.api.deletePedido(item.id).subscribe((result) => {
+      this.loadPedidos();
+    })
+  }
+
+  logout() {
+    const user = this.storage.retrieve('usuario');
+    if (user != undefined) {
+      this.api.logout(user.id).subscribe((result) => {
+        this.storage.clear('usuario');
+        this.actiModal.close();
+      });
     }
-    document.getElementById('pedidos').classList.toggle('actived');
+  }
+
+  changePassword() {
+    let formData: FormData = new FormData();
+    formData.append('usuario', this.usuario.usuario);
+    formData.append('id_usuario', this.usuario.id.toString());
+    formData.append('pass_old', this.pass_old);
+    formData.append('new_password', this.new_password);
+    this.api.changePassword(formData).subscribe((result) => {
+      console.log(result);
+    }, error => { console.log(error); }
+    )
   }
 }

@@ -49,6 +49,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    height: 350px;
+    padding-top: 15px;
+    overflow: auto;
 }
 
 .container-perfil .side form .input-perfil {
@@ -182,12 +185,6 @@
 }
 
 .container-perfil .side .sidebar-pedidos.active {
-    width: 32%;
-    opacity: 1;
-    visibility: visible;
-}
-
-.container-perfil .side .sidebar-pedidos.actived {
     width: 64%;
     opacity: 1;
     visibility: visible;
@@ -218,37 +215,40 @@
     transition: all .5s ease;
 }
 
-.container-perfil .side .sidebar-pedidos .table-pedido {
-    width: 90%;
-    max-height: 400px;
+.container-perfil .side .sidebar-pedidos .list-pedidos {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.container-perfil .side .sidebar-pedidos .list-pedidos .pedidos {
+    width: 95%;
+    overflow: hidden;
+    position: relative;
     border-radius: 0.5em;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
     display: flex;
-    flex-direction: column;
-}
-
-.container-perfil .side .sidebar-pedidos .table-pedido .table-head {
-    display: flex;
-    width: 100%;
     flex-direction: row;
-    padding: 10px;
-    background-color: var(--firstcolor-hover);
+    padding: 5px;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: var(--firstcolor);
 }
 
-.container-perfil .side .sidebar-pedidos .table-pedido .table-body {
-    display: flex;
-    width: 100%;
-    padding: 10px;
-    flex-direction: row;
-}
-
-.container-perfil .side .sidebar-pedidos .table-pedido .table-head .td-pedido-head{
-    text-align: center;
-}
-
-.container-perfil .side .sidebar-pedidos .table-pedido .table-body .td-pedido{
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
+.container-perfil .side .sidebar-pedidos .list-pedidos .pedidos .td-pedido {
+    width: 10%;
     text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+    font-size: 12px;
+}
+
+.fecha{
+    background-color: white;
+    color: var(--firstcolor);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 0.5em;
 }

@@ -11,7 +11,7 @@
     </div>
     <div class="side" style="width: 65%;">
         <h3 class="h3" style="margin-bottom: 15px;padding-left: 15px;"><strong>Perfil de usuario</strong></h3>
-        <form action="">
+        <form action="" class="scroll-mine">
             <div class="input-perfil">
                 <label for="">Usuario:</label>
                 <input type="text" class="in" name="usuario" [(ngModel)]="usuario.usuario" [disabled]="!edit">
@@ -47,34 +47,60 @@
                     perfil</button>
                 <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
                     Ver pedidos</button>
-                <button class="btn btn-perfil"><i class="bi bi-unlock-fill"></i> Cambiar contraseña</button>
+                <button class="btn btn-perfil" (click)="show_form_password=!show_form_password"><i
+                        class="bi bi-unlock-fill"></i> Cambiar contraseña</button>
+                <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
+                    session</button>
+            </div>
+            <div style="margin-top: 10px;width: 100%;"></div>
+            <div class="input-perfil" *ngIf="show_form_password">
+                <label for="">Contraseña antigua:</label>
+                <input type="password" class="in" name="old_pass" [(ngModel)]="pass_old">
+                <i class="bi bi-key prev"></i>
+                <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
+            </div>
+            <div class="input-perfil" *ngIf="show_form_password">
+                <label for="">Contraseña nueva:</label>
+                <input type="password" class="in" name="new_password" [(ngModel)]="new_password">
+                <i class="bi bi-key prev"></i>
+                <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
+            </div>
+            <div class="input-perfil" *ngIf="show_form_password">
+                <label for="">Confirmar contraseña:</label>
+                <input type="password" class="in" name="confirm" [(ngModel)]="confirm">
+                <i class="bi bi-key prev"></i>
+                <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
+            </div>
+            <div class="btn-groups" *ngIf="show_form_password">
+                <button class="btn btn-perfil" (click)="changePassword()"><i class="bi bi-hdd-fill"></i>
+                    Cambiar</button>
             </div>
         </form>
 
         <div id="pedidos" class="sidebar-pedidos">
-            <button id="btn-ampliar" class="btn btn-ampliar" (click)="pedidosCompleteDetails()"><i
+            <button id="btn-ampliar" class="btn btn-ampliar" (click)="pedidosDetails()"><i
                     class="bi bi-caret-left-fill"></i></button>
-            <h4 class="h4">Pedidos</h4>
-            <div class="table-pedido">
-                <div class="table-head">
-                    <div class="td-pedido-head" style="width: 20%;">Producto</div>
-                    <div class="td-pedido-head" style="width: 20%;">Cantidad</div>
-                    <div class="td-pedido-head" style="width: 20%;">Fecha</div>
-                    <div class="td-pedido-head" style="width: 20%;">Estado</div>
-                    <div class="td-pedido-head" style="width: 20%;">Accion</div>
-                </div>
-                <div class="table-body" *ngFor="let item of pedidos">
-                    <div class="td-pedido" style="width: 20%;">{{item.producto_id}}</div>
-                    <div class="td-pedido" style="width: 20%;">{{item.cantidad}}</div>
+            <h4 class="h4" style="text-shadow: 0 5px 5px rgba(0, 0 ,0,0.4);color: white;">Pedidos</h4>
+            <div class="list-pedidos" *ngFor="let item of pedidos">
+                <div class="pedidos" *ngIf="!item.fechalist">
+                    <!-- <div class="td-pedido" style="width: 20%" *ngIf="item.fechalist">{{item.fechalist}}</div> -->
+                    <div class="td-pedido" style="width: 20%;">{{item.producto.titulo}}</div>
+                    <div class="td-pedido" style="width: 10%;">{{item.cantidad}}</div>
+                    <div class="td-pedido" style="width: 20%;">{{item.cantidad*item.producto.precio}}</div>
                     <div class="td-pedido" style="width: 20%;">{{item.fecha|date: 'short'}}</div>
                     <div class="td-pedido" style="width: 20%;">{{item.estado}}</div>
-                    <div class="td-pedido" style="width: 20%;"><button class="btn-firstcolor" style="color: white;"><i class="bi bi-trash"></i></button></div>
+                    <div class="td-pedido" style="width: 10%;"><button class="btn-firstcolor"
+                            (click)="eliminarPedido(item)" style="color: white;"><i class="bi bi-trash"></i></button>
+                    </div>
                 </div>
+                <label class="fecha" *ngIf="item.fechalist">
+                    {{item.fechalist}}
+                </label>
+
             </div>
         </div>
-    </div>
 
-    <div class="imagen-triangulo">
-        <img src="assets/logo-mitad-right.png">
+        <div class="imagen-triangulo">
+            <img src="assets/logo-mitad-right.png">
+        </div>
     </div>
-</div>
