@@ -86,7 +86,7 @@
 }
 
 .container-perfil .side form .input-perfil .in {
-    width: 150px;
+    width: auto;
     font-size: 12px;
     text-overflow: ellipsis;
     color: var(--firstcolor);
@@ -169,6 +169,7 @@
 
 .container-perfil .side .sidebar-pedidos {
     position: absolute;
+    white-space: nowrap;
     top: 0;
     bottom: 0;
     right: 0;
