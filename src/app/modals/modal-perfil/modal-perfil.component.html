@@ -1,6 +1,6 @@
 <div class="container-perfil">
     <button class="btn btn-closed" (click)="actiModal.close()"><i class="bi bi-x"></i></button>
-    <div class="side" style="width: 35%;text-align: center;">
+    <div class="side" style="width: 40%;text-align: center;">
         <div class="content-icon">
             <div class="icono-content">
                 <i class="bi bi-person-fill svg-shadow"></i>
@@ -8,8 +8,19 @@
         </div>
         <label class="user-data user">{{usuario.usuario}}</label>
         <label class="user-data data">usuario desde: {{timeUser}}</label>
+        <div class="btn-groups">
+            <button class="btn btn-perfil" (click)="edit=!edit"><i class="bi bi-pencil-fill"></i> Editar
+                perfil</button>
+            <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
+                Ver pedidos</button>
+            <button class="btn btn-perfil" (click)="show_form_password=!show_form_password"><i
+                    class="bi bi-unlock-fill"></i> Cambiar contraseña</button>
+            <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
+                session</button>
+        </div>
     </div>
-    <div class="side" style="width: 65%;">
+    <div style="width: 1px;background-color: #99989c;height: 80%;position: absolute;margin-right: 159px;"></div>
+    <div class="side" style="width: 60%;padding-left: 20px;">
         <h3 class="h3" style="margin-bottom: 15px;padding-left: 15px;"><strong>Perfil de usuario</strong></h3>
         <form action="" class="scroll-mine">
             <div class="input-perfil">
@@ -42,16 +53,7 @@
                 <i class="bi bi-person-rolodex prev"></i>
                 <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
             </div>
-            <div class="btn-groups">
-                <button class="btn btn-perfil" (click)="edit=!edit"><i class="bi bi-pencil-fill"></i> Editar
-                    perfil</button>
-                <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
-                    Ver pedidos</button>
-                <button class="btn btn-perfil" (click)="show_form_password=!show_form_password"><i
-                        class="bi bi-unlock-fill"></i> Cambiar contraseña</button>
-                <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
-                    session</button>
-            </div>
+
             <div style="margin-top: 10px;width: 100%;"></div>
             <div class="input-perfil" *ngIf="show_form_password">
                 <label for="">Contraseña antigua:</label>
@@ -77,17 +79,18 @@
             </div>
         </form>
 
-        <div id="pedidos" class="sidebar-pedidos">
+        <div id="pedidos" class="sidebar-pedidos"
+            style="background: linear-gradient(180deg, rgb(7, 7, 7) 0%, var(--firstcolor) 20%), url('assets/fondo8.png');background-blend-mode: multiply;background-repeat: no-repeat;">
             <button id="btn-ampliar" class="btn btn-ampliar" (click)="pedidosDetails()"><i
                     class="bi bi-caret-left-fill"></i></button>
             <h4 class="h4" style="text-shadow: 0 5px 5px rgba(0, 0 ,0,0.4);color: white;">Pedidos</h4>
             <div class="list-pedidos" *ngFor="let item of pedidos">
                 <div class="pedidos" *ngIf="!item.fechalist">
                     <!-- <div class="td-pedido" style="width: 20%" *ngIf="item.fechalist">{{item.fechalist}}</div> -->
-                    <div class="td-pedido" style="width: 20%;">{{item.producto.titulo}}</div>
-                    <div class="td-pedido" style="width: 10%;">{{item.cantidad}}</div>
-                    <div class="td-pedido" style="width: 20%;">{{item.cantidad*item.producto.precio}}</div>
-                    <div class="td-pedido" style="width: 20%;">{{item.fecha|date: 'short'}}</div>
+                    <div class="td-pedido" style="width: 30%;">{{item.producto.titulo}}</div>
+                    <div class="td-pedido" style="width: 5%;">{{item.cantidad}}</div>
+                    <div class="td-pedido" style="width: 10%;">{{item.cantidad*item.producto.precio}}</div>
+                    <div class="td-pedido" style="width: 25%;">{{item.fecha|date: 'short'}}</div>
                     <div class="td-pedido" style="width: 20%;">{{item.estado}}</div>
                     <div class="td-pedido" style="width: 10%;"><button class="btn-firstcolor"
                             (click)="eliminarPedido(item)" style="color: white;"><i class="bi bi-trash"></i></button>

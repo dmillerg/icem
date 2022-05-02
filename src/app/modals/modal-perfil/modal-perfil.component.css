@@ -8,7 +8,6 @@
     padding: 15px;
     background-color: white;
     border-radius: 0.5em;
-    border: 1px solid var(--firstcolor);
     flex-wrap: wrap;
 }
 
@@ -47,8 +46,8 @@
 .container-perfil .side form {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
     height: 350px;
     padding-top: 15px;
     overflow: auto;
@@ -56,6 +55,7 @@
 
 .container-perfil .side form .input-perfil {
     display: flex;
+    width: 170px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -86,7 +86,7 @@
 }
 
 .container-perfil .side form .input-perfil .in {
-    width: auto;
+    width: 220px;
     font-size: 12px;
     text-overflow: ellipsis;
     color: var(--firstcolor);
@@ -126,20 +126,20 @@
     bottom: 2px;
     left: 2px;
     border-bottom-left-radius: 1em;
-    width: 120px;
+    width: 100px;
     height: auto;
 }
 
-.container-perfil .side form .btn-groups {
+.btn-groups {
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    overflow: auto;
-}
+}   
 
-.container-perfil .side form .btn-groups .btn-perfil {
+.btn-groups .btn-perfil {
     border: none;
     border-radius: 0.5em;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
@@ -181,12 +181,11 @@
     align-items: center;
     padding: 10px;
     visibility: hidden;
-    background-color: var(--firstcolor);
     transition: all .5s ease;
 }
 
 .container-perfil .side .sidebar-pedidos.active {
-    width: 64%;
+    width: 60%;
     opacity: 1;
     visibility: visible;
 }
