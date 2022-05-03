@@ -42,16 +42,6 @@
                 <i class="bi bi-person-rolodex prev"></i>
                 <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
             </div>
-            <div class="btn-groups">
-                <button class="btn btn-perfil" (click)="edit=!edit"><i class="bi bi-pencil-fill"></i> Editar
-                    perfil</button>
-                <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
-                    Ver pedidos</button>
-                <button class="btn btn-perfil" (click)="show_form_password=!show_form_password"><i
-                        class="bi bi-unlock-fill"></i> Cambiar contraseña</button>
-                <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
-                    session</button>
-            </div>
             <div style="margin-top: 10px;width: 100%;"></div>
             <div class="input-perfil" *ngIf="show_form_password">
                 <label for="">Contraseña antigua:</label>
@@ -75,6 +65,17 @@
                 <button class="btn btn-perfil" (click)="changePassword()"><i class="bi bi-hdd-fill"></i>
                     Cambiar</button>
             </div>
+            <div class="btn-groups">
+                <button class="btn btn-perfil" (click)="edit=!edit"><i class="bi bi-pencil-fill"></i> Editar
+                    perfil</button>
+                <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
+                    Ver pedidos</button>
+                <button class="btn btn-perfil" (click)="show_form_password=!show_form_password"><i
+                        class="bi bi-unlock-fill"></i> Cambiar contraseña</button>
+                <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
+                    session</button>
+            </div>
+
         </form>
 
         <div id="pedidos" class="sidebar-pedidos">
