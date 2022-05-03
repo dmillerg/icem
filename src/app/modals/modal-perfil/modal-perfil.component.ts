@@ -38,7 +38,7 @@ export class ModalPerfilComponent implements OnInit {
 
   fechalist: string = '';
 
-  constructor(private activeModal: NgbActiveModal, private modalService: NgbModal, private storage: SessionStorageService, private api: ApiService, private message: MessageServiceService) {
+  constructor(private activeModal: NgbActiveModal, private modalService: NgbModal,public storage: SessionStorageService, private api: ApiService, private message: MessageServiceService) {
     this.actiModal = activeModal;
   }
 

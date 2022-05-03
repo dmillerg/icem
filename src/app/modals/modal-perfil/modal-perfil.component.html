@@ -20,7 +20,7 @@
             <button class="btn btn-perfil" [hidden]="show_form_password || edit" (click)="mostrarFormPass()"><i
                     class="bi bi-unlock-fill"></i> Cambiar
                 contraseña</button>
-                <button class="btn btn-perfil" (click)="administrar()"><i
+                <button class="btn btn-perfil" (click)="administrar()" *ngIf="storage.retrieve('usuario') && storage.retrieve('usuario').rol=='admin'"><i
                     class="bi bi-kanban-fill"></i> Administrar</button>
             <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
                 session</button>
