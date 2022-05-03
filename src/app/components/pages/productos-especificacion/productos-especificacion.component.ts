@@ -111,6 +111,7 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
     this.api.getProductosById(this.producto.id).subscribe((result) => {
       if(result != null){
       this.producto.disponibilidad = result.disponibilidad;
+      this.producto.precio = Number.isInteger(result.precio)?Number(result.precio+'.00'):result.precio;
       }
     });
   }

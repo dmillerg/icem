@@ -12,12 +12,16 @@
         <label class="user-data user">{{usuario.usuario}}</label>
         <label class="user-data data">usuario desde: {{timeUser}}</label>
         <div class="btn-groups" style="z-index: 999;">
-            <button class="btn btn-perfil" (click)="editPerfil()"><i class="bi bi-pencil-fill"></i> Editar
+            <button class="btn btn-perfil" [hidden]="show_form_password || edit" (click)="edit=!edit"><i
+                    class="bi bi-pencil-fill"></i> Editar
                 perfil</button>
             <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
                 Ver pedidos</button>
-            <button class="btn btn-perfil" (click)="mostrarFormPass()"><i class="bi bi-unlock-fill"></i> Cambiar
+            <button class="btn btn-perfil" [hidden]="show_form_password || edit" (click)="mostrarFormPass()"><i
+                    class="bi bi-unlock-fill"></i> Cambiar
                 contraseña</button>
+                <button class="btn btn-perfil" (click)="administrar()"><i
+                    class="bi bi-kanban-fill"></i> Administrar</button>
             <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
                 session</button>
         </div>
@@ -55,6 +59,13 @@
                 <input type="text" class="in" name="rol" [(ngModel)]="usuario.rol" disabled>
                 <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
             </div>
+            <div class="btn-groups" [hidden]="!edit">
+                <button class="btn btn-perfil" (click)="editPerfil()"><i class="bi bi-hdd-fill"></i>
+                    Editar</button>
+                <button class="btn btn-perfil" (click)="resetearFalse()"><i class="bi bi-x"></i>
+                    Cancelar</button>
+
+            </div>
             <div style="margin-top: 10px;width: 100%;"></div>
             <div class="input-perfil" [hidden]="!show_form_password">
                 <i class="bi bi-key prev"></i>
@@ -83,34 +94,36 @@
                 <button class="btn btn-perfil" (click)="changePassword()"
                     [disabled]="new_password!=confirm || new_password.length<8"><i class="bi bi-hdd-fill"></i>
                     Cambiar</button>
-                <button class="btn btn-perfil"><i class="bi bi-x"></i>
+                <button class="btn btn-perfil" (click)="resetearFalse()"><i class="bi bi-x"></i>
                     Cancelar</button>
 
             </div>
 
         </form>
 
-        <div id="pedidos" class="sidebar-pedidos"
+        <div id="pedidos" class="sidebar-pedidos" [ngClass]="{'active': sidebarpedidos}"
             style="background: linear-gradient(180deg, rgb(7, 7, 7) 0%, var(--firstcolor) 20%), url('assets/fondo8.png');background-blend-mode: multiply;background-repeat: no-repeat;">
-            <button id="btn-ampliar" class="btn btn-ampliar" (click)="pedidosDetails()"><i
-                    class="bi bi-caret-left-fill"></i></button>
+            <button id="btn-ampliar" class="btn btn-ampliar" [ngClass]="{'active': sidebarpedidos}"
+                (click)="pedidosDetails()"><i class="bi bi-caret-left-fill"></i></button>
             <h4 class="h4" style="text-shadow: 0 5px 5px rgba(0, 0 ,0,0.4);color: white;">Pedidos</h4>
-            <div class="list-pedidos" *ngFor="let item of pedidos">
-                <div class="pedidos" *ngIf="!item.fechalist">
-                    <!-- <div class="td-pedido" style="width: 20%" *ngIf="item.fechalist">{{item.fechalist}}</div> -->
-                    <div class="td-pedido" style="width: 30%;">{{item.producto.titulo}}</div>
-                    <div class="td-pedido" style="width: 5%;">{{item.cantidad}}</div>
-                    <div class="td-pedido" style="width: 10%;">{{item.cantidad*item.producto.precio}}</div>
-                    <div class="td-pedido" style="width: 25%;">{{item.fecha|date: 'short'}}</div>
-                    <div class="td-pedido" style="width: 20%;">{{item.estado}}</div>
-                    <div class="td-pedido" style="width: 10%;"><button class="btn-firstcolor"
-                            (click)="eliminarPedido(item)" style="color: white;"><i class="bi bi-trash"></i></button>
+            <div class="list">
+                <div class="list-pedidos" *ngFor="let item of pedidos">
+                    <div class="pedidos" *ngIf="!item.fechalist">
+                        <!-- <div class="td-pedido" style="width: 20%" *ngIf="item.fechalist">{{item.fechalist}}</div> -->
+                        <div class="td-pedido" style="width: 55%;">{{item.producto.titulo}}</div>
+                        <div class="td-pedido" style="width: 5%;">{{item.cantidad}}</div>
+                        <div class="td-pedido" style="width: 10%;">{{item.cantidad*item.producto.precio}}</div>
+                        <div class="td-pedido" style="width: 20%;">{{item.estado}}</div>
+                        <div class="td-pedido" style="width: 10%;"><button class="btn-firstcolor"
+                                (click)="eliminarPedido(item)" style="color: white;"><i
+                                    class="bi bi-trash"></i></button>
+                        </div>
                     </div>
-                </div>
-                <label class="fecha" *ngIf="item.fechalist">
-                    {{item.fechalist}}
-                </label>
+                    <label class="fecha" *ngIf="item.fechalist">
+                        {{item.fechalist}}
+                    </label>
 
+                </div>
             </div>
         </div>
 

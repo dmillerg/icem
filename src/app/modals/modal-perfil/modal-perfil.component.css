@@ -175,6 +175,8 @@
     align-items: center;
     padding: 10px;
     visibility: hidden;
+    border-top-right-radius: .5em;
+    border-bottom-right-radius: .5em;
     transition: all .5s ease;
 }
 
@@ -209,12 +211,22 @@
     transition: all .5s ease;
 }
 
-.container-perfil .side .sidebar-pedidos .list-pedidos {
-    max-height: 350px;
-    overflow-y: auto;
+.container-perfil .side .sidebar-pedidos .list .list-pedidos {
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.container-perfil .side .sidebar-pedidos .list-pedidos .pedidos {
+.container-perfil .side .sidebar-pedidos .list{
+    width: 100%;
+    height: 350px;
+    overflow: auto;
+}
+
+.container-perfil .side .sidebar-pedidos .list .list-pedidos .pedidos {
     width: 95%;
     overflow: hidden;
     position: relative;

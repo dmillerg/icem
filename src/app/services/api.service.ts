@@ -892,6 +892,17 @@ export class ApiService {
     return this.http.post<Configuracion>(direccion, formData);
   }
 
+  /**
+   * Guarda los cambios en las configuraciones
+   * @param formData configuraciones nuevas
+   * @returns 
+   */
+  saveConfigs(formData: FormData){
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'configuraciones/'
+    return this.http.post<any>(direccion, formData);
+  }
+
   sendEmail() {
     let direccion = this.url + 'send';
     return this.http.get(direccion);

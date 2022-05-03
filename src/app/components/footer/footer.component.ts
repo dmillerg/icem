@@ -114,6 +114,8 @@ export class FooterComponent implements OnInit {
 
   fechaActualizacion() {
     this.api.ultimaActualizacion().subscribe(result => {
+      console.log('asdasd',result[0]);
+      
       this.fechaAct = result[0].ultsession;
     });
   }

@@ -20,6 +20,8 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   loadConfiguraciones() {
+    this.configuraciones=[];
+    this.configuraciones2=[];
     this.api.getConfiguraciones().subscribe(result => {
       console.log(result);
       this.configuraciones = result;
@@ -30,7 +32,12 @@ export class ConfiguracionComponent implements OnInit {
   }
 
   saveConfig(){
-    this.storage.store('configuraciones', this.configuraciones);
+    console.log(this.configuraciones);
+    let formData = new FormData();
+    formData.append('configs', this.configuraciones.toString())
+    this.api.saveConfigs(formData).subscribe((result)=>{
+      console.log(result);
+    })
   }
 
 }

@@ -8,9 +8,10 @@
             <div class="title-text text-start">
                 <h1 class="number text-section"><strong>{{id}}</strong></h1>
                 <h1 class="text-firstcolor" style="position: absolute;bottom: 5px;"><strong>{{producto.titulo}}</strong>
+                    <p style="font-size: 15px;">{{producto.fecha | date: 'medium'}}</p>
                 </h1>
             </div>
-            <p>{{producto.fecha | date: 'medium'}}</p>
+           
             <p><strong>Categoría:</strong> {{categoria}}</p>
             <!-- <div class="centrado-horizontal"> -->
             <p><strong>Precio:</strong>${{producto.precio}}</p>

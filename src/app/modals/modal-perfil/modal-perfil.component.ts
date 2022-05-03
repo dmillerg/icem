@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Pedido } from 'src/app/models/pedido';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
 import { MessageServiceService } from 'src/app/services/message-service.service';
+import { ModalAdminComponent } from '../modal-admin/modal-admin.component';
 
 @Component({
   selector: 'app-modal-perfil',
@@ -33,10 +34,11 @@ export class ModalPerfilComponent implements OnInit {
 
   edit: boolean = false;
   actiModal: NgbActiveModal;
+  sidebarpedidos: boolean = false;
 
   fechalist: string = '';
 
-  constructor(private activeModal: NgbActiveModal, private storage: SessionStorageService, private api: ApiService, private message: MessageServiceService) {
+  constructor(private activeModal: NgbActiveModal, private modalService: NgbModal, private storage: SessionStorageService, private api: ApiService, private message: MessageServiceService) {
     this.actiModal = activeModal;
   }
 
@@ -61,33 +63,39 @@ export class ModalPerfilComponent implements OnInit {
   loadPedidos() {
     this.pedidos = [];
     this.api.getPedidos(this.usuario.id).subscribe(result => {
-      result.forEach(e => {
-        this.convertirData(e);
-      })
+      console.log(result);
+      this.convertirData(result);
     })
   }
 
   pedidosDetails() {
-    document.getElementById('btn-ampliar').classList.toggle('active');
-    document.getElementById('pedidos').classList.toggle('active');
+    this.sidebarpedidos = !this.sidebarpedidos;
   }
 
-  convertirData(item: any) {
-    let date = new Date(item.fecha)
-    let t = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
+  convertirData(result: any[]) {
+    result.forEach(item => {
+      let date = new Date(item.fecha)
+      let t = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
 
-    this.api.calcularTiempo(t + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()).subscribe(r => {
-      this.api.getProductosById(item.producto_id).subscribe(result => {
-        if (this.fechalist != r[0].tiempo + ' dias') {
-          this.fechalist = t;
-          if (r[0].tiempo < 10) {
-            this.fechalist = r[0].tiempo + ' dias';
+      this.api.calcularTiempo(t + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()).subscribe(r => {
+        this.api.getProductosById(item.producto_id).subscribe(result => {
+          let transcurrido = r[0].tiempo == 0 ? 'hoy' : 'ayer';
+          if (this.fechalist != r[0].tiempo + ' dias' && this.fechalist != transcurrido) {
+            this.fechalist = t;
+            if (r[0].tiempo < 10) {
+              if (r[0].tiempo == 0) {
+                this.fechalist = 'hoy';
+              } else if (r[0].tiempo == 1) {
+                this.fechalist = 'ayer';
+              } else
+                this.fechalist = r[0].tiempo + ' dias';
+            }
+            this.pedidos.push({ fechalist: this.fechalist });
           }
-          this.pedidos.push({ fechalist: this.fechalist });
-        }
-        item.producto = result;
-        this.pedidos.push(item)
-      })
+          item.producto = result;
+          this.pedidos.push(item)
+        })
+      });
     });
   }
 
@@ -126,28 +134,37 @@ export class ModalPerfilComponent implements OnInit {
   }
 
   mostrarFormPass() {
+    this.sidebarpedidos = false;
     this.show_form_password = !this.show_form_password;
   }
 
+  resetearFalse() {
+    this.sidebarpedidos = false;
+    this.show_form_password = false;
+    this.edit = false;
+  }
+
   editPerfil() {
-    if (!this.edit) {
+    this.resetearFalse();
+    let formData = new FormData();
+    formData.append('id', this.usuario.id.toString());
+    formData.append('usuario', this.usuario.usuario.toString());
+    formData.append('nombre', this.usuario.nombre.toString());
+    formData.append('fecha', this.usuario.fecha.toString());
+    formData.append('correo', this.usuario.correo.toString());
+    formData.append('rol', this.usuario.rol.toString());
+    this.api.updateUsuarioWithOutPass(formData, this.usuario.id).subscribe((result) => {
+      this.message.success('', 'Datos del perfil actualizados satisfactoriamente');
       this.edit = !this.edit;
-    } else {
-      let formData = new FormData();
-      formData.append('id', this.usuario.id.toString());
-      formData.append('usuario', this.usuario.usuario.toString());
-      formData.append('nombre', this.usuario.nombre.toString());
-      formData.append('fecha', this.usuario.fecha.toString());
-      formData.append('correo', this.usuario.correo.toString());
-      formData.append('rol', this.usuario.rol.toString());
-      this.api.updateUsuarioWithOutPass(formData, this.usuario.id).subscribe((result) => {
-        this.message.success('', 'Datos del perfil actualizados satisfactoriamente');
-        this.edit = !this.edit;
-        this.storage.store('usuario', this.usuario);
-      }, error => {
-        this.message.error('', 'En estos momentos no se puede editar el perfil por favor intentelo mas tarde');
-        this.edit = !this.edit;
-      });
-    }
+      this.storage.store('usuario', this.usuario);
+    }, error => {
+      this.message.error('', 'En estos momentos no se puede editar el perfil por favor intentelo mas tarde');
+      this.edit = !this.edit;
+    });
+  }
+
+  administrar() {
+    this.actiModal.close();
+    let modal = this.modalService.open(ModalAdminComponent, {size: 'lg'});
   }
 }
