@@ -55,6 +55,7 @@ export class ModalUsuarioComponent implements OnInit {
       this.usuario_pasado.usuario = this.usuario.usuario;
       this.usuario_pasado.password = this.usuario.password;
       this.usuario_pasado.nombre = this.usuario.nombre;
+      this.usuario_pasado.correo = this.usuario.correo;
       this.usuario_pasado.fecha = this.usuario.fecha;
     }
   }
@@ -71,7 +72,7 @@ export class ModalUsuarioComponent implements OnInit {
 
     console.log(this.modalAction)
     if(this.modalAction =="Editar"){
-      this.api.updateUsuario(formData, this.usuario.id).subscribe((result)=>{
+      this.api.updateUsuarioWithOutPass(formData, this.usuario.id).subscribe((result)=>{
         this.actiModal.close('Usuarios');
         console.log(result);
       },(error)=>{

@@ -12,9 +12,20 @@
     justify-content: center;
 }
 
+.contenedor-cards{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition: all 0.3s ease-in-out;
+}
+
 .card-mine {
     border: none;
-    min-width: 150px;
+    width: 17%;
+    height: 180px;
+    min-width: 200px;
     background-color: rgba(0, 0, 0, 0.15);
     transform: scale(0.9);
     transition: all .3s ease;

@@ -39,6 +39,7 @@ export class TableUsuarioComponent implements OnInit {
     modal.componentInstance.modalSubHeader = 'admin de todo el sitio';
     modal.componentInstance.modalAction = 'Editar';
     modal.componentInstance.usuario = usuario;
+    
     modal.result.then((result) => {
       if (result) {
         this.loadUsuario();

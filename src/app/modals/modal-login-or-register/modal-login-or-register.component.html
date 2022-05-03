@@ -1,9 +1,10 @@
-<div class="content-total" >
+<div class="content-total">
     <button class="btn btn-closed" (click)="actiModal.close()"><i class="bi bi-x-lg svg-shadow"></i></button>
     <div class="content-login">
         <img src="assets/icon-icem-blue.png" alt="logo" class="image-icon svg-shadow">
         <form action="" class="form-login">
-            <p [@scaleAnimation]="'enter'" *ngIf="errorLogin" style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Usuario o
+            <p [@scaleAnimation]="'enter'" *ngIf="errorLogin" style="font-size: 12px;text-align: center;width: 90%;"
+                class="text-danger">Usuario o
                 contraseña incorrectos, pruebe de nuevo</p>
             <div class="input-content">
                 <label for="usuario-login">usuario</label>
@@ -31,7 +32,8 @@
                     [(ngModel)]="register.usuario">
             </div>
             <label [@scaleAnimation]="'enter'" *ngIf="register.usuario.length>0 && errorRegister"
-                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">El usuario ya existe, pruebe con otro</label>
+                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">El usuario ya existe, pruebe
+                con otro</label>
             <div class="input-content">
                 <label for="name-register">nombre y apellidos</label>
                 <i class="bi bi-chat-square-fill prefix"></i>
@@ -45,13 +47,17 @@
                     [(ngModel)]="register.correo">
             </div>
             <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && !validateEmail()"
-                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Este correo no es valido</label>
+                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Este correo no es
+                valido</label>
             <div class="input-content">
                 <label for="pass-register">contraseña</label>
                 <i class="bi bi-key-fill prefix"></i>
                 <input type="password" class="in" name="pass-login" id="pass-register" placeholder="contraseña"
                     [(ngModel)]="register.password">
             </div>
+            <label *ngIf="register.password.length<8 && register.password.length>0" class="text-danger"
+                style="font-size: 12px; width: 150px;">la
+                contraseña debe tener al menos 8 caracteres</label>
             <div class="input-content">
                 <label for="pass-confirm-register">confirmar contraseña</label>
                 <i class="bi bi-key-fill prefix"></i>
@@ -61,7 +67,7 @@
                     coinciden las contraseñas</p>
             </div>
             <button class="btn btn-register"
-                [disabled]="!validateEmail() || !validateVacio() || register.confirm_pass!=register.password"
+                [disabled]="!validateEmail() || !validateVacio() || register.confirm_pass!=register.password || register.password.length<8"
                 (click)="registEr()">Aceptar</button>
         </form>
         <div *ngIf="success" class="message-successful">

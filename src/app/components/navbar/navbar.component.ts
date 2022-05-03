@@ -186,7 +186,7 @@ export class NavbarComponent implements OnInit {
   }
 
   loginOrRegister(action: string) {
-    let modal = this.modalService.open(ModalLoginOrRegisterComponent, { backdrop: 'static' });
+    let modal = this.modalService.open(ModalLoginOrRegisterComponent, { backdrop: 'static'});
     modal.componentInstance.modalAction = action;
     modal.result.then((result) => {
       if (result) {
