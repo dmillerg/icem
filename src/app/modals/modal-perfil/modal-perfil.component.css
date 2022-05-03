@@ -8,7 +8,6 @@
     padding: 15px;
     background-color: white;
     border-radius: 0.5em;
-    border: 1px solid var(--firstcolor);
     flex-wrap: wrap;
 }
 
@@ -47,8 +46,7 @@
 .container-perfil .side form {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     height: 350px;
     padding-top: 15px;
     overflow: auto;
@@ -57,26 +55,23 @@
 .container-perfil .side form .input-perfil {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
     position: relative;
-    padding: 15px;
+    padding: 10px;
+    max-width: 200px;
+    font-size: 12px;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .container-perfil .side form .input-perfil label {
-    position: absolute;
     color: var(--firstcolor);
-    top: -7px;
-    left: 32px;
-    font-weight: 800;
-    font-size: 12px;
+    font-weight: 500;
+    margin-left: 10px;
 }
 
 .container-perfil .side form .input-perfil .prev {
-    position: absolute;
+    font-size: 20px;
     color: var(--firstcolor);
-    left: 15px;
-    top: -12px;
 }
 
 .container-perfil .side form .input-perfil .next {
@@ -86,24 +81,23 @@
 }
 
 .container-perfil .side form .input-perfil .in {
-    width: auto;
-    font-size: 12px;
+    width: 220px;
     text-overflow: ellipsis;
     color: var(--firstcolor);
     border: none;
     border-bottom: 1px solid var(--firstcolor);
     outline: none;
-    margin-left: 23px;
-    padding-left: 0px;
+    margin-left: 10px;
+    background: transparent;
     transition: all .3s ease;
 }
 
 .container-perfil .side form .input-perfil .in:read-only {
     color: var(--firstcolor);
+    margin-left: 10px;
     border: none;
     outline: none;
-    margin-left: 23px;
-    padding-left: 0px;
+    background: transparent;
     transition: all .3s ease;
 }
 
@@ -126,20 +120,20 @@
     bottom: 2px;
     left: 2px;
     border-bottom-left-radius: 1em;
-    width: 120px;
+    width: 100px;
     height: auto;
 }
 
-.container-perfil .side form .btn-groups {
+.btn-groups {
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    overflow: auto;
-}
+}   
 
-.container-perfil .side form .btn-groups .btn-perfil {
+.btn-groups .btn-perfil {
     border: none;
     border-radius: 0.5em;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
@@ -181,12 +175,11 @@
     align-items: center;
     padding: 10px;
     visibility: hidden;
-    background-color: var(--firstcolor);
     transition: all .5s ease;
 }
 
 .container-perfil .side .sidebar-pedidos.active {
-    width: 64%;
+    width: 60%;
     opacity: 1;
     visibility: visible;
 }

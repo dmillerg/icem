@@ -333,6 +333,19 @@ export class ApiService {
     return this.http.post(direccion, formData);
   }
 
+   /**
+   * Actualiza el usuarios
+   * @param formData datos actualizados del usuarios
+   * @param id id del usuarios a actualizar
+   * @returns
+   */
+    updateUsuarioWithOutPass(formData, id) {
+      const headers = { 'content-type': 'application/json' };
+      formData.append('token', this.storage.retrieve('usuario').token);
+      let direccion = this.url + 'usuario/' + id;
+      return this.http.post(direccion, formData);
+    }
+
   /**
    * Guarda una nuevo usuarios
    * @param formData datos del usuarios
@@ -900,6 +913,11 @@ export class ApiService {
     });
   }
 
+  /**
+   * Permite a un usuario cambiar la contrasenna 
+   * @param formData datos para la nueva contrasenna
+   * @returns 
+   */
   changePassword(formData: FormData): Observable<any>{
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'changepass/'

@@ -78,7 +78,7 @@ body {
 }
 
 .btn-firstcolor {
-  max-height: 60px; 
+  max-height: 60px;
   white-space: nowrap;
   background-color: var(--firstcolor);
   color: white;
@@ -86,8 +86,8 @@ body {
 }
 
 .img-loading {
-  background:transparent url(assets/cargando-icem.gif) center no-repeat;
-  }
+  background: transparent url(assets/cargando-icem.gif) center no-repeat;
+}
 
 .btn-firstcolor:hover {
   background-color: var(--firstcolor-hover);
@@ -145,7 +145,10 @@ body {
   transition: ease-in-out 0.3s;
 }
 
-div.card-firstcolor h1, h2, h3, h4 {
+div.card-firstcolor h1,
+h2,
+h3,
+h4 {
   color: var(--firstcolor);
 }
 
@@ -321,13 +324,61 @@ div.card-firstcolor h1, h2, h3, h4 {
 }
 
 .svg-shadow {
-  filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
 }
 
-.box-shadow{
+.box-shadow {
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, .7);
 }
 
-img{
+img {
   image-rendering: -webkit-optimize-contrast;
+}
+
+.message {
+  padding: 15px;
+  border-radius: 5em;
+  max-width: 250px;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  left: calc(50% - 50px);
+  z-index: 9999;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: none;
+  transition: all .3s ease;
+}
+
+.left-message{
+  left: 20px;
+}
+
+.successmes{
+  background-color: var(--firstcolor);
+  color: white;
+  transition: all .3s ease;
+}
+
+.successmes:hover{
+  transition: all .3s ease;
+  background-color: var(--firstcolor-hover);
+}
+
+.errormes{
+  background-color: var(--alertcolor);
+  color: white;
+  transition: all .3s ease;
+}
+
+.activoMessage {
+  opacity: 1;
+  visibility: visible;
+  transition: all .3s ease;
 }

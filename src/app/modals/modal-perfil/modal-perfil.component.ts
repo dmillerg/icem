@@ -4,6 +4,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 import { Pedido } from 'src/app/models/pedido';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
+import { MessageServiceService } from 'src/app/services/message-service.service';
 
 @Component({
   selector: 'app-modal-perfil',
@@ -12,7 +13,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ModalPerfilComponent implements OnInit {
 
-  usuario: Usuario = {
+  usuario: any = {
     id: -1,
     usuario: '',
     nombre: '',
@@ -20,7 +21,8 @@ export class ModalPerfilComponent implements OnInit {
     correo: '',
     fecha: '',
     rol: '',
-    ultsession: ''
+    ultsession: '',
+    token: ''
   };
   timeUser: string = '';
   pedidos: any[] = [];
@@ -34,7 +36,7 @@ export class ModalPerfilComponent implements OnInit {
 
   fechalist: string = '';
 
-  constructor(private activeModal: NgbActiveModal, private storage: SessionStorageService, private api: ApiService) {
+  constructor(private activeModal: NgbActiveModal, private storage: SessionStorageService, private api: ApiService, private message: MessageServiceService) {
     this.actiModal = activeModal;
   }
 
@@ -47,6 +49,7 @@ export class ModalPerfilComponent implements OnInit {
       this.usuario.nombre = user.nombre;
       this.usuario.fecha = user.fecha;
       this.usuario.rol = user.rol;
+      this.usuario.token = user.token;
     }
     this.api.calcularTiempo(this.usuario.fecha).subscribe((result) => {
       this.timeUser = result[0].tiempo + ' dias'
@@ -72,8 +75,8 @@ export class ModalPerfilComponent implements OnInit {
   convertirData(item: any) {
     let date = new Date(item.fecha)
     let t = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
-    
-    this.api.calcularTiempo(t+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()).subscribe(r => {
+
+    this.api.calcularTiempo(t + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()).subscribe(r => {
       this.api.getProductosById(item.producto_id).subscribe(result => {
         if (this.fechalist != r[0].tiempo + ' dias') {
           this.fechalist = t;
@@ -113,7 +116,38 @@ export class ModalPerfilComponent implements OnInit {
     formData.append('new_password', this.new_password);
     this.api.changePassword(formData).subscribe((result) => {
       console.log(result);
-    }, error => { console.log(error); }
+      this.mostrarFormPass();
+      this.message.success('', result.message)
+    }, (error) => {
+      this.message.error('', error.error.message)
+      console.log(error);
+    }
     )
+  }
+
+  mostrarFormPass() {
+    this.show_form_password = !this.show_form_password;
+  }
+
+  editPerfil() {
+    if (!this.edit) {
+      this.edit = !this.edit;
+    } else {
+      let formData = new FormData();
+      formData.append('id', this.usuario.id.toString());
+      formData.append('usuario', this.usuario.usuario.toString());
+      formData.append('nombre', this.usuario.nombre.toString());
+      formData.append('fecha', this.usuario.fecha.toString());
+      formData.append('correo', this.usuario.correo.toString());
+      formData.append('rol', this.usuario.rol.toString());
+      this.api.updateUsuarioWithOutPass(formData, this.usuario.id).subscribe((result) => {
+        this.message.success('', 'Datos del perfil actualizados satisfactoriamente');
+        this.edit = !this.edit;
+        this.storage.store('usuario', this.usuario);
+      }, error => {
+        this.message.error('', 'En estos momentos no se puede editar el perfil por favor intentelo mas tarde');
+        this.edit = !this.edit;
+      });
+    }
   }
 }
