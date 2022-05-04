@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { CarouselComponent } from './components/carousel/carousel.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { HomeComponent } from './components/pages/home/home.component';
@@ -63,6 +62,7 @@ import { ModalPerfilComponent } from './modals/modal-perfil/modal-perfil.compone
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
 import { ModalConfiguracionComponent } from './modals/modal-configuracion/modal-configuracion.component';
 import { TableConfiguracion } from './components/tables/table-configuracion/table-configuracion.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -70,7 +70,6 @@ import { TableConfiguracion } from './components/tables/table-configuracion/tabl
   declarations: [
     AppComponent,
     NavbarComponent,
-    CarouselComponent,
     FooterComponent,
     HomeComponent,
     ProductoComponent,
@@ -117,6 +116,7 @@ import { TableConfiguracion } from './components/tables/table-configuracion/tabl
     ModalPerfilComponent,
     ConfiguracionComponent,
     ModalConfiguracionComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

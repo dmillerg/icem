@@ -1,0 +1,52 @@
+.contenedor-bola{
+    position: relative;
+    border-radius: 100%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
+
+.contenedor-bola .bolita{
+    position: absolute;
+    border-radius: 100%;
+    background-color: var(--firstcolor-section);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+    width: 45%;
+    height: 45%;
+    z-index: 999;
+}
+
+.contenedor-bola .bolita2{
+    position: absolute;
+    border-radius: 100%;
+    background-color: var(--firstcolor-hover);
+    width: 95%;
+    height: 95%;
+}
+
+.contenedor-bola .bolita3{
+    position: absolute;
+    border-radius: 100%;
+    background-color: var(--firstcolor);
+    width: 95%;
+    height: 95%;
+}
+
+.contenedor-bola div.top{
+    top: 0;
+}
+
+.contenedor-bola div.left{
+    left: 0;
+}
+.contenedor-bola div.right{
+    right: 0;
+}
+.contenedor-bola div.bottom{
+    bottom: 0;
+}
