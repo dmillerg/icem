@@ -14,7 +14,7 @@
 .container-perfil .side {
     display: flex;
     flex-direction: column;
-    height: 400px;
+    height: 450px;
     padding: 10px;
 }
 
@@ -127,6 +127,7 @@
 .btn-groups {
     margin-top: 10px;
     display: flex;
+    overflow: auto;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -145,7 +146,7 @@
     transition: all .3s ease;
 }
 
-.container-perfil .side form .btn-groups .btn-perfil:hover {
+.container-perfil .side .btn-groups .btn-perfil:hover {
     background-color: var(--firstcolor-hover);
     border-radius: 1.5em;
     transition: all .3s ease;

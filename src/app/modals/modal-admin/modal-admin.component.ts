@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Categoria } from 'src/app/models/categoria';
+import { Configuracion } from 'src/app/models/configuracion';
 import { Desarrollo } from 'src/app/models/desarrollo';
 import { Noticia } from 'src/app/models/noticias';
 import { Pedido } from 'src/app/models/pedido';
@@ -56,6 +57,7 @@ export class ModalAdminComponent implements OnInit {
   scraparray: Scrap[] = [];
   postsarray: Posts[] = [];
   pedidosarray: Pedido[] = [];
+  configuracionesarray: Configuracion[]=[];
 
   constructor(
     private activeModal: NgbActiveModal,

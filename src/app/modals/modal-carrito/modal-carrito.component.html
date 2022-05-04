@@ -4,8 +4,8 @@
         <i class="bi bi-cart3" style="font-size: 30px;color: var(--firstcolor);margin-right: 10px;"></i>
         <h3>Carrito de compras</h3>
     </div>
-    <div class="body">
-        <label *ngIf="carrito.length==0" class="text-firstcolor message">No hay productos en el carrito</label>
+    <div class="body-cart scroll-mine">
+        <label *ngIf="carrito.length==0" class="message-empty">No hay productos en el carrito</label>
         <li *ngFor="let item of carrito" class="items">
             <img [src]="item.url" style="width: 50px;height: 50px;" [alt]="item.producto_id">
             <div class="data">

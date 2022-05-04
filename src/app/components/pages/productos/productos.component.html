@@ -9,12 +9,11 @@
             </div>
             <div class="category-list" *ngFor="let item of categorias">
                 <div [id]="item.nombre" class="category-item" (click)="swichtProductos($event, item)">
-                    <div class="category-text-item" [ngClass]="{'active': (storage.retrieve('categoria') && storage.retrieve('categoria').nombre== item.nombre)}">
+                    <div class="category-text-item"
+                        [ngClass]="{'active': (storage.retrieve('categoria') && storage.retrieve('categoria').nombre== item.nombre)}">
                         <div>{{item.nombre}}</div>
-                        <!-- Cras justo odio -->
                     </div>
-                    <!-- <span class="badge bg-primary rounded-pill">14</span> -->
-                </div>
+                </div>  
             </div>
         </div>
         <div class="animado" [ngClass]="{ 'col-sm-7': comentarios , 'col-sm-10' : !comentarios}">
@@ -44,8 +43,7 @@
         </div>
         <div [ngClass]="{ 'hide': !comentarios , 'col-sm-3' : comentarios}" style="position: relative">
             <div class="barra-superior">
-                <button id="btn-filter" class="btn btn-outline-firstcolor" (click)="abrirFiltro()"
-                    >
+                <button id="btn-filter" class="btn btn-outline-firstcolor" (click)="abrirFiltro()">
                     <div class="pista pista-off pista-bottom" (click)="abrirFiltro()">Filtrar por alias</div>
                     <i class="bi bi-funnel"></i>
                 </button>
@@ -60,15 +58,17 @@
             </div>
             <div class="bg-firstcolor fila" style="width: 90%;"></div>
             <div class="bg-firstcolor fila" style="width: 80%;"></div>
-            <form class="box-outline" [@scaleAnimation]="'enter'" *ngIf="comentar" style="padding: 15px;position: relative;margin-bottom: 20px;">
+            <form class="box-outline" [@scaleAnimation]="'enter'" *ngIf="comentar"
+                style="padding: 15px;position: relative;margin-bottom: 20px;">
                 <p class="text-firstcolor"><i class="bi bi-person"></i> alias:</p>
-                <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')" [(ngModel)]="alias" class="input-outline input" style="color: black;" required>
+                <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')" [(ngModel)]="alias"
+                    class="input-outline input" style="color: black;" required>
                 <p class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</p>
-                <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')" [(ngModel)]="correo" class="input-outline input" style="color: black;"
-                    required>
+                <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')"
+                    [(ngModel)]="correo" class="input-outline input" style="color: black;" required>
                 <p class="text-firstcolor"><i class="bi bi-chat-dots"></i> comentario:</p>
-                <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline" style="color: black;"
-                    required></textarea>
+                <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline"
+                    style="color: black;" required></textarea>
                 <button class="btn btn-firstcolor" (click)="enviarPosts()" style="width: 100%;"
                     [disabled]="!validarComentario()">
                     <div class="pista pista-off pista-left">Enviar</div>
@@ -83,11 +83,14 @@
                     style="position: relative;">
                     <h5 class="h5"><i class="bi bi-person"></i>{{item.alias}}</h5>
                     <p>{{item.correo}}</p>
-                  
+
                     <p>{{item.comentario}}</p>
-                    
+
                     <div class="barra-inferior">
-                        <p class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}} <i (click)="openResponder(item)" *ngIf="storage.retrieve('usuario')&&storage.retrieve('usuario').rol=='admin'" class="bi bi-pencil"></i></p>
+                        <p class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}} <i
+                                (click)="openResponder(item)"
+                                *ngIf="storage.retrieve('usuario')&&storage.retrieve('usuario').rol=='admin'"
+                                class="bi bi-pencil"></i></p>
                     </div>
                     <div class="lista-respuesta" *ngFor="let item2 of item.respuestas">
                         <li>{{item2.respuesta}}</li>
@@ -105,7 +108,7 @@
 </div>
 <div class="container">
     <div class="row animado" style="width: 100%; position: relative;">
-        <div class="col-sm-2">
+        <div class="col-sm-2" style="z-index: 999">
             <div class="mitad bg-firstcolor text-center text-firstcolor"
                 style="position: absolute;top: 30px;left: 40px;">
             </div>

@@ -47,6 +47,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarConfigs();
+    this.storage.observe('configuraciones').subscribe((result)=>{
+      this.cargarConfigs();
+    })
     this.loading = true;
     setTimeout(() => {
       this.loading = false;

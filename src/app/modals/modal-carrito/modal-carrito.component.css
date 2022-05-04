@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.btn-closed{
+.btn-closed {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -21,19 +21,20 @@
     display: flex;
 }
 
-.content-total .body {
-    margin-top: 10px;
+.content-total .body-cart {
+    width: 100%;
+    padding: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 200px;
-    padding-top: 200px;
     overflow-y: auto;
+    max-height: 250px;
     border-bottom: 1px solid var(--firstcolor);
+    transition: all .3s ease-in-out;
 }
 
-.content-total .body .items {
+.content-total div .items {
     width: 90%;
     height: 60px;
     display: flex;
@@ -44,19 +45,19 @@
     color: var(--firstcolor);
 }
 
-.content-total .body .items .data {
+.content-total div .items .data {
     display: flex;
     flex-direction: column;
     margin-left: 15px;
 }
 
-.content-total .body .items .data label {
+.content-total div.items .data label {
     color: var(--firstcolor);
     margin-bottom: 5px;
     /* text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.74); */
 }
 
-.content-total .body .items .delete {
+.content-total div .items .delete {
     background-color: transparent;
     position: absolute;
     padding: 10px;
@@ -69,13 +70,13 @@
     transition: all .3s ease;
 }
 
-.content-total .body .items .delete:hover{
+.content-total div .items .delete:hover {
     background-color: var(--firstcolor);
     color: white;
     transition: all .3s ease;
 }
 
-.content-total .body .items .delete:focus{
+.content-total div .items .delete:focus {
     border: none;
     outline: none;
 }
@@ -86,13 +87,12 @@
 }
 
 .content-total .info-list,
-.content-total .info-list .info label{
+.content-total .info-list .info label {
     color: var(--firstcolor);
     font-size: 10px;
 }
 
-.content-total .body .message{
-    font-weight: 900;
-    margin-top: 10px;
-    margin-bottom: 20px;
+.message-empty{
+    color: var(--firstcolor);
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 }

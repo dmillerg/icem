@@ -1,0 +1,23 @@
+<div style="overflow: auto;width: 100%;" class="table-mine">
+    <table class="table table-dark text-center table-mine">
+        <thead>
+            <th>id</th>
+            <th>nombre</th>
+            <th>configs</th>
+            <th>acciones</th>
+        </thead>
+        <tr *ngFor="let item of configuraciones">
+            <td>{{item.id}}</td>
+            <td>{{item.nombre}}</td>
+            <td>{{item.config}}</td>
+            <td>
+                <button class="btn btn-outline-primary" (click)="updateConfiguracion(item)"> <i
+                        class="bi bi-pencil svg-shadow"></i>
+                </button>
+                <button class="btn btn-outline-danger" (click)="delete(item)">
+                    <i class="bi bi-trash svg-shadow"></i>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>

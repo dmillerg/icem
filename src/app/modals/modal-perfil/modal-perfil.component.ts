@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
 import { MessageServiceService } from 'src/app/services/message-service.service';
 import { ModalAdminComponent } from '../modal-admin/modal-admin.component';
+import { ModalCarritoComponent } from '../modal-carrito/modal-carrito.component';
 
 @Component({
   selector: 'app-modal-perfil',
@@ -38,7 +39,7 @@ export class ModalPerfilComponent implements OnInit {
 
   fechalist: string = '';
 
-  constructor(private activeModal: NgbActiveModal, private modalService: NgbModal,public storage: SessionStorageService, private api: ApiService, private message: MessageServiceService) {
+  constructor(private activeModal: NgbActiveModal, private modalService: NgbModal, public storage: SessionStorageService, private api: ApiService, private message: MessageServiceService) {
     this.actiModal = activeModal;
   }
 
@@ -76,26 +77,23 @@ export class ModalPerfilComponent implements OnInit {
     result.forEach(item => {
       let date = new Date(item.fecha)
       let t = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
+      let transcurrido = item.tiempo == 0 ? 'hoy' : item.tiempo == 1 ? 'ayer' : item.tiempo + ' dias';
+      console.log(transcurrido);
 
-      this.api.calcularTiempo(t + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()).subscribe(r => {
-        this.api.getProductosById(item.producto_id).subscribe(result => {
-          let transcurrido = r[0].tiempo == 0 ? 'hoy' : 'ayer';
-          if (this.fechalist != r[0].tiempo + ' dias' && this.fechalist != transcurrido) {
-            this.fechalist = t;
-            if (r[0].tiempo < 10) {
-              if (r[0].tiempo == 0) {
-                this.fechalist = 'hoy';
-              } else if (r[0].tiempo == 1) {
-                this.fechalist = 'ayer';
-              } else
-                this.fechalist = r[0].tiempo + ' dias';
-            }
-            this.pedidos.push({ fechalist: this.fechalist });
-          }
-          item.producto = result;
-          this.pedidos.push(item)
-        })
-      });
+      if (this.fechalist != transcurrido && this.fechalist != t) {
+        this.fechalist = t;
+        if (item.tiempo < 10) {
+          if (item.tiempo == 0) {
+            this.fechalist = 'hoy';
+          } else if (item.tiempo == 1) {
+            this.fechalist = 'ayer';
+          } else
+            this.fechalist = item.tiempo + ' dias';
+        }
+        this.pedidos.push({ fechalist: this.fechalist });
+      }
+      item.producto = result;
+      this.pedidos.push(item)
     });
   }
 
@@ -165,6 +163,11 @@ export class ModalPerfilComponent implements OnInit {
 
   administrar() {
     this.actiModal.close();
-    let modal = this.modalService.open(ModalAdminComponent, {size: 'lg'});
+    let modal = this.modalService.open(ModalAdminComponent, { size: 'lg' });
+  }
+
+  administrarCarrito(){
+    this.actiModal.close();
+    let modal = this.modalService.open(ModalCarritoComponent, { size: 'md' });
   }
 }

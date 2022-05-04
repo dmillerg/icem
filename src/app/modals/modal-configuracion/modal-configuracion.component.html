@@ -1,0 +1,14 @@
+<div class="contenedor">
+    <h3 class="h3">Configurar parametro</h3>
+    <form>
+        <div class="input-content">
+            <label for="" class="title">{{configuracion.nombre}}</label>
+            <input type="number" name="cant" [max]="max()" style="color: var(--firstcolor);" placeholder="entre el parametro de busqueda" [(ngModel)]="configuracion.config">
+            <select *ngIf="tiempo" name="medida" [(ngModel)]="medida">
+                <option *ngFor="let item of medidas" [value]="item">{{item}}</option>
+            </select>
+        </div>
+        <button class="btn btn-firstcolor" (click)="aplicarCambio()"><i class="bi bi-hdd-fill"></i>Aplicar cambios</button>
+        <button class="btn btn-firstcolor" (click)="actiModal.close()"><i class="bi bi-x"></i>Cancelar</button>
+    </form>
+</div>

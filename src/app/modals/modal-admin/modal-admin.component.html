@@ -102,7 +102,9 @@
       <app-table-pedido [pedidos]="pedidosarray" [usuarios]="usuariosarray" [ngClass]="{ 'fade-in-element': pedidos }"
         [hidden]="!pedidos">
       </app-table-pedido>
-      <app-configuracion [ngClass]="{ 'fade-in-element': configuracion }" [hidden]="!configuracion"></app-configuracion>
+      <app-table-configuracion [configuraciones]="configuracionesarray" [ngClass]="{ 'fade-in-element': configuracion }"
+        [hidden]="!configuracion">
+      </app-table-configuracion>
     </div>
   </div>
 </div>

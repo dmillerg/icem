@@ -3,7 +3,7 @@
         <img src="assets/logo-mitad-right.png">
     </div>
     <button class="btn btn-closed" (click)="actiModal.close()"><i class="bi bi-x"></i></button>
-    <div class="side" style="width: 40%;text-align: center;">
+    <div class="side" style="width: 40%;text-align: center; min-width: 200px;">
         <div class="content-icon">
             <div class="icono-content">
                 <i class="bi bi-person-fill svg-shadow"></i>
@@ -20,13 +20,16 @@
             <button class="btn btn-perfil" [hidden]="show_form_password || edit" (click)="mostrarFormPass()"><i
                     class="bi bi-unlock-fill"></i> Cambiar
                 contraseña</button>
-                <button class="btn btn-perfil" (click)="administrar()" *ngIf="storage.retrieve('usuario') && storage.retrieve('usuario').rol=='admin'"><i
+            <button class="btn btn-perfil" (click)="administrar()"
+                *ngIf="storage.retrieve('usuario') && storage.retrieve('usuario').rol=='admin'"><i
                     class="bi bi-kanban-fill"></i> Administrar</button>
+            <button class="btn btn-perfil" (click)="administrarCarrito()"><i class="bi bi-cart-fill"></i> Carrito</button>
             <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
                 session</button>
         </div>
     </div>
-    <div class="side" style="width: 59%;padding-left: 20px;border-left: 1px solid #9b999e;">
+    <div style="width: 1px;background-color: #9b999e;height: 350px;"></div>
+    <div class="side" style="width: 59%;padding-left: 20px; min-width: 300px;">
         <h3 class="h3" style="margin-bottom: 15px;padding-left: 15px;"><strong>Perfil de usuario</strong></h3>
         <form action="" class="scroll-mine">
             <div class="input-perfil" [hidden]="show_form_password">
@@ -110,9 +113,9 @@
                 <div class="list-pedidos" *ngFor="let item of pedidos">
                     <div class="pedidos" *ngIf="!item.fechalist">
                         <!-- <div class="td-pedido" style="width: 20%" *ngIf="item.fechalist">{{item.fechalist}}</div> -->
-                        <div class="td-pedido" style="width: 55%;">{{item.producto.titulo}}</div>
+                        <div class="td-pedido" style="width: 55%;">{{item.titulo}}</div>
                         <div class="td-pedido" style="width: 5%;">{{item.cantidad}}</div>
-                        <div class="td-pedido" style="width: 10%;">{{item.cantidad*item.producto.precio}}</div>
+                        <div class="td-pedido" style="width: 10%;">{{item.cantidad*item.precio}}</div>
                         <div class="td-pedido" style="width: 20%;">{{item.estado}}</div>
                         <div class="td-pedido" style="width: 10%;"><button class="btn-firstcolor"
                                 (click)="eliminarPedido(item)" style="color: white;"><i

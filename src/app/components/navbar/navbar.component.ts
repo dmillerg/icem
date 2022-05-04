@@ -47,15 +47,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     if (this.storage.retrieve('configuraciones')) {
       let result = this.storage.retrieve('configuraciones');
-      console.log(result);
-
       this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config)
     }
     this.storage.observe('configuraciones').subscribe((result) => {
       if (result && result.length > 0) {
-        console.log(result);
-
-        this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config)
+        this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config);
+        // this.cargarTiempoRestante();
       }
     })
     if (this.storage.retrieve('carrito')) {
@@ -141,6 +138,8 @@ export class NavbarComponent implements OnInit {
         this.tiempo.hora = Math.floor(Math.floor(horas - (result.tiempo / 3600)))
         this.tiempo.minuto = Math.floor(((horas - (result.tiempo / 3600)) - Math.floor(horas - (result.tiempo / 3600))) * 60)
         this.tiempo.segundo = Math.floor(((horas - (result.tiempo / 3600)) - Math.floor(horas - (result.tiempo / 3600))) * 3600) % 60
+        console.log(this.tiempo);
+        
         this.intervalo = setInterval(() => {
           this.disminuirSec()
         }, 1000)
@@ -264,6 +263,8 @@ export class NavbarComponent implements OnInit {
   }
 
   loadProducto(item) {
+    console.log(item);
+    
     this.storage.store('categoria', item);
   }
 

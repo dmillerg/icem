@@ -61,6 +61,8 @@ import { TablePedidoComponent } from './components/tables/table-pedido/table-ped
 import { ModalAdminResetComponent } from './modals/modal-admin-reset/modal-admin-reset.component';
 import { ModalPerfilComponent } from './modals/modal-perfil/modal-perfil.component';
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
+import { ModalConfiguracionComponent } from './modals/modal-configuracion/modal-configuracion.component';
+import { TableConfiguracion } from './components/tables/table-configuracion/table-configuracion.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -95,6 +97,7 @@ import { ConfiguracionComponent } from './components/pages/configuracion/configu
     TableScrapComponent,
     TablePostsComponent,
     TablePedidoComponent,
+    TableConfiguracion,
     ModalDeleteComponent,
     ModalCategoriaComponent,
     ModalNoticiaComponent,
@@ -113,6 +116,7 @@ import { ConfiguracionComponent } from './components/pages/configuracion/configu
     ModalAdminResetComponent,
     ModalPerfilComponent,
     ConfiguracionComponent,
+    ModalConfiguracionComponent,
   ],
   imports: [
     BrowserModule,

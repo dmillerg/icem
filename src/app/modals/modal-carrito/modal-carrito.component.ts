@@ -20,9 +20,14 @@ export class ModalCarritoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   this.calcularTotal();
+  }
+
+  calcularTotal(){
+    this.total = 0;
     this.carrito.forEach(e => {
       this.total += parseInt(e.precio) * parseInt(e.cantidad);
-    })
+    });
   }
 
   listarCarrito() {
@@ -33,6 +38,7 @@ export class ModalCarritoComponent implements OnInit {
         this.carrito.forEach((e, i) => {
           this.getProductoFoto(e.producto_id, i);
         });
+        this.calcularTotal();
         this.storage.store('carrito', this.carrito);
       });
     }
