@@ -60,15 +60,15 @@
             <div class="bg-firstcolor fila" style="width: 80%;"></div>
             <form class="box-outline" [@scaleAnimation]="'enter'" *ngIf="comentar"
                 style="padding: 15px;position: relative;margin-bottom: 20px;">
-                <p class="text-firstcolor"><i class="bi bi-person"></i> alias:</p>
+                <label class="text-firstcolor"><i class="bi bi-person"></i> alias:</label>
                 <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')" [(ngModel)]="alias"
-                    class="input-outline input" style="color: black;" required>
-                <p class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</p>
+                    class="input-outline input" required>
+                <label class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</label>
                 <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')"
-                    [(ngModel)]="correo" class="input-outline input" style="color: black;" required>
-                <p class="text-firstcolor"><i class="bi bi-chat-dots"></i> comentario:</p>
+                    [(ngModel)]="correo" class="input-outline input" required>
+                <label class="text-firstcolor"><i class="bi bi-chat-dots"></i> comentario:</label>
                 <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline"
-                    style="color: black;" required></textarea>
+                    style="color: var(--firstcolor);" required></textarea>
                 <button class="btn btn-firstcolor" (click)="enviarPosts()" style="width: 100%;"
                     [disabled]="!validarComentario()">
                     <div class="pista pista-off pista-left">Enviar</div>

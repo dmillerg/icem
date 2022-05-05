@@ -22,6 +22,9 @@ export class ModalPerfilComponent implements OnInit {
     password: '',
     correo: '',
     fecha: '',
+    pais: '',
+    telefono: '',
+    direccion: '',
     rol: '',
     ultsession: '',
     token: ''
@@ -51,6 +54,9 @@ export class ModalPerfilComponent implements OnInit {
       this.usuario.correo = user.correo;
       this.usuario.nombre = user.nombre;
       this.usuario.fecha = user.fecha;
+      this.usuario.pais = user.pais;
+      this.usuario.direccion = user.direccion;
+      this.usuario.telefono = user.telefono;
       this.usuario.rol = user.rol;
       this.usuario.token = user.token;
     }
@@ -143,6 +149,7 @@ export class ModalPerfilComponent implements OnInit {
   }
 
   editPerfil() {
+    this.sidebarpedidos = false;
     this.resetearFalse();
     let formData = new FormData();
     formData.append('id', this.usuario.id.toString());
@@ -150,6 +157,9 @@ export class ModalPerfilComponent implements OnInit {
     formData.append('nombre', this.usuario.nombre.toString());
     formData.append('fecha', this.usuario.fecha.toString());
     formData.append('correo', this.usuario.correo.toString());
+    formData.append('pais', this.usuario.pais.toString());
+    formData.append('direccion', this.usuario.direccion.toString());
+    formData.append('telefono', this.usuario.telefono.toString());
     formData.append('rol', this.usuario.rol.toString());
     this.api.updateUsuarioWithOutPass(formData, this.usuario.id).subscribe((result) => {
       this.message.success('', 'Datos del perfil actualizados satisfactoriamente');

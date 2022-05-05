@@ -13,6 +13,7 @@
 
 .container-perfil .side {
     display: flex;
+    position: relative;
     flex-direction: column;
     height: 450px;
     padding: 10px;
@@ -132,7 +133,8 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-}   
+    min-height: 100px;
+}
 
 .btn-groups .btn-perfil {
     border: none;
@@ -166,8 +168,9 @@
     position: absolute;
     white-space: nowrap;
     top: 0;
-    bottom: 0;
+    left: 0;
     right: 0;
+    bottom: 0;
     width: 0%;
     display: flex;
     opacity: 0;
@@ -176,13 +179,12 @@
     align-items: center;
     padding: 10px;
     visibility: hidden;
-    border-top-right-radius: .5em;
-    border-bottom-right-radius: .5em;
+    border-radius: .5em;
     transition: all .5s ease;
 }
 
 .container-perfil .side .sidebar-pedidos.active {
-    width: 60%;
+    width: 100%;
     opacity: 1;
     visibility: visible;
 }
@@ -200,6 +202,7 @@
     background-color: var(--firstcolor);
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
     color: white;
+    z-index: 999;
     transition: all .5s ease;
 }
 
@@ -221,7 +224,7 @@
     justify-content: center;
 }
 
-.container-perfil .side .sidebar-pedidos .list{
+.container-perfil .side .sidebar-pedidos .list {
     width: 100%;
     height: 350px;
     overflow: auto;
@@ -251,7 +254,7 @@
     font-size: 12px;
 }
 
-.fecha{
+.fecha {
     background-color: white;
     color: var(--firstcolor);
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);

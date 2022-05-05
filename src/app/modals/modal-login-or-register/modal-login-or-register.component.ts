@@ -51,6 +51,8 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     correo: '',
     nombre: '',
     telefono: '',
+    pais: '',
+    direccion: '',
   }
 
   errorLogin: boolean = false;
@@ -81,10 +83,13 @@ export class ModalLoginOrRegisterComponent implements OnInit {
       const user = {
         id: result.usuario[0].id,
         usuario: result.usuario[0].usuario,
-        password: result.usuario[0].password,
+        // password: result.usuario[0].password,
         nombre: result.usuario[0].nombre,
         fecha: result.usuario[0].fecha,
         correo: result.usuario[0].correo,
+        pais: result.usuario[0].correo,
+        direccion: result.usuario[0].correo,
+        telefono: result.usuario[0].correo,
         rol: result.usuario[0].rol,
         token: result.token,
       };
@@ -101,6 +106,10 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     formData.append('nombre', this.register.nombre);
     formData.append('password', this.register.password);
     formData.append('correo', this.register.correo);
+    formData.append('pais', this.register.pais);
+    formData.append('direccion', this.register.direccion);
+    formData.append('telefono', this.register.telefono);
+    formData.append('rol', 'usuario');
     this.api.addUsuarios(formData).subscribe((result) => {
       this.errorRegister = true;
       this.success = true;

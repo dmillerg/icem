@@ -1,6 +1,6 @@
 <div style="overflow: auto;width: 100%;" class="table-mine">
     <input type="number" name="time" class="in" [(ngModel)]="time" placeholder="tiempo de refresco">
-    <button class="btn btn-outline-firstcolor" [disabled]="loadingScrap || time<6000 || time==undefined" style="position: absolute;bottom: 10px;right: 10px;" (click)="loadScrapin()">
+    <button class="btn btn-outline-firstcolor" [disabled]="loadingScrap || time==undefined" style="position: absolute;bottom: 10px;right: 10px;" (click)="loadScrapin()">
        
        <span *ngIf="!loadingScrap"> <i class="bi bi-binoculars svg-shadow"></i></span>
        <span *ngIf="loadingScrap" class="spinner-border spinner-border-sm svg-shadow" role="status"

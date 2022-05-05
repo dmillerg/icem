@@ -25,6 +25,9 @@ export class ModalUsuarioComponent implements OnInit {
     fecha: '',
     ultsession: '',
     correo: '',
+    pais: '',
+    direccion: '',
+    telefono: '',
     rol: '',
   };
 
@@ -36,6 +39,9 @@ export class ModalUsuarioComponent implements OnInit {
     fecha: '',
     ultsession: '',
     correo: '',
+    pais: '',
+    direccion: '',
+    telefono: '',
     rol: '',
   };
 
@@ -46,6 +52,8 @@ export class ModalUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.usuario);
+    
     this.rellenarSiEditas();
   }
 
@@ -68,7 +76,12 @@ export class ModalUsuarioComponent implements OnInit {
     formData.append('nombre',this.usuario.nombre.toString());
     formData.append('fecha',this.usuario.fecha.toString());
     formData.append('correo',this.usuario.correo.toString());
+    formData.append('pais',this.usuario.pais.toString());
+    formData.append('direccion',this.usuario.direccion.toString());
+    formData.append('telefono',this.usuario.telefono.toString());
     formData.append('rol',this.usuario.rol.toString());
+    console.log(formData);
+    
 
     console.log(this.modalAction)
     if(this.modalAction =="Editar"){

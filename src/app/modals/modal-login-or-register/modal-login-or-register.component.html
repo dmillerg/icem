@@ -46,6 +46,24 @@
                 <input type="email" class="in" name="correo-login" id="correo-register" placeholder="correo"
                     [(ngModel)]="register.correo">
             </div>
+            <div class="input-content">
+                <label for="pais-register">pais</label>
+                <i class="bi bi-flag-fill prefix"></i>
+                <input type="text" class="in" name="pais-register" id="pais-register" placeholder="pais"
+                    [(ngModel)]="register.pais">
+            </div>
+            <div class="input-content">
+                <label for="direccion-register">direccion</label>
+                <i class="bi bi-geo-alt-fill prefix"></i>
+                <input type="text" class="in" name="direccion-register" id="direccion-register" placeholder="direccion"
+                    [(ngModel)]="register.direccion">
+            </div>
+            <div class="input-content">
+                <label for="telefono-register">telefono</label>
+                <i class="bi bi-phone-fill prefix"></i>
+                <input type="number" class="in" name="telefono-register" id="telefono-register" placeholder="telefono"
+                    [(ngModel)]="register.telefono">
+            </div>
             <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && !validateEmail()"
                 style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Este correo no es
                 valido</label>

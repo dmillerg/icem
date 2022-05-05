@@ -286,10 +286,15 @@ h4 {
   outline: rgba(59, 64, 142, 0.281);
   padding: 5px;
   /* background-color: transparent; */
-  color: var(--firstcolor-section);
+  color: var(--firstcolor);
   border: solid 1px var(--firstcolor);
   border-radius: 0.2em;
   width: 100%;
+}
+
+.input-outline:disabled{
+  color: var(--firstcolor);
+  background-color: var(--firstcolor-section);
 }
 
 :disabled {

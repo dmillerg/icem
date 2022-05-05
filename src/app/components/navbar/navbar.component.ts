@@ -197,6 +197,9 @@ export class NavbarComponent implements OnInit {
           nombre: result.usuario[0].nombre,
           fecha: result.usuario[0].fecha,
           correo: result.usuario[0].correo,
+          pais: result.usuario[0].pais,
+          direccion: result.usuario[0].direccion,
+          telefono: result.usuario[0].telefono,
           rol: result.usuario[0].rol,
           token: result.token,
         };

@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
+
     this.cargaInicial()
     this.api.getProducto(4).subscribe((result) => {
       if (result.length > 0) {
@@ -92,8 +92,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.titulo_noti = result[0].titulo;
         this.desc_noti = result[0].descripcion;
         this.noticia = result[0];
-        this.img_noti = result[0].imagen;
+        this.noticia.logo = this.noticia.logo==null?'assets/icon-icem-gray.png':this.noticia.logo;
+        result[0].imagen.includes('http') ?result[0].imagen : this.cargarImagen(result[0]);
       }
+    });
+  }
+
+  cargarImagen(e: Noticia){
+    this.api.getNoticiaFoto(e.id).subscribe((result) => { }, error => {
+      this.img_noti = error.url;
     });
   }
 

@@ -23,6 +23,9 @@ export class TableScrapComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScrap();
+    this.time = Number(this.storage.retrieve('configuraciones')[1].config)*3600000
+    console.log(Number(this.storage.retrieve('configuraciones')[1].config));
+    
   }
 
   loadScrap() {

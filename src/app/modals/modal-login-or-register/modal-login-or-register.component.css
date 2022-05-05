@@ -222,9 +222,9 @@ CSS del register
     margin-bottom: 10px;
     flex-direction: column;
     align-items: center;
-    padding-top: 10px;
     justify-content: center;
-    overflow-y: auto;
+    overflow: auto;
+    padding-top: 250px;
 }
 
 .content-total .content-register .message-successful{

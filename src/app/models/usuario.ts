@@ -6,5 +6,8 @@ export interface Usuario {
   fecha: string;
   ultsession: string;
   correo: string;
+  pais: string;
+  direccion: string;
+  telefono: string;
   rol: string;
 }
