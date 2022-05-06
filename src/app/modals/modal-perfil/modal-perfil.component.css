@@ -95,10 +95,7 @@
 
 .container-perfil .side form .input-perfil .in:read-only {
     color: var(--firstcolor);
-    margin-left: 10px;
     border: none;
-    outline: none;
-    background: transparent;
     transition: all .3s ease;
 }
 

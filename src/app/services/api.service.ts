@@ -321,6 +321,16 @@ export class ApiService {
   }
 
   /**
+   * Activa la cuenta de un usuario
+   * @param id del usuario
+   * @returns 
+   */
+  activarUsuario(id: number){
+    let direccion = this.url + 'activarUsuario/' + id.toString();
+    return this.http.get<Usuario[]>(direccion)
+  }
+
+  /**
    * Actualiza el usuarios
    * @param formData datos actualizados del usuarios
    * @param id id del usuarios a actualizar

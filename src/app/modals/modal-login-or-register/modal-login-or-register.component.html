@@ -23,8 +23,8 @@
         </form>
     </div>
     <div class="content-register">
-        <div *ngIf="!success" class="icono-content"><i class="bi bi-person-fill svg-shadow"></i></div>
-        <form *ngIf="!success" action="" class="form-register">
+        <div *ngIf="!success" style="margin-top: 10px;" class="icono-content"><i class="bi bi-person-fill svg-shadow"></i></div>
+        <form *ngIf="!success" action="" class="form-register scroll-mine">
             <div class="input-content">
                 <label for="usuario-register">usuario</label>
                 <i class="bi bi-person-fill prefix"></i>
@@ -47,19 +47,19 @@
                     [(ngModel)]="register.correo">
             </div>
             <div class="input-content">
-                <label for="pais-register">pais</label>
+                <label for="pais-register">pais(opcional)</label>
                 <i class="bi bi-flag-fill prefix"></i>
                 <input type="text" class="in" name="pais-register" id="pais-register" placeholder="pais"
                     [(ngModel)]="register.pais">
             </div>
             <div class="input-content">
-                <label for="direccion-register">direccion</label>
+                <label for="direccion-register">direccion(opcional)</label>
                 <i class="bi bi-geo-alt-fill prefix"></i>
                 <input type="text" class="in" name="direccion-register" id="direccion-register" placeholder="direccion"
                     [(ngModel)]="register.direccion">
             </div>
             <div class="input-content">
-                <label for="telefono-register">telefono</label>
+                <label for="telefono-register">telefono(opcional)</label>
                 <i class="bi bi-phone-fill prefix"></i>
                 <input type="number" class="in" name="telefono-register" id="telefono-register" placeholder="telefono"
                     [(ngModel)]="register.telefono">

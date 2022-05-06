@@ -24,6 +24,9 @@
                 <button class="btn btn-outline-info" (click)="resetear(item)">
                     <i class="bi bi-unlock svg-shadow"></i>
                 </button>
+                <button class="btn btn-outline-success" [disabled]="item.activo" (click)="activarUsuario(item)">
+                    <i class="bi bi-check svg-shadow"></i>
+                </button>
             </td>
         </tr>
     </table>

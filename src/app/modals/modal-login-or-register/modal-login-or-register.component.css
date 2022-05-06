@@ -205,8 +205,8 @@ CSS del register
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     background-color: var(--firstcolor-hover);
     border-radius: 100%;
 }

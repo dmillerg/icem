@@ -10,4 +10,5 @@ export interface Usuario {
   direccion: string;
   telefono: string;
   rol: string;
+  activo: boolean;
 }

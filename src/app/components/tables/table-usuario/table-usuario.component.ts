@@ -15,7 +15,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./table-usuario.component.css'],
 })
 export class TableUsuarioComponent implements OnInit {
-  @Input() usuarios: Usuario[];
+  @Input() usuarios: Usuario[]=[];
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class TableUsuarioComponent implements OnInit {
     modal.componentInstance.modalSubHeader = 'admin de todo el sitio';
     modal.componentInstance.modalAction = 'Editar';
     modal.componentInstance.usuario = usuario;
-    
+
     modal.result.then((result) => {
       if (result) {
         this.loadUsuario();
@@ -58,8 +58,16 @@ export class TableUsuarioComponent implements OnInit {
     });
   }
 
-  resetear(usuario: Usuario){
+  resetear(usuario: Usuario) {
     let modal = this.modalService.open(ModalAdminResetComponent);
     modal.componentInstance.usuario = usuario;
+  }
+
+  activarUsuario(item: Usuario) {
+    this.api.activarUsuario(item.id).subscribe((result) => {
+      item.activo = true;
+    }, error => {
+      item.activo = false;
+    })
   }
 }
