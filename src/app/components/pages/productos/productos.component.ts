@@ -56,6 +56,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
     disponibilidad: 0,
     especificaciones: '',
     garantia: '',
+    ficha: '',
     imagen: '',
     precio: 0,
     usos: ''

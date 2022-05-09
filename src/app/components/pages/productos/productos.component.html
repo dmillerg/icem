@@ -24,8 +24,8 @@
                     <div class="pista pista-off pista-bottom">Ver comentarios</div>
                     <i class="bi bi-chat-square-text"></i>
                 </button>
-                <button class="btn btn-outline-firstcolor centrado" style="position: relative;">
-                    <div class="pista pista-off pista-bottom">Descargar ficha técnica</div>
+                <button class="btn btn-outline-firstcolor centrado" [disabled]="producto.ficha == null" style="position: relative;">
+                    <div class="pista pista-off pista-bottom" *ngIf="producto && producto.ficha != null">Descargar ficha técnica</div>
                     <i class="bi bi-journal-text"></i>
                 </button>
             </div>

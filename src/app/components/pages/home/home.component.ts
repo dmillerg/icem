@@ -59,7 +59,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.cargaInicial()
     this.api.getProducto(4).subscribe((result) => {
       if (result.length > 0) {

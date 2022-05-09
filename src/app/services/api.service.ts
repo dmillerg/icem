@@ -321,13 +321,24 @@ export class ApiService {
   }
 
   /**
+   * Obtener un usuario por su id
+   * @param id del usauario
+   * @returns
+   */
+   getUsuariosById(id: number = -1): Observable<Usuario> {
+    const headers = { 'content-type': 'application/json' };
+    let direccion = this.url + 'usuario/' + id.toString();
+    return this.http.get<Usuario>(direccion, { headers: headers });
+  }
+
+  /**
    * Activa la cuenta de un usuario
    * @param id del usuario
    * @returns 
    */
   activarUsuario(id: number){
     let direccion = this.url + 'activarUsuario/' + id.toString();
-    return this.http.get<Usuario[]>(direccion)
+    return this.http.get<any>(direccion)
   }
 
   /**
@@ -913,9 +924,22 @@ export class ApiService {
     return this.http.post<any>(direccion, formData);
   }
 
-  sendEmail() {
+  /**
+   * Envia un correo para dar una informacion
+   * @param correo del destinatario
+   * @param asunto del correo
+   * @param mensaje del correo con la informacion pertinente
+   * @returns 
+   */
+  sendEmail(correo: string, asunto: string='', mensaje: string = '') {
     let direccion = this.url + 'send';
-    return this.http.get(direccion);
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      correo: correo,
+      asunto: asunto,
+      mensaje: mensaje,
+    };
+    return this.http.get(direccion, {headers: headers, params: params});
   }
 
   /**

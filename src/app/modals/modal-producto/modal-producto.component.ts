@@ -26,6 +26,7 @@ export class ModalProductoComponent implements OnInit {
     usos: '',
     especificaciones: '',
     garantia: '',
+    ficha: '',
     precio: 0,
     disponibilidad: 0,
   };
@@ -43,6 +44,7 @@ export class ModalProductoComponent implements OnInit {
     usos: '',
     especificaciones: '',
     garantia: '',
+    ficha: '',
     precio: 0.0,
     disponibilidad: 0,
   };

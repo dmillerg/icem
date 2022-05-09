@@ -1,0 +1,24 @@
+.contenedor-activate{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 0.5em;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.contenedor-activate .contenedor-imagen{
+    width: 150px;
+    height: 150px;
+}
+
+.contenedor-activate label{
+    color: var(--firstcolor);
+    margin: 10px;
+}

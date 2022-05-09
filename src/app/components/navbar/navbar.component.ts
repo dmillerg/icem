@@ -296,4 +296,8 @@ export class NavbarComponent implements OnInit {
       })
     })
   }
+
+  calcularWindowSize(){
+    return window.innerWidth<854;
+  }
 }

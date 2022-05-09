@@ -111,8 +111,10 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     formData.append('telefono', this.register.telefono);
     formData.append('rol', 'usuario');
     this.api.addUsuarios(formData).subscribe((result) => {
-      this.errorRegister = true;
-      this.success = true;
+      this.api.sendEmail(this.register.correo, 'Activacion de la cuenta de usuario al usuario ' + this.register.usuario, 'Para activar su cuenta y poder acceder a nuestro sitio debe presionar el link que se le manda a continuacion \n sdahjshdjahjsdh').subscribe((result) => {
+        this.errorRegister = true;
+        this.success = true;
+      })
       // this.actiModal.close();
     }, error => {
       this.errorRegister = true;

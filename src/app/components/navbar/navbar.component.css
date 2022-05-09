@@ -263,3 +263,33 @@ p {
 .nav-contextual.active:hover{
     background-color: var(--firstcolor-hover);
 }
+
+.navbar-mobile{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 160px;
+    text-align: center;
+    font-family: MyriadPro-BoldCond;
+    color: white;
+}
+
+.navbar-mobile .title-navbar-mobile h3{
+    margin-top: 20px;
+    color: white;
+}
+
+.navbar-mobile .imagen-navbar-mobile{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    bottom: -50px;
+}
+
+.navbar-mobile .imagen-navbar-mobile img{
+    width: 100%;
+    height: 100%;
+}

@@ -1,6 +1,8 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
+import { ModalActivationComponent } from './modals/modal-activation/modal-activation.component';
 import { ApiService } from './services/api.service';
 
 const listAnimation = trigger('listAnimation', [
@@ -41,11 +43,12 @@ export class AppComponent implements OnInit {
   back_final = '';
   loading: boolean = false;
 
-  constructor(public storage: SessionStorageService, private api: ApiService) {
+  constructor(public storage: SessionStorageService, private api: ApiService, private modalService: NgbModal) {
 
   }
 
   ngOnInit(): void {
+    this.modalService.open(ModalActivationComponent)
     this.cargarConfigs();
     this.storage.observe('configuraciones').subscribe((result)=>{
       this.cargarConfigs();

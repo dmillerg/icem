@@ -113,6 +113,10 @@ body {
   transition: ease-in-out .3s;
 }
 
+.btn-outline-firstcolor:disabled {
+  cursor: pointer;
+}
+
 .text-firstcolor {
   color: var(--firstcolor);
 }
@@ -230,9 +234,10 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: small;
+  font-size: 12px;
+  white-space: nowrap;
   background-color: var(--theme-color);
-  transform: translateY(100%);
+  /* transform: translateY(100%); */
   z-index: 999;
   pointer-events: none;
 }
@@ -292,13 +297,9 @@ h4 {
   width: 100%;
 }
 
-.input-outline:disabled{
+.input-outline:disabled {
   color: var(--firstcolor);
   background-color: var(--firstcolor-section);
-}
-
-:disabled {
-  cursor: not-allowed;
 }
 
 .text-shadow {
@@ -361,22 +362,22 @@ img {
   transition: all .3s ease;
 }
 
-.left-message{
+.left-message {
   left: 20px;
 }
 
-.successmes{
+.successmes {
   background-color: var(--firstcolor);
   color: white;
   transition: all .3s ease;
 }
 
-.successmes:hover{
+.successmes:hover {
   transition: all .3s ease;
   background-color: var(--firstcolor-hover);
 }
 
-.errormes{
+.errormes {
   background-color: var(--alertcolor);
   color: white;
   transition: all .3s ease;

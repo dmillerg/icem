@@ -1,0 +1,16 @@
+<div class="contenedor-activate">
+    <div class="contenedor-imagen">
+        <img src="assets/icon-icem-blue.png" alt="ICEM">
+    </div>
+    <h3 class="h3">Activacion de la cuenta de usuario</h3>
+    <div class="data-user">
+        <label for="">{{usuario.usuario}}</label>
+    </div>
+    <label for="" class="texto-info">Verifique que su usuario es correcto y presione el boton de debajo para activar su
+        cuenta</label>
+    <button class="btn btn-firstcolor" (click)="activandoUsuario()">
+        <div *ngIf="activando"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Activando...
+        </div>
+        <div *ngIf="!activando"><i class="bi bi-check"></i></div>
+    </button>
+</div>

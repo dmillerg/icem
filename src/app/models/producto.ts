@@ -8,6 +8,7 @@ export interface Producto {
   usos: string;
   especificaciones: string;
   garantia: string;
+  ficha: string;
   precio:number;
   disponibilidad: number;
 }

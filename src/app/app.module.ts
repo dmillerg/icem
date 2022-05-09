@@ -63,6 +63,7 @@ import { ConfiguracionComponent } from './components/pages/configuracion/configu
 import { ModalConfiguracionComponent } from './modals/modal-configuracion/modal-configuracion.component';
 import { TableConfiguracion } from './components/tables/table-configuracion/table-configuracion.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { ModalActivationComponent } from './modals/modal-activation/modal-activation.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -117,6 +118,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     ConfiguracionComponent,
     ModalConfiguracionComponent,
     LoadingSpinnerComponent,
+    ModalActivationComponent,
   ],
   imports: [
     BrowserModule,
