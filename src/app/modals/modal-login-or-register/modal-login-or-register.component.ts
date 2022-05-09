@@ -101,6 +101,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
   }
 
   registEr() {
+    // this.generarLink()
     let formData = new FormData();
     formData.append('usuario', this.register.usuario);
     formData.append('nombre', this.register.nombre);
@@ -111,7 +112,8 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     formData.append('telefono', this.register.telefono);
     formData.append('rol', 'usuario');
     this.api.addUsuarios(formData).subscribe((result) => {
-      this.api.sendEmail(this.register.correo, 'Activacion de la cuenta de usuario al usuario ' + this.register.usuario, 'Para activar su cuenta y poder acceder a nuestro sitio debe presionar el link que se le manda a continuacion \n sdahjshdjahjsdh').subscribe((result) => {
+      let link = this.generarLink(result.result.insertId);
+      this.api.sendEmail(this.register.correo, 'Activacion de la cuenta de usuario para ' + this.register.usuario, `Para activar su cuenta y poder acceder a nuestro sitio debe presionar el link que se le manda a continuacion \n http://localhost:4200/#/inicio?link=${link}`).subscribe((resul) => {
         this.errorRegister = true;
         this.success = true;
       })
@@ -119,6 +121,23 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     }, error => {
       this.errorRegister = true;
     })
+  }
+
+  generarLink(id: any) {
+    let result = '';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const l = chars.length;
+    let cant = Math.floor(Math.random() * (30 - 20)) + 20;
+    let replaces = 'Edd' + id + 'Dde';
+    let place = Math.floor(Math.random() * (cant - 0)) + 0;
+    for (let i = 0; i < cant; i++) {
+      if (i == place) {
+        result += replaces;
+      }
+      result += chars[Math.floor(Math.random() * (l - 0)) + 0]
+    }
+    console.log(result);
+    return result;
   }
 
   validateEmail() {

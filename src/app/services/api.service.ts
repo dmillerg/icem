@@ -375,7 +375,7 @@ export class ApiService {
   addUsuarios(formData) {
     const headers = { 'content-type': 'application/json' };
     let direccion = this.url + 'saveUsuario';
-    return this.http.post(direccion, formData);
+    return this.http.post<any>(direccion, formData);
   }
 
   /**

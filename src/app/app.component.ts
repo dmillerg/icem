@@ -1,6 +1,8 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { url } from 'inspector';
 import { SessionStorageService } from 'ngx-webstorage';
 import { ModalActivationComponent } from './modals/modal-activation/modal-activation.component';
 import { ApiService } from './services/api.service';
@@ -43,14 +45,14 @@ export class AppComponent implements OnInit {
   back_final = '';
   loading: boolean = false;
 
-  constructor(public storage: SessionStorageService, private api: ApiService, private modalService: NgbModal) {
+  constructor(public storage: SessionStorageService, private api: ApiService, private modalService: NgbModal, private activatedRoute: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
-    this.modalService.open(ModalActivationComponent)
+    this.activate();
     this.cargarConfigs();
-    this.storage.observe('configuraciones').subscribe((result)=>{
+    this.storage.observe('configuraciones').subscribe((result) => {
       this.cargarConfigs();
     })
     this.loading = true;
@@ -71,6 +73,15 @@ export class AppComponent implements OnInit {
       btn_scroll.classList.add('btn-scala');
       btn_scroll.classList.remove('btn-scala-up');
     }
+  }
+
+  activate() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      let url = params['link'];
+      if (url != undefined) {
+        this.modalService.open(ModalActivationComponent, { backdrop: 'static' });
+      }
+    });
   }
 
   onScroll(scroll: HTMLElement) {

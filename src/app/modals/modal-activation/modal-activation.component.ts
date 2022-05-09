@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
+import { MessageServiceService } from 'src/app/services/message-service.service';
 
 @Component({
   selector: 'app-modal-activation',
@@ -24,23 +26,29 @@ export class ModalActivationComponent implements OnInit {
     rol: '',
     activo: false,
   };
-  activando: boolean= false;
-  constructor(private activatedRoute: ActivatedRoute, private api: ApiService) { }
+  activando: boolean = false;
+  actiModal: NgbActiveModal;
+  constructor(private activatedRoute: ActivatedRoute, private api: ApiService, private activeModal: NgbActiveModal, private message: MessageServiceService) {
+    this.actiModal = activeModal;
+   }
 
   ngOnInit(): void {
     this.loadURL();
   }
 
-  loadURL(){
+  loadURL() {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.id = params['id'];
-      let url = '$10$Qcm6OiMBKaWIbkoZLqTSvO/eNSRWrH6mg3p3crrv8BG157AtEdd321Ddexgs2';
-      console.log(url.indexOf('Edd'));
-      console.log(url.indexOf('Dde'));
-      console.log(url.substring(url.indexOf('Edd')+3,url.indexOf('Dde')));
-      
-      
-      this.loadUsuario();
+      let url = params['link'];
+
+
+      if (url != undefined) {
+        // console.log(url.indexOf('Edd'));
+        // console.log(url.indexOf('Dde'));
+        // console.log(url.substring(url.indexOf('Edd') + 3, url.indexOf('Dde')));
+        this.id = Number(url.substring(url.indexOf('Edd') + 3, url.indexOf('Dde')));
+        console.log(url);
+        this.loadUsuario();
+      }
     });
   }
 
@@ -50,10 +58,12 @@ export class ModalActivationComponent implements OnInit {
     });
   }
 
-  activandoUsuario(){
+  activandoUsuario() {
     this.activando = true;
-    this.api.activarUsuario(this.id).subscribe((result)=>{
+    this.api.activarUsuario(this.id).subscribe((result) => {
       this.activando = false;
+      this.message.success('', 'Su cuenta se ha activado con exito');
+      this.actiModal.close();
     })
   }
 
