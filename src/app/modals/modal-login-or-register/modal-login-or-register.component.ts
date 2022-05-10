@@ -1,7 +1,9 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
+import { MessageServiceService } from 'src/app/services/message-service.service';
 
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
@@ -44,6 +46,8 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     password: '',
   }
 
+  errorMessage: string = '';
+
   register = {
     usuario: '',
     password: '',
@@ -60,7 +64,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
   success: boolean = false;
   errorRegister: boolean = false;
 
-  constructor(private activeModal: NgbActiveModal, private api: ApiService) {
+  constructor(private activeModal: NgbActiveModal, private api: ApiService, private message: MessageServiceService) {
     this.actiModal = activeModal;
   }
 
@@ -125,7 +129,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
 
   generarLink(id: any) {
     let result = '';
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-*';
     const l = chars.length;
     let cant = Math.floor(Math.random() * (30 - 20)) + 20;
     let replaces = 'Edd' + id + 'Dde';
@@ -151,4 +155,31 @@ export class ModalLoginOrRegisterComponent implements OnInit {
       this.register.password.length > 0;
   }
 
+  forgetPassword() {
+    if (this.login.usuario != '') {
+      if (this.login.usuario.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
+        this.api.getUsuariosByEmail(this.login.usuario).subscribe((result) => {
+          this.sendEmailForgotPassword(result);
+        });
+      } else {
+        
+        this.api.getUsuariosByUser(this.login.usuario).subscribe((result) => {
+          this.sendEmailForgotPassword(result);
+        });
+      }
+    } else {
+      this.errorMessage = 'debe rellenar el campo usuario o correo con alguno de estos elementos para poder saber quien es usted, luego presione sobre olvido su contraseña';
+    }
+
+  }
+
+  sendEmailForgotPassword(user: Usuario) {
+    let reset = this.generarLink(user.id);
+    this.api.sendEmail(user.correo, 'Contraseña olvidada por el usuario ' + this.register.usuario, `Para restablecer su contraseña por favor presione el link a continuación: \n http://localhost:4200/#/inicio?reset=${reset}`).subscribe((resul) => {
+      this.errorRegister = true;
+      this.success = true;
+      this.message.success('','Se ha enviado un correo de restablecimiento de contraseña')
+      this.actiModal.close()
+    })
+  }
 }

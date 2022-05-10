@@ -6,15 +6,19 @@ import { ApiService } from 'src/app/services/api.service';
 import { MessageServiceService } from 'src/app/services/message-service.service';
 
 @Component({
-  selector: 'app-modal-activation',
-  templateUrl: './modal-activation.component.html',
-  styleUrls: ['./modal-activation.component.css']
+  selector: 'app-modal-user-reset-password',
+  templateUrl: './modal-user-reset-password.component.html',
+  styleUrls: ['./modal-user-reset-password.component.css']
 })
-export class ModalActivationComponent implements OnInit {
+export class ModalUserResetPasswordComponent implements OnInit {
+
+  password: string = '';
+  confirm: string = '';
+  actiModal: NgbActiveModal;
   id: number = -1;
   usuario: Usuario = {
     id: -1,
-    usuario: 'Usuario',
+    usuario: 'Usuario9706',
     password: '',
     nombre: '',
     fecha: '',
@@ -26,11 +30,13 @@ export class ModalActivationComponent implements OnInit {
     rol: '',
     activo: false,
   };
-  activando: boolean = false;
-  actiModal: NgbActiveModal;
-  constructor(private activatedRoute: ActivatedRoute, private api: ApiService, private activeModal: NgbActiveModal, private message: MessageServiceService) {
-    this.actiModal = activeModal;
-   }
+
+  constructor(private api: ApiService,
+    private message: MessageServiceService,
+    private activeModal: NgbActiveModal,
+    private activatedRoute: ActivatedRoute) { 
+      this.actiModal = activeModal;
+    }
 
   ngOnInit(): void {
     this.loadURL();
@@ -38,11 +44,8 @@ export class ModalActivationComponent implements OnInit {
 
   loadURL() {
     this.activatedRoute.queryParams.subscribe(params => {
-      let url = params['link'];
+      let url = params['reset'];
       if (url != undefined) {
-        // console.log(url.indexOf('Edd'));
-        // console.log(url.indexOf('Dde'));
-        // console.log(url.substring(url.indexOf('Edd') + 3, url.indexOf('Dde')));
         this.id = Number(url.substring(url.indexOf('Edd') + 3, url.indexOf('Dde')));
         console.log(url);
         this.loadUsuario();
@@ -56,13 +59,15 @@ export class ModalActivationComponent implements OnInit {
     });
   }
 
-  activandoUsuario() {
-    this.activando = true;
-    this.api.activarUsuario(this.id).subscribe((result) => {
-      this.activando = false;
-      this.message.success('', 'Su cuenta se ha activado con exito');
+  cambiarPass(){
+    let formData = new FormData();
+    formData.append('id_usuario', this.id.toString());
+    formData.append('new_password', this.password);
+    this.api.adminResetPassword(formData).subscribe((result)=>{
+      this.message.success('', 'Contraseña cambiada correctamente');
       this.actiModal.close();
+    }, error=>{
+      this.message.error('', 'Error al intentar cambiar la contraseña, por favor intentelo mas tarde');
     })
   }
-
 }

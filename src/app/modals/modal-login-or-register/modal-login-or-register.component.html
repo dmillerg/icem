@@ -18,7 +18,8 @@
                 <input type="password" class="in" name="pass-login" id="pass-login" placeholder="contraseña"
                     [(ngModel)]="login.password">
             </div>
-            <a class="olvido">¿olvido su contraseña?</a>
+            <a class="olvido" (click)="forgetPassword()">¿olvido su contraseña?</a>
+            <p class="text-danger" *ngIf="errorMessage.length>0"></p>
             <button class="btn btn-login" (click)="logIn()">Aceptar</button>
         </form>
     </div>

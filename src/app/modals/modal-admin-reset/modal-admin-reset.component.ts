@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SessionStorageService } from 'ngx-webstorage';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -15,7 +16,7 @@ export class ModalAdminResetComponent implements OnInit {
   confirm: string = ''
   actiModal: NgbActiveModal
 
-  constructor(private activeModal: NgbActiveModal, private api: ApiService) {
+  constructor(private activeModal: NgbActiveModal, private api: ApiService, private storage: SessionStorageService) {
     this.actiModal = activeModal;
   }
 
@@ -26,11 +27,10 @@ export class ModalAdminResetComponent implements OnInit {
     let formData = new FormData();
     formData.append('id_usuario', this.usuario.id.toString())
     formData.append('new_password', this.password)
-    this.api.adminResetPassword(formData).subscribe((result) => {
+    this.api.adminResetPassword(formData, this.storage.retrieve('token')).subscribe((result) => {
       this.actiModal.close();
     }, err => {
       console.error(err);
-
     })
   }
 

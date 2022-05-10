@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { url } from 'inspector';
 import { SessionStorageService } from 'ngx-webstorage';
 import { ModalActivationComponent } from './modals/modal-activation/modal-activation.component';
+import { ModalUserResetPasswordComponent } from './modals/modal-user-reset-password/modal-user-reset-password.component';
 import { ApiService } from './services/api.service';
 
 const listAnimation = trigger('listAnimation', [
@@ -77,9 +78,16 @@ export class AppComponent implements OnInit {
 
   activate() {
     this.activatedRoute.queryParams.subscribe(params => {
-      let url = params['link'];
-      if (url != undefined) {
-        this.modalService.open(ModalActivationComponent, { backdrop: 'static' });
+      let link = params['link'];
+      let reset = params['reset'];
+      if (link != undefined) {
+        this.api.checkLinks(link).subscribe((res) => {
+          this.modalService.open(ModalActivationComponent, { backdrop: 'static' });
+        });
+      } else if (reset != undefined) {
+        this.api.checkLinks(reset).subscribe((res) => {
+          this.modalService.open(ModalUserResetPasswordComponent, { backdrop: 'static' });
+        });
       }
     });
   }

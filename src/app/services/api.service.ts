@@ -325,9 +325,31 @@ export class ApiService {
    * @param id del usauario
    * @returns
    */
-   getUsuariosById(id: number = -1): Observable<Usuario> {
+  getUsuariosById(id: number = -1): Observable<Usuario> {
     const headers = { 'content-type': 'application/json' };
     let direccion = this.url + 'usuario/' + id.toString();
+    return this.http.get<Usuario>(direccion, { headers: headers });
+  }
+
+  /**
+  * Obtener un usuario por su user
+  * @param user del usuario
+  * @returns
+  */
+  getUsuariosByUser(user: string = ''): Observable<Usuario> {
+    const headers = { 'content-type': 'application/json' };
+    let direccion = this.url + 'usuariobyuser/' + user.toString();
+    return this.http.get<Usuario>(direccion, { headers: headers });
+  }
+
+  /**
+* Obtener un usuario por su email
+* @param email del usuario
+* @returns
+*/
+  getUsuariosByEmail(email: string = ''): Observable<Usuario> {
+    const headers = { 'content-type': 'application/json' };
+    let direccion = this.url + 'usuariobyemail/' + email.toString();
     return this.http.get<Usuario>(direccion, { headers: headers });
   }
 
@@ -336,7 +358,7 @@ export class ApiService {
    * @param id del usuario
    * @returns 
    */
-  activarUsuario(id: number){
+  activarUsuario(id: number) {
     let direccion = this.url + 'activarUsuario/' + id.toString();
     return this.http.get<any>(direccion)
   }
@@ -354,18 +376,18 @@ export class ApiService {
     return this.http.post(direccion, formData);
   }
 
-   /**
-   * Actualiza el usuarios
-   * @param formData datos actualizados del usuarios
-   * @param id id del usuarios a actualizar
-   * @returns
-   */
-    updateUsuarioWithOutPass(formData, id) {
-      const headers = { 'content-type': 'application/json' };
-      formData.append('token', this.storage.retrieve('usuario').token);
-      let direccion = this.url + 'usuario/' + id;
-      return this.http.post(direccion, formData);
-    }
+  /**
+  * Actualiza el usuarios
+  * @param formData datos actualizados del usuarios
+  * @param id id del usuarios a actualizar
+  * @returns
+  */
+  updateUsuarioWithOutPass(formData, id) {
+    const headers = { 'content-type': 'application/json' };
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'usuario/' + id;
+    return this.http.post(direccion, formData);
+  }
 
   /**
    * Guarda una nuevo usuarios
@@ -861,8 +883,8 @@ export class ApiService {
    * @param formData datos para reiniciar la contrase;a
    * @returns 
    */
-  adminResetPassword(formData: FormData) {
-    formData.append('token', this.storage.retrieve('usuario').token);
+  adminResetPassword(formData: FormData, token: string = '9e-7l-0a-6i-9n-6e-0y-8p-23g') {
+    formData.append('token', token);
     let direccion = this.url + 'adminreset/'
     return this.http.post(direccion, formData);
   }
@@ -918,7 +940,7 @@ export class ApiService {
    * @param formData configuraciones nuevas
    * @returns 
    */
-  saveConfigs(formData: FormData){
+  saveConfigs(formData: FormData) {
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'configuraciones/'
     return this.http.post<any>(direccion, formData);
@@ -931,7 +953,7 @@ export class ApiService {
    * @param mensaje del correo con la informacion pertinente
    * @returns 
    */
-  sendEmail(correo: string, asunto: string='', mensaje: string = '') {
+  sendEmail(correo: string, asunto: string = '', mensaje: string = '') {
     let direccion = this.url + 'send';
     const headers = { 'content-type': 'application/json' };
     const params = {
@@ -939,7 +961,7 @@ export class ApiService {
       asunto: asunto,
       mensaje: mensaje,
     };
-    return this.http.get(direccion, {headers: headers, params: params});
+    return this.http.get(direccion, { headers: headers, params: params });
   }
 
   /**
@@ -947,11 +969,11 @@ export class ApiService {
    * @param fecha hasta la cual calcular el tiempo
    * @returns 
    */
-  calcularTiempo(fecha: string =''){
+  calcularTiempo(fecha: string = '') {
     let date = new Date(fecha);
-    let resultDate = date.getFullYear()+'/'+ (date.getMonth()+1)+'/'+date.getDate()+' '+ date.getHours()+':'+ date.getMinutes()+':'+ date.getSeconds();
+    let resultDate = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
     let direccion = this.url + 'all';
-    let query =  `SELECT TIMESTAMPDIFF(DAY,'${resultDate}',NOW()) as tiempo`
+    let query = `SELECT TIMESTAMPDIFF(DAY,'${resultDate}',NOW()) as tiempo`
     return this.http.post<any>(direccion, {
       query: query,
       token: this.storage.retrieve('usuario').token,
@@ -963,10 +985,20 @@ export class ApiService {
    * @param formData datos para la nueva contrasenna
    * @returns 
    */
-  changePassword(formData: FormData): Observable<any>{
+  changePassword(formData: FormData): Observable<any> {
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'changepass/'
     return this.http.post<any>(direccion, formData);
+  }
+
+  /**
+   * comprueba que el link es valido y existe
+   * @param link a comprobar
+   * @returns 
+   */
+  checkLinks(link: string=''){
+    let direccion = this.url + 'links/'
+    return this.http.post<any>(direccion, {link: link});
   }
 
 }

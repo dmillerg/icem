@@ -23,7 +23,11 @@ export class MessageServiceService {
     succ.appendChild(messages);
     succ.id = 'message';
     succ.classList.add('message');
-    document.body.appendChild(succ);
+    let content = document.createElement('div');
+    content.id = 'content-message';
+    content.appendChild(succ);
+    content.classList.add('message-content')
+    document.body.appendChild(content);
   }
 
   success(title: string = '', message: string = 'message') {
@@ -33,7 +37,7 @@ export class MessageServiceService {
     setTimeout(() => {
       document.getElementById('message').classList.remove('activoMessage');
       setTimeout(()=>{
-        document.body.removeChild(document.getElementById('message'));
+        document.body.removeChild(document.getElementById('content-message'));
       }, 500);
     }, 8000);
   }
@@ -45,7 +49,7 @@ export class MessageServiceService {
     setTimeout(() => {
       document.getElementById('message').classList.remove('activoMessage');
       setTimeout(()=>{
-        document.body.removeChild(document.getElementById('message'));
+        document.body.removeChild(document.getElementById('content-message'));
       }, 500);
     }, 8000);
   }
