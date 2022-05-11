@@ -1,9 +1,10 @@
 <div class="content-total">
     <button class="btn btn-closed" (click)="actiModal.close()"><i class="bi bi-x-lg svg-shadow"></i></button>
     <div class="content-login">
-        <img src="assets/icon-icem-blue.png" alt="logo" class="image-icon svg-shadow">
-        <form action="" class="form-login">
-            <p [@scaleAnimation]="'enter'" *ngIf="errorLogin" style="font-size: 12px;text-align: center;width: 90%;"
+        <img *ngIf="!cargaemail" src="assets/icon-icem-blue.png" alt="logo" class="image-icon svg-shadow">
+        
+        <form action="" *ngIf="!cargaemail" class="form-login">
+            <p [@scaleAnimation]="'enter'" *ngIf="errorLogin" style="font-size: 12px;text-align: center;width: 90%;margin-top: 20px;"
                 class="text-danger">Usuario o
                 contraseña incorrectos, pruebe de nuevo</p>
             <div class="input-content">
@@ -18,10 +19,16 @@
                 <input type="password" class="in" name="pass-login" id="pass-login" placeholder="contraseña"
                     [(ngModel)]="login.password">
             </div>
+            <div class="form-check" style="margin-top: -10px;">
+                <input class="form-check-input" type="checkbox" style="background-color: var(--firstcolor-section);" value="" name="remember" [(ngModel)]="remember" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault" style="color: var(--firstcolor);font-size: 12px;">
+                  recuerdame la próxima vez
+                </label>
+              </div>
             <a class="olvido" (click)="forgetPassword()">¿olvido su contraseña?</a>
-            <p class="text-danger" *ngIf="errorMessage.length>0"></p>
             <button class="btn btn-login" (click)="logIn()">Aceptar</button>
         </form>
+        <label *ngIf="cargaemail" class="carga">Enviando un correo con el link para recuperar contraseña</label>
     </div>
     <div class="content-register">
         <div *ngIf="!success" style="margin-top: 10px;" class="icono-content"><i class="bi bi-person-fill svg-shadow"></i></div>
@@ -95,7 +102,7 @@
         </div>
     </div>
     <div class="content-blue"
-        style="background: linear-gradient(0, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo3.png');background-blend-mode: multiply;">
+        style="background: linear-gradient(0, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo8.png');background-blend-mode: multiply;">
         <ul>
             <li id="autenticarse" class="li" [ngClass]="{'active': activo}" (click)="loginOrRegister()">autenticarse
             </li>

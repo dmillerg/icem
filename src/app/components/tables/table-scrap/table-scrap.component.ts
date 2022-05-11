@@ -113,7 +113,7 @@ export class TableScrapComponent implements OnInit {
       this.loadingScrap = true;
       this.messageScrap = 'Iniciando Scrapping...'
       this.api.IniciarScrap(this.time).subscribe((result) => {
-        this.messageScrap = 'Scrapping iniciado cada 1 hora';
+        this.messageScrap = 'Scrapping iniciado cada '+(this.time/(1000*3600))+' horas';
         setTimeout(() => {
           this.messageScrap = 'Detener Scrapping';
           this.loadingScrap = false;

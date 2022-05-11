@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SessionStorageService } from 'ngx-webstorage';
+import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { ModalAdminComponent } from 'src/app/modals/modal-admin/modal-admin.component';
 import { ModalCarritoComponent } from 'src/app/modals/modal-carrito/modal-carrito.component';
 import { ModalPerfilComponent } from 'src/app/modals/modal-perfil/modal-perfil.component';
@@ -40,7 +40,11 @@ export class NavbarComponent implements OnInit {
 
   total_pagar: number = 0;
 
-  constructor(private router: Router, private storage: SessionStorageService, private modalService: NgbModal, private api: ApiService) {
+  constructor(private router: Router,
+    private storage: SessionStorageService,
+    private localstorage: LocalStorageService,
+    private modalService: NgbModal,
+    private api: ApiService) {
     this.storage2 = storage;
   }
 
@@ -139,7 +143,7 @@ export class NavbarComponent implements OnInit {
         this.tiempo.minuto = Math.floor(((horas - (result.tiempo / 3600)) - Math.floor(horas - (result.tiempo / 3600))) * 60)
         this.tiempo.segundo = Math.floor(((horas - (result.tiempo / 3600)) - Math.floor(horas - (result.tiempo / 3600))) * 3600) % 60
         console.log(this.tiempo);
-        
+
         this.intervalo = setInterval(() => {
           this.disminuirSec()
         }, 1000)
@@ -185,7 +189,7 @@ export class NavbarComponent implements OnInit {
   }
 
   loginOrRegister(action: string) {
-    let modal = this.modalService.open(ModalLoginOrRegisterComponent, { backdrop: 'static'});
+    let modal = this.modalService.open(ModalLoginOrRegisterComponent, { backdrop: 'static' });
     modal.componentInstance.modalAction = action;
     modal.result.then((result) => {
       if (result) {
@@ -215,6 +219,7 @@ export class NavbarComponent implements OnInit {
     if (user != undefined) {
       this.api.logout(user.id).subscribe((result) => {
         this.storage.clear('usuario');
+        this.localstorage.clear('usuario');
       });
     }
   }
@@ -267,7 +272,7 @@ export class NavbarComponent implements OnInit {
 
   loadProducto(item) {
     console.log(item);
-    
+
     this.storage.store('categoria', item);
   }
 
@@ -297,7 +302,7 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  calcularWindowSize(){
-    return window.innerWidth<854;
+  calcularWindowSize() {
+    return window.innerWidth < 854;
   }
 }

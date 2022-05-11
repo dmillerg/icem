@@ -3,9 +3,9 @@
     <form>
         <div class="input-content">
             <label for="" class="title">{{configuracion.nombre}}</label>
-            <input type="number" name="cant" [max]="max()" style="color: var(--firstcolor);"
+            <input type="number" name="cant"  style="color: var(--firstcolor);"
                 placeholder="entre el parametro de busqueda" [(ngModel)]="configuracion.config">
-            <select *ngIf="tiempo" name="medida" [(ngModel)]="medida">
+            <select *ngIf="tiempo" name="medida" [(ngModel)]="medida" (ngModelChange)="onChange()">
                 <option *ngFor="let item of medidas" [value]="item">{{item}}</option>
             </select>
         </div>

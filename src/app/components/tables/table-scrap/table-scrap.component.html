@@ -1,11 +1,14 @@
 <div style="overflow: auto;width: 100%;" class="table-mine">
-    <input type="number" name="time" class="in" [(ngModel)]="time" placeholder="tiempo de refresco">
-    <button class="btn btn-outline-firstcolor" [disabled]="loadingScrap || time==undefined" style="position: absolute;bottom: 10px;right: 10px;" (click)="loadScrapin()">
-       
-       <span *ngIf="!loadingScrap"> <i class="bi bi-binoculars svg-shadow"></i></span>
-       <span *ngIf="loadingScrap" class="spinner-border spinner-border-sm svg-shadow" role="status"
-                        aria-hidden="true"> </span> {{messageScrap}}
-    </button>
+    <div class="init-scrap">
+        <input type="number" name="time" class="in" [(ngModel)]="time" placeholder="tiempo de refresco">
+        <button class="btn btn-outline-firstcolor" [disabled]="loadingScrap || time==undefined"
+             (click)="loadScrapin()">
+
+            <span *ngIf="!loadingScrap"> <i class="bi bi-binoculars svg-shadow"></i></span>
+            <span *ngIf="loadingScrap" class="spinner-border spinner-border-sm svg-shadow" role="status"
+                aria-hidden="true"> </span> {{messageScrap}}
+        </button>
+    </div>
     <table class="table table-dark text-center table-mine">
         <thead>
             <th>id</th>
@@ -23,8 +26,10 @@
                 <div class="icon"><img class="img-fluid svg-shadow" [src]="item.logo"></div>
             </td>
             <td>
-                <div class="icon centrado"><i *ngIf="item.activo == 1" class="bi bi-check text-success svg-shadow"></i></div>
-                <div class="icon centrado"><i *ngIf="item.activo == 0" class="bi bi-x text-danger svg-shadow"></i> </div>
+                <div class="icon centrado"><i *ngIf="item.activo == 1" class="bi bi-check text-success svg-shadow"></i>
+                </div>
+                <div class="icon centrado"><i *ngIf="item.activo == 0" class="bi bi-x text-danger svg-shadow"></i>
+                </div>
             </td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateScrap(item)"> <i

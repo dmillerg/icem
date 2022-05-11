@@ -1,5 +1,6 @@
 export interface Configuracion{
     id: number;
     nombre: string;
-    config: string;
+    descripcion: string;
+    config: number;
 }

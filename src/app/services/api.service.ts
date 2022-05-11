@@ -17,12 +17,12 @@ import { Respuesta } from '../models/respuesta';
 import { Carrito } from '../models/carrito';
 import { Pedido } from '../models/pedido';
 import { Configuracion } from '../models/configuracion';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  // url: string = 'http://d80e-152-206-214-63.ngrok.io/apis';
-  url: string = 'http://localhost:9707/apis/';
+  url: string = environment.url_backend;
 
   constructor(
     private http: HttpClient,
@@ -996,9 +996,9 @@ export class ApiService {
    * @param link a comprobar
    * @returns 
    */
-  checkLinks(link: string=''){
+  checkLinks(link: string='', time: number = 10){
     let direccion = this.url + 'links/'
-    return this.http.post<any>(direccion, {link: link});
+    return this.http.post<any>(direccion, {link: link, time: time});
   }
 
 }

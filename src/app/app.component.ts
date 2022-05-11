@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { url } from 'inspector';
-import { SessionStorageService } from 'ngx-webstorage';
+import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { ModalActivationComponent } from './modals/modal-activation/modal-activation.component';
 import { ModalUserResetPasswordComponent } from './modals/modal-user-reset-password/modal-user-reset-password.component';
 import { ApiService } from './services/api.service';
@@ -46,11 +46,16 @@ export class AppComponent implements OnInit {
   back_final = '';
   loading: boolean = false;
 
-  constructor(public storage: SessionStorageService, private api: ApiService, private modalService: NgbModal, private activatedRoute: ActivatedRoute) {
-
+  constructor(
+    public storage: SessionStorageService,
+    public localstorage: LocalStorageService,
+    private api: ApiService,
+    private modalService: NgbModal,
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.loadData();
     this.activate();
     this.cargarConfigs();
     this.storage.observe('configuraciones').subscribe((result) => {
@@ -61,6 +66,12 @@ export class AppComponent implements OnInit {
       this.loading = false;
     }, 3000);
     this.back_final = this.back_class + ' ' + this.back_transparente;
+  }
+
+  loadData() {
+    if (this.localstorage.retrieve('usuario')) {
+      this.storage.store('usuario', this.localstorage.retrieve('usuario'));
+    }
   }
 
   onScrolling() {
@@ -81,7 +92,7 @@ export class AppComponent implements OnInit {
       let link = params['link'];
       let reset = params['reset'];
       if (link != undefined) {
-        this.api.checkLinks(link).subscribe((res) => {
+        this.api.checkLinks(link, (this.storage.retrieve('configuraciones')[2].config*60)).subscribe((res) => {
           this.modalService.open(ModalActivationComponent, { backdrop: 'static' });
         });
       } else if (reset != undefined) {

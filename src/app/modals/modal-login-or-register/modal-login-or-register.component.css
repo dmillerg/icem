@@ -26,6 +26,7 @@
 .content-total .content-login {
     width: 50%;
     height: 100%;
+    position: relative;
     background-color: var(--theme-color);
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
@@ -33,6 +34,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.content-login .carga{
+    position: absolute;
+    top: 48%;
+    left: 10px;
+    right: 10px;
+    bottom: 0;
+    text-align: center;
+    color: var(--firstcolor);
+    font-size: 12px;
 }
 
 .content-total .content-register {
@@ -188,9 +200,10 @@ CSS del login
 
 .content-total .content-login .form-login .olvido{
     color: var(--firstcolor);
-    margin-top: -20px;
+    margin: 10px;
     text-decoration: none;
     font-size: 12px;
+    cursor: pointer;
 }
 
 /***
@@ -213,7 +226,7 @@ CSS del register
 
 .content-total .content-register .icono-content i{
     color: var(--firstcolor);
-    font-size: 50px;
+    font-size: 45px;
 }
 
 .content-total .content-register .form-register{

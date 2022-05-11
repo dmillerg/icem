@@ -33,7 +33,11 @@ export class TableConfiguracion implements OnInit {
     modal.componentInstance.modalSubHeader = 'configuraciones del sitio web';
     modal.componentInstance.modalAction = 'Editar';
     modal.componentInstance.tiempo = true;
-    modal.componentInstance.configuracion = configuracion;
+    console.log(configuracion);
+    modal.componentInstance.configuracion.id = configuracion.id;
+    modal.componentInstance.configuracion.nombre = configuracion.nombre;
+    modal.componentInstance.configuracion.descripcion = configuracion.descripcion;
+    modal.componentInstance.configuracion.config = configuracion.config;
     
     modal.result.then((result) => {
       if (result) {

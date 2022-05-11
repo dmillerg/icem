@@ -1,9 +1,11 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { LocalStorageService } from 'ngx-webstorage';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
 import { MessageServiceService } from 'src/app/services/message-service.service';
+import { environment } from 'src/environments/environment';
 
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
@@ -46,8 +48,6 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     password: '',
   }
 
-  errorMessage: string = '';
-
   register = {
     usuario: '',
     password: '',
@@ -59,12 +59,17 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     direccion: '',
   }
 
+  cargaemail: boolean = false;
+  remember: boolean = false;
   errorLogin: boolean = false;
 
   success: boolean = false;
   errorRegister: boolean = false;
 
-  constructor(private activeModal: NgbActiveModal, private api: ApiService, private message: MessageServiceService) {
+  constructor(private activeModal: NgbActiveModal,
+    private api: ApiService,
+    private message: MessageServiceService,
+    private localstorage: LocalStorageService) {
     this.actiModal = activeModal;
   }
 
@@ -97,6 +102,9 @@ export class ModalLoginOrRegisterComponent implements OnInit {
         rol: result.usuario[0].rol,
         token: result.token,
       };
+      if (this.remember) {
+        this.localstorage.store('usuario', user);
+      }
       this.errorLogin = false;
       this.actiModal.close(result);
     }, err => {
@@ -117,7 +125,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     formData.append('rol', 'usuario');
     this.api.addUsuarios(formData).subscribe((result) => {
       let link = this.generarLink(result.result.insertId);
-      this.api.sendEmail(this.register.correo, 'Activacion de la cuenta de usuario para ' + this.register.usuario, `Para activar su cuenta y poder acceder a nuestro sitio debe presionar el link que se le manda a continuacion \n http://localhost:4200/#/inicio?link=${link}`).subscribe((resul) => {
+      this.api.sendEmail(this.register.correo, 'Activacion de la cuenta de usuario para ' + this.register.usuario, `Para activar su cuenta y poder acceder a nuestro sitio debe presionar el link que se le manda a continuacion \n ${environment.url_page}/#/inicio?link=${link}`).subscribe((resul) => {
         this.errorRegister = true;
         this.success = true;
       })
@@ -158,17 +166,18 @@ export class ModalLoginOrRegisterComponent implements OnInit {
   forgetPassword() {
     if (this.login.usuario != '') {
       if (this.login.usuario.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
+        this.cargaemail = true;
         this.api.getUsuariosByEmail(this.login.usuario).subscribe((result) => {
           this.sendEmailForgotPassword(result);
         });
       } else {
-        
+        this.cargaemail = true;
         this.api.getUsuariosByUser(this.login.usuario).subscribe((result) => {
           this.sendEmailForgotPassword(result);
         });
       }
     } else {
-      this.errorMessage = 'debe rellenar el campo usuario o correo con alguno de estos elementos para poder saber quien es usted, luego presione sobre olvido su contraseña';
+      this.message.error('debe rellenar el campo usuario o correo con alguno de estos elementos para poder saber quien es usted, luego presione sobre olvido su contraseña');
     }
 
   }
@@ -177,9 +186,10 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     let reset = this.generarLink(user.id);
     this.api.sendEmail(user.correo, 'Contraseña olvidada por el usuario ' + this.register.usuario, `Para restablecer su contraseña por favor presione el link a continuación: \n http://localhost:4200/#/inicio?reset=${reset}`).subscribe((resul) => {
       this.errorRegister = true;
+      this.cargaemail = false;
       this.success = true;
-      this.message.success('','Se ha enviado un correo de restablecimiento de contraseña')
-      this.actiModal.close()
+      this.message.success('', 'Se ha enviado un correo de restablecimiento de contraseña')
+      this.actiModal.close();
     })
   }
 }

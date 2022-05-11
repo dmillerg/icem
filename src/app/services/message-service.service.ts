@@ -7,7 +7,7 @@ export class MessageServiceService {
 
   constructor() { }
 
-  private burbuja(title: string = 'Title', message: string = 'message') {
+  private burbuja(title: string = 'Title', message: string = '') {
     let succ = document.createElement("div");
     if (title.length > 0) {
       let titles = document.createElement("label");
@@ -15,12 +15,8 @@ export class MessageServiceService {
       titles.appendChild(titletext);
       succ.appendChild(titles);
     }
-    let messages = document.createElement("label");
-    messages.style.marginLeft = '10px';
     let messagetext = document.createTextNode(message);
-    messages.appendChild(messagetext);
-
-    succ.appendChild(messages);
+    succ.appendChild(messagetext);
     succ.id = 'message';
     succ.classList.add('message');
     let content = document.createElement('div');
@@ -30,7 +26,7 @@ export class MessageServiceService {
     document.body.appendChild(content);
   }
 
-  success(title: string = '', message: string = 'message') {
+  success(title: string = '', message: string = '') {
     this.burbuja(title, message);
     document.getElementById('message').classList.add('successmes');
     document.getElementById('message').classList.add('activoMessage');
@@ -42,7 +38,7 @@ export class MessageServiceService {
     }, 8000);
   }
 
-  error(title: string = '', message: string = 'message') {
+  error(title: string = '', message: string = '') {
     this.burbuja(title, message);
     document.getElementById('message').classList.add('errormes');
     document.getElementById('message').classList.add('activoMessage');

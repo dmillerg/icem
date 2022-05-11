@@ -1,7 +1,18 @@
 .card-mine{
+    min-width: 300px;
+    width: 20%;
     padding: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 .card-mine:hover {
     transform: scale(1.05);
     transition: ease-in-out 0.3s;
+}
+
+.contenedor-busq{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

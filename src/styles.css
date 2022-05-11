@@ -85,6 +85,10 @@ body {
   padding: 15px;
 }
 
+.btn-firstcolor i{
+  margin-right: 10px;
+}
+
 .img-loading {
   background: transparent url(assets/cargando-icem.gif) center no-repeat;
 }
@@ -348,16 +352,15 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
 }
 
 .message {
-  padding: 15px;
+  padding: 10px;
+  text-align: center;
   border-radius: 5em;
-  max-width: 250px;
+  max-width: 500px;
   text-overflow: ellipsis;
   font-size: 12px;
-  height: 50px;
   z-index: 9999;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
   opacity: 0;
