@@ -1,0 +1,47 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.contenedor form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor form .input-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.contenedor form .input-content select {
+    margin: 10px;
+    line-height: 50px;
+    height: 40px;
+    background-color: #363636;
+    box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.4);
+    color: white;
+    border: 1px solid white;
+    border-radius: .5em;
+}
+
+
+.contenedor form .btn-groups{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contenedor form .btn-groups .btn{
+    margin: 5px;
+}
+

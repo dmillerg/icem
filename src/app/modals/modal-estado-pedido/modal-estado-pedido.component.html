@@ -1,0 +1,16 @@
+<div class="contenedor">
+    <h3 class="h3">Cambiar estado</h3>
+    <form>
+        <div class="input-content">
+            <label for="" class="title">Cambiar estado del pedido {{id}}</label>
+            <select name="estado" [(ngModel)]="estado">
+                <option *ngFor="let item of estados" [value]="item">{{item}}</option>
+            </select>
+        </div>
+        <div class="btn-groups">
+            <button class="btn btn-firstcolor" (click)="aplicarCambio()"><i class="bi bi-hdd-fill"></i>Aplicar
+                cambios</button>
+            <button class="btn btn-firstcolor" (click)="actiModal.close()"><i class="bi bi-x"></i>Cancelar</button>
+        </div>
+    </form>
+</div>

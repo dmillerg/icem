@@ -65,6 +65,7 @@ import { TableConfiguracion } from './components/tables/table-configuracion/tabl
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { ModalActivationComponent } from './modals/modal-activation/modal-activation.component';
 import { ModalUserResetPasswordComponent } from './modals/modal-user-reset-password/modal-user-reset-password.component';
+import { ModalEstadoPedidoComponent } from './modals/modal-estado-pedido/modal-estado-pedido.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -121,6 +122,7 @@ import { ModalUserResetPasswordComponent } from './modals/modal-user-reset-passw
     LoadingSpinnerComponent,
     ModalActivationComponent,
     ModalUserResetPasswordComponent,
+    ModalEstadoPedidoComponent,
   ],
   imports: [
     BrowserModule,

@@ -85,7 +85,13 @@ body {
   padding: 15px;
 }
 
-.btn-firstcolor i{
+.btn-firstcolor:hover:disabled,
+.btn-firstcolor:disabled {
+  background-color: var(--firstcolor-section);
+  cursor: not-allowed;
+}
+
+.btn-firstcolor i {
   margin-right: 10px;
 }
 
@@ -345,7 +351,7 @@ img {
   image-rendering: -webkit-optimize-contrast;
 }
 
-.message-content{
+.message-content {
   width: 100%;
   position: absolute;
   bottom: 20px;

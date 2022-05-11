@@ -879,6 +879,18 @@ export class ApiService {
   }
 
   /**
+   * Cambia el estado actula del pedido
+   * @param formData Estado del pedido
+   * @param id_pedido del pedido
+   * @returns 
+   */
+  cambiarEstadoPedido(formData: FormData, id_pedido: number=-1){
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'cambiarestadopedidos/' + id_pedido;
+    return this.http.put(direccion, formData);
+  }
+
+  /**
    * Resetea la contrasenna siendo admin ded un usuario
    * @param formData datos para reiniciar la contrase;a
    * @returns 
