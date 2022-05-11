@@ -96,20 +96,23 @@ export class NavbarComponent implements OnInit {
 
   activate(url) {
     if (this.activo !== url) {
-      document.getElementById(url).classList.add('active');
-      document.getElementById(this.activo).classList.remove('active');
+      if(document.getElementById(url)) document.getElementById(url).classList.add('active');
+      if(document.getElementById(this.activo)) document.getElementById(this.activo).classList.remove('active');
       this.activo = url;
     }
+
   }
 
   navigateTo(path) {
-    // console.log('actual', this.activo);
-    // console.log('nuevo', path);
     if (this.activo !== path) {
       if (path == 'productos') {
-        this.storage.store('categoria', { id: -1, nombre: 'Todos' });
+        if (!this.storage.retrieve('categoria')) {
+          this.storage.store('categoria', { id: -1, nombre: 'Todos' });
+        }
       }
-      this.activate(path)
+      if (path != 'buscar') {
+        this.activate(path);
+      }
       this.router.navigate([path + '/']);
     }
   }

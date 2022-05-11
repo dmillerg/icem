@@ -33,7 +33,6 @@ export class BusquedaComponent implements OnInit {
     }
     this.storage.observe('titulo').subscribe((result)=>{
       if(result){
-        console.log('observe',result);
         this.titulo = result;
         this.loadProductos();
       }
@@ -91,7 +90,6 @@ export class BusquedaComponent implements OnInit {
           tipo: 'desarrollos'
         });
       });
-      console.log(this.busqueda);
     });
   }
 
