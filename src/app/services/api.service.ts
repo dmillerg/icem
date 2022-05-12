@@ -1046,4 +1046,14 @@ export class ApiService {
     return this.http.get<Ventas[]>(direccion, { headers: headers, params: params });
   }
 
+  generarReportes(ventas: Ventas[]): Observable<any>{
+    let direccion = this.url + 'reportes';
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      ventas: ventas,
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.post<Ventas[]>(direccion, params);
+  }
+
 }

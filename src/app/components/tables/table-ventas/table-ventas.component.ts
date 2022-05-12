@@ -113,4 +113,14 @@ export class TableVentasComponent implements OnInit {
      }
    })
   }
+
+  generarReportes(){
+    this.api.generarReportes(this.ventas).subscribe(result=>{
+      console.log(result);
+      
+    }, error=>{
+      console.log(error);
+      
+    })
+  }
 }

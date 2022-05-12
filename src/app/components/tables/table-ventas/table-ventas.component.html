@@ -10,7 +10,7 @@
             <option *ngFor="let item of productos" [value]="item.id">{{item.titulo}}</option>
         </select>
     </div>
-    <table class="table table-dark text-center  table-mine">
+    <table class="table table-dark text-center  table-mine" (click)="generarReportes()">
         <thead>
             <th>id</th>
             <th>usuario</th>
