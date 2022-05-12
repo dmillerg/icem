@@ -11,4 +11,5 @@ export interface Producto {
   ficha: string;
   precio:number;
   disponibilidad: number;
+  activo: boolean;
 }

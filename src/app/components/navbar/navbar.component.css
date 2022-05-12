@@ -169,13 +169,21 @@ p {
 .menu-left{
     position: absolute;
     left: 0;
-    top: 30px;
 }
 
 .menu-right{
     position: absolute;
     right: 0;
-    top: 30px;
+}
+
+.menu-top{
+    position: absolute;
+    bottom: 0;
+}
+
+.menu-bottom{
+    position: absolute;
+    
 }
 
 .nav-item:hover .menu {
@@ -256,8 +264,12 @@ p {
 }
 
 .nav-contextual.disabled{
-    background-color: var(--firstcolor-hover);
-    color: white;
+    color: var(--firstcolor);
+}
+
+.nav-contextual.disabled:hover{
+    color: var(--firstcolor);
+    background-color: white;
 }
 
 .nav-contextual.active:hover{

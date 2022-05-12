@@ -18,10 +18,24 @@ td {
     line-height: 45px;
     width: 150px;
     padding: 10px;
+    margin: 10px;
     background-color: var(--firstcolor-hover);
     color: var(--theme-color);
     border: none;
     text-overflow: ellipsis;
     border-radius: 0.5em;
     box-shadow: 0 0 2px 2px var(--firstcolor);
+}
+
+.table-mine .seleccionable .selecc2{
+    line-height: 45px;
+    width: 150px;
+    outline: none;
+    background-color: var(--firstcolor-hover);
+    color: var(--theme-color);
+    border: none;
+    text-overflow: ellipsis;
+    border-radius: 0.5em;
+    box-shadow: 0 0 2px 2px var(--firstcolor);
+    padding-left: 10px;
 }

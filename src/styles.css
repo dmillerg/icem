@@ -82,7 +82,7 @@ body {
   white-space: nowrap;
   background-color: var(--firstcolor);
   color: white;
-  padding: 15px;
+  padding: 8px;
 }
 
 .btn-firstcolor:hover:disabled,
@@ -102,7 +102,6 @@ body {
 .btn-firstcolor:hover {
   background-color: var(--firstcolor-hover);
   color: white;
-  padding: 15px;
   transition: ease-in-out .3s;
 }
 

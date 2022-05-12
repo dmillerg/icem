@@ -1,8 +1,13 @@
 <div style="overflow: auto;width: 100%;" class="table-mine scroll-mine">
     <div class="seleccionable">
         <select name="usuario" id="user" [(ngModel)]="user_id" (change)="change()" class="selecc">
-            <option value="-1">Seleccione el usuario</option>
+            <option value="-1">usuario</option>
             <option *ngFor="let item of usuarios" [value]="item.id">{{item.usuario}}</option>
+        </select>
+       <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha">
+        <select name="producto" id="producto" [(ngModel)]="producto_id" (change)="changeprod()" class="selecc">
+            <option value="-1">producto</option>
+            <option *ngFor="let item of productos" [value]="item.id">{{item.titulo}}</option>
         </select>
     </div>
     <table class="table table-dark text-center  table-mine">
@@ -11,19 +16,17 @@
             <th>usuario</th>
             <th>producto</th>
             <th>cantidad</th>
-            <th>estado</th>
             <th>fecha</th>
             <th>acciones</th>
         </thead>
-        <tr *ngFor="let item of pedidos">
+        <tr *ngFor="let item of ventas">
             <td>{{item.id}}</td>
             <td>{{item.usuario}}</td>
             <td><img [src]="item.url" style="width: 70px;height: auto;" alt=""></td>
             <td>{{item.cantidad}}</td>
-            <td>{{item.estado}}</td>
             <td>{{item.fecha | date: 'short'}}</td>
             <td>
-                <button hidden class="btn btn-outline-primary" (click)="updateProducto(item)"> <i
+                <!-- <button hidden class="btn btn-outline-primary" (click)="updateProducto(item)"> <i
                         class="bi bi-pencil svg-shadow"></i>
                 </button>
                 <button class="btn btn-outline-info" (click)="cambiarEstadoPedido(item)"> <i
@@ -31,7 +34,7 @@
             </button>
                 <button class="btn btn-outline-danger" [disabled]="item.estado==='finalizado'" (click)="delete(item)">
                     <i class="bi bi-trash svg-shadow"></i>
-                </button>
+                </button> -->
             </td>
         </tr>
     </table>

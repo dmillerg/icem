@@ -11,6 +11,7 @@ import { Producto } from 'src/app/models/producto';
 import { Quienes } from 'src/app/models/quienes';
 import { Scrap } from 'src/app/models/scrap';
 import { Usuario } from 'src/app/models/usuario';
+import { Ventas } from 'src/app/models/ventas';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalCategoriaComponent } from '../modal-categoria/modal-categoria.component';
 import { ModalDesarrolloComponent } from '../modal-desarrollo/modal-desarrollo.component';
@@ -43,6 +44,7 @@ export class ModalAdminComponent implements OnInit {
   posts: boolean = false;
   pedidos: boolean = false;
   configuracion: boolean = false;
+  ventas: boolean = false;
 
   usuario: Usuario;
   @Output() emisor: EventEmitter<string> = new EventEmitter<string>();
@@ -57,7 +59,8 @@ export class ModalAdminComponent implements OnInit {
   scraparray: Scrap[] = [];
   postsarray: Posts[] = [];
   pedidosarray: Pedido[] = [];
-  configuracionesarray: Configuracion[]=[];
+  ventasarray: Ventas[] = [];
+  configuracionesarray: Configuracion[] = [];
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -75,39 +78,44 @@ export class ModalAdminComponent implements OnInit {
   cambiarTabla(event) {
     // console.log(event.target.innerText);
     this.cambiarFalseAll();
+    console.log(event.target.innerText);
+    
     switch (event.target.innerText) {
-      case 'Productos':
+      case ' Productos':
         this.productos = true;
         break;
-      case 'Noticias':
+      case ' Noticias':
         this.noticias = true;
         break;
-      case 'Categorias':
+      case ' Categorias':
         this.categorias = true;
         break;
-      case 'Desarrollos':
+      case ' Desarrollos':
         this.desarrollos = true;
         break;
-      case 'Usuarios':
+      case ' Usuarios':
         this.usuarios = true;
         break;
-      case 'Chat':
+      case ' Chat':
         this.chat = true;
         break;
-      case 'Quienes':
+      case ' Quienes':
         this.quienes = true;
         break;
-      case 'Scraps':
+      case ' Scraps':
         this.scrap = true;
         break;
-      case 'Posts':
+      case ' Posts':
         this.posts = true;
         break;
-      case 'Pedidos':
+      case ' Pedidos':
         this.pedidos = true;
         break;
-      case 'Configuracion':
+      case ' Configuracion':
         this.configuracion = true;
+        break;
+      case ' Ventas':
+        this.ventas = true;
         break;
     }
     this.activo = event.target.innerText;
@@ -124,6 +132,7 @@ export class ModalAdminComponent implements OnInit {
     this.scrap = false
     this.posts = false;
     this.pedidos = false;
+    this.ventas = false;
     this.configuracion = false;
   }
 
@@ -303,6 +312,14 @@ export class ModalAdminComponent implements OnInit {
       if (result.length > 0) {
         this.pedidosarray = result;
       } else this.pedidosarray = [];
+    });
+  }
+
+  loadVentas() {
+    this.api.getVentas().subscribe((result) => {
+      if (result.length > 0) {
+        this.ventasarray = result;
+      } else this.ventasarray = [];
     });
   }
 }

@@ -27,58 +27,62 @@
           'btn-primary': productos,
           'btn-outline-primary': !productos
         }" class="btn" (click)="cambiarTabla($event)">
-        Productos
+        <i class="bi bi-bicycle"></i> Productos
       </button>
       <button [ngClass]="{
           'btn-primary': categorias,
           'btn-outline-primary': !categorias
         }" class="btn" (click)="cambiarTabla($event)">
-        Categorias
+        <i class="bi bi-bookmark"></i> Categorias
       </button>
       <button [ngClass]="{
           'btn-primary': noticias,
           'btn-outline-primary': !noticias
         }" class="btn" (click)="cambiarTabla($event)">
-        Noticias
+        <i class="bi bi-newspaper"></i> Noticias
       </button>
       <button [ngClass]="{
           'btn-primary': desarrollos,
           'btn-outline-primary': !desarrollos
         }" class="btn" (click)="cambiarTabla($event)">
-        Desarrollos
+        <i class="bi bi-graph-up"></i> Desarrollos
       </button>
       <button [ngClass]="{
           'btn-primary': usuarios,
           'btn-outline-primary': !usuarios
         }" class="btn" (click)="cambiarTabla($event)">
-        Usuarios
+        <i class="bi bi-person"></i> Usuarios
       </button>
       <button [ngClass]="{ 'btn-primary': chat, 'btn-outline-primary': !chat }" class="btn"
         (click)="cambiarTabla($event)" [hidden]="usuario.usuario != 'kuroko'">
-        Chat
+        <i class="bi bi-chat-square-dots"></i> Chat
       </button>
       <button [ngClass]="{ 'btn-primary': quienes, 'btn-outline-primary': !quienes }" class="btn"
         (click)="cambiarTabla($event)">
-        Quienes
+        <i class="bi bi-people"></i> Quienes
       </button>
       <button [ngClass]="{ 'btn-primary': scrap, 'btn-outline-primary': !scrap }" class="btn"
         (click)="cambiarTabla($event)">
-        Scraps
+        <i class="bi bi-bar-chart-steps"></i> Scraps
       </button>
       <button [ngClass]="{ 'btn-primary': posts, 'btn-outline-primary': !posts }" class="btn"
         (click)="cambiarTabla($event)">
-        Posts
+        <i class="bi bi-file-earmark-text"></i> Posts
       </button>
       <button [ngClass]="{ 'btn-primary': pedidos, 'btn-outline-primary': !pedidos }" class="btn"
         (click)="cambiarTabla($event)">
-        Pedidos
+        <i class="bi bi-cart"></i> Pedidos
+      </button>
+      <button [ngClass]="{ 'btn-primary': ventas, 'btn-outline-primary': !ventas }" class="btn"
+        (click)="cambiarTabla($event)">
+        <i class="bi bi-receipt"></i> Ventas
       </button>
       <button [ngClass]="{ 'btn-primary': configuracion, 'btn-outline-primary': !configuracion }" class="btn"
         (click)="cambiarTabla($event)">
-        Configuracion
+        <i class="bi bi-gear"></i> Configuracion
       </button>
       <button class="btn btn-outline-primary" (click)="logout()">
-        Cerrar Sesion
+        <i class="bi bi-door-closed"></i> Cerrar Sesion
       </button>
     </div>
     <div class="col-sm-10 tabs-content scroll-mine" style="position: relative;">
@@ -105,6 +109,9 @@
       <app-table-configuracion [configuraciones]="configuracionesarray" [ngClass]="{ 'fade-in-element': configuracion }"
         [hidden]="!configuracion">
       </app-table-configuracion>
+      <app-table-ventas [ventas]="ventasarray" [usuarios]="usuariosarray" [ngClass]="{ 'fade-in-element': pedidos }"
+        [hidden]="!ventas">
+      </app-table-ventas>
     </div>
   </div>
 </div>

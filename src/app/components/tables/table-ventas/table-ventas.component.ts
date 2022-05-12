@@ -10,42 +10,44 @@ import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-  selector: 'app-table-pedido',
-  templateUrl: './table-pedido.component.html',
-  styleUrls: ['./table-pedido.component.css'],
+  selector: 'app-table-ventas',
+  templateUrl: './table-ventas.component.html',
+  styleUrls: ['./table-ventas.component.css'],
 })
-export class TablePedidoComponent implements OnInit {
+export class TableVentasComponent implements OnInit {
 
-  @Input() pedidos: any[];
+  @Input() ventas: any[];
   @Input() usuarios: Usuario[] = [];
+  @Input() productos: Producto[] = [];
   user_id: number = -1;
+  fecha : string= '';
+  producto_id: number = -1;
 
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
     this.loadUsuario();
-    this.loadPedidos();
+    this.loadProductos();
+    this.loadVentas();
   }
 
-  loadPedidos() {
-    this.api.getPedidos(this.user_id).subscribe((result) => {
-      console.log(result);
-
+  loadVentas() {
+    this.api.getVentas(this.user_id, this.fecha, this.producto_id).subscribe((result) => {
       if (result.length > 0) {
-        this.pedidos = result;
+        this.ventas = result;
         result.forEach((e, i) => {
           this.getProductoFoto(e.producto_id, i);
-          this.pedidos[i].usuario = this.usuarios.filter(r => r.id == this.user_id)[0].usuario;
+          this.ventas[i].usuario = this.usuarios.filter(r => r.id == e.user_id)[0].usuario;
         })
       }
-      else this.pedidos = [];
+      else this.ventas = [];
     });
   }
 
   getProductoFoto(id: number, position: number) {
     this.api.getProductoFoto(id).subscribe(result => {
     }, error => {
-      this.pedidos[position].url = error.url;
+      this.ventas[position].url = error.url;
     })
   }
 
@@ -60,10 +62,22 @@ export class TablePedidoComponent implements OnInit {
     });
   }
 
+  loadProductos() {
+    this.api.getProducto().subscribe((result) => {
+      if (result.length > 0) {
+          this.productos = result;
+      } else this.usuarios = [];
+    });
+  }
+
   change() {
     console.log(this.user_id);
+    this.loadVentas();
+  }
 
-    this.loadPedidos();
+  changeprod() {
+    console.log(this.user_id);
+    this.loadVentas();
   }
   // updateProducto(producto) {
   //   let modal = this.modalService.open(ModalProductoComponent, { size: 'lg' });
@@ -84,7 +98,7 @@ export class TablePedidoComponent implements OnInit {
     modal.componentInstance.modalHeader = 'Pedido';
     modal.result.then((result) => {
       if (result) {
-        this.loadPedidos();
+        this.loadVentas();
       }
     });
   }
@@ -95,7 +109,7 @@ export class TablePedidoComponent implements OnInit {
    modal.componentInstance.estado = pedido.estado;
    modal.result.then(result=>{
      if(result){
-       this.loadPedidos();
+       this.loadVentas();
      }
    })
   }

@@ -305,7 +305,11 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  calcularWindowSize() {
+  calcularWindowWidthSize() {
     return window.innerWidth < 854;
+  }
+
+  calcularWindowHeightSize() {
+    return window.innerHeight < 478;
   }
 }

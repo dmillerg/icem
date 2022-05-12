@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         var direccion = false;
         var cont = 1;
         result.forEach((item) => {
+          if(item.activo){
           this.productos_recientes.push({
             id: item.id,
             titulo: item.titulo,
@@ -82,7 +83,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           });
           this.cargarData();
           direccion = !direccion;
-          cont++;
+          cont++;}
         });
       } else this.productos_recientes = [];
     });

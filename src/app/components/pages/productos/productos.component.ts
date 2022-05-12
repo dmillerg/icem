@@ -59,7 +59,8 @@ export class ProductosComponent implements OnInit, OnDestroy {
     ficha: '',
     imagen: '',
     precio: 0,
-    usos: ''
+    usos: '',
+    activo: false,
   };
   id: string = '';
   category: string = '';
@@ -98,10 +99,10 @@ export class ProductosComponent implements OnInit, OnDestroy {
         this.id = '0' + this.producto.id;
       } else this.id = this.producto.id.toString();
     }
+    this.observeCategoria();
     this.loadAllProductos();
     this.loadCategorias();
     this.loadProductos();
-    this.observeCategoria();
   }
 
   loadUsuario() {
@@ -122,7 +123,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   loadAllProductos() {
     this.api.getProducto(0, -1, -1).subscribe((result) => {
-      this.productoss = result;
+      this.productoss = result.filter(e=>e.activo);
     })
   }
 
@@ -159,7 +160,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   loadProductos() {
     this.api.getProducto(0, this.categoriaId, this.producto.id).subscribe((result) => {
-      this.productos = result;
+      this.productos = result.filter(e=>e.activo);
       this.loadPosts();
       if (this.storage.retrieve('producto')) {
         this.storage.store('producto', this.producto);

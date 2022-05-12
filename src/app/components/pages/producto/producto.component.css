@@ -17,6 +17,10 @@
     padding-inline: 20px;
 }
 
+.btn-firstcolor{
+    padding: 15px;
+}
+
 .descripcion-text {
     font-size: small;
 }

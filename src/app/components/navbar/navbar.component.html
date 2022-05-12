@@ -1,4 +1,4 @@
-<nav [class]="back_class" style="z-index: 999;">
+<nav [class]="back_class" class="scroll-mine" style="z-index: 999;height: fit-content;overflow: auto;" >
     <div class="container-fluid">
         <div class="navbar-brand">
             <span class="letter" data-letter="I" (click)="navigateTo('inicio')"
@@ -60,7 +60,7 @@
     </form>
     <li class="nav-item nav-mine" style="position: relative;"><i class="bi bi-person-fill svg-shadow"></i>
         {{acceso}}
-        <div class="menu menu-right">
+        <div class="menu" [ngClass]="{'menu-left': calcularWindowWidthSize(), 'menu-right': !calcularWindowWidthSize(), 'menu-top': calcularWindowHeightSize(), 'menu-bottom':!calcularWindowHeightSize()}" >
     <li *ngIf="acceso=='acceder/registrarse'" class="nav-contextual" (click)="loginOrRegister('Login')"><i
             class="bi bi-person-circle col-sm-2" style="margin-right: 10px;"></i><span
             class="col-sm-10">autenticarse</span></li>
@@ -82,7 +82,7 @@
             class="bi bi-cart3 svg-shadow">
             <div class="cant-cart">{{carrito.length}}</div>
         </i>
-        <div class="menu menu-right">
+        <div class="menu" [ngClass]="{'menu-left': calcularWindowWidthSize() && !calcularWindowHeightSize(), 'menu-right': !calcularWindowWidthSize(), 'menu-top': calcularWindowWidthSize() && calcularWindowHeightSize()}">
     <li class="nav-contextual disabled" disabled style="width: 250px;" *ngIf="carrito.length>0"><label for="">
             Tiempo restante:
             {{(tiempo.hora<10)?'0'+tiempo.hora: tiempo.hora}}:{{(tiempo.minuto<10)?'0'+tiempo.minuto:
@@ -111,7 +111,7 @@
 
 <!-- Navbar sin funcionalidad solo para pc  -->
 
-<div style="width: 100%;display: flex;flex-direction: row;flex-wrap: wrap;" *ngIf="!calcularWindowSize()">
+<div style="width: 100%;display: flex;flex-direction: row;flex-wrap: wrap;" *ngIf="!calcularWindowWidthSize()">
     <div style="width: 80%;min-width: 500px; height: 100%;position: relative;">
         <div class="clip-path-shadow">
             <div class="navbar-fondo2 bg-firstcolor"
@@ -147,7 +147,7 @@
 </div>
 
 <!-- Navbar sin funcionalidad solo para moviles y tablets -->
-<div class="navbar-mobile" *ngIf="calcularWindowSize()"
+<div class="navbar-mobile" *ngIf="calcularWindowWidthSize()"
     style="background: linear-gradient(180deg, rgb(7, 7, 7) 0%, var(--firstcolor) 40%), url('assets/fondo8.png');background-blend-mode: multiply;">
     <div class="title-navbar-mobile">
         <h3 class="h3 text-shadow">Empresa Cubana de Equipos Médicos </h3>

@@ -48,4 +48,10 @@ export class TableProductoComponent implements OnInit {
       }
     });
   }
+
+  activarProducto(item: Producto){
+    this.api.activarProducto(item.id, !item.activo).subscribe(result=>{
+      this.loadProductos();
+    })
+  }
 }

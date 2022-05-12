@@ -18,6 +18,7 @@ import { Carrito } from '../models/carrito';
 import { Pedido } from '../models/pedido';
 import { Configuracion } from '../models/configuracion';
 import { environment } from 'src/environments/environment';
+import { Ventas } from '../models/ventas';
 @Injectable({
   providedIn: 'root',
 })
@@ -109,6 +110,22 @@ export class ApiService {
   getProductoFoto(id) {
     let direccion = this.url + 'productoFoto/' + id.toString();
     return this.http.get(direccion);
+  }
+
+  /**
+   * Activa o desactiva el producto para mostrar a la venta
+   * @param id del producto
+   * @param activo estado del producto
+   * @returns 
+   */
+  activarProducto(id: number=-1, activo: boolean = false){
+    let direccion = this.url + 'activarproducto/' + id.toString();
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+      activo: activo,
+    };
+    return this.http.get(direccion, { headers: headers, params: params });
   }
 
   /**
@@ -884,7 +901,7 @@ export class ApiService {
    * @param id_pedido del pedido
    * @returns 
    */
-  cambiarEstadoPedido(formData: FormData, id_pedido: number=-1){
+  cambiarEstadoPedido(formData: FormData, id_pedido: number = -1) {
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'cambiarestadopedidos/' + id_pedido;
     return this.http.put(direccion, formData);
@@ -1008,9 +1025,25 @@ export class ApiService {
    * @param link a comprobar
    * @returns 
    */
-  checkLinks(link: string='', time: number = 10){
+  checkLinks(link: string = '', time: number = 10) {
     let direccion = this.url + 'links/'
-    return this.http.post<any>(direccion, {link: link, time: time});
+    return this.http.post<any>(direccion, { link: link, time: time });
+  }
+
+  /**
+   * Obtiene todas las ventas
+   * @returns 
+   */
+  getVentas(id_user: number = -1, fecha: string = '', producto_id: number = -1): Observable<Ventas[]>{
+    let direccion = this.url + 'ventas';
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      id_user: id_user,
+      fecha: fecha,
+      producto_id: producto_id,
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.get<Ventas[]>(direccion, { headers: headers, params: params });
   }
 
 }

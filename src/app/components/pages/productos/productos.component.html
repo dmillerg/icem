@@ -131,9 +131,10 @@
 
         </div>
 
-        <div class="col-sm-10 scroll-mine "
-            style="display: flex; flex-direction: row;overflow-x: auto;min-height: 200px; "
+        <div class="col-sm-10 scroll-mine"
+            style="display: flex; flex-direction: row;overflow-x: auto;min-height: 400px;position: relative; "
             [@listAnimation]="productos.length">
+            <label class="empty" *ngIf="productos.length==0">No existen productos en esta categoria</label>
             <div *ngFor="let item of productos" style="width: 16rem;">
                 <app-producto [producto]="item" style="margin-inline: 20px;"
                     (emisor)="swicthEspecification($event, especification)">
