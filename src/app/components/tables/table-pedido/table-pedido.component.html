@@ -26,7 +26,7 @@
                 <button hidden class="btn btn-outline-primary" (click)="updateProducto(item)"> <i
                         class="bi bi-pencil svg-shadow"></i>
                 </button>
-                <button class="btn btn-outline-info" (click)="cambiarEstadoPedido(item)"> <i
+                <button class="btn btn-outline-info" (click)="cambiarEstadoPedido(item)" [disabled]="item.estado==='finalizado'"> <i
                     class="bi bi-basket svg-shadow"></i>
             </button>
                 <button class="btn btn-outline-danger" [disabled]="item.estado==='finalizado'" (click)="delete(item)">

@@ -49,12 +49,12 @@
 
     </ul>
     <form class="d-flex form">
-        <input class="form-control me-2 input-outline" [(ngModel)]="titulo" name="titulo" type="search"
+        <input class="form-control me-2 input-outline" style="border-radius: 1em;padding-left: 15px;" [(ngModel)]="titulo" name="titulo" type="search"
             placeholder="Buscar..." aria-label="Search">
         <button class="btn btn-outline-firstcolor btn-search"
             style="height: 40px;display: flex;align-items: center;justify-content: center;position: relative;"
             (click)="buscar()">
-            <div class="pista pista-off pista-bottom">buscar</div>
+            <!-- <div class="pista pista-off pista-bottom">buscar</div> -->
             <i class="fa fa-search svg-shadow"></i>
         </button>
     </form>

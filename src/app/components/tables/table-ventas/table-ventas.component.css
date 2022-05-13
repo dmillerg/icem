@@ -2,19 +2,20 @@ td {
     width: 6%;
 }
 
-.table-mine{
-
+.table-mine {
 }
 
-.table-mine .seleccionable{
+.seleccionable {
     width: 100%;
-    height: 60px;
     padding: 10px;
     display: flex;
     align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
-.table-mine .seleccionable .selecc{
+.seleccionable .selecc {
     line-height: 45px;
     width: 150px;
     padding: 10px;
@@ -24,11 +25,11 @@ td {
     border: none;
     text-overflow: ellipsis;
     border-radius: 0.5em;
-    box-shadow: 0 0 2px 2px var(--firstcolor);
+    /* box-shadow: 0 0 2px 2px var(--firstcolor); */
 }
 
-.table-mine .seleccionable .selecc2{
-    line-height: 45px;
+.seleccionable .selecc2 {
+    line-height: 40px;
     width: 150px;
     outline: none;
     background-color: var(--firstcolor-hover);
@@ -36,6 +37,6 @@ td {
     border: none;
     text-overflow: ellipsis;
     border-radius: 0.5em;
-    box-shadow: 0 0 2px 2px var(--firstcolor);
+    /* box-shadow: 0 0 2px 2px var(--firstcolor); */
     padding-left: 10px;
 }

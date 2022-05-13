@@ -20,7 +20,7 @@ export class TableVentasComponent implements OnInit {
   @Input() usuarios: Usuario[] = [];
   @Input() productos: Producto[] = [];
   user_id: number = -1;
-  fecha : string= '';
+  fecha: string = '';
   producto_id: number = -1;
 
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
@@ -46,6 +46,7 @@ export class TableVentasComponent implements OnInit {
 
   getProductoFoto(id: number, position: number) {
     this.api.getProductoFoto(id).subscribe(result => {
+      this.ventas[position].url = result.url;
     }, error => {
       this.ventas[position].url = error.url;
     })
@@ -65,7 +66,7 @@ export class TableVentasComponent implements OnInit {
   loadProductos() {
     this.api.getProducto().subscribe((result) => {
       if (result.length > 0) {
-          this.productos = result;
+        this.productos = result;
       } else this.usuarios = [];
     });
   }
@@ -104,23 +105,33 @@ export class TableVentasComponent implements OnInit {
   }
 
   cambiarEstadoPedido(pedido: Pedido) {
-   let modal = this.modalService.open(ModalEstadoPedidoComponent, {backdrop: 'static'});
-   modal.componentInstance.id = pedido.id;
-   modal.componentInstance.estado = pedido.estado;
-   modal.result.then(result=>{
-     if(result){
-       this.loadVentas();
-     }
-   })
+    let modal = this.modalService.open(ModalEstadoPedidoComponent, { backdrop: 'static' });
+    modal.componentInstance.id = pedido.id;
+    modal.componentInstance.estado = pedido.estado;
+    modal.result.then(result => {
+      if (result) {
+        this.loadVentas();
+      }
+    })
   }
 
-  generarReportes(){
-    this.api.generarReportes(this.ventas).subscribe(result=>{
+  generarReportes() {
+    this.api.generarReportes(this.user_id, this.fecha, this.producto_id, 'ventas.xlsx').subscribe(result => {
       console.log(result);
-      
-    }, error=>{
+      let filename = result.headers.get('content-disposition')?.split(';')[1].split('=')[1];
+      let blob: Blob = result.body as Blob;
+      let a = document.createElement('a');
+      a.download = 'ventas.xlsx';
+      a.href = window.URL.createObjectURL(blob)
+      a.target="_blank"
+      a.click();
+      this.api.deleteFile('ventas.xlsx').subscribe((result)=>{
+        console.log(result);
+        
+      })
+    }, error => {
       console.log(error);
-      
+
     })
   }
 }

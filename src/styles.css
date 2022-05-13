@@ -196,6 +196,10 @@ h4 {
   src: url('fonts/MyriadPro-SemiboldSemiExt.otf');
 }
 
+/* *{
+  font-family: MyriadPro-BoldCond;
+} */
+
 .animado {
   opacity: 0;
   transform: translateY(50%);
@@ -265,6 +269,10 @@ h4 {
 
 .pista-bottom {
   bottom: var(--dimen-tooltip);
+}
+
+.btn {
+  position: relative;
 }
 
 .pista-off {

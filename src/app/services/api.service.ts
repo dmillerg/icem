@@ -107,7 +107,7 @@ export class ApiService {
    * @param id id del producto
    * @returns
    */
-  getProductoFoto(id) {
+  getProductoFoto(id): Observable<any> {
     let direccion = this.url + 'productoFoto/' + id.toString();
     return this.http.get(direccion);
   }
@@ -118,7 +118,7 @@ export class ApiService {
    * @param activo estado del producto
    * @returns 
    */
-  activarProducto(id: number=-1, activo: boolean = false){
+  activarProducto(id: number = -1, activo: boolean = false) {
     let direccion = this.url + 'activarproducto/' + id.toString();
     const headers = { 'content-type': 'application/json' };
     const params = {
@@ -1034,26 +1034,57 @@ export class ApiService {
    * Obtiene todas las ventas
    * @returns 
    */
-  getVentas(id_user: number = -1, fecha: string = '', producto_id: number = -1): Observable<Ventas[]>{
+  getVentas(id_user: number = -1, fecha: string = '', producto_id: number = -1): Observable<Ventas[]> {
     let direccion = this.url + 'ventas';
     const headers = { 'content-type': 'application/json' };
     const params = {
       id_user: id_user,
-      fecha: fecha,
+      fecha: fecha.toString(),
       producto_id: producto_id,
       token: this.storage.retrieve('usuario').token,
     };
     return this.http.get<Ventas[]>(direccion, { headers: headers, params: params });
   }
 
-  generarReportes(ventas: Ventas[]): Observable<any>{
+  /**
+   * genera un excel con el reporte
+   * @param user_id id del usuario
+   * @param fecha fecha de la venta
+   * @param producto_id id del producto
+   * @param name nombre del archiivo a devolver
+   * @returns 
+   */
+  generarReportes(
+    user_id: number = -1,
+    fecha: string = '',
+    producto_id: number = -1,
+    name: string = ''
+  ): Observable<any> {
+    let direccion = this.url + 'reportes';
+    const headers = { 'content-type': 'application/json' };
+
+    const params = {
+      user_id: user_id,
+      fecha: fecha,
+      producto_id: producto_id,
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.get(direccion, { headers: headers, params: params, observe: 'response', responseType: 'blob' });
+  }
+
+  /**
+   * Eliminar el archivo descargado
+   * @param name del archivo
+   * @returns 
+   */
+  deleteFile(name: string = '') {
     let direccion = this.url + 'reportes';
     const headers = { 'content-type': 'application/json' };
     const params = {
-      ventas: ventas,
+      name: name,
       token: this.storage.retrieve('usuario').token,
     };
-    return this.http.post<Ventas[]>(direccion, params);
+    return this.http.delete(direccion, { headers: headers, params: params });
   }
 
 }

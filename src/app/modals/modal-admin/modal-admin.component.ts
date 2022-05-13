@@ -48,6 +48,7 @@ export class ModalAdminComponent implements OnInit {
 
   usuario: Usuario;
   @Output() emisor: EventEmitter<string> = new EventEmitter<string>();
+  add_disable: boolean = false;
 
   activo: string = 'Productos';
   productosarray: Producto[] = [];
@@ -59,7 +60,7 @@ export class ModalAdminComponent implements OnInit {
   scraparray: Scrap[] = [];
   postsarray: Posts[] = [];
   pedidosarray: Pedido[] = [];
-  ventasarray: Ventas[] = [];
+  ventasarray: any[] = [];
   configuracionesarray: Configuracion[] = [];
 
   constructor(
@@ -146,7 +147,7 @@ export class ModalAdminComponent implements OnInit {
           'para la comercializacion y venta';
         modal.result.then((result) => {
           if (result) {
-            this.loadProductos();
+            this.loadAll();
           }
         });
         break;
@@ -156,7 +157,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'lo mas reciente en el ICEM';
         modal.result.then((result) => {
           if (result) {
-            this.loadNoticia();
+            this.loadAll();
           }
         });
         break;
@@ -167,7 +168,7 @@ export class ModalAdminComponent implements OnInit {
           'tipos de productos de la empresa';
         modal.result.then((result) => {
           if (result) {
-            this.loadCategorias();
+            this.loadAll();
           }
         });
         break;
@@ -180,7 +181,7 @@ export class ModalAdminComponent implements OnInit {
           'en pruebas para su posterior venta';
         modal.result.then((result) => {
           if (result) {
-            this.loadDesarrollo();
+            this.loadAll();
           }
         });
         break;
@@ -190,7 +191,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Administrador de la pagina';
         modal.result.then((result) => {
           if (result) {
-            this.loadUsuario();
+            this.loadAll();
           }
         });
         break;
@@ -200,7 +201,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Personas integrantes del equipo';
         modal.result.then((result) => {
           if (result) {
-            this.loadQuienes();
+            this.loadAll();
           }
         });
         break;
@@ -210,7 +211,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Scraps de los sitios';
         modal.result.then((result) => {
           if (result) {
-            this.loadScraps();
+            this.loadAll();
           }
         });
         break;
@@ -220,7 +221,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
         modal.result.then((result) => {
           if (result) {
-            this.loadPosts();
+            this.loadAll();
           }
         });
         break;
@@ -235,6 +236,27 @@ export class ModalAdminComponent implements OnInit {
         // });
         break;
     }
+  }
+
+  getProductoFoto(id: number, position: number) {
+    this.api.getProductoFoto(id).subscribe(result => {
+      this.ventasarray[position].url = result.url;
+    }, error => {
+      this.ventasarray[position].url = error.url;
+    })
+  }
+
+  loadAll(){
+    this.loadCategorias();
+    this.loadDesarrollo();
+    this.loadNoticia();
+    this.loadPedidos();
+    this.loadPosts();
+    this.loadProductos();
+    this.loadQuienes();
+    this.loadScraps();
+    this.loadUsuario();
+    this.loadVentas();
   }
 
   logout() {
@@ -316,9 +338,12 @@ export class ModalAdminComponent implements OnInit {
   }
 
   loadVentas() {
+    this.ventasarray = [];
     this.api.getVentas().subscribe((result) => {
       if (result.length > 0) {
-        this.ventasarray = result;
+        result.forEach((e, i) => {
+          this.getProductoFoto(e.producto_id, i);
+        })
       } else this.ventasarray = [];
     });
   }
