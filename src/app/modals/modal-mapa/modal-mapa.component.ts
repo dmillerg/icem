@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalMapaComponent implements OnInit {
   actiModal: NgbActiveModal;
-  zoom: number = 1;
+  zoom: number = 1.8;
   constructor(private activeModal: NgbActiveModal) {
     this.actiModal = this.actiModal;
   }
