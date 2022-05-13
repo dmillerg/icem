@@ -6,7 +6,7 @@
     <button class="btn btn-primary" (click)="comenzar()">Aceptar</button>
   </form>
 
-  <div class="box-sms scroll-mine"  id="box-sms" [@listAnimation]="mensajes.length">
+  <div class="box-sms scroll-mine" id="box-sms" [@listAnimation]="mensajes.length">
     <div class="box-screen" [hidden]="!borrando">
       <div class="box-delete">
         <div style="width: 40%; padding-left: 5%">
@@ -26,7 +26,17 @@
           'visibility-off': item.nombre == nombre
         }" (click)=" downloadFile(item.archivo)">
         <p class="respuesta-sms" *ngIf="item.id_respondido>-1">{{item.respuesta}}</p>
-        <img [src]="item.imagen" [hidden]="item.archivo == ''" />
+        <div class="row">
+          <div class="col-sm-10">
+            <img [src]="item.imagen" [hidden]="item.archivo == ''" />
+          </div>
+          <div class="col-sm-2" style="justify-content: center;">
+            <button class="btn-actions text-shadow"><i class="bi bi-download"></i></button>
+            <button class="btn-actions text-shadow"><i class="bi bi-eye"></i></button>
+            <button class="btn-actions text-shadow"><i class="bi bi-download"></i></button>
+          </div>
+        </div>
+
         <p>{{ item.sms }}</p>
         <p class="font-small">
           {{ item.nombre }} {{ item.fecha | date: "hh:mm:ss" }}
@@ -36,8 +46,18 @@
           'visibility-off': item.nombre != nombre,
           'visibility-on': item.nombre == nombre
         }" (click)=" downloadFile(item.archivo)">
-        <p class="respuesta-sms" *ngIf="item.id_respondido>-1" >{{item.respuesta}}</p>
-        <img [src]="item.imagen" [hidden]="item.archivo == ''" />
+        <p class="respuesta-sms" *ngIf="item.id_respondido>-1">{{item.respuesta}}</p>
+        <div class="row">
+          <div class="col-sm-2" style="justify-content: center;">
+            <button class="btn-actions text-shadow"><i class="bi bi-download"></i></button>
+            <button class="btn-actions text-shadow"><i class="bi bi-eye"></i></button>
+            <button class="btn-actions text-shadow"><i class="bi bi-download"></i></button>
+          </div>
+          <div class="col-sm-10">
+            <img [src]="item.imagen" [hidden]="item.archivo == ''" />
+          </div>
+          
+        </div>
         <p>{{ item.sms }}</p>
         <p class="font-small">
           {{ item.nombre }} {{ item.fecha | date: "hh:mm:ss" }}

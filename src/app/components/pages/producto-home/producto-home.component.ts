@@ -38,7 +38,8 @@ export class ProductoHomeComponent implements OnInit {
     }
     // console.log(this.id+'\n'+this.titulo+'\n'+this.descripcion+'\n'+this.src_producto+'\n');
     this.api.getProductoFoto(this.producto.id).subscribe((result) => {
-      console.log(result);
+      // console.log(result);
+      this.producto.imagen = result.url;
     }, error => this.producto.imagen = error.url)
     if (this.direccion) {
       this.color = 'bg-osc';

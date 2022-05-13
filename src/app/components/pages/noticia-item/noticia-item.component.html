@@ -4,7 +4,7 @@
   </div>
   <div class="row">
 
-    <img class="image" style="text-align: center;" [src]="noticia.imagen" [alt]="noticia.titulo" />
+    <img *ngIf="noticia.imagen.length>0" class="image" style="text-align: center;" [src]="noticia.imagen" [alt]="noticia.titulo" />
 
     <div class="body-text" style="padding: 20px;">
       <h5 class="text-firstcolor">{{ noticia.titulo }}</h5>

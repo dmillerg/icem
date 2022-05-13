@@ -1,7 +1,7 @@
 <div class="modal-header bg dark">
   <div class="row">
     <div class="col-sm-3">
-      <img [hidden]="usuario.usuario != 'kuroko'" style="width: 60px;height: 40px;" src="assets/icono-kuroko.png" />
+      <img [hidden]="usuario.usuario != 'kuroko'" class="svg-shadow" style="width: 60px;height: 35px;" src="assets/icono-kuroko.png" />
       <div class="fav-icon" [hidden]="usuario.usuario == 'kuroko'">
         <span class="fav-letter">{{ usuario.usuario[0].toUpperCase() }}</span>
       </div>
