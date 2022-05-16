@@ -26,7 +26,7 @@
                             y servicios a sus clientes nacionales.
                         </p>
                     </div>
-                    <form #formlogin [ngClass]="{'autenticar': !showLogin, 'autenticado': showLogin}"
+                    <!-- <form #formlogin [ngClass]="{'autenticar': !showLogin, 'autenticado': showLogin}"
                         [hidden]="!showLogin">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Usuario</label>
@@ -42,7 +42,7 @@
                         <button type="submit" class="btn btn-firstcolor" (click)="login()">Autenticar</button>
                         <button type="submit" class="btn btn-outline-firstcolor" (click)="cancelarLogin()"
                             style="margin-left: 10px;">Cancelar</button>
-                    </form>
+                    </form> -->
                 </div>
                 <!--Grid column-->
 
@@ -129,17 +129,17 @@
         <!-- Section: Social media -->
         <section class="mb-4 text-center">
             <!-- Facebook -->
-            <a class="btn btn-outline-primary btn-floating m-1 rounded-circle" href="https://www.facebook.com/ICEMCuba"
+            <a title="facebook" class="btn btn-outline-primary btn-floating m-1 rounded-circle" href="https://www.facebook.com/ICEMCuba"
                 target="_blank" role="button"><i class="fab fa-facebook-f"></i></a>
 
             <!-- Google -->
-            <a class="btn btn-outline-success btn-floating m-1 rounded-circle"
+            <a title="google" class="btn btn-outline-success btn-floating m-1 rounded-circle"
                 href="https://www.google.com/search?client=firefox-b-d&q=icem+cuba" target="_blank" role="button"><i
                     class="fab fa-google"></i></a>
 
             <!-- Google -->
-            <a class="btn btn-outline-warning btn-floating m-1 rounded-circle correo"
-                href="https://www.facebook.com/ICEMCuba" target="_blank" role="button"><i
+            <a title="correo" class="btn btn-outline-warning btn-floating m-1 rounded-circle correo"
+                href="https://empresaicem@gmail.com" target="_blank" role="button"><i
                     class="fa fa-envelope"></i></a>
 
         </section>

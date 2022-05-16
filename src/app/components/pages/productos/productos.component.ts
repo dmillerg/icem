@@ -84,7 +84,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy(): void {
-    this.storage.store('categoria', {id: -1, nombre: 'Todos'});
+    this.storage.store('categoria', { id: -1, nombre: 'Todos' });
   }
 
   ngOnInit(): void {
@@ -111,19 +111,21 @@ export class ProductosComponent implements OnInit, OnDestroy {
       this.alias = this.storage.retrieve('usuario').usuario;
     }
     this.storage.observe('usuario').subscribe((result) => {
-      if (result) {
-        this.correo = result.correo;
-        this.alias = result.usuario;
-      } else {
-        this.correo = '';
-        this.alias = '';
+      if (result.correo != this.correo && result.alias != this.alias) {
+        if (result) {
+          this.correo = result.correo;
+          this.alias = result.usuario;
+        } else {
+          this.correo = '';
+          this.alias = '';
+        }
       }
     })
   }
 
   loadAllProductos() {
     this.api.getProducto(0, -1, -1).subscribe((result) => {
-      this.productoss = result.filter(e=>e.activo);
+      this.productoss = result.filter(e => e.activo);
     })
   }
 
@@ -151,7 +153,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
       this.categoriaId = this.storage.retrieve('categoria').id;
     }
     this.storage.observe('categoria').subscribe((result) => {
-      if (result) {
+      if (result && result.id != this.categoriaId) {
         this.categoriaId = result.id;
         this.loadProductos();
       }
@@ -160,7 +162,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   loadProductos() {
     this.api.getProducto(0, this.categoriaId, this.producto.id).subscribe((result) => {
-      this.productos = result.filter(e=>e.activo);
+      this.productos = result.filter(e => e.activo);
       this.loadPosts();
       if (this.storage.retrieve('producto')) {
         this.storage.store('producto', this.producto);

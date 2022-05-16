@@ -43,13 +43,13 @@ export class QuienesSomosComponent implements OnInit {
     this.cargaInicial();
     this.cargaInicial2();
     this.loadQuienes();
-    this.loadVideo();
+    // this.loadVideo();
     setTimeout(()=>{
       if(this.storage.retrieve('quienes')){
         this.scrollInicial(this.storage.retrieve('quienes'));
       }
       this.storage.observe('quienes').subscribe((result)=>{
-        this.scrollInicial(result);
+        // this.scrollInicial(result);
       })
     }, 600)
   }

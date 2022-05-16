@@ -161,29 +161,31 @@ p {
     opacity: 0;
     margin-top: -1px;
     visibility: hidden;
+    list-style-type: none;
+    padding: 0;
     /* pointer-events: none; */
     transition: all 0.3s ease;
     z-index: 999;
 }
 
-.menu-left{
+.menu-left {
     position: absolute;
     left: 0;
 }
 
-.menu-right{
+.menu-right {
     position: absolute;
     right: 0;
 }
 
-.menu-top{
+.menu-top {
     position: absolute;
     bottom: 0;
 }
 
-.menu-bottom{
+.menu-bottom {
     position: absolute;
-    
+
 }
 
 .nav-item:hover .menu {
@@ -209,11 +211,11 @@ p {
     transition: all .3s;
 }
 
-.form{
+.form {
     position: relative;
 }
 
-.form .btn-search{
+.form .btn-search {
     border: none;
     position: absolute;
     right: 55px;
@@ -221,7 +223,7 @@ p {
     border-top-right-radius: 1em;
 }
 
-.nav-mine i .cant-cart{
+.nav-mine i .cant-cart {
     position: absolute;
     font-family: Arial, Helvetica, sans-serif;
     top: -8px;
@@ -238,47 +240,47 @@ p {
     font-size: 10px;
 }
 
-.nav-contextual .info{
+.nav-contextual .info {
     display: flex;
     flex-direction: column;
     color: var(--firstcolor);
     transition: all .3s ease;
 }
 
-.nav-contextual:hover .info label{
+.nav-contextual:hover .info label {
     transition: all .3s ease;
     color: white;
 }
 
-.nav-contextual .btn-delete{
+.nav-contextual .btn-delete {
     margin-left: 10px;
     color: var(--firstcolor);
     transition: all .3s ease;
 }
 
-.nav-contextual:hover .btn-delete{
+.nav-contextual:hover .btn-delete {
     color: white;
 }
 
-.nav-contextual.active{
+.nav-contextual.active {
     background-color: var(--firstcolor);
     color: white;
 }
 
-.nav-contextual.disabled{
+.nav-contextual.disabled {
     color: var(--firstcolor);
 }
 
-.nav-contextual.disabled:hover{
+.nav-contextual.disabled:hover {
     color: var(--firstcolor);
     background-color: white;
 }
 
-.nav-contextual.active:hover{
+.nav-contextual.active:hover {
     background-color: var(--firstcolor-hover);
 }
 
-.navbar-mobile{
+.navbar-mobile {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -291,19 +293,19 @@ p {
     color: white;
 }
 
-.navbar-mobile .title-navbar-mobile h3{
+.navbar-mobile .title-navbar-mobile h3 {
     margin-top: 20px;
     color: white;
 }
 
-.navbar-mobile .imagen-navbar-mobile{
+.navbar-mobile .imagen-navbar-mobile {
     width: 100px;
     height: 100px;
     position: absolute;
     bottom: -50px;
 }
 
-.navbar-mobile .imagen-navbar-mobile img{
+.navbar-mobile .imagen-navbar-mobile img {
     width: 100%;
     height: 100%;
 }

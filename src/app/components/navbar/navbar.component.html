@@ -1,4 +1,4 @@
-<nav [class]="back_class" class="scroll-mine" style="z-index: 999;height: fit-content" >
+<nav [class]="back_class" class="scroll-mine" style="z-index: 999;height: fit-content">
     <div class="container-fluid">
         <div class="navbar-brand">
             <span class="letter" data-letter="I" (click)="navigateTo('inicio')"
@@ -16,96 +16,114 @@
                         class="fa fa-home svg-shadow"></i> Inicio </li>
                 <li class="nav-item nav-mine" id="productos" (click)="navigateTo('productos')"><i
                         class="fa fa-medkit svg-shadow"></i> Productos
-                    <div class="menu menu-left">
-                <li class="nav-contextual" (click)="loadProducto({id: -1, nombre: 'Todos'})"><i
-                        class="fa fa-medkit col-sm-2" style="margin-right: 10px;"></i><span
-                        class="col-sm-10">Todos</span></li>
-                <li *ngFor="let item of categorias" class="nav-contextual" (click)="loadProducto(item)"><i
-                        class="fa fa-medkit col-sm-2" style="margin-right: 10px;"></i><span
-                        class="col-sm-10">{{item.nombre}}</span></li>
+                    <ul class="menu menu-left">
+                        <li class="nav-contextual" (click)="loadProducto({id: -1, nombre: 'Todos'})"><i
+                                class="fa fa-medkit col-sm-2" style="margin-right: 10px;"></i><span
+                                class="col-sm-10">Todos</span></li>
+                        <li *ngFor="let item of categorias" class="nav-contextual" (click)="loadProducto(item)"><i
+                                class="fa fa-medkit col-sm-2" style="margin-right: 10px;"></i><span
+                                class="col-sm-10">{{item.nombre}}</span></li>
+                    </ul>
+
+                </li>
+                <li class="nav-item nav-mine" id="quienes" (click)="navigateTo('quienes')"><i
+                        class="fa fa-users svg-shadow"></i>
+                    Quienes somos
+                    <ul class="menu menu-left">
+
+                        <li class="nav-contextual" (click)="loadQuienes('mision')"><i class="fa fa-users col-sm-2"
+                                style="margin-right: 10px;"></i><span class="col-sm-10">Mision</span></li>
+                        <li class="nav-contextual" (click)="loadQuienes('vision')"><i class="fa fa-users col-sm-2"
+                                style="margin-right: 10px;"></i><span class="col-sm-10">Vision</span></li>
+                        <li class="nav-contextual" (click)="loadQuienes('objetivo')"><i class="fa fa-users col-sm-2"
+                                style="margin-right: 10px;"></i><span class="col-sm-10">Objetivo</span></li>
+                        <li class="nav-contextual" (click)="loadQuienes('miembros')"><i class="fa fa-users col-sm-2"
+                                style="margin-right: 10px;"></i><span class="col-sm-10">Miembros del equipo</span></li>
+                        <li class="nav-contextual" (click)="loadQuienes('actividades')"><i class="fa fa-users col-sm-2"
+                                style="margin-right: 10px;"></i><span class="col-sm-10">Actividades</span></li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-mine" id="noticias" (click)="navigateTo('noticias')"><i
+                        class="fa fa-book-open svg-shadow"></i> Noticias</li>
+                <li class="nav-item nav-mine" id="nuevos" (click)="navigateTo('nuevos')"><i
+                        class="fa fa-gavel svg-shadow"></i>
+                    Nuevos Desarrollos</li>
+
+                <form class="d-flex form">
+                    <input class="form-control me-2 input-outline" style="border-radius: 1em;padding-left: 15px;"
+                        [(ngModel)]="titulo" name="titulo" type="search" placeholder="Buscar..." aria-label="Search">
+                    <button class="btn btn-outline-firstcolor btn-search" title="buscar"
+                        style="height: 40px;display: flex;align-items: center;justify-content: center;position: relative;"
+                        (click)="buscar()">
+                        <!-- <div class="pista pista-off pista-bottom">buscar</div> -->
+                        <i class="fa fa-search svg-shadow"></i>
+                    </button>
+                </form>
+                <li class="nav-item nav-mine" style="position: relative;"><i class="bi bi-person-fill svg-shadow"></i>
+                    {{acceso}}
+                    <ul class="menu"
+                        [ngClass]="{'menu-left': calcularWindowWidthSize(), 'menu-right': !calcularWindowWidthSize(), 'menu-top': calcularWindowHeightSize(), 'menu-bottom':!calcularWindowHeightSize()}">
+                        <li *ngIf="acceso=='acceder/registrarse'" class="nav-contextual"
+                            (click)="loginOrRegister('Login')">
+                            <i class="bi bi-person-circle col-sm-2" style="margin-right: 10px;"></i><span
+                                class="col-sm-10">autenticarse</span>
+                        </li>
+                        <li *ngIf="acceso!='acceder/registrarse'" class="nav-contextual" (click)="perfil();"><i
+                                class="bi bi-person-video2 col-sm-2" style="margin-right: 10px;"></i><span
+                                class="col-sm-10">perfil</span>
+                        </li>
+                        <li *ngIf="acceso=='acceder/registrarse'" class="nav-contextual"
+                            (click)="loginOrRegister('Register')"><i class="bi bi-person-plus-fill col-sm-2"
+                                style="margin-right: 10px;"></i><span class="col-sm-10">registrarse</span></li>
+                        <li *ngIf="acceso!='acceder/registrarse' && storage2.retrieve('usuario').rol=='admin'"
+                            (click)="administrar()" class="nav-contextual"><i class="bi bi-kanban-fill col-sm-2"
+                                style="margin-right: 10px;"></i><span class="col-sm-10">administrar</span></li>
+                        <li *ngIf="acceso!='acceder/registrarse'" class="nav-contextual" (click)="cancelarLogin()"><i
+                                class="bi bi-door-closed-fill col-sm-2" style="margin-right: 10px;"></i><span
+                                class="col-sm-10">cerrar
+                                sesión</span></li>
+                    </ul>
+                </li>
+                <li *ngIf="acceso!='acceder/registrarse'" class="nav-item nav-mine" style="position: relative;"><i
+                        class="bi bi-cart3 svg-shadow">
+                        <div class="cant-cart">{{carrito.length}}</div>
+                    </i>
+                    <ul class="menu"
+                        [ngClass]="{'menu-left': calcularWindowWidthSize() && !calcularWindowHeightSize(), 'menu-right': !calcularWindowWidthSize(), 'menu-top': calcularWindowWidthSize() && calcularWindowHeightSize()}">
+                        <li class="nav-contextual disabled" disabled style="width: 250px;" *ngIf="carrito.length>0">
+                            <label for="">
+                                Tiempo restante:
+                                {{(tiempo.hora<10)?'0'+tiempo.hora:
+                                    tiempo.hora}}:{{(tiempo.minuto<10)?'0'+tiempo.minuto:
+                                    tiempo.minuto}}:{{(tiempo.segundo<10)?'0'+tiempo.segundo: tiempo.segundo}} </label>
+                        </li>
+                        <li *ngFor="let item of carrito" class="nav-contextual" style="width: 250px;">
+
+                            <img title="carritoimage1" style="width: 60px;height: 60px;margin-right: 10px;"
+                                [src]="item.url" [alt]="item.url">
+                            <div class="info">
+                                <label>id del producto:{{item.producto_id}}</label>
+                                <label for="">cantidad: {{item.cantidad}}</label>
+                            </div>
+                            <button class="btn btn-delete" (click)="deleteCarrito(item.id)"><i
+                                    class="bi bi-x"></i></button>
+                        </li>
+                        <li class="nav-contextual disabled" disabled style="width: 250px;" *ngIf="carrito.length>0">
+                            <label for="">Total
+                                a
+                                pagar: {{total_pagar}}</label></li>
+                        <li class="nav-contextual active" (click)="pagarCarrito()" style="width: 250px;"
+                            *ngIf="carrito.length>0">
+                            <label for=""> Pagar</label>
+                        </li>
+                        <li class="nav-contextual" style="width: 250px;" *ngIf="carrito.length==0"><label for="">No hay
+                                productos en
+                                el
+                                carrito</label></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-        </li>
-        <li class="nav-item nav-mine" id="quienes" (click)="navigateTo('quienes')"><i
-                class="fa fa-users svg-shadow"></i>
-            Quienes somos
-            <div class="menu menu-left">
-        <li class="nav-contextual" (click)="loadQuienes('mision')"><i class="fa fa-users col-sm-2"
-                style="margin-right: 10px;"></i><span class="col-sm-10">Mision</span></li>
-        <li class="nav-contextual" (click)="loadQuienes('vision')"><i class="fa fa-users col-sm-2"
-                style="margin-right: 10px;"></i><span class="col-sm-10">Vision</span></li>
-        <li class="nav-contextual" (click)="loadQuienes('objetivo')"><i class="fa fa-users col-sm-2"
-                style="margin-right: 10px;"></i><span class="col-sm-10">Objetivo</span></li>
-        <li class="nav-contextual" (click)="loadQuienes('miembros')"><i class="fa fa-users col-sm-2"
-                style="margin-right: 10px;"></i><span class="col-sm-10">Miembros del equipo</span></li>
-        <li class="nav-contextual" (click)="loadQuienes('actividades')"><i class="fa fa-users col-sm-2"
-                style="margin-right: 10px;"></i><span class="col-sm-10">Actividades</span></li>
-    </div>
-    </li>
-    <li class="nav-item nav-mine" id="noticias" (click)="navigateTo('noticias')"><i
-            class="fa fa-book-open svg-shadow"></i> Noticias</li>
-    <li class="nav-item nav-mine" id="nuevos" (click)="navigateTo('nuevos')"><i class="fa fa-gavel svg-shadow"></i>
-        Nuevos Desarrollos</li>
-
-
-    </ul>
-    <form class="d-flex form">
-        <input class="form-control me-2 input-outline" style="border-radius: 1em;padding-left: 15px;" [(ngModel)]="titulo" name="titulo" type="search"
-            placeholder="Buscar..." aria-label="Search">
-        <button class="btn btn-outline-firstcolor btn-search"
-            style="height: 40px;display: flex;align-items: center;justify-content: center;position: relative;"
-            (click)="buscar()">
-            <!-- <div class="pista pista-off pista-bottom">buscar</div> -->
-            <i class="fa fa-search svg-shadow"></i>
-        </button>
-    </form>
-    <li class="nav-item nav-mine" style="position: relative;"><i class="bi bi-person-fill svg-shadow"></i>
-        {{acceso}}
-        <div class="menu" [ngClass]="{'menu-left': calcularWindowWidthSize(), 'menu-right': !calcularWindowWidthSize(), 'menu-top': calcularWindowHeightSize(), 'menu-bottom':!calcularWindowHeightSize()}" >
-    <li *ngIf="acceso=='acceder/registrarse'" class="nav-contextual" (click)="loginOrRegister('Login')"><i
-            class="bi bi-person-circle col-sm-2" style="margin-right: 10px;"></i><span
-            class="col-sm-10">autenticarse</span></li>
-    <li *ngIf="acceso!='acceder/registrarse'" class="nav-contextual" (click)="perfil();"><i
-            class="bi bi-person-video2 col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">perfil</span>
-    </li>
-    <li *ngIf="acceso=='acceder/registrarse'" class="nav-contextual" (click)="loginOrRegister('Register')"><i
-            class="bi bi-person-plus-fill col-sm-2" style="margin-right: 10px;"></i><span
-            class="col-sm-10">registrarse</span></li>
-    <li *ngIf="acceso!='acceder/registrarse' && storage2.retrieve('usuario').rol=='admin'" (click)="administrar()"
-        class="nav-contextual"><i class="bi bi-kanban-fill col-sm-2" style="margin-right: 10px;"></i><span
-            class="col-sm-10">administrar</span></li>
-    <li *ngIf="acceso!='acceder/registrarse'" class="nav-contextual" (click)="cancelarLogin()"><i
-            class="bi bi-door-closed-fill col-sm-2" style="margin-right: 10px;"></i><span class="col-sm-10">cerrar
-            sesión</span></li>
-    </div>
-    </li>
-    <li *ngIf="acceso!='acceder/registrarse'" class="nav-item nav-mine" style="position: relative;"><i
-            class="bi bi-cart3 svg-shadow">
-            <div class="cant-cart">{{carrito.length}}</div>
-        </i>
-        <div class="menu" [ngClass]="{'menu-left': calcularWindowWidthSize() && !calcularWindowHeightSize(), 'menu-right': !calcularWindowWidthSize(), 'menu-top': calcularWindowWidthSize() && calcularWindowHeightSize()}">
-    <li class="nav-contextual disabled" disabled style="width: 250px;" *ngIf="carrito.length>0"><label for="">
-            Tiempo restante:
-            {{(tiempo.hora<10)?'0'+tiempo.hora: tiempo.hora}}:{{(tiempo.minuto<10)?'0'+tiempo.minuto:
-                tiempo.minuto}}:{{(tiempo.segundo<10)?'0'+tiempo.segundo: tiempo.segundo}} </label>
-    </li>
-    <li *ngFor="let item of carrito" class="nav-contextual" style="width: 250px;">
-
-        <img style="width: 60px;height: 60px;margin-right: 10px;" [src]="item.url" [alt]="item.url">
-        <div class="info">
-            <label>id del producto:{{item.producto_id}}</label>
-            <label for="">cantidad: {{item.cantidad}}</label>
-        </div>
-        <button class="btn btn-delete" (click)="deleteCarrito(item.id)"><i class="bi bi-x"></i></button>
-    </li>
-    <li class="nav-contextual disabled" disabled style="width: 250px;" *ngIf="carrito.length>0"><label for="">Total a
-            pagar: {{total_pagar}}</label></li>
-    <li class="nav-contextual active" (click)="pagarCarrito()" style="width: 250px;" *ngIf="carrito.length>0"><label
-            for=""> Pagar</label></li>
-    <li class="nav-contextual" style="width: 250px;" *ngIf="carrito.length==0"><label for="">No hay productos en el
-            carrito</label></li>
-    </div>
-    </li>
-    </div>
     </div>
 </nav>
 
@@ -142,7 +160,7 @@
     </div>
     <div
         style="display: flex;flex-direction: row;align-items: center;justify-content: center;width: 20%;height: 400px;">
-        <img class="image" src="assets/icon-icem-gray.png">
+        <img title="iconogrisicem" class="image" src="assets/icon-icem-gray.png">
     </div>
 </div>
 
@@ -156,6 +174,6 @@
         <label class=" text-shadow" for="">Para su inversión presente y futura</label>
     </div>
     <div class="imagen-navbar-mobile">
-        <img class="image svg-shadow" src="assets/icon-icem-gray.png">
+        <img title="iconogrisicem" class="image svg-shadow" src="assets/icon-icem-gray.png">
     </div>
 </div>

@@ -32,7 +32,7 @@ export class BusquedaComponent implements OnInit {
       this.titulo = this.storage.retrieve('titulo');
     }
     this.storage.observe('titulo').subscribe((result)=>{
-      if(result){
+      if(result && result.length>0){
         this.titulo = result;
         this.loadProductos();
       }

@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
     this.activate();
     this.cargarConfigs();
     this.storage.observe('configuraciones').subscribe((result) => {
+      if(result && result!= undefined)
       this.cargarConfigs();
     })
     this.loading = true;

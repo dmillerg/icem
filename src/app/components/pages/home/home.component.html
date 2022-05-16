@@ -73,12 +73,11 @@
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <div style="border-radius: 100%;background-color:white;width: 10px;height: 10px;border: 1px solid rgba(255, 255, 255, 0.692)"
-                data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true"
-                aria-label="Slide 1"></div>
+                data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true"></div>
             <div style="border-radius: 100%;background-color: white;width: 10px;height: 10px;border: 1px solid rgba(255, 255, 255, 0.692)"
-                data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></div>
+                data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></div>
             <div style="border-radius: 100%;background-color: white;width: 10px;height: 10px;border: 1px solid rgba(255, 255, 255, 0.692)"
-                data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></div>
+                data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></div>
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -153,7 +152,8 @@
         <h1 class="title-section2 text-section"><strong>Productos...</strong></h1>
     </div>
     <div class="row p-4"></div>
-    <div *ngIf="productos_recientes.length>0" class="row" style="justify-content: center;" [@listAnimation]="productos_recientes.length">
+    <div *ngIf="productos_recientes.length>0" class="row" style="justify-content: center;"
+        [@listAnimation]="productos_recientes.length">
         <div *ngFor="let item of productos_recientes" class="col-sm-6 col-md-4 col-lg-3">
             <app-producto-home style="font-size: small" [producto]="item" [direccion]="item.direccion"
                 [cont]="item.cont"></app-producto-home>
