@@ -50,7 +50,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       if (result.length > 0) {
         result.forEach((item, i) => {
           console.log(item);
-          this.convertir(item, i==result.length-1);
+          this.convertir(item, i == result.length - 1);
         });
       }
     });
@@ -78,11 +78,20 @@ export class ChatComponent implements OnInit, OnDestroy {
           if (result != null) {
             item.respuesta = result.sms;
           }
+          // if (item.archivo.length>0) {
+            item.extension = item.archivo.substring(item.archivo.length-3, item.archivo.length);
+            console.log(item.extension);
+            
+          // }
           this.mensajes.push(item);
           this.cantMax = this.mensajes.length;
           // document.getElementById("box-sms").scrollTop = document.getElementById("box-sms").scrollHeight;
           if (ultimo) {
-            document.getElementById("final").scrollIntoView({ behavior: "smooth" });
+            setTimeout(() => {
+              document.getElementById("final").scrollIntoView({ behavior: "smooth" });
+
+            })
+            // this.scrollBottom();
           }
         })
       }
@@ -102,7 +111,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     let formData = new FormData();
     if (this.uploadFiles != undefined) {
       for (let i = 0; i < this.uploadFiles.length; i++) {
-        formData.append('foto', this.uploadFiles[i], this.uploadFiles[i].name);
+        formData.append('foto', this.uploadFiles[i], this.uploadFiles[i].lastModified.toString());
+        formData.append('extension', this.uploadFiles[i].name.substring(this.uploadFiles[i].name.indexOf('.') + 1, this.uploadFiles[i].name.length));
       }
     }
     formData.append('sms', this.sms.toString());
@@ -124,27 +134,14 @@ export class ChatComponent implements OnInit, OnDestroy {
     let file = (<HTMLInputElement>fileInput.target).files[0];
     //  console.log(fileInput);
     this.uploadFiles = fileInput.target.files;
+    console.log(this.uploadFiles);
+
     const reader = new FileReader();
     reader.onload = () => {
       // this.desarrollo.imagen = reader.result as string;
       this.message = 'archivo subido correctamente';
     };
     reader.readAsDataURL(file);
-  }
-
-  scrollBottom() {
-    let cant = 10;
-    const anim = setInterval(() => {
-      if (
-        document.getElementById('box-sms').scrollTop <
-        document.getElementById('box-sms').scrollHeight - 400
-      ) {
-        cant += 1.5;
-        document.getElementById('box-sms').scrollTop += cant;
-      } else {
-        clearInterval(anim);
-      }
-    }, 1);
   }
 
   upload() {
@@ -170,8 +167,18 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   downloadFile(nombre) {
-    this.api.downloadFoto(nombre).subscribe(
-      (result) => console.log(result),
+    this.api.downloadFile(nombre).subscribe(
+      (result) => {
+        let blob: Blob = result.body as Blob;
+        console.log('sss', blob);
+
+        let a = document.createElement('a');
+        a.download = nombre.toString();
+        a.href = window.URL.createObjectURL(blob)
+        a.target = "_blank"
+        a.click();
+        console.log(result)
+      },
       (error) => console.log(error)
     );
   }

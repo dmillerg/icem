@@ -24,7 +24,7 @@
 </div>
 <div class="modal-body" style="height: 100%; overflow-y: auto; padding-block: 0; padding-bottom: 20px">
   <div class="row">
-    <div class="col-sm-2 sidebar scroll-mine text-center">
+    <div class="sidebar scroll-mine text-center">
       <button [ngClass]="{
           'btn-primary': productos,
           'btn-outline-primary': !productos
@@ -87,7 +87,7 @@
         <i class="bi bi-door-closed"></i> Cerrar Sesion
       </button>
     </div>
-    <div class="col-sm-10 tabs-content scroll-mine" style="position: relative;">
+    <div class="tabs-content" style="position: relative;">
       <app-table-producto [productos]="productosarray" [ngClass]="{ 'fade-in-element': productos }"
         [hidden]="!productos"></app-table-producto>
       <app-table-categoria [categorias]="categoriaarray" [ngClass]="{ 'fade-in-element': categorias }"

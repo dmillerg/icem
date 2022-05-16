@@ -20,20 +20,20 @@
     </div>
     <p class="text-center text-danger" style="width: 100%;" [hidden]="mensajes.length > 0 || nombre.length == 0">
       {{messageChat}}</p>
-    <div *ngFor="let item of mensajes" style="width: 100%; display: flex; flex-direction: row ">
-      <div class="item-sms text-start" [id]="item.nombre" style="width: 50%" (click)="responderSMS(item)" [ngClass]="{
-          'visibility-on': item.nombre != nombre,
-          'visibility-off': item.nombre == nombre
-        }" (click)=" downloadFile(item.archivo)">
+    <div id="box-sms" class="box-sms">
+      <div *ngFor="let item of mensajes" class="item-sms" [ngClass]="{
+        'item-sms-left': item.nombre != nombre,
+        'item-sms-right': item.nombre == nombre }">
         <p class="respuesta-sms" *ngIf="item.id_respondido>-1">{{item.respuesta}}</p>
-        <div class="row">
-          <div class="col-sm-10">
-            <img [src]="item.imagen" [hidden]="item.archivo == ''" />
+        <div class="row" *ngIf="item.archivo.length>0">
+          <div class="col-sm-10" style="display: flex;justify-content: center;align-items: center;font-size: 30px;">
+            <i class="bi bi-cloud-arrow-down svg-shadow" *ngIf="item.extension!='jpg'&&item.extension!='png'&&item.extension!='ico'"></i>
+            <img [src]="item.imagen" *ngIf="item.archivo != '' && (item.extension=='jpg'||item.extension=='png'||item.extension=='ico')" />
           </div>
           <div class="col-sm-2" style="justify-content: center;">
-            <button class="btn-actions text-shadow"><i class="bi bi-download"></i></button>
-            <button class="btn-actions text-shadow"><i class="bi bi-eye"></i></button>
-            <button class="btn-actions text-shadow"><i class="bi bi-download"></i></button>
+            <button class="btn-actions text-shadow" (click)="downloadFile(item.archivo)"><i class="bi bi-download"></i></button>
+            <button class="btn-actions text-shadow" [disabled]="item.extension!='jpg'&&item.extension!='png'&&item.extension!='ico'"><i class="bi bi-eye"></i></button>
+            <!-- <button class="btn-actions text-shadow"><i class="bi bi-download"></i></button> -->
           </div>
         </div>
 
@@ -42,29 +42,9 @@
           {{ item.nombre }} {{ item.fecha | date: "hh:mm:ss" }}
         </p>
       </div>
-      <div class="item-sms text-end" [id]="item.id" style="width: 50%" (click)="responderSMS(item)" [ngClass]="{
-          'visibility-off': item.nombre != nombre,
-          'visibility-on': item.nombre == nombre
-        }" (click)=" downloadFile(item.archivo)">
-        <p class="respuesta-sms" *ngIf="item.id_respondido>-1">{{item.respuesta}}</p>
-        <div class="row">
-          <div class="col-sm-2" style="justify-content: center;">
-            <button class="btn-actions text-shadow"><i class="bi bi-download"></i></button>
-            <button class="btn-actions text-shadow"><i class="bi bi-eye"></i></button>
-            <button class="btn-actions text-shadow"><i class="bi bi-download"></i></button>
-          </div>
-          <div class="col-sm-10">
-            <img [src]="item.imagen" [hidden]="item.archivo == ''" />
-          </div>
-          
-        </div>
-        <p>{{ item.sms }}</p>
-        <p class="font-small">
-          {{ item.nombre }} {{ item.fecha | date: "hh:mm:ss" }}
-        </p>
-      </div>
+      <div id="final"></div>
     </div>
-    <div id="final"></div>
+ 
   </div>
 
   <div class="chat-form">
@@ -86,7 +66,7 @@
         <input type="text" name="sms" [(ngModel)]="sms" class="form-control" id="sms" placeholder="texto..."
           [disabled]="disable" />
       </div>
-      <input hidden name="imagen" type="file" id="formFile" accept="image/*" (change)="fileEvent($event)"
+      <input hidden name="imagen" type="file" id="formFile" (change)="fileEvent($event)"
         [disabled]="disable" />
 
       <div class="col-auto" style="width: 20%">

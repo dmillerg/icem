@@ -495,17 +495,17 @@ export class ApiService {
   }
 
   /**
-   * Obtiene la foto para descargar
-   * @param nombre nombre del foto
+   * Obtiene la file para descargar
+   * @param nombre nombre del file
    * @returns
    */
-  downloadFoto(nombre) {
+  downloadFile(nombre): Observable<any> {
     let direccion = this.url + 'download';
     const headers = { 'content-type': 'application/json' };
     const params = {
       nombre: nombre,
     };
-    return this.http.get(direccion, { headers: headers, params: params });
+    return this.http.get(direccion, { headers: headers, params: params, observe: 'response', responseType: 'blob' });
   }
 
   /**
