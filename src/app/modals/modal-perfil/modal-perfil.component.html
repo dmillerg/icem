@@ -32,11 +32,11 @@
     <div class="side" style="width: 59%;padding-left: 20px; min-width: 300px;">
 
         <h3 class="h3" style="margin-bottom: 15px;padding-left: 15px;"><strong>Perfil de usuario</strong></h3>
-        <form action="" class="scroll-mine">
+        <form action="" class="scroll-mine" style="width: 100%;">
             <div class="input-perfil" [hidden]="show_form_password">
                 <i class="bi bi-person-fill prev"></i>
                 <label for="">Usuario:</label>
-                <input type="text" class="in" name="usuario" [(ngModel)]="usuario.usuario" [disabled]="!edit">
+                <input type="text" class="in" name="usuario" [(ngModel)]="usuario.usuario" disabled>
                 <!-- <i class="bi bi-pencil-fill next"></i> -->
             </div>
             <div class="input-perfil" [hidden]="show_form_password">
@@ -54,7 +54,7 @@
             <div class="input-perfil" [hidden]="show_form_password">
                 <i class="bi bi-calendar-fill prev"></i>
                 <label for="">Fecha:</label>
-                <input type="text" class="in" name="fecha" [(ngModel)]="usuario.fecha" disabled>
+                <label for="">{{usuario.fecha | date: 'short'}}</label>
                 <!-- <i class="bi bi-pencil-fill next"></i> -->
             </div>
             <div class="input-perfil" [hidden]="show_form_password">
@@ -83,8 +83,8 @@
             </div>
             <div class="btn-groups scroll-mine" [hidden]="!edit">
                 <button class="btn btn-perfil" (click)="editPerfil()"><i class="bi bi-hdd-fill"></i>
-                    Editar</button>
-                <button class="btn btn-perfil" (click)="resetearFalse()"><i class="bi bi-x"></i>
+                    Guardar cambios</button>
+                <button class="btn btn-perfil" (click)="resetearFalse(); loadDataUser()"><i class="bi bi-x"></i>
                     Cancelar</button>
 
             </div>

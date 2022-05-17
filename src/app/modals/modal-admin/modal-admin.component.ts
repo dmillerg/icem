@@ -119,7 +119,7 @@ export class ModalAdminComponent implements OnInit {
         this.ventas = true;
         break;
     }
-    this.activo = event.target.innerText;
+    this.activo = event.target.innerText.toString().substring(1,event.target.innerText.toString().length);
   }
 
   cambiarFalseAll() {

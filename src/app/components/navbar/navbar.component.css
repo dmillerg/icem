@@ -168,6 +168,17 @@ p {
     z-index: 999;
 }
 
+.input-search {
+    width: 70%;
+    height: 40px;
+    border: none;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, .4);
+    border-radius: 1em;
+    padding-left: 15px;
+    padding-right: 0;
+    outline: none;
+}
+
 .menu-left {
     position: absolute;
     left: 0;
@@ -218,7 +229,7 @@ p {
 .form .btn-search {
     border: none;
     position: absolute;
-    right: 55px;
+    right: 45px;
     border-bottom-right-radius: 1em;
     border-top-right-radius: 1em;
 }

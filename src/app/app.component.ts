@@ -45,6 +45,7 @@ export class AppComponent implements OnInit {
   back_transparente = 'back-transparent';
   back_final = '';
   loading: boolean = false;
+  configuraciones: any[] = [];
 
   constructor(
     public storage: SessionStorageService,
@@ -56,11 +57,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
-    this.activate();
+    // this.activate();
     this.cargarConfigs();
     this.storage.observe('configuraciones').subscribe((result) => {
-      if(result && result!= undefined)
-      this.cargarConfigs();
+      if (result && result.length != this.configuraciones.length)
+        this.cargarConfigs();
     })
     this.loading = true;
     setTimeout(() => {
@@ -92,8 +93,11 @@ export class AppComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       let link = params['link'];
       let reset = params['reset'];
-      if (link != undefined) {
-        this.api.checkLinks(link, (this.storage.retrieve('configuraciones')[2].config*60)).subscribe((res) => {
+      // console.log('link:  ', link);
+      // console.log('reset:  ', reset);
+
+      if (link && link.length > 0) {
+        this.api.checkLinks(link, (this.storage.retrieve('configuraciones')[2].config * 60)).subscribe((res) => {
           this.modalService.open(ModalActivationComponent, { backdrop: 'static' });
         });
       } else if (reset != undefined) {
@@ -115,7 +119,9 @@ export class AppComponent implements OnInit {
 
   cargarConfigs() {
     this.api.getConfiguraciones().subscribe((result) => {
+      this.configuraciones = result;
       this.storage.store('configuraciones', result)
+      this.activate();
     })
   }
 }

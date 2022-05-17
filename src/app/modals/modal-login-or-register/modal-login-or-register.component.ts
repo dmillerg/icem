@@ -59,12 +59,22 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     direccion: '',
   }
 
+  correo: string = '';
+
   cargaemail: boolean = false;
   remember: boolean = false;
   errorLogin: boolean = false;
 
+  registerLoading: boolean = false;
+  activateLoading: boolean = false;
+  loginLoading: boolean = false;
+
   success: boolean = false;
-  errorRegister: boolean = false;
+  errorRegisterUser: boolean = false;
+  errorRegisterEmail: boolean = false;
+  activarCuenta: boolean = false;
+
+  idLogin: number = -1;
 
   constructor(private activeModal: NgbActiveModal,
     private api: ApiService,
@@ -85,6 +95,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
   }
 
   logIn() {
+    this.loginLoading = true;
     let formData = new FormData()
     formData.append('usuario', this.login.usuario);
     formData.append('password', this.login.password);
@@ -105,15 +116,24 @@ export class ModalLoginOrRegisterComponent implements OnInit {
       if (this.remember) {
         this.localstorage.store('usuario', user);
       }
+      this.loginLoading = false;
       this.errorLogin = false;
       this.actiModal.close(result);
     }, err => {
-      this.errorLogin = true;
+      if (err.error.message == 'Este usuario no esta activo') {
+        this.activarCuenta = true;
+        this.loginLoading = false;
+        this.idLogin = err.error.id;
+        this.correo = err.error.correo;
+      } else {
+        this.errorLogin = true;
+      }
     })
   }
 
   registEr() {
     // this.generarLink()
+    this.registerLoading = true;
     let formData = new FormData();
     formData.append('usuario', this.register.usuario);
     formData.append('nombre', this.register.nombre);
@@ -125,14 +145,36 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     formData.append('rol', 'usuario');
     this.api.addUsuarios(formData).subscribe((result) => {
       let link = this.generarLink(result.result.insertId);
-      this.api.sendEmail(this.register.correo, 'Activacion de la cuenta de usuario para ' + this.register.usuario, `Para activar su cuenta y poder acceder a nuestro sitio debe presionar el link que se le manda a continuacion \n ${environment.url_page}/#/inicio?link=${link}`).subscribe((resul) => {
-        this.errorRegister = true;
-        this.success = true;
-      })
+      this.sendEmailActivacion(link, this.register.correo);
       // this.actiModal.close();
     }, error => {
-      this.errorRegister = true;
+      if (error.error.message == 'Este usuario ya esta siendo utilizado') {
+        this.errorRegisterUser = true;
+      } else if (error.error.message == 'Este correo ya esta siendo utlizado') {
+        this.errorRegisterEmail = true;
+      }
+      this.registerLoading = false;
     })
+  }
+
+  sendEmailActivacion(link, correo) {
+    this.api.sendEmail(correo, 'Activacion de la cuenta de usuario para ' + this.register.usuario, `Para activar su cuenta y poder acceder a nuestro sitio debe presionar el link que se le manda a continuacion \n ${environment.url_page}/#/inicio?link=${link}`).subscribe((resul) => {
+      this.errorRegisterUser = true;
+      this.success = true;
+      this.registerLoading = false;
+      this.activateLoading = false;
+      this.activarCuenta = false;
+    }, error=>{
+      this.registerLoading = false;
+      this.activateLoading = false;
+      this.message.error('', 'No se pudo mandar el correo de verificación, por favor intentelo mas tarde');
+    });
+  }
+
+  activateAccount() {
+    this.activateLoading = true;
+    let link = this.generarLink(this.idLogin);
+    this.sendEmailActivacion(link, this.correo);
   }
 
   generarLink(id: any) {
@@ -184,8 +226,8 @@ export class ModalLoginOrRegisterComponent implements OnInit {
 
   sendEmailForgotPassword(user: Usuario) {
     let reset = this.generarLink(user.id);
-    this.api.sendEmail(user.correo, 'Contraseña olvidada por el usuario ' + this.register.usuario, `Para restablecer su contraseña por favor presione el link a continuación: \n http://localhost:4200/#/inicio?reset=${reset}`).subscribe((resul) => {
-      this.errorRegister = true;
+    this.api.sendEmail(user.correo, 'Contraseña olvidada por el usuario ' + this.login.usuario, `Para restablecer su contraseña por favor presione el link a continuación: \n http://localhost:4200/#/inicio?reset=${reset}`).subscribe((resul) => {
+      this.errorRegisterUser = true;
       this.cargaemail = false;
       this.success = true;
       this.message.success('', 'Se ha enviado un correo de restablecimiento de contraseña')

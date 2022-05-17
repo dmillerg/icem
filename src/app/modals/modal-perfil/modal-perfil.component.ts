@@ -47,6 +47,14 @@ export class ModalPerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   this.loadDataUser();
+    this.api.calcularTiempo(this.usuario.fecha).subscribe((result) => {
+      this.timeUser = result[0].tiempo + ' dias'
+    })
+    this.loadPedidos();
+  }
+
+  loadDataUser(){
     if (this.storage.retrieve('usuario')) {
       let user = this.storage.retrieve('usuario');
       this.usuario.id = user.id;
@@ -60,11 +68,6 @@ export class ModalPerfilComponent implements OnInit {
       this.usuario.rol = user.rol;
       this.usuario.token = user.token;
     }
-    this.api.calcularTiempo(this.usuario.fecha).subscribe((result) => {
-      this.timeUser = result[0].tiempo + ' dias'
-    })
-    this.loadPedidos();
-
   }
 
   loadPedidos() {

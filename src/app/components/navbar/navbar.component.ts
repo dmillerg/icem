@@ -38,6 +38,8 @@ export class NavbarComponent implements OnInit {
   intervalo: any;
   timeConfig: number = 0;
 
+  searched: boolean= false;
+
   total_pagar: number = 0;
 
   constructor(private router: Router,
@@ -63,14 +65,14 @@ export class NavbarComponent implements OnInit {
       this.carrito = this.storage.retrieve('carrito');
     }
     this.storage.observe('carrito').subscribe((e) => {
-      if (e.length != this.carrito.length) {
+      // if (e.length != this.carrito.length || e[0].cantidad) {
         this.carrito = e;
         this.total_pagar = 0;
         this.carrito.forEach(i => {
           this.total_pagar += i.cantidad * i.precio;
         })
         this.cargarTiempoRestante();
-      }
+      // }
     });
     this.listarCategoriasProductos();
     this.listarCarrito();

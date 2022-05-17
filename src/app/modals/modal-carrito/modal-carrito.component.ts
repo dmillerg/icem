@@ -20,7 +20,16 @@ export class ModalCarritoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadCarrito();
    this.calcularTotal();
+  }
+
+  loadCarrito(){
+    if(this.carrito.length==0){
+      if(this.storage.retrieve('usuario') && this.storage.retrieve('carrito') && this.storage.retrieve('carrito').length>0){
+        this.carrito = this.storage.retrieve('carrito');
+      }
+    }
   }
 
   calcularTotal(){

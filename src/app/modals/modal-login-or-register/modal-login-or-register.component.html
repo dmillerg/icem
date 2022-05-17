@@ -2,44 +2,54 @@
     <button class="btn btn-closed" (click)="actiModal.close()"><i class="bi bi-x-lg svg-shadow"></i></button>
     <div class="content-login">
         <img *ngIf="!cargaemail" src="assets/icon-icem-blue.png" alt="logo" class="image-icon svg-shadow">
-        
+
         <form action="" *ngIf="!cargaemail" class="form-login">
-            <p [@scaleAnimation]="'enter'" *ngIf="errorLogin" style="font-size: 12px;text-align: center;width: 90%;margin-top: 20px;"
-                class="text-danger">Usuario o
+            <p [@scaleAnimation]="'enter'" *ngIf="errorLogin"
+                style="font-size: 12px;text-align: center;width: 90%;margin-top: 20px;" class="text-danger">Usuario o
                 contraseña incorrectos, pruebe de nuevo</p>
             <div class="input-content">
                 <label for="usuario-login">usuario</label>
                 <i class="bi bi-person-fill prefix"></i>
                 <input type="text" class="in" name="usuario-login" id="usuario-login" placeholder="usuario o correo"
-                    [(ngModel)]="login.usuario">
+                    [(ngModel)]="login.usuario" (ngModelChange)="activarCuenta=false;">
             </div>
             <div class="input-content">
                 <label for="usuario-login">contraseña</label>
                 <i class="bi bi-key-fill prefix"></i>
                 <input type="password" class="in" name="pass-login" id="pass-login" placeholder="contraseña"
-                    [(ngModel)]="login.password">
+                    [(ngModel)]="login.password" (ngModelChange)="activarCuenta=false;">
             </div>
             <div class="form-check" style="margin-top: -10px;">
-                <input class="form-check-input" type="checkbox" style="background-color: var(--firstcolor-section);" value="" name="remember" [(ngModel)]="remember" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault" style="color: var(--firstcolor);font-size: 12px;">
-                  recuerdame la próxima vez
+                <input class="form-check-input" type="checkbox" style="background-color: var(--firstcolor-section);"
+                    [disabled]="activarCuenta" value="" name="remember" [(ngModel)]="remember" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault" [disabled]="activarCuenta"
+                    style="color: var(--firstcolor);font-size: 12px;">
+                    recuerdame la próxima vez
                 </label>
-              </div>
+            </div>
             <a class="olvido" (click)="forgetPassword()">¿olvido su contraseña?</a>
-            <button class="btn btn-login" (click)="logIn()">Aceptar</button>
+            <button class="btn btn-login" [disabled]="activarCuenta" (click)="logIn()">
+                <span *ngIf="loginLoading" class="spinner-border spinner-border-sm svg-shadow" role="status"
+                    aria-hidden="true"> </span>Aceptar</button>
+            <button [@scaleAnimation]="'enter'" class="btn btn-activar" [disabled]="activateLoading" *ngIf="activarCuenta"
+                (click)="activateAccount()">
+                <span *ngIf="activateLoading" class="spinner-border spinner-border-sm svg-shadow" role="status"
+                    aria-hidden="true"> </span>
+                Mandar correo de activación</button>
         </form>
         <label *ngIf="cargaemail" class="carga">Enviando un correo con el link para recuperar contraseña</label>
     </div>
     <div class="content-register">
-        <div *ngIf="!success" style="margin-top: 10px;" class="icono-content"><i class="bi bi-person-fill svg-shadow"></i></div>
+        <div *ngIf="!success" style="margin-top: 10px;" class="icono-content"><i
+                class="bi bi-person-fill svg-shadow"></i></div>
         <form *ngIf="!success" action="" class="form-register scroll-mine">
             <div class="input-content">
                 <label for="usuario-register">usuario</label>
                 <i class="bi bi-person-fill prefix"></i>
                 <input type="text" class="in" name="usuario-login" id="usuario-login" placeholder="usuario"
-                    [(ngModel)]="register.usuario">
+                    [(ngModel)]="register.usuario" (ngModelChange)="errorRegisterUser=false;">
             </div>
-            <label [@scaleAnimation]="'enter'" *ngIf="register.usuario.length>0 && errorRegister"
+            <label [@scaleAnimation]="'enter'" *ngIf="register.usuario.length>0 && errorRegisterUser"
                 style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">El usuario ya existe, pruebe
                 con otro</label>
             <div class="input-content">
@@ -52,8 +62,14 @@
                 <label for="correo-register">correo</label>
                 <i class="bi bi-envelope-fill prefix"></i>
                 <input type="email" class="in" name="correo-login" id="correo-register" placeholder="correo"
-                    [(ngModel)]="register.correo">
+                    [(ngModel)]="register.correo" (ngModelChange)="errorRegisterEmail=false;">
             </div>
+            <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && !validateEmail()"
+                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Este correo no es
+                valido</label>
+            <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && errorRegisterEmail"
+                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">El correo ya esta siendo
+                utilizado en otra cuenta</label>
             <div class="input-content">
                 <label for="pais-register">pais(opcional)</label>
                 <i class="bi bi-flag-fill prefix"></i>
@@ -72,9 +88,6 @@
                 <input type="number" class="in" name="telefono-register" id="telefono-register" placeholder="telefono"
                     [(ngModel)]="register.telefono">
             </div>
-            <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && !validateEmail()"
-                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Este correo no es
-                valido</label>
             <div class="input-content">
                 <label for="pass-register">contraseña</label>
                 <i class="bi bi-key-fill prefix"></i>
@@ -89,12 +102,22 @@
                 <i class="bi bi-key-fill prefix"></i>
                 <input type="password" class="in" name="pass-confirm-register" id="pass-confirm-register"
                     placeholder="confirmar contraseña" [(ngModel)]="register.confirm_pass">
-                <p *ngIf="register.confirm_pass!=register.password" class="text-danger text-center error-text">no
-                    coinciden las contraseñas</p>
             </div>
+            <label [@scaleAnimation]="'enter'" *ngIf="register.confirm_pass!=register.password"
+                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">no
+                coinciden las contraseñas</label>
+            <label [@scaleAnimation]="'enter'"
+                *ngIf="register.confirm_pass!=register.password || errorRegisterEmail || errorRegisterUser"
+                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Revisa el formulario de
+                registro hay datos mal insertados</label>
             <button class="btn btn-register"
                 [disabled]="!validateEmail() || !validateVacio() || register.confirm_pass!=register.password || register.password.length<8"
-                (click)="registEr()">Aceptar</button>
+                (click)="registEr()">
+                <span *ngIf="registerLoading" class="spinner-border spinner-border-sm svg-shadow" role="status"
+                    aria-hidden="true"> </span>
+                <label *ngIf="!registerLoading">Aceptar</label>
+                <label *ngIf="registerLoading">Enviando correo de confirmación</label>
+            </button>
         </form>
         <div *ngIf="success" class="message-successful">
             <label class="text-firstcolor">se ha mandado un mensaje de confirmación a su correo: {{register.correo}}

@@ -36,6 +36,16 @@
     justify-content: center;
 }
 
+.btn-activar{
+    padding: 10px;
+    width: fit-content;
+    font-size: 12px;
+    background-color: var(--firstcolor);
+    color: var(--theme-color);
+    border-radius: 0.5em;
+    margin-top: 10px;
+}
+
 .content-login .carga{
     position: absolute;
     top: 48%;
