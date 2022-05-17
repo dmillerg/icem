@@ -1,3 +1,7 @@
 td {
     width: 6%;
 }
+
+.btn:disabled{
+    cursor: not-allowed;
+}

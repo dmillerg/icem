@@ -162,7 +162,7 @@ export class ModalAdminComponent implements OnInit {
         });
         break;
       case 'Categorias':
-        modal = this.modalService.open(ModalCategoriaComponent, { size: 'lg' });
+        modal = this.modalService.open(ModalCategoriaComponent, { size: 'md' });
         modal.componentInstance.modalHeader = 'Categoria';
         modal.componentInstance.modalSubHeader =
           'tipos de productos de la empresa';
@@ -196,7 +196,7 @@ export class ModalAdminComponent implements OnInit {
         });
         break;
       case 'Quienes':
-        modal = this.modalService.open(ModalQuienesComponent, { size: 'lg' });
+        modal = this.modalService.open(ModalQuienesComponent, { size: 'md' });
         modal.componentInstance.modalHeader = 'Quienes';
         modal.componentInstance.modalSubHeader = 'Personas integrantes del equipo';
         modal.result.then((result) => {
@@ -216,7 +216,7 @@ export class ModalAdminComponent implements OnInit {
         });
         break;
       case 'Posts':
-        modal = this.modalService.open(ModalPostsComponent, { size: 'lg', backdrop: 'static' });
+        modal = this.modalService.open(ModalPostsComponent, { size: 'md', backdrop: 'static' });
         modal.componentInstance.modalHeader = 'Posts';
         modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
         modal.result.then((result) => {

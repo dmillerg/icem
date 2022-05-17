@@ -111,7 +111,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
       this.alias = this.storage.retrieve('usuario').usuario;
     }
     this.storage.observe('usuario').subscribe((result) => {
-      if (result.correo != this.correo && result.alias != this.alias) {
+      if (result && result.correo != this.correo && result.alias != this.alias) {
         if (result) {
           this.correo = result.correo;
           this.alias = result.usuario;

@@ -151,6 +151,24 @@
     transition: all .3s ease;
 }
 
+.btn-trash {
+    background-color: var(--firstcolor);
+    color: var(--theme-color);
+    border-radius: 0.5em;
+    padding: 5px;
+    transition: all .3s ease;
+}
+
+.btn-trash:hover {
+    background-color: var(--firstcolor-hover);
+    transition: all .3s ease;
+}
+
+.btn-trash:disabled {
+    cursor: not-allowed;
+    background-color: var(--firstcolor-section);
+}
+
 .container-perfil .btn-closed {
     position: absolute;
     border: none;

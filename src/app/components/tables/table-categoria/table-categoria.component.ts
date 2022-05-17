@@ -26,7 +26,7 @@ export class TableCategoriaComponent implements OnInit {
   }
 
   updateCategoria(categoria) {
-    let modal = this.modalService.open(ModalCategoriaComponent, { size: 'lg' });
+    let modal = this.modalService.open(ModalCategoriaComponent, { size: 'md' });
     modal.componentInstance.modalHeader = 'Categoria';
     modal.componentInstance.modalSubHeader = 'tipos de productos de la empresa';
     modal.componentInstance.modalAction = 'Editar';

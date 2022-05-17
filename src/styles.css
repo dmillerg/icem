@@ -43,6 +43,11 @@
   background: rgba(7, 7, 7, 0.8);
 }
 
+.btn:disabled{
+  cursor: not-allowed;
+}
+
+
 .modal-header {
   background: rgba(7, 7, 7, 0.01);
 }
@@ -122,8 +127,9 @@ body {
   transition: ease-in-out .3s;
 }
 
-.btn-outline-firstcolor:disabled {
-  cursor: pointer;
+.btn-outline-firstcolor:disabled,
+.btn-outline-firstcolor:hover:disabled {
+  cursor: not-allowed;
 }
 
 .text-firstcolor {
@@ -317,6 +323,7 @@ h4 {
 .input-outline:disabled {
   color: var(--firstcolor);
   background-color: var(--firstcolor-section);
+  cursor: not-allowed;
 }
 
 .text-shadow {

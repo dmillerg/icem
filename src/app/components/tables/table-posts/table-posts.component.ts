@@ -27,7 +27,7 @@ export class TablePostsComponent implements OnInit {
   }
 
   updatePosts(posts) {
-    let modal = this.modalService.open(ModalPostsComponent, { size: 'lg' });
+    let modal = this.modalService.open(ModalPostsComponent, { size: 'md' });
     modal.componentInstance.modalHeader = 'Posts';
     modal.componentInstance.modalSubHeader = 'comentarios que hacen los usuarios';
     modal.componentInstance.modalAction = 'Editar';
@@ -51,7 +51,7 @@ export class TablePostsComponent implements OnInit {
   }
 
   responderPost(posts: Posts){
-    let modal = this.modalService.open(ModalRespuestaComponent, { size: 'lg' });
+    let modal = this.modalService.open(ModalRespuestaComponent, { size: 'md' });
     modal.componentInstance.id_post = posts.id;
     modal.componentInstance.modalHeader = 'Responder';
     modal.result.then((result) => {

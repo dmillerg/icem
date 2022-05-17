@@ -28,7 +28,7 @@ export class TableQuienesComponent implements OnInit {
   }
 
   updateQuienes(quien) {
-    let modal = this.modalService.open(ModalQuienesComponent, { size: 'lg' });
+    let modal = this.modalService.open(ModalQuienesComponent, { size: 'md' });
     modal.componentInstance.modalHeader = 'Quienes';
     modal.componentInstance.modalSubHeader = 'para la comercializacion y venta';
     modal.componentInstance.modalAction = 'Editar';
