@@ -11,7 +11,7 @@
     flex-wrap: wrap;
 }
 
-.container-perfil .side {
+.side {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -19,7 +19,7 @@
     padding: 10px;
 }
 
-.container-perfil .side .content-icon {
+.side .content-icon {
     width: 100%;
     height: auto;
     display: flex;
@@ -27,7 +27,7 @@
     justify-content: center;
 }
 
-.container-perfil .side .content-icon .icono-content {
+.side .content-icon .icono-content {
     width: 150px;
     height: 150px;
     background-color: var(--firstcolor-hover);
@@ -39,12 +39,12 @@
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
 }
 
-.container-perfil .side .content-icon .icono-content i {
+.side .content-icon .icono-content i {
     font-size: 80px;
     color: var(--firstcolor);
 }
 
-.container-perfil .side form {
+.side form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -53,12 +53,12 @@
     overflow: auto;
 }
 
-.container-perfil .side form .input-perfil {
+.side form .input-perfil {
     display: flex;
+    width: 100%;
     flex-direction: row;
     position: relative;
     padding: 10px;
-    max-width: 200px;
     font-size: 12px;
     align-items: center;
     justify-content: flex-start;
@@ -70,18 +70,18 @@
     margin-left: 10px;
 }
 
-.container-perfil .side form .input-perfil .prev {
+.side form .input-perfil .prev {
     font-size: 20px;
     color: var(--firstcolor);
 }
 
-.container-perfil .side form .input-perfil .next {
+.side form .input-perfil .next {
     position: absolute;
     color: var(--firstcolor);
     right: 0;
 }
 
-.container-perfil .side form .input-perfil .in {
+.side form .input-perfil .in {
     width: 220px;
     text-overflow: ellipsis;
     color: var(--firstcolor);
@@ -93,27 +93,27 @@
     transition: all .3s ease;
 }
 
-.container-perfil .side form .input-perfil .in:read-only {
+.side form .input-perfil .in:read-only {
     color: var(--firstcolor);
     border: none;
     transition: all .3s ease;
 }
 
-.container-perfil .side .user-data {
+.side .user-data {
     font-size: 12px;
     margin: 2px;
     text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-.container-perfil .side .user-data.user {
+.side .user-data.user {
     color: var(--firstcolor);
 }
 
-.container-perfil .side .user-data.data {
+.side .user-data.data {
     color: #9b999e;
 }
 
-.container-perfil .imagen-triangulo {
+.imagen-triangulo {
     position: absolute;
     bottom: 2px;
     left: 2px;
@@ -145,7 +145,7 @@
     transition: all .3s ease;
 }
 
-.container-perfil .side .btn-groups .btn-perfil:hover {
+.side .btn-groups .btn-perfil:hover {
     background-color: var(--firstcolor-hover);
     border-radius: 1.5em;
     transition: all .3s ease;
@@ -169,7 +169,7 @@
     background-color: var(--firstcolor-section);
 }
 
-.container-perfil .btn-closed {
+.btn-closed {
     position: absolute;
     border: none;
     right: 5px;
@@ -179,7 +179,7 @@
     color: var(--firstcolor);
 }
 
-.container-perfil .side .sidebar-pedidos {
+.side .sidebar-pedidos {
     position: absolute;
     white-space: nowrap;
     top: 0;
@@ -198,17 +198,17 @@
     transition: all .5s ease;
 }
 
-.container-perfil .side .sidebar-pedidos.active {
+.side .sidebar-pedidos.active {
     width: 100%;
     opacity: 1;
     visibility: visible;
 }
 
-.container-perfil .side .sidebar-pedidos.actived~.container-perfil .btn-closed {
+.side .sidebar-pedidos.actived~.btn-closed {
     color: white;
 }
 
-.container-perfil .side .sidebar-pedidos .btn-ampliar {
+.side .sidebar-pedidos .btn-ampliar {
     position: absolute;
     left: 0;
     height: 45px;
@@ -221,16 +221,16 @@
     transition: all .5s ease;
 }
 
-.container-perfil .side .sidebar-pedidos .btn-ampliar:hover {
+.side .sidebar-pedidos .btn-ampliar:hover {
     background-color: var(--firstcolor-hover);
 }
 
-.container-perfil .side .sidebar-pedidos .btn-ampliar.active {
+.side .sidebar-pedidos .btn-ampliar.active {
     transform: rotate(180deg);
     transition: all .5s ease;
 }
 
-.container-perfil .side .sidebar-pedidos .list .list-pedidos {
+.side .sidebar-pedidos .list .list-pedidos {
     width: 100%;
     overflow: auto;
     display: flex;
@@ -239,13 +239,13 @@
     justify-content: center;
 }
 
-.container-perfil .side .sidebar-pedidos .list {
+.side .sidebar-pedidos .list {
     width: 100%;
     height: 350px;
     overflow: auto;
 }
 
-.container-perfil .side .sidebar-pedidos .list .list-pedidos .pedidos {
+.side .sidebar-pedidos .list .list-pedidos .pedidos {
     width: 95%;
     overflow: hidden;
     position: relative;
@@ -261,7 +261,7 @@
     color: var(--firstcolor);
 }
 
-.container-perfil .side .sidebar-pedidos .list-pedidos .pedidos .td-pedido {
+.side .sidebar-pedidos .list-pedidos .pedidos .td-pedido {
     width: 10%;
     text-overflow: ellipsis;
     overflow: hidden;

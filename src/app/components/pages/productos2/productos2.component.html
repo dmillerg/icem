@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div #especification style="transform: translateY(-100px);"></div>
+
+    <section class="especifications animado" *ngIf="producto!= null && producto!=undefined">
+        <div class="container">
+        <div class="row">
+            <div id="producto-especification" class="producto-especification">
+                <div class="barra-superior">
+                    <button class="btn centrado"
+                        [ngClass]="{ 'btn-outline-firstcolor': !comentarios , 'btn-firstcolor' : comentarios}"
+                        (click)="abrirComentarios()" style="position: relative;">
+                        <div class="pista pista-off pista-bottom">Ver comentarios</div>
+                        <i class="bi bi-chat-square-text"></i>
+                    </button>
+                    <button class="btn btn-outline-firstcolor centrado" [disabled]="producto.ficha == null" style="position: relative;">
+                        <div class="pista pista-off pista-bottom" *ngIf="producto && producto.ficha != null">Descargar ficha técnica</div>
+                        <i class="bi bi-journal-text"></i>
+                    </button>
+                </div>
+                <app-productos-especificacion [producto]="producto" [categoria]="categoria">
+                </app-productos-especificacion>
+            </div>
+            <div id="posts" class="posts">
+             <app-posts (emisor)="abrirComentarios()"></app-posts>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <section class="categorys animado">
+        <div class="contenedor">
+            <div class="rows">
+                <h3 class="h3">Categorias</h3>
+            </div>
+            <div class="rows linea">
+                <div *ngFor="let item of categorias" class="categoria" (click)="cambiarCategoria(item.id)"
+                    [ngClass]="{'active': (storage.retrieve('categoria') && storage.retrieve('categoria').nombre== item.nombre)}">
+                    {{item.nombre}}
+                </div>
+                <div class="square"></div>
+                <div class="square2"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="products animado">
+        <h3 class="number text-section text-center" *ngIf="productos.length==0"><strong>No hay productos en esta
+                categoria</strong></h3>
+        <div class="container">
+            <div class="row" [@listAnimation]="productos.length">
+                <div *ngFor="let item of productos" class="col-sm-6 col-md-4 col-lg-3">
+                    <app-producto [producto]="item" style="margin-inline: 20px;"
+                        (emisor)="swicthEspecification($event, especification)">
+                    </app-producto>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

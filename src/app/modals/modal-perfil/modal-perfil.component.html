@@ -3,146 +3,157 @@
         <img src="assets/logo-mitad-right.png">
     </div>
     <button class="btn btn-closed" (click)="actiModal.close()"><i class="bi bi-x"></i></button>
-    <div class="side" style="width: 40%;text-align: center; min-width: 200px;">
-        <div class="content-icon">
-            <div class="icono-content">
-                <i class="bi bi-person-fill svg-shadow"></i>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="side" style="text-align: center; min-width: 200px;">
+                <div class="content-icon">
+                    <div class="icono-content">
+                        <i class="bi bi-person-fill svg-shadow"></i>
+                    </div>
+                </div>
+                <label class="user-data user">{{usuario.usuario}}</label>
+                <label class="user-data data">usuario desde: {{timeUser}}</label>
+                <div class="btn-groups scroll-mine" style="z-index: 999;">
+                    <button class="btn btn-perfil" [hidden]="show_form_password || edit" (click)="edit=!edit;sidebarpedidos=false"><i
+                            class="bi bi-pencil-fill"></i> Editar
+                        perfil</button>
+                    <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
+                        Ver pedidos</button>
+                    <button class="btn btn-perfil" [hidden]="show_form_password || edit" (click)="mostrarFormPass()"><i
+                            class="bi bi-unlock-fill"></i> Cambiar
+                        contraseña</button>
+                    <button class="btn btn-perfil" (click)="administrar()"
+                        *ngIf="storage.retrieve('usuario') && storage.retrieve('usuario').rol=='admin'"><i
+                            class="bi bi-kanban-fill"></i> Administrar</button>
+                    <button class="btn btn-perfil" (click)="administrarCarrito()"><i class="bi bi-cart-fill"></i>
+                        Carrito</button>
+                    <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
+                        session</button>
+                </div>
             </div>
         </div>
-        <label class="user-data user">{{usuario.usuario}}</label>
-        <label class="user-data data">usuario desde: {{timeUser}}</label>
-        <div class="btn-groups scroll-mine" style="z-index: 999;">
-            <button class="btn btn-perfil" [hidden]="show_form_password || edit" (click)="edit=!edit"><i
-                    class="bi bi-pencil-fill"></i> Editar
-                perfil</button>
-            <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
-                Ver pedidos</button>
-            <button class="btn btn-perfil" [hidden]="show_form_password || edit" (click)="mostrarFormPass()"><i
-                    class="bi bi-unlock-fill"></i> Cambiar
-                contraseña</button>
-            <button class="btn btn-perfil" (click)="administrar()"
-                *ngIf="storage.retrieve('usuario') && storage.retrieve('usuario').rol=='admin'"><i
-                    class="bi bi-kanban-fill"></i> Administrar</button>
-            <button class="btn btn-perfil" (click)="administrarCarrito()"><i class="bi bi-cart-fill"></i>
-                Carrito</button>
-            <button class="btn btn-perfil" (click)="logout()"><i class="bi bi-door-closed-fill"></i> Cerrar
-                session</button>
-        </div>
-    </div>
-    <div class="side" style="width: 59%;padding-left: 20px; min-width: 300px;">
+        <div class="col-sm-8">
+            <div class="side" style="padding-left: 20px; min-width: 300px;">
 
-        <h3 class="h3" style="margin-bottom: 15px;padding-left: 15px;"><strong>Perfil de usuario</strong></h3>
-        <form action="" class="scroll-mine" style="width: 100%;">
-            <div class="input-perfil" [hidden]="show_form_password">
-                <i class="bi bi-person-fill prev"></i>
-                <label for="">Usuario:</label>
-                <input type="text" class="in" name="usuario" [(ngModel)]="usuario.usuario" disabled>
-                <!-- <i class="bi bi-pencil-fill next"></i> -->
-            </div>
-            <div class="input-perfil" [hidden]="show_form_password">
-                <i class="bi bi-chat-fill prev"></i>
-                <label for="">Nombre:</label>
-                <input type="text" class="in" name="nombre" [(ngModel)]="usuario.nombre" [disabled]="!edit">
-                <!-- <i class="bi bi-pencil-fill next"></i> -->
-            </div>
-            <div class="input-perfil" [hidden]="show_form_password">
-                <i class="bi bi-envelope-fill prev"></i>
-                <label for="">Correo:</label>
-                <input type="text" class="in" name="correo" [(ngModel)]="usuario.correo" [disabled]="!edit">
-                <!-- <i class="bi bi-pencil-fill next"></i> -->
-            </div>
-            <div class="input-perfil" [hidden]="show_form_password">
-                <i class="bi bi-calendar-fill prev"></i>
-                <label for="">Fecha:</label>
-                <label for="">{{usuario.fecha | date: 'short'}}</label>
-                <!-- <i class="bi bi-pencil-fill next"></i> -->
-            </div>
-            <div class="input-perfil" [hidden]="show_form_password">
-                <i class="bi bi-flag-fill prev"></i>
-                <label for="">Pais:</label>
-                <input type="text" class="in" name="pais" [(ngModel)]="usuario.pais" [disabled]="!edit">
-                <!-- <i class="bi bi-pencil-fill next"></i> -->
-            </div>
-            <div class="input-perfil" [hidden]="show_form_password">
-                <i class="bi bi-geo-alt-fill prev"></i>
-                <label for="">Direccion:</label>
-                <input type="text" class="in" name="direccion" [(ngModel)]="usuario.direccion" [disabled]="!edit">
-                <!-- <i class="bi bi-pencil-fill next"></i> -->
-            </div>
-            <div class="input-perfil" [hidden]="show_form_password">
-                <i class="bi bi-phone-fill prev"></i>
-                <label for="">Telefono:</label>
-                <input type="number" class="in" name="telefono" [(ngModel)]="usuario.telefono" [disabled]="!edit">
-                <!-- <i class="bi bi-pencil-fill next"></i> -->
-            </div>
-            <div class="input-perfil" [hidden]="show_form_password">
-                <i class="bi bi-person-rolodex prev"></i>
-                <label for="">Rol:</label>
-                <input type="text" class="in" name="rol" [(ngModel)]="usuario.rol" disabled>
-                <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
-            </div>
-            <div class="btn-groups scroll-mine" [hidden]="!edit">
-                <button class="btn btn-perfil" (click)="editPerfil()"><i class="bi bi-hdd-fill"></i>
-                    Guardar cambios</button>
-                <button class="btn btn-perfil" (click)="resetearFalse(); loadDataUser()"><i class="bi bi-x"></i>
-                    Cancelar</button>
+                <h3 class="h3" style="margin-bottom: 15px;padding-left: 15px;"><strong>Perfil de usuario</strong></h3>
+                <form action="" class="scroll-mine" style="width: 100%;">
+                    <div class="input-perfil" [hidden]="show_form_password">
+                        <i class="bi bi-person-fill prev"></i>
+                        <label for="">Usuario:</label>
+                        <input type="text" class="in" name="usuario" [(ngModel)]="usuario.usuario" disabled>
+                        <!-- <i class="bi bi-pencil-fill next"></i> -->
+                    </div>
+                    <div class="input-perfil" [hidden]="show_form_password">
+                        <i class="bi bi-chat-fill prev"></i>
+                        <label for="">Nombre:</label>
+                        <input type="text" class="in" name="nombre" [(ngModel)]="usuario.nombre" [disabled]="!edit">
+                        <!-- <i class="bi bi-pencil-fill next"></i> -->
+                    </div>
+                    <div class="input-perfil" [hidden]="show_form_password">
+                        <i class="bi bi-envelope-fill prev"></i>
+                        <label for="">Correo:</label>
+                        <input type="text" class="in" name="correo" [(ngModel)]="usuario.correo" [disabled]="!edit">
+                        <!-- <i class="bi bi-pencil-fill next"></i> -->
+                    </div>
+                    <div class="input-perfil" [hidden]="show_form_password">
+                        <i class="bi bi-calendar-fill prev"></i>
+                        <label for="">Fecha:</label>
+                        <label for="">{{usuario.fecha | date: 'short'}}</label>
+                        <!-- <i class="bi bi-pencil-fill next"></i> -->
+                    </div>
+                    <div class="input-perfil" [hidden]="show_form_password">
+                        <i class="bi bi-flag-fill prev"></i>
+                        <label for="">Pais:</label>
+                        <input type="text" class="in" name="pais" [(ngModel)]="usuario.pais" [disabled]="!edit">
+                        <!-- <i class="bi bi-pencil-fill next"></i> -->
+                    </div>
+                    <div class="input-perfil" [hidden]="show_form_password">
+                        <i class="bi bi-geo-alt-fill prev"></i>
+                        <label for="">Direccion:</label>
+                        <input type="text" class="in" name="direccion" [(ngModel)]="usuario.direccion"
+                            [disabled]="!edit">
+                        <!-- <i class="bi bi-pencil-fill next"></i> -->
+                    </div>
+                    <div class="input-perfil" [hidden]="show_form_password">
+                        <i class="bi bi-phone-fill prev"></i>
+                        <label for="">Telefono:</label>
+                        <input type="number" class="in" name="telefono" [(ngModel)]="usuario.telefono"
+                            [disabled]="!edit">
+                        <!-- <i class="bi bi-pencil-fill next"></i> -->
+                    </div>
+                    <div class="input-perfil" [hidden]="show_form_password">
+                        <i class="bi bi-person-rolodex prev"></i>
+                        <label for="">Rol:</label>
+                        <input type="text" class="in" name="rol" [(ngModel)]="usuario.rol" disabled>
+                        <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
+                    </div>
+                    <div class="btn-groups scroll-mine" [hidden]="!edit">
+                        <button class="btn btn-perfil" (click)="editPerfil()"><i class="bi bi-hdd-fill"></i>
+                            Guardar cambios</button>
+                        <button class="btn btn-perfil" (click)="resetearFalse(); loadDataUser()"><i class="bi bi-x"></i>
+                            Cancelar</button>
 
-            </div>
-            <div style="margin-top: 10px;width: 100%;"></div>
-            <div class="input-perfil" [hidden]="!show_form_password">
-                <i class="bi bi-key prev"></i>
-                <label for="">Contraseña antigua:</label>
-                <input type="password" class="in" name="old_pass" [(ngModel)]="pass_old">
-                <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
-            </div>
-            <div class="input-perfil" [hidden]="!show_form_password">
-                <i class="bi bi-key prev"></i>
-                <label for="">Contraseña nueva:</label>
-                <input type="password" class="in" name="new_password" [(ngModel)]="new_password">
-                <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
-                <label for="" class="text-danger" *ngIf="new_password.length<8 && new_password.length>0"
-                    style="position: absolute;bottom: -5px; white-space: nowrap;">la nueva contraseña debe tener al
-                    menos 8 caracteres</label>
-            </div>
-            <div class="input-perfil" [hidden]="!show_form_password">
-                <i class="bi bi-key prev"></i>
-                <label for="">Confirmar contraseña:</label>
-                <input type="password" class="in" name="confirm" [(ngModel)]="confirm">
-                <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
-                <label for="" class="text-danger" *ngIf="new_password!=confirm"
-                    style="position: absolute;bottom: -5px;white-space: nowrap;">no coinciden las contraseñas</label>
-            </div>
-            <div class="btn-groups scroll-mine" id="btnchange" [hidden]="!show_form_password">
-                <button class="btn btn-perfil" (click)="changePassword()"
-                    [disabled]="new_password!=confirm || new_password.length<8"><i class="bi bi-hdd-fill"></i>
-                    Cambiar</button>
-                <button class="btn btn-perfil" (click)="resetearFalse()"><i class="bi bi-x"></i>
-                    Cancelar</button>
+                    </div>
+                    <div style="margin-top: 10px;width: 100%;"></div>
+                    <div class="input-perfil" [hidden]="!show_form_password">
+                        <i class="bi bi-key prev"></i>
+                        <label for="">Contraseña antigua:</label>
+                        <input type="password" class="in" name="old_pass" [(ngModel)]="pass_old">
+                        <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
+                    </div>
+                    <div class="input-perfil" [hidden]="!show_form_password">
+                        <i class="bi bi-key prev"></i>
+                        <label for="">Contraseña nueva:</label>
+                        <input type="password" class="in" name="new_password" [(ngModel)]="new_password">
+                        <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
+                        <label for="" class="text-danger" *ngIf="new_password.length<8 && new_password.length>0"
+                            style="position: absolute;bottom: -5px; white-space: nowrap;">la nueva contraseña debe tener
+                            al
+                            menos 8 caracteres</label>
+                    </div>
+                    <div class="input-perfil" [hidden]="!show_form_password">
+                        <i class="bi bi-key prev"></i>
+                        <label for="">Confirmar contraseña:</label>
+                        <input type="password" class="in" name="confirm" [(ngModel)]="confirm">
+                        <!-- <i class="bi bi-pencil-fill next" (click)="edit=true"></i> -->
+                        <label for="" class="text-danger" *ngIf="new_password!=confirm"
+                            style="position: absolute;bottom: -5px;white-space: nowrap;">no coinciden las
+                            contraseñas</label>
+                    </div>
+                    <div class="btn-groups scroll-mine" id="btnchange" [hidden]="!show_form_password">
+                        <button class="btn btn-perfil" (click)="changePassword()"
+                            [disabled]="new_password!=confirm || new_password.length<8"><i class="bi bi-hdd-fill"></i>
+                            Cambiar</button>
+                        <button class="btn btn-perfil" (click)="resetearFalse()"><i class="bi bi-x"></i>
+                            Cancelar</button>
 
-            </div>
-        </form>
+                    </div>
+                </form>
 
-        <div id="pedidos" class="sidebar-pedidos" [ngClass]="{'active': sidebarpedidos}"
-            style="background: linear-gradient(180deg, rgb(7, 7, 7) 0%, var(--firstcolor) 20%), url('assets/fondo8.png');background-blend-mode: multiply;background-repeat: no-repeat;">
-            <button id="btn-ampliar" class="btn btn-ampliar" [ngClass]="{'active': sidebarpedidos}"
-                (click)="pedidosDetails()"><i class="bi bi-caret-left-fill"></i></button>
-            <h4 class="h4" style="text-shadow: 0 5px 5px rgba(0, 0 ,0,0.4);color: white;">Pedidos</h4>
-            <div class="list">
-                <div class="list-pedidos" *ngFor="let item of pedidos">
-                    <div class="pedidos" *ngIf="!item.fechalist">
-                        <!-- <div class="td-pedido" style="width: 20%" *ngIf="item.fechalist">{{item.fechalist}}</div> -->
-                        <div class="td-pedido" style="width: 55%;">{{item.titulo}}</div>
-                        <div class="td-pedido" style="width: 5%;">{{item.cantidad}}</div>
-                        <div class="td-pedido" style="width: 10%;">{{item.cantidad*item.precio}}</div>
-                        <div class="td-pedido" style="width: 20%;">{{item.estado}}</div>
-                        <div class="td-pedido" style="width: 10%;"><button class="btn-trash" [disabled]="item.estado==='finalizado'"
-                                (click)="eliminarPedido(item)" style="color: white;"><i
-                                    class="bi bi-trash"></i></button>
+
+                <div id="pedidos" class="sidebar-pedidos" [ngClass]="{'active': sidebarpedidos}"
+                    style="background: linear-gradient(180deg, rgb(7, 7, 7) 0%, var(--firstcolor) 20%), url('assets/fondo8.png');background-blend-mode: multiply;background-repeat: no-repeat;">
+                    <button id="btn-ampliar" class="btn btn-ampliar" [ngClass]="{'active': sidebarpedidos}"
+                        (click)="pedidosDetails()"><i class="bi bi-caret-left-fill"></i></button>
+                    <h4 class="h4" style="text-shadow: 0 5px 5px rgba(0, 0 ,0,0.4);color: white;">Pedidos</h4>
+                    <div class="list">
+                        <div class="list-pedidos scroll-mine" *ngFor="let item of pedidos">
+                            <div class="pedidos scroll-mine" *ngIf="!item.fechalist">
+                                <!-- <div class="td-pedido" style="width: 20%" *ngIf="item.fechalist">{{item.fechalist}}</div> -->
+                                <div class="td-pedido" style="width: 55%;">{{item.titulo}}</div>
+                                <div class="td-pedido" style="width: 5%;">{{item.cantidad}}</div>
+                                <div class="td-pedido" style="width: 10%;">{{item.cantidad*item.precio}}</div>
+                                <div class="td-pedido" style="width: 20%;">{{item.estado}}</div>
+                                <div class="td-pedido" style="width: 10%;"><button class="btn-trash"
+                                        [disabled]="item.estado==='finalizado'" (click)="eliminarPedido(item)"
+                                        style="color: white;"><i class="bi bi-trash"></i></button>
+                                </div>
+                            </div>
+                            <label class="fecha" *ngIf="item.fechalist">
+                                {{item.fechalist}}
+                            </label>
                         </div>
                     </div>
-                    <label class="fecha" *ngIf="item.fechalist">
-                        {{item.fechalist}}
-                    </label>
                 </div>
             </div>
         </div>

@@ -26,8 +26,10 @@ import { ApiService } from 'src/app/services/api.service';
 export class ProductosEspecificacionComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() producto: Producto;
   @Input() id: string = '';
-  @Input() oculto: boolean = false;
-  @Input() categoria: string = '';
+  @Input() categoria: Categoria = {
+    id: -1,
+    nombre: ''
+  };
   carrito: any[] = [];
   cantidad: number = 0;
 

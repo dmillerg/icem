@@ -1,0 +1,45 @@
+.list-posts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: flex-start;
+    background: var(--theme-color);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.barra-superior {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.barra-superior form {
+    width: 70%;
+    position: relative;
+    padding-right: 20px;
+}
+
+.barra-superior form input {
+    width: 100%;
+    outline: none;
+    border: none;
+    line-height: 40px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.burbuja-comentario {
+    padding: 10px;
+    border-radius: 1em;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.burbuja-comentario h5{
+    font-size: 15px;
+
+}

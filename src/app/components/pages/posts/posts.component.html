@@ -1,0 +1,71 @@
+<div class="list-posts">
+    <div class="barra-superior">
+
+        <form id="form" class="form-filter"><input id="input" name="filtro" [(ngModel)]="filtro"
+                (ngModelChange)="filtrar()" class="filter-input" placeholder="alias..."></form>
+        <button class="btn" [ngClass]="{ 'btn-firstcolor': comentar , 'btn-outline-firstcolor' : !comentar}"
+        (click)="comentar=!comentar"
+            style="position: relative;">
+            <div class="pista pista-off pista-bottom">Comentar producto</div>
+            <i class="bi bi-pen"></i>
+        </button>
+        <button class="btn btn-outline-firstcolor"
+        (click)=" this.emisor.emit();"
+            style="position: relative;">
+            <div class="pista pista-off pista-bottom">Cerrar</div>
+            <i class="bi bi-x"></i>
+        </button>
+    </div>
+    <div class="bg-firstcolor fila" style="width: 90%;"></div>
+    <div class="bg-firstcolor fila" style="width: 80%;"></div>
+    <div class="scroll-mine" style="max-height: 350px;overflow-y: auto;">
+
+        <form class="box-outline" [@scaleAnimation]="'enter'" *ngIf="comentar"
+            style="padding: 15px;position: relative;margin-bottom: 20px;">
+            <label class="text-firstcolor"><i class="bi bi-person"></i> alias:</label>
+            <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')" [(ngModel)]="alias"
+                class="input-outline input" required>
+            <label class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</label>
+            <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')"
+                [(ngModel)]="correo" class="input-outline input" required>
+            <label class="text-firstcolor"><i class="bi bi-chat-dots"></i> comentario:</label>
+            <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline"
+                style="color: var(--firstcolor);" required></textarea>
+            <button class="btn btn-firstcolor" (click)="enviarPosts()" style="width: 100%;"
+                [disabled]="!validarComentario()">
+                <i class="bi bi-send"></i> Comentar
+            </button>
+
+        </form>
+
+        <div style="max-height: 400px;overflow-y: auto;overflow-x: hidden; padding-top: 10px;" class="scroll-mine"
+            [@listAnimation]="posts.length">
+
+            <div *ngFor="let item of posts" class="burbuja-comentario bg-firstcolor text-white"
+                style="position: relative;">
+                <h5 class="h5"><i class="bi bi-person"></i>
+                    <strong>{{item.alias}}</strong>
+                </h5>
+                <p>{{item.correo}}</p>
+
+                <p>{{item.comentario}}</p>
+
+                <div class="barra-inferior">
+                    <p class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}} <i
+                            (click)="openResponder(item)"
+                            *ngIf="storage.retrieve('usuario')&&storage.retrieve('usuario').rol=='admin'"
+                            class="bi bi-pencil"></i></p>
+                </div> 
+                <ol class="lista-respuesta" *ngFor="let item2 of item.respuestas">
+                    <li>{{item2.respuesta}}</li>
+                </ol>
+                <p style="font-size: small;position: absolute;top: 5px;right: 5px;">
+                    {{item.fecha | date: 'dd/MM/YYYY'}}</p>
+            </div>
+            <p class="text-firstcolor text-center" style="font-size: 12px;" *ngIf="posts.length==0">No hay comentarios
+                acerca de este
+                producto</p>
+        </div>
+    </div>
+    <div class="barra-inferior"></div>
+</div>

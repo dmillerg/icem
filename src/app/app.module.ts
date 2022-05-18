@@ -67,6 +67,8 @@ import { ModalActivationComponent } from './modals/modal-activation/modal-activa
 import { ModalUserResetPasswordComponent } from './modals/modal-user-reset-password/modal-user-reset-password.component';
 import { ModalEstadoPedidoComponent } from './modals/modal-estado-pedido/modal-estado-pedido.component';
 import { TableVentasComponent } from './components/tables/table-ventas/table-ventas.component';
+import { Productos2Component } from './components/pages/productos2/productos2.component';
+import { PostsComponent } from './components/pages/posts/posts.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -125,6 +127,8 @@ import { TableVentasComponent } from './components/tables/table-ventas/table-ven
     ModalActivationComponent,
     ModalUserResetPasswordComponent,
     ModalEstadoPedidoComponent,
+    Productos2Component,
+    PostsComponent,
   ],
   imports: [
     BrowserModule,

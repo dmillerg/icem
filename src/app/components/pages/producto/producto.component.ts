@@ -53,7 +53,6 @@ export class ProductoComponent implements OnInit {
   }
 
   verMas(item) {
-    console.log(item);
     // this.storage.clear('producto');
     this.storage.store('producto', item);
     this.emisor.emit(this.producto);

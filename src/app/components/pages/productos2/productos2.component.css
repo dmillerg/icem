@@ -1,0 +1,121 @@
+.categorys{
+    background-color: var(--firstcolor);
+    margin-bottom: 20px;
+}
+
+.products{
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+}
+
+.h3{
+    color: var(--theme-color);
+}
+
+.container .rows,
+.contenedor .rows {
+    width: fit-content;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: relative;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    justify-content: center;
+}
+
+.contenedor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .rows .categoria,
+.contenedor .rows .categoria {
+    color: var(--theme-color);
+    padding: 10px;
+    box-shadow: 0 0 2px 2px var(--firstcolor-hover);
+    border-radius: 1em;
+    transition: all 0.3s ease;
+}
+
+.container .rows.linea,
+.contenedor .rows.linea {
+    border-bottom: 1px solid var(--firstcolor);
+}
+
+.contenedor .rows .square2{
+    position: absolute;
+    bottom: -18px;
+    width: 70px;
+    height: 30px;
+    margin-left: 48px;
+    transform: rotate(-28deg);
+    background: var(--firstcolor);
+    border: none;
+}
+
+.contenedor .rows .square {
+    position: absolute;
+    bottom: -18px;
+    width: 70px;
+    height: 30px;
+    margin-right: 48px;
+    transform: rotate(28deg);
+    background: var(--firstcolor);
+    border: none;
+}
+
+.container .rows .categoria:hover,
+.contenedor .rows .categoria:hover {
+    color: var(--theme-color);
+    background-color: var( --firstcolor-hover);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.container .rows .categoria.active,
+.contenedor .rows .categoria.active {
+    color: var(--theme-color);
+    background-color: var(--firstcolor-hover);
+    transition: all 0.3s ease;
+}
+
+.text-section{
+   margin-top: 60px;
+    font-size: 30px;
+}
+
+.barra-superior {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+}
+
+.producto-especification{
+    width: 100%;
+    transition: all .3s ease;
+}
+
+
+.posts{
+    width: 300px;
+    margin-top: -10px;
+    opacity: 0;
+    position: absolute;
+    right: -350px;
+    visibility: hidden;
+    transition: all .3s ease-in-out;
+}
+
+.posts.active{
+    right: 10px;
+    opacity: 1;
+    visibility: visible;
+    transition: all .3s ease-in-out;
+}

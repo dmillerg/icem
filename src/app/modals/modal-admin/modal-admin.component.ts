@@ -242,7 +242,7 @@ export class ModalAdminComponent implements OnInit {
     this.api.getProductoFoto(id).subscribe(result => {
       this.ventasarray[position].url = result.url;
     }, error => {
-      this.ventasarray[position].url = error.url;
+      // this.ventasarray[position].url = error.url;
     })
   }
 
