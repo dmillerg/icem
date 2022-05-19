@@ -49,7 +49,8 @@ export class Productos2Component implements OnInit {
   };
   categoria: Categoria = {
     id: -1,
-    nombre: ''
+    nombre: '',
+    descripcion: '',
   };
 
   alias: string = '';
@@ -94,7 +95,7 @@ export class Productos2Component implements OnInit {
 
   loadCategorias() {
     this.api.getCategorias().subscribe(result => {
-      this.categorias.push({ id: -1, nombre: 'Todos' });
+      this.categorias.push({ id: -1, nombre: 'Todos', descripcion: 'Esta categoría contiene a todos los productos'  });
       result.forEach(e => {
         this.categorias.push(e);
       });

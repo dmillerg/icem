@@ -69,6 +69,7 @@ import { ModalEstadoPedidoComponent } from './modals/modal-estado-pedido/modal-e
 import { TableVentasComponent } from './components/tables/table-ventas/table-ventas.component';
 import { Productos2Component } from './components/pages/productos2/productos2.component';
 import { PostsComponent } from './components/pages/posts/posts.component';
+import { ProductoEspecification2Component } from './components/pages/producto-especification2/producto-especification2.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -129,6 +130,7 @@ import { PostsComponent } from './components/pages/posts/posts.component';
     ModalEstadoPedidoComponent,
     Productos2Component,
     PostsComponent,
+    ProductoEspecification2Component,
   ],
   imports: [
     BrowserModule,

@@ -28,7 +28,8 @@ export class ProductosEspecificacionComponent implements OnInit, OnDestroy, Afte
   @Input() id: string = '';
   @Input() categoria: Categoria = {
     id: -1,
-    nombre: ''
+    nombre: '',
+    descripcion: ''
   };
   carrito: any[] = [];
   cantidad: number = 0;

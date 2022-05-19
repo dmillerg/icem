@@ -131,7 +131,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   loadCategorias() {
     this.api.getCategorias().subscribe((result) => {
-      this.categorias.push({ id: -1, nombre: 'Todos' });
+      this.categorias.push({ id: -1, nombre: 'Todos', descripcion: 'Esta categoría contiene a todos los productos' });
       result.forEach(item => this.categorias.push(item));
       this.anterior = this.categorias[0].nombre;
     });

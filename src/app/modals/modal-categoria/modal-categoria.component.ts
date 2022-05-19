@@ -18,11 +18,13 @@ export class ModalCategoriaComponent implements OnInit {
   categoria: Categoria = {
     id: -1,
     nombre: '',
+    descripcion: '',
   };
 
   categoria_pasado: Categoria = {
     id: -1,
     nombre: '',
+    descripcion: '',
   };
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
