@@ -29,7 +29,8 @@ export class Productos2Component implements OnInit {
 
 
   productos: Producto[] = [];
-  categorias: Categoria[] = []; 
+  categorias: Categoria[] = [];
+  categorias4: Categoria[] = [];
   posts: any[] = [];
 
   producto: Producto = {
@@ -59,6 +60,7 @@ export class Productos2Component implements OnInit {
   comentarios: boolean = false;
 
   categoriaId: number = -1;
+  position: number = 4;
 
   constructor(private api: ApiService, public storage: SessionStorageService, private modalService: NgbModal) { }
 
@@ -95,12 +97,22 @@ export class Productos2Component implements OnInit {
 
   loadCategorias() {
     this.api.getCategorias().subscribe(result => {
-      this.categorias.push({ id: -1, nombre: 'Todos', descripcion: 'Esta categoría contiene a todos los productos'  });
+      this.categorias.push({ id: -1, nombre: 'Todos', descripcion: 'Esta categoría contiene a todos los productos' });
       result.forEach(e => {
         this.categorias.push(e);
       });
       this.categoria = result[0];
+      this.rellenarCategorias();
     });
+  }
+
+  rellenarCategorias() {
+    this.categorias4 = [];
+    this.categorias.forEach((e, i) => {
+      if ((i + 1) <= this.position && (i + 1) >= (this.position - 4)) {
+        this.categorias4.push(e);
+      }
+    })
   }
 
   cambiarCategoria(id: number) {

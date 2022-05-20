@@ -43,7 +43,7 @@
   background: rgba(7, 7, 7, 0.8);
 }
 
-.btn:disabled{
+.btn:disabled {
   cursor: not-allowed;
 }
 
@@ -112,17 +112,20 @@ body {
 
 .btn-outline-firstcolor {
   background-color: transparent;
-  border: 1px solid var(--firstcolor);
+  /* border: 1px solid var(--firstcolor); */
+  border: none;
   color: var(--firstcolor);
-  border-radius: 0.2em;
+  border-radius: 0.5em;
+  box-shadow: 0 8px 32px 0 var(--firstcolor-section);
   padding: 15px;
 }
 
 .btn-outline-firstcolor:hover {
   background-color: var(--firstcolor);
-  border: 1px solid var(--firstcolor);
+  border: none;
   color: white;
-  border-radius: 0.2em;
+  border-radius: 0.5em;
+  box-shadow: 0 8px 32px 0 var(--firstcolor-section);
   padding: 15px;
   transition: ease-in-out .3s;
 }

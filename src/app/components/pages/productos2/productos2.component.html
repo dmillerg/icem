@@ -1,33 +1,7 @@
 <div class="container-fluid">
-    <div #especification style="transform: translateY(-100px);"></div>
-
-    <section class="especifications animado" *ngIf="producto!= null && producto!=undefined">
-        <div class="container">
-        <div class="row">
-            <div id="producto-especification" class="producto-especification">
-                <div class="barra-superior">
-                    <button class="btn centrado"
-                        [ngClass]="{ 'btn-outline-firstcolor': !comentarios , 'btn-firstcolor' : comentarios}"
-                        (click)="abrirComentarios()" style="position: relative;">
-                        <div class="pista pista-off pista-bottom">Ver comentarios</div>
-                        <i class="bi bi-chat-square-text"></i>
-                    </button>
-                    <button class="btn btn-outline-firstcolor centrado" [disabled]="producto.ficha == null" style="position: relative;">
-                        <div class="pista pista-off pista-bottom" *ngIf="producto && producto.ficha != null">Descargar ficha técnica</div>
-                        <i class="bi bi-journal-text"></i>
-                    </button>
-                </div>
-                <app-producto-especification2></app-producto-especification2>
-            </div>
-            <div id="posts" class="posts">
-             <app-posts (emisor)="abrirComentarios()"></app-posts>
-            </div>
-        </div>
-    </div>
-    </section>
-
+   
     <section class="categorys animado">
-        <div class="contenedor">
+        <!-- <div class="contenedor">
             <div class="rows">
                 <h3 class="h3">Categorias</h3>
             </div>
@@ -39,8 +13,54 @@
                 <div class="square"></div>
                 <div class="square2"></div>
             </div>
+        </div> -->
+        <div class="container">
+            <div class="contenedor-categoria">
+                <button class="btn-prev"><i class="bi bi-chevron-left"></i></button>
+                <button *ngFor="let item of categorias4" class="btn-categoria" (click)="cambiarCategoria(item.id)"
+                    [ngClass]="{'active': (storage.retrieve('categoria') && storage.retrieve('categoria').nombre== item.nombre)}">
+                    <i class="bi bi-truck svg-shadow" style="font-size: 30px;"></i>
+                    <strong style="font-size: 16px;">{{item.nombre}}</strong>
+                    <p style="font-size: 12px;padding-left: 5px;padding-right: 5px;max-height: 20px;">{{item.descripcion}}</p>
+                </button>
+                <button class="btn-next"><i class="bi bi-chevron-right"></i></button>
+            </div>
         </div>
     </section>
+
+
+    <div #especification style="transform: translateY(-100px);"></div>
+
+
+
+    <section class="especifications animado" *ngIf="producto!= null && producto!=undefined">
+        <div class="container">
+            <div class="row">
+                <div id="producto-especification" class="producto-especification">
+                    <div class="barra-superior">
+                        <button class="btn centrado"
+                            [ngClass]="{ 'btn-outline-firstcolor': !comentarios , 'btn-firstcolor' : comentarios}"
+                            (click)="abrirComentarios()" style="position: relative;">
+                            <div class="pista pista-off pista-bottom">Ver comentarios</div>
+                            <i class="bi bi-chat-square-text"></i>
+                        </button>
+                        <button class="btn btn-outline-firstcolor centrado" [disabled]="producto.ficha == null"
+                            style="position: relative;margin-right: 10px;">
+                            <div class="pista pista-off pista-bottom" *ngIf="producto && producto.ficha != null">
+                                Descargar ficha técnica</div>
+                            <i class="bi bi-journal-text"></i>
+                        </button>
+                    </div>
+                    <app-producto-especification2></app-producto-especification2>
+                </div>
+                <div id="posts" class="posts">
+                    <app-posts (emisor)="abrirComentarios()"></app-posts>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
 
 
     <section class="products animado">
