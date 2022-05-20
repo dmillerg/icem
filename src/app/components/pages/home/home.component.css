@@ -26,7 +26,9 @@
     width: 17%;
     height: 180px;
     min-width: 200px;
-    background-color: rgba(0, 0, 0, 0.15);
+    /* background-color: rgba(0, 0, 0, 0.15); */
+    border-radius: 0.5em;
+    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
     transform: scale(0.9);
     transition: all .3s ease;
 }
@@ -69,6 +71,8 @@
     padding-left: 0;
     padding-right: 5px;
     position: relative;
+    border-radius: 0.5em;
+    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
 }
 
 .bg-azul {
@@ -115,6 +119,11 @@
     width: 30%;
     height: auto;
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.carousel{
+    border-radius: 0.5em;
+    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
 }
 
 .btn-carousel{

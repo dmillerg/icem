@@ -1,31 +1,32 @@
 <div class="contenedor-especification" [@scaleAnimation]="'enter'">
     <div class="container-fluid">
-        <div class="row" style="justify-content: center;">
+        <div class="row" style="margin-bottom: 5px;">
+            <div class="titulo">
+                <h3 class="h3"><i class="bi bis bi-truck svg-shadow"></i> {{producto.titulo}}</h3>
+                <label class="fecha">{{producto.fecha|date: 'short'}}</label>
+            </div>
+        </div>
+        <div class="row">
             <div class="contenedor-imagen col-sm-12 col-md-5 col-lg-5">
                 <img [src]="producto.imagen" [alt]="producto.titulo">
             </div>
-            <div class="contenedor-titulo col-sm-12 col-md-5 col-lg-5">
+            <div class="col-sm-12 col-md-7 col-lg-7">
                 <div class="container-fluid">
-                    <div class="row" style="margin-bottom: 5px;">
-                        <div class="titulo">
-                            <h3 class="h3"><i class="bi bis bi-truck svg-shadow"></i> {{producto.titulo}}</h3>
-                            <p class="fecha">{{producto.fecha|date: 'short'}}</p>
-                        </div>
-                    </div>
+                    
                     <div class="row">
                         <div class="things col-sm-5 col-md-5 col-lg-5">
                             <label><i class="bi bis bi-currency-dollar svg-shadow"></i> <strong> Precio:
                                 </strong></label>
-                            <p>{{producto.precio}}</p>
+                            <label>{{producto.precio}}</label>
                         </div>
                         <div class="things col-sm-5 col-md-5 col-lg-5">
                             <label><i class="bi bis bi-card-checklist svg-shadow"></i> <strong> Disponibilidad:
                                 </strong></label>
-                            <p>{{producto.disponibilidad}}</p>
+                            <label>{{producto.disponibilidad}}</label>
                         </div>
                         <div class="things col-sm-5 col-md-5 col-lg-5">
                             <label><i class="bi bis bi-bookmark svg-shadow"></i> <strong> Categoría: </strong></label>
-                            <p>{{categoria}}</p>
+                            <label>{{categoria}}</label>
                         </div>
                         <div class="things col-sm-5 col-md-5 col-lg-5" *ngIf="storage.retrieve('usuario')" [@scaleAnimation]="'enter'">
                             <label><i class="bi bis bi-cart svg-shadow"></i> <strong> Montar al carrito:
@@ -53,19 +54,19 @@
     <div class="contenedor-descripcion">
         <div class="container-fluid" style="padding-left: 0;padding-right: 0;">
             <div class="row">
-                <div class="description col-sm-12 col-md-12 col-lg-12">
+                <div class="description col-sm-12 col-md-6 col-lg-6">
                     <i class="bi bi-info-circle svg-shadow"></i> <strong> Descripción: </strong>
                     {{producto.descripcion}}
                 </div>
-                <div class="description col-sm-12 col-md-12 col-lg-12">
+                <div class="description col-sm-12 col-md-6 col-lg-5">
                     <i class="bi bi-list-task svg-shadow"></i> <strong> Especificaciones: </strong>
                     {{producto.especificaciones}}
                 </div>
-                <div class="description col-sm-12 col-md-12 col-lg-12">
+                <div class="description col-sm-12 col-md-6 col-lg-6">
                     <i class="bi bi-window svg-shadow"></i><strong> Usos: </strong>
                     {{producto.usos}}
                 </div>
-                <div class="description col-sm-12 col-md-12 col-lg-12">
+                <div class="description col-sm-12 col-md-6 col-lg-5">
                     <i class="bi bi-file-text svg-shadow"></i> <strong> Garantía: </strong>
                     {{producto.garantia}}
                 </div>

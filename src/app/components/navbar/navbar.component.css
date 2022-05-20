@@ -150,8 +150,9 @@ p {
 
 .menu {
     background-color: white;
-    border: 1px solid var(--firstcolor);
-    box-shadow: 0 0 5px 5px rgba(0, 0, 0, .4);
+    /* border: 1px solid var(--firstcolor); */
+    border: none;
+    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
     display: flex;
     flex-direction: column;
     text-align: center;

@@ -51,7 +51,7 @@ export class ProductoEspecification2Component implements OnInit {
     usos: '',
     activo: false,
   };
-  categoria: string='';
+  categoria: string = '';
   carrito: any[] = [];
   cantidad: number = 0;
 
@@ -64,9 +64,11 @@ export class ProductoEspecification2Component implements OnInit {
     if (this.storage.retrieve('producto')) {
       this.producto = this.storage.retrieve('producto');
       this.loadImageProducto(this.producto.id);
-      this.storage.observe('producto').subscribe((result)=>{
-        this.producto= result;
-        this.loadImageProducto(this.producto.id);
+      this.storage.observe('producto').subscribe((result) => {
+        if (result != undefined && result != null) {
+          this.producto = result;
+          this.loadImageProducto(this.producto.id);
+        }
       })
     }
   }
@@ -81,7 +83,7 @@ export class ProductoEspecification2Component implements OnInit {
     })
   }
 
-  loadCategoria(){
+  loadCategoria() {
     this.api.getCategoriaById(this.producto.categoria).subscribe((result) => {
       this.categoria = result.nombre;
     }, error => {
@@ -133,12 +135,14 @@ export class ProductoEspecification2Component implements OnInit {
   }
 
   loadEspecification() {
-    this.api.getProductosById(this.producto.id).subscribe((result) => {
-      if(result != null){
-      this.producto.disponibilidad = result.disponibilidad;
-      this.producto.precio = Number.isInteger(result.precio)?Number(result.precio+'.00'):result.precio;
-      }
-    });
+    if (this.storage.retrieve('producto')) {
+      this.api.getProductosById(this.producto.id).subscribe((result) => {
+        if (result != null) {
+          this.producto.disponibilidad = result.disponibilidad;
+          this.producto.precio = Number.isInteger(result.precio) ? Number(result.precio + '.00') : result.precio;
+        }
+      });
+    }
   }
 
 }

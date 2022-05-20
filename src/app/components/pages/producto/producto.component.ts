@@ -19,8 +19,8 @@ import { ApiService } from 'src/app/services/api.service';
     trigger(
       'scaleAnimation', [
         transition(':enter', [
-          style({transform: 'scale(0)', opacity: 0}),
-          animate('500ms', style({transform: 'scale(1)', opacity: 1}))
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('500ms', style({transform: 'translateX(0%)', opacity: 1}))
         ]),
         transition(':leave', [
           style({transform: 'scale(1)', opacity: 1}),

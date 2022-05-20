@@ -88,11 +88,13 @@ export class PostsComponent implements OnInit {
     this.loadPosts();
     if (this.storage.retrieve('producto')) {
       this.producto = this.storage.retrieve('producto');
-      this.storage.observe('producto').subscribe((result) => {
+    }
+    this.storage.observe('producto').subscribe((result) => {
+      if (result != undefined && result != null) {
         this.producto = result;
         this.loadPosts();
-      })
-    }
+      }
+    })
   }
 
   loadPosts() {

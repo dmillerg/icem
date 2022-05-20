@@ -45,6 +45,7 @@ export class ModalCategoriaComponent implements OnInit {
     let formData = new FormData();
     formData.append('id', this.categoria.id.toString());
     formData.append('nombre', this.categoria.nombre.toString());
+    formData.append('descripcion', this.categoria.descripcion.toString());
 
     if (this.modalAction == 'Editar') {
       this.api.updateCategoria(formData, this.categoria.id).subscribe(

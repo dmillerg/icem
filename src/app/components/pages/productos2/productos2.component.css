@@ -1,16 +1,16 @@
-.categorys{
+.categorys {
     /* background-color: var(--firstcolor); */
     margin-top: 60px;
     margin-bottom: 20px;
 }
 
-.products{
+.products {
     width: 100%;
     height: auto;
     min-height: 400px;
 }
 
-.h3{
+.h3 {
     color: var(--theme-color);
 }
 
@@ -50,7 +50,7 @@
     border-bottom: 1px solid var(--firstcolor);
 }
 
-.contenedor .rows .square2{
+.contenedor .rows .square2 {
     position: absolute;
     bottom: -18px;
     width: 70px;
@@ -75,7 +75,7 @@
 .container .rows .categoria:hover,
 .contenedor .rows .categoria:hover {
     color: var(--theme-color);
-    background-color: var( --firstcolor-hover);
+    background-color: var(--firstcolor-hover);
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -87,8 +87,8 @@
     transition: all 0.3s ease;
 }
 
-.text-section{
-   margin-top: 60px;
+.text-section {
+    margin-top: 60px;
     font-size: 30px;
 }
 
@@ -98,13 +98,13 @@
     width: 100%;
 }
 
-.producto-especification{
+.producto-especification {
     width: 100%;
     transition: all .3s ease;
 }
 
 
-.posts{
+.posts {
     width: 300px;
     margin-top: -10px;
     opacity: 0;
@@ -114,63 +114,281 @@
     transition: all .3s ease-in-out;
 }
 
-.posts.active{
+.posts.active {
     right: 10px;
+    bottom: 160px;
     opacity: 1;
     visibility: visible;
     transition: all .3s ease-in-out;
 }
 
-.contenedor-categoria{
+.contenedor-categoria {
     width: 100%;
-    height: 150px;
-    background-color: var(--firstcolor);
-    border-radius: 0.5em;
+    position: relative;
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    position: relative;
-    border: 10px white solid;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
 }
 
-.contenedor-categoria .btn-categoria{
-    width: 25%;
-    height: 150px;
+.contenedor-categoria .btn-categoria {
+    padding: 10px;
+    background-color: var(--firstcolor);
+    color: var(--theme-color);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    color: var(--theme-color);
-    border: none;
-    background-color: transparent;
     gap: 10px;
-    transition: all .3s ease;
-}
-
-.contenedor-categoria .btn-categoria:hover{
-    background-color: var(--firstcolor-hover);
-    height: 180px;
-    transform: translateY(-50px);
-    border-radius: 0.5em;
-    transition: all .3s ease;
-}
-
-.contenedor-categoria .btn-categoria.active{
-    transform: translateY(-60px);
-    height: 210px;
-    background-color: white;
+    justify-content: center;
+    align-items: center;
     border-radius: 0.5em;
     box-shadow: 0 8px 32px 0 var(--firstcolor-section);
-    color: var(--firstcolor);
-    transition: all .3s ease;
+    transition: all .3s ease-in-out;
 }
 
-.contenedor-categoria .btn-next{
-    position: absolute;
-    background-color: var(--firstcolor);
-    top: 45px;
-    right: -20px;
-    padding: 20px;
-    border-radius: 50%;
+.contenedor-categoria .btn-categoria.active {
+    background-color: var(--theme-color);
+    color: var(--firstcolor);
+    transform: translateY(-20px);
+    z-index: 999;
     box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
+    transition: all .3s ease-in-out;
+}
+
+.contenedor-categoria .btn-categoria:hover {
+    background-color: var(--firstcolor-hover);
+    color: var(--theme-color);
+    transform: scale(1.1);
+    /* transform: translateY(-30px); */
+    box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
+    transition: all .3s ease-in-out;
+}
+
+.contenedor-categoria .btn-categoria.active:hover {
+    background-color: var(--theme-color);
+    color: var(--firstcolor);
+    transform: translateY(-30px);
+    box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
+    transition: all .3s ease-in-out;
+}
+
+.ventas-contenedor {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.grafico {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: conic-gradient(pink 70deg,
+            lightblue 0 235deg,
+            orange 0);
+}
+
+
+
+/************************
+Css orignal https://codepen.io/jlalovi/details/bIyAr
+************************/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background: #1f253d;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+h1 {
+    font-size: 23px;
+}
+
+h2 {
+    font-size: 17px;
+}
+
+p {
+    font-size: 15px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 15px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1,
+h2,
+p,
+a,
+span {
+    color: #fff;
+}
+
+.scnd-font-color {
+    color: #9099b7;
+}
+
+.titular {
+    display: block;
+    line-height: 60px;
+    margin: 0;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.horizontal-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.horizontal-list li {
+    float: left;
+}
+
+.block {
+    margin: 25px 25px 0 0;
+    background: #394264;
+    border-radius: 5px;
+    float: left;
+    width: 300px;
+    overflow: hidden;
+}
+
+/******************************************** LEFT CONTAINER *****************************************/
+.left-container {}
+
+.menu-box {
+    height: 360px;
+}
+
+.donut-chart-block {
+    overflow: hidden;
+}
+
+.donut-chart-block .titular {
+    padding: 10px 0;
+}
+
+
+/******************************************
+GRAFICO CIRCULAR PIE CHART
+******************************************/
+.donut-chart {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 2rem;
+    border-radius: 100%
+}
+
+p.center-date {
+    background: #394264;
+    position: absolute;
+    text-align: center;
+    font-size: 28px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 130px;
+    height: 130px;
+    margin: auto;
+    border-radius: 50%;
+    line-height: 35px;
+    padding: 15% 0 0;
+}
+
+.center-date span.scnd-font-color {
+    line-height: 0;
+}
+
+.recorte {
+    border-radius: 50%;
+    clip: rect(0px, 200px, 200px, 100px);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.quesito {
+    border-radius: 50%;
+    clip: rect(0px, 100px, 200px, 0px);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    font-family: monospace;
+    font-size: 1.5rem;
+}
+
+#porcion1 {
+    transform: rotate(0deg);
+}
+
+#porcion1 .quesito {
+    background-color: #E64C65;
+    transform: rotate(180deg);
+}
+
+#porcion2 {
+    /* background-color: var(--firstcolor); */
+    transform: rotate(76deg);
+}
+
+#porcion2 .quesito {
+    background-color: #11A8AB;
+    transform: rotate(360deg);
+}
+
+#porcion3 {
+    transform: rotate(0deg);
+}
+
+#porcion3 .quesito {
+    background-color: #4FC4F6;
+    transform: rotate(0deg);
+}
+
+#porcionFin {
+    transform: rotate(0deg);
+}
+
+#porcionFin .quesito {
+    background-color: #FCB150;
+    transform: rotate(0deg);
+}
+
+.nota-final {
+    clear: both;
+    color: #4FC4F6;
+    font-size: 1rem;
+    padding: 2rem 0;
+}
+
+.nota-final strong {
+    color: #E64C65;
+}
+
+.nota-final a {
+    color: #FCB150;
+    font-size: inherit;
 }

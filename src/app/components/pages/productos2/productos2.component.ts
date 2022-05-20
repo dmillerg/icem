@@ -19,11 +19,24 @@ const listAnimation = trigger('listAnimation', [
   ])
 ]);
 
+const scaleAnimation = trigger(
+  'scaleAnimation', [
+  transition(':enter', [
+    style({ transform: 'scale(0)', opacity: 0 }),
+    animate('500ms', style({ transform: 'scale(1)', opacity: 1 }))
+  ]),
+  transition(':leave', [
+    style({ transform: 'scale(1)', opacity: 1 }),
+    animate('250ms', style({ transform: 'scale(0)', opacity: 0 }))
+  ])
+]
+);
+
 @Component({
   selector: 'app-productos2',
   templateUrl: './productos2.component.html',
   styleUrls: ['./productos2.component.css'],
-  animations: [listAnimation]
+  animations: [listAnimation, scaleAnimation]
 })
 export class Productos2Component implements OnInit {
 
@@ -34,6 +47,21 @@ export class Productos2Component implements OnInit {
   posts: any[] = [];
 
   producto: Producto = {
+    id: -1,
+    titulo: '',
+    descripcion: '',
+    fecha: '',
+    categoria: -1,
+    disponibilidad: 0,
+    especificaciones: '',
+    garantia: '',
+    ficha: '',
+    imagen: '',
+    precio: 0,
+    usos: '',
+    activo: false,
+  };
+  producto2: Producto = {
     id: -1,
     titulo: '',
     descripcion: '',
@@ -77,9 +105,16 @@ export class Productos2Component implements OnInit {
         if (result.id != this.categoria.id) {
           this.categoria = result;
           this.categoriaId = this.categoria.id;
+          this.producto = this.producto2;
           this.loadProductos();
         }
-      })
+      });
+    }
+    if(this.storage.retrieve('producto')){
+      this.producto = this.storage.retrieve('producto');
+      this.storage.observe('producto').subscribe((result) => {
+        this.producto = result;
+      });
     }
   }
 
@@ -87,10 +122,10 @@ export class Productos2Component implements OnInit {
     this.api.getProducto(-1, this.categoriaId, -1).subscribe(result => {
       if (result.length > 0) {
         this.productos = result;
-        this.producto = result[0]
+        this.storage.clear('producto');
       } else {
         this.productos = [];
-        this.producto = null;
+        // this.producto = null;
       }
     });
   }
@@ -109,7 +144,7 @@ export class Productos2Component implements OnInit {
   rellenarCategorias() {
     this.categorias4 = [];
     this.categorias.forEach((e, i) => {
-      if ((i + 1) <= this.position && (i + 1) >= (this.position - 4)) {
+      if (i < this.position && i >= (this.position - 4)) {
         this.categorias4.push(e);
       }
     })
