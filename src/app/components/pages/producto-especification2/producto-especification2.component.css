@@ -11,6 +11,19 @@
     align-items: center;
 }
 
+.contenedor-img .h4 {
+    position: absolute;
+    right: -50px;
+    top: 25px;
+    background-color: var(--alertcolor);
+    color: var(--theme-color);
+    z-index: 2;
+    padding: 10px;
+    border-radius: 5px;
+    transform: rotate(45deg);
+    transition: all .3s ease-in-out;
+}
+
 .contenedor-img img {
     width: 100%;
     height: auto;
@@ -95,7 +108,7 @@
     color: var(--theme-color);
     background-color: var(--firstcolor);
     margin-right: 5px;
-    
+
 }
 
 .contenedor-carrito .btn-cart:disabled {
@@ -122,7 +135,7 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-.disponible{
+.disponible {
     position: absolute;
     bottom: 0;
     right: 15px;

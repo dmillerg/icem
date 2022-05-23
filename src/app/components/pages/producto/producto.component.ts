@@ -36,7 +36,7 @@ export class ProductoComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private storage: SessionStorageService,
+    public storage: SessionStorageService,
     private router: Router
   ) {}
 

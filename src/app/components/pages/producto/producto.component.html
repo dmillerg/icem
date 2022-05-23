@@ -1,4 +1,5 @@
-<div class="card card-mine" [@scaleAnimation]="'enter'">
+<div class="card card-mine" [ngClass]="{'active': storage.retrieve('producto')&&storage.retrieve('producto').id==producto.id}" [@scaleAnimation]="'enter'" (click)="verMas(producto)">
+    <h4 class="h4" [@scaleAnimation]="'enter'" *ngIf="producto.disponibilidad==0">Agotado</h4>
     <img class="img-backlogo-bottom-rigth" src="assets/logo-mitad-left.png">
     <!-- <img class="img-backlogo-top-left" src="assets/logo-mitad-right.png"> -->
     <div class="title-text text-start">

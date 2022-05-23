@@ -122,7 +122,7 @@ export class Productos2Component implements OnInit {
     this.api.getProducto(-1, this.categoriaId, -1).subscribe(result => {
       if (result.length > 0) {
         this.productos = result;
-        this.storage.clear('producto');
+        // this.storage.clear('producto');
       } else {
         this.productos = [];
         // this.producto = null;

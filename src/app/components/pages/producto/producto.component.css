@@ -9,6 +9,18 @@
     box-shadow: 0 8px 32px 0 var(--firstcolor-section);
 }
 
+.card-mine.active{
+    transition: all .3s ease;
+    transform: scale(1.05);
+    box-shadow: 0 0 32px 0 var(--firstcolor-hover);
+}
+
+.card-mine:hover{
+    transform: scale(1.05);
+    transition: all .3s ease;
+
+}
+
 
 .title-text {
     width: 100%;
@@ -39,10 +51,24 @@
     margin-top: 30px;
     width: 90%;
     margin-left: 0;
+    /* box-shadow: 0 8px 2px 0 var(--firstcolor-hover); */
 }
 
 .img {
     position: relative;
+}
+
+.card-mine .h4{
+    position: absolute;
+    right: -5px;
+    top: 10px;
+    background-color: var(--alertcolor);
+    color: var(--theme-color);
+    z-index: 2;
+    padding: 10px;
+    border-radius: 5px;
+    transform: rotate(45deg);
+    transition: all .3s ease-in-out;
 }
 
 .img-backlogo-bottom-rigth{

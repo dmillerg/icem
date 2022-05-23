@@ -3,6 +3,7 @@
         <div class="col-sm-5" style="padding: 10px;">
             <div class="contenedor-img">
                 <h3 class="h3">{{categoria}}</h3>
+                <h4 class="h4" *ngIf="producto.disponibilidad==0" [@scaleAnimation]="'enter'">Agotado</h4>
                 <img [src]="producto.imagen" alt="">
                 <label class="disponible">Disponibles: {{producto.disponibilidad}}</label>
             </div>
@@ -17,7 +18,7 @@
                     <button class="btn-cart" [disabled]="cantidad==0" (click)="cant('less')"><i class="bi bi-dash"></i></button>
                     <input type="number" [(ngModel)]="cantidad">
                     <button class="btn-cart" [disabled]="cantidad>=producto.disponibilidad" (click)="cant('more')"><i class="bi bi-plus"></i></button>
-                    <button class="btn-cart"[disabled]="cantidad==0 || cantidad>=producto.disponibilidad" (click)="addCarrito();"><i class="bi bi-cart"> </i>Añadir al carrito</button>
+                    <button class="btn-cart"[disabled]="cantidad==0 || cantidad>producto.disponibilidad" (click)="addCarrito();"><i class="bi bi-cart"> </i>Añadir al carrito</button>
                 </div>
                 <button type="button" id="especificaciones" class="collapsible" (click)="collapse($event)">Especificaciones <i class="bi"></i></button>
                 <div id="especificacionescontent" class="content">
