@@ -121,6 +121,8 @@ export class ModalProductoComponent implements OnInit {
     let file = (<HTMLInputElement>fileInput.target).files[0];
     //  console.log(fileInput);
     this.uploadFiles = fileInput.target.files;
+    console.log(this.uploadFiles);
+    
     const reader = new FileReader();
     reader.onload = () => {
       this.producto.imagen = reader.result as string;

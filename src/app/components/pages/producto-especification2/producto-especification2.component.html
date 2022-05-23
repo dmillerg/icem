@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container"  [@scaleAnimation]="'enter'">
     <div class="row">
         <div class="col-sm-5" style="padding: 10px;">
             <div class="contenedor-img">
@@ -12,13 +12,13 @@
                 <label class="text">{{producto.fecha| date:'dd/MM/YYYY hh:mm a'}}</label>
                 <strong style="display: flex;flex-direction: row;font-size: 18px;"><div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio}}.00</strong>
                 <p class="text">{{producto.descripcion}}</p>
-                <div class="contenedor-carrito">
+                <div class="contenedor-carrito" *ngIf="storage.retrieve('usuario')" [@scaleAnimation]="'enter'">
                     <button class="btn-cart" [disabled]="cantidad==0" (click)="cant('less')"><i class="bi bi-dash"></i></button>
                     <input type="number" [(ngModel)]="cantidad">
                     <button class="btn-cart" [disabled]="cantidad>=producto.disponibilidad" (click)="cant('more')"><i class="bi bi-plus"></i></button>
                     <button class="btn-cart"[disabled]="cantidad==0 || cantidad>=producto.disponibilidad" (click)="addCarrito();"><i class="bi bi-cart"> </i>Añadir al carrito</button>
                 </div>
-                <button type="button" id="especificaciones" class="collapsible" (click)="collapse($event)">Especificaciones</button>
+                <button type="button" id="especificaciones" class="collapsible" (click)="collapse($event)">Especificaciones <i class="bi"></i></button>
                 <div id="especificacionescontent" class="content">
                   <p class="text">{{producto.especificaciones.length>0?producto.especificaciones:'No hay especificaciones definidas'}}</p>
                 </div> 

@@ -14,7 +14,7 @@
 .contenedor-img img {
     width: 100%;
     height: auto;
-    transform: translateX(10%);
+    transform: translateX(40px);
     box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
 }
 
@@ -104,7 +104,7 @@
 }
 
 .contenedor-carrito input {
-    width: 60px;
+    width: 30px;
     outline: none;
     border: none;
     border-bottom: 1px solid var(--firstcolor);

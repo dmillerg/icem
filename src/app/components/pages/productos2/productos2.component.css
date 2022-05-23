@@ -149,7 +149,7 @@
 .contenedor-categoria .btn-categoria.active {
     background-color: var(--theme-color);
     color: var(--firstcolor);
-    transform: translateY(-20px);
+    transform: translateY(-15px);
     z-index: 999;
     box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
     transition: all .3s ease-in-out;
@@ -167,7 +167,7 @@
 .contenedor-categoria .btn-categoria.active:hover {
     background-color: var(--theme-color);
     color: var(--firstcolor);
-    transform: translateY(-30px);
+    transform: translateY(-15px);
     box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
     transition: all .3s ease-in-out;
 }
@@ -191,88 +191,6 @@
 }
 
 
-
-/************************
-Css orignal https://codepen.io/jlalovi/details/bIyAr
-************************/
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
-
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-body {
-    background: #1f253d;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding-left: 0;
-}
-
-h1 {
-    font-size: 23px;
-}
-
-h2 {
-    font-size: 17px;
-}
-
-p {
-    font-size: 15px;
-}
-
-a {
-    text-decoration: none;
-    font-size: 15px;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-h1,
-h2,
-p,
-a,
-span {
-    color: #fff;
-}
-
-.scnd-font-color {
-    color: #9099b7;
-}
-
-.titular {
-    display: block;
-    line-height: 60px;
-    margin: 0;
-    text-align: center;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.horizontal-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.horizontal-list li {
-    float: left;
-}
-
-.block {
-    margin: 25px 25px 0 0;
-    background: #394264;
-    border-radius: 5px;
-    float: left;
-    width: 300px;
-    overflow: hidden;
-}
 
 /******************************************** LEFT CONTAINER *****************************************/
 .left-container {}
@@ -394,7 +312,11 @@ p.center-date {
 }
 
 
-.titulo-categorias{
+.titulo-categorias {
     width: 100%;
-    color: aqua;
+    text-align: center;
+}
+
+.titulo-categorias .h3 {
+    color: var(--firstcolor-hover);
 }

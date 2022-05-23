@@ -89,7 +89,6 @@
 .content-total .info-list,
 .content-total .info-list .info label {
     color: var(--firstcolor);
-    font-size: 10px;
 }
 
 .message-empty{

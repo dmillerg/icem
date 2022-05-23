@@ -205,9 +205,14 @@ h4 {
   src: url('fonts/MyriadPro-SemiboldSemiExt.otf');
 }
 
-/* *{
+*{
   font-family: MyriadPro-BoldCond;
-} */
+}
+
+.text{
+  color: #777;
+
+}
 
 .animado {
   opacity: 0;
