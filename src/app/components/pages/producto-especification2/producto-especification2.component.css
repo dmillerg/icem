@@ -14,19 +14,21 @@
 .contenedor-img img {
     width: 100%;
     height: auto;
-    transform: translateX(7%);
+    transform: translateX(10%);
     box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
 }
 
 .contenedor-img h3 {
+    width: 10%;
     position: absolute;
     font-family: MyriadPro-BoldCond;
     font-weight: 700;
     left: 0;
-    top: 0;
+    bottom: 15px;
     white-space: nowrap;
     color: var(--theme-color);
-    transform: rotate(270deg);
+    padding: 0;
+    transform: rotate(-90deg);
 }
 
 .column {
@@ -60,11 +62,13 @@
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active,
 .collapsible:hover {
-    background-color: #ccc;
+    background-color: var(--firstcolor-hover);
 }
+
 
 /* Style the collapsible content. Note: hidden by default */
 .content {
+    width: 100%;
     padding: 0 18px;
     max-height: 0;
     overflow: hidden;
@@ -76,4 +80,44 @@
     /* padding-top: 18px; */
     max-height: 400px;
     transition: all .3s ease-in-out;
+}
+
+.contenedor-carrito {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.contenedor-carrito .btn-cart {
+    padding: 7px;
+    border-radius: 2px;
+    color: var(--theme-color);
+    background-color: var(--firstcolor);
+    margin-right: 5px;
+    
+}
+
+.contenedor-carrito .btn-cart:disabled {
+    background-color: #c1c1c1;
+    cursor: not-allowed;
+}
+
+.contenedor-carrito input {
+    width: 60px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--firstcolor);
+    color: #777;
+    margin-right: 5px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

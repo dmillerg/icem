@@ -392,3 +392,9 @@ p.center-date {
     color: #FCB150;
     font-size: inherit;
 }
+
+
+.titulo-categorias{
+    width: 100%;
+    color: aqua;
+}

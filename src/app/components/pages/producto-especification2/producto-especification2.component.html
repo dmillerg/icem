@@ -9,20 +9,26 @@
         <div class="col-sm-7">
             <div class="column">
                 <h1 class="h1 text-firstcolor">{{producto.titulo}}</h1>
-                <label class="text">{{producto.fecha| date:'short'}}</label>
-                <strong style="display: flex;flex-direction: row;font-size: 18px;"><div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio}}</strong>
+                <label class="text">{{producto.fecha| date:'dd/MM/YYYY hh:mm a'}}</label>
+                <strong style="display: flex;flex-direction: row;font-size: 18px;"><div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio}}.00</strong>
                 <p class="text">{{producto.descripcion}}</p>
+                <div class="contenedor-carrito">
+                    <button class="btn-cart" [disabled]="cantidad==0" (click)="cant('less')"><i class="bi bi-dash"></i></button>
+                    <input type="number" [(ngModel)]="cantidad">
+                    <button class="btn-cart" [disabled]="cantidad>=producto.disponibilidad" (click)="cant('more')"><i class="bi bi-plus"></i></button>
+                    <button class="btn-cart"[disabled]="cantidad==0 || cantidad>=producto.disponibilidad" (click)="addCarrito();"><i class="bi bi-cart"> </i>Añadir al carrito</button>
+                </div>
                 <button type="button" id="especificaciones" class="collapsible" (click)="collapse($event)">Especificaciones</button>
                 <div id="especificacionescontent" class="content">
-                  <p>{{producto.especificaciones}}</p>
+                  <p class="text">{{producto.especificaciones.length>0?producto.especificaciones:'No hay especificaciones definidas'}}</p>
                 </div> 
                 <button type="button" id="usos" class="collapsible" (click)="collapse($event)">Usos</button>
                 <div id="usoscontent" class="content">
-                  <p>{{producto.usos}}</p>
+                  <p class="text">{{producto.usos.length>0?producto.usos:'No hay usos definidos'}}</p>
                 </div> 
                 <button type="button" id="garantia" class="collapsible" (click)="collapse($event)">Garantía</button>
                 <div id="garantiacontent" class="content">
-                  <p>{{producto.garantia}}</p>
+                  <p class="text">{{producto.garantia.length>0?producto.garantia:'No hay garantias definidas'}}</p>
                 </div> 
             </div>
         </div>
