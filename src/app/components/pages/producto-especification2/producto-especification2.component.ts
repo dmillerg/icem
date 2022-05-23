@@ -145,4 +145,12 @@ export class ProductoEspecification2Component implements OnInit {
     }
   }
 
+  collapse(event: any){
+   let collap = document.getElementById(event.target.id.toString());
+   collap.classList.toggle('active');
+   let content = document.getElementById(event.target.id.toString()+'content');
+   content.classList.toggle('active');
+   
+  }
+
 }

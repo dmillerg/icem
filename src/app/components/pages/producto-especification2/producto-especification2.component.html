@@ -1,75 +1,29 @@
-<div class="contenedor-especification" [@scaleAnimation]="'enter'">
-    <div class="container-fluid">
-        <div class="row" style="margin-bottom: 5px;">
-            <div class="titulo">
-                <h3 class="h3"><i class="bi bis bi-truck svg-shadow"></i> {{producto.titulo}}</h3>
-                <label class="fecha">{{producto.fecha|date: 'short'}}</label>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5" style="padding: 10px;">
+            <div class="contenedor-img">
+                <h3 class="h3">{{categoria}}</h3>
+                <img [src]="producto.imagen" alt="">
             </div>
         </div>
-        <div class="row">
-            <div class="contenedor-imagen col-sm-12 col-md-5 col-lg-5">
-                <img [src]="producto.imagen" [alt]="producto.titulo">
-            </div>
-            <div class="col-sm-12 col-md-7 col-lg-7">
-                <div class="container-fluid">
-                    
-                    <div class="row">
-                        <div class="things col-sm-5 col-md-5 col-lg-5">
-                            <label><i class="bi bis bi-currency-dollar svg-shadow"></i> <strong> Precio:
-                                </strong></label>
-                            <label>{{producto.precio}}</label>
-                        </div>
-                        <div class="things col-sm-5 col-md-5 col-lg-5">
-                            <label><i class="bi bis bi-card-checklist svg-shadow"></i> <strong> Disponibilidad:
-                                </strong></label>
-                            <label>{{producto.disponibilidad}}</label>
-                        </div>
-                        <div class="things col-sm-5 col-md-5 col-lg-5">
-                            <label><i class="bi bis bi-bookmark svg-shadow"></i> <strong> Categoría: </strong></label>
-                            <label>{{categoria}}</label>
-                        </div>
-                        <div class="things col-sm-5 col-md-5 col-lg-5" *ngIf="storage.retrieve('usuario')" [@scaleAnimation]="'enter'">
-                            <label><i class="bi bis bi-cart svg-shadow"></i> <strong> Montar al carrito:
-                                </strong></label>
-                            <div class="container">
-                                <div class="controles">
-                                    <button class="btn btn-add-less" (click)="cant('more')"
-                                        [disabled]="producto.disponibilidad<=cantidad"><i
-                                            class="bi bi-plus"></i></button>
-                                    <input class="" [max]="producto.disponibilidad" min="0" type="number"
-                                        [(ngModel)]="cantidad">
-                                    <button class="btn btn-add-less" (click)="cant('less')" [disabled]="cantidad<=0"><i
-                                            class="bi bi-dash"></i></button>
-                                    <button class="btn btn-add-less"
-                                        [disabled]="cantidad>producto.disponibilidad || producto.disponibilidad==0 || cantidad==0"
-                                        (click)="addCarrito()"><i class="bi bi-cart3"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="contenedor-descripcion">
-        <div class="container-fluid" style="padding-left: 0;padding-right: 0;">
-            <div class="row">
-                <div class="description col-sm-12 col-md-6 col-lg-6">
-                    <i class="bi bi-info-circle svg-shadow"></i> <strong> Descripción: </strong>
-                    {{producto.descripcion}}
-                </div>
-                <div class="description col-sm-12 col-md-6 col-lg-5">
-                    <i class="bi bi-list-task svg-shadow"></i> <strong> Especificaciones: </strong>
-                    {{producto.especificaciones}}
-                </div>
-                <div class="description col-sm-12 col-md-6 col-lg-6">
-                    <i class="bi bi-window svg-shadow"></i><strong> Usos: </strong>
-                    {{producto.usos}}
-                </div>
-                <div class="description col-sm-12 col-md-6 col-lg-5">
-                    <i class="bi bi-file-text svg-shadow"></i> <strong> Garantía: </strong>
-                    {{producto.garantia}}
-                </div>
+        <div class="col-sm-7">
+            <div class="column">
+                <h1 class="h1 text-firstcolor">{{producto.titulo}}</h1>
+                <label class="text">{{producto.fecha| date:'short'}}</label>
+                <strong style="display: flex;flex-direction: row;font-size: 18px;"><div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio}}</strong>
+                <p class="text">{{producto.descripcion}}</p>
+                <button type="button" id="especificaciones" class="collapsible" (click)="collapse($event)">Especificaciones</button>
+                <div id="especificacionescontent" class="content">
+                  <p>{{producto.especificaciones}}</p>
+                </div> 
+                <button type="button" id="usos" class="collapsible" (click)="collapse($event)">Usos</button>
+                <div id="usoscontent" class="content">
+                  <p>{{producto.usos}}</p>
+                </div> 
+                <button type="button" id="garantia" class="collapsible" (click)="collapse($event)">Garantía</button>
+                <div id="garantiacontent" class="content">
+                  <p>{{producto.garantia}}</p>
+                </div> 
             </div>
         </div>
     </div>

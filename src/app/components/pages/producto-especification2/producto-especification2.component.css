@@ -1,161 +1,79 @@
-.contenedor-especification {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    width: 100%;
-    
-}
-
-.contenedor-top {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.contenedor-imagen {
-    margin-bottom: 20px;
-    display: flex;
-    max-width: fit-content;
-    height: fit-content;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    border-radius: 0.5em;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
-}
-
-.contenedor-titulo {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.titulo {
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 15px;
-    padding-top: 40px;
-    border-radius: 0.5em;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
-    justify-content: flex-start;
+.contenedor-img {
     position: relative;
-    margin-bottom: 20px;
-}
-
-.titulo .bi-truck {
-    position: absolute;
-    top: -25px;
-    color: var(--theme-color);
-    background-color: var(--firstcolor);
-    padding: 7px;
-    border-radius: 0.5em;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
-}
-
-.titulo .fecha {
-    font-size: 12px;
-    color: var(--firstcolor-section);
-}
-
-
-.things {
-    margin: 5px;
-    padding: 10px;
-    border-radius: 0.5em;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding-top: 30px;
-    color: var(--firstcolor);
-}
-
-.things i.bis {
-    position: absolute;
-    top: -15px;
-    left: 15px;
-    color: var(--theme-color);
-    background-color: var(--firstcolor);
-    padding: 7px;
-    border-radius: 0.5em;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
-}
-
-.description {
-    margin: 10px;
-    padding: 30px;
-    padding-top: 35px;
-    border-radius: 0.5em;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
-    color: var(--firstcolor);
-    position: relative;
-}
-
-.description .bi {
-    position: absolute;
-    padding: 7px;
-    top: -12px;
-    background-color: var(--firstcolor);
-    color: var(--theme-color);
-    border-radius: 0.5em;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
-}
-
-.contenedor-descripcion {
-    /* margin-top: 20px; */
-}
-
-.controles {
-    margin-top: 20px;
     width: 100%;
+    height: auto;
+    background-color: var(--firstcolor);
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 10px;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
-.controles .btn-add-less{
-    background-color: var(--firstcolor);
+.contenedor-img img {
+    width: 100%;
+    height: auto;
+    transform: translateX(7%);
+    box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
+}
+
+.contenedor-img h3 {
+    position: absolute;
+    font-family: MyriadPro-BoldCond;
+    font-weight: 700;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
     color: var(--theme-color);
-    border-radius: 0.5em;
-    transition: all .3s ease;
-    padding: 7px;
+    transform: rotate(270deg);
 }
 
-.controles input {
-   width: 30px;
-   height: 30px;
-   outline: none;
-   border: none;
-   border-bottom: 1px solid var(--firstcolor);
-   /* border-radius: 0.5em; */
-   /* box-shadow: 0 8px 32px 0 var(--firstcolor-section); */
+.column {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 50px;
+    font-family: MyriadPro-BoldCond;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.column .text {
+    color: #777;
+    font-weight: 11;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
+.collapsible {
+    background-color: var(--firstcolor);
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
 }
 
-.btn-add-less:hover{
-    background-color: var(--firstcolor-hover);
-    transition: all .3s ease;
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.collapsible:hover {
+    background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: #f1f1f1;
+}
+
+.content.active {
+    /* padding-top: 18px; */
+    max-height: 400px;
+    transition: all .3s ease-in-out;
 }
