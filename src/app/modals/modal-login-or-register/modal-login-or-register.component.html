@@ -31,8 +31,8 @@
             <button class="btn btn-login" [disabled]="activarCuenta" (click)="logIn()">
                 <span *ngIf="loginLoading" class="spinner-border spinner-border-sm svg-shadow" role="status"
                     aria-hidden="true"> </span>Aceptar</button>
-            <button [@scaleAnimation]="'enter'" class="btn btn-activar" [disabled]="activateLoading" *ngIf="activarCuenta"
-                (click)="activateAccount()">
+            <button [@scaleAnimation]="'enter'" class="btn btn-activar" [disabled]="activateLoading"
+                *ngIf="activarCuenta" (click)="activateAccount()">
                 <span *ngIf="activateLoading" class="spinner-border spinner-border-sm svg-shadow" role="status"
                     aria-hidden="true"> </span>
                 Mandar correo de activación</button>
@@ -126,10 +126,11 @@
     </div>
     <div class="content-blue"
         style="background: linear-gradient(0, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo8.png');background-blend-mode: multiply;">
-        <ul>
-            <li id="autenticarse" class="li" [ngClass]="{'active': activo}" (click)="loginOrRegister()">autenticarse
-            </li>
-            <li id="registrarse" class="li" [ngClass]="{'active': !activo}" (click)="loginOrRegister()">registrarse</li>
-        </ul>
+        <button id="autenticarse" class="li" [ngClass]="{'active': activo}" (click)="loginOrRegister()">
+            <label *ngIf="activo" style="cursor: pointer;">autenticarse</label>
+            <label *ngIf="!activo" style="cursor: pointer;">registrarse</label>
+        </button>
+        <!-- <button id="registrarse" class="li" [ngClass]="{'active': !activo}"
+            (click)="loginOrRegister()">registrarse</button> -->
     </div>
 </div>
