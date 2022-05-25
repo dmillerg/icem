@@ -36,7 +36,7 @@ const scaleAnimation = trigger('scaleAnimation', [
 })
 export class ProductoEspecification2Component implements OnInit {
 
-  producto: Producto = {
+  producto: any = {
     id: -1,
     titulo: '',
     descripcion: '',
@@ -50,10 +50,12 @@ export class ProductoEspecification2Component implements OnInit {
     precio: 0,
     usos: '',
     activo: false,
+    url: '',
   };
   categoria: string = '';
   carrito: any[] = [];
   cantidad: number = 0;
+  imagenes: string[] = [];
 
   constructor(private api: ApiService, public storage: SessionStorageService) { }
 
@@ -73,14 +75,28 @@ export class ProductoEspecification2Component implements OnInit {
     }
   }
 
+  cambiarVista(position: number) {
+    let medio = this.producto.url;
+    this.producto.url = this.imagenes[position];
+    this.imagenes[position] = medio;
+  }
+
   loadImageProducto(id: number) {
-    this.api.getProductoFoto(id).subscribe((result) => {
-      this.producto.imagen = result.url;
-      this.loadCategoria();
-    }, error => {
-      this.producto.imagen = error.url;
-      this.loadCategoria();
-    })
+    console.log(this.producto.imagen.split(','));
+    this.imagenes = [];
+    this.producto.imagen.split(',').forEach((e, i) => {
+      this.api.getProductoFotoName(e).subscribe((result) => {
+        if (i == 0) { this.producto.url = result.url; } else {
+          this.imagenes.push(result.url);
+        }
+      }, error => {
+        // console.log('ERROR  ', error);
+        if (i == 0) { this.producto.url = error.url; } else {
+          this.imagenes.push(error.url);
+        }
+      })
+    });
+    this.loadCategoria();
   }
 
   loadCategoria() {
@@ -145,12 +161,12 @@ export class ProductoEspecification2Component implements OnInit {
     }
   }
 
-  collapse(event: any){
-   let collap = document.getElementById(event.target.id.toString());
-   collap.classList.toggle('active');
-   let content = document.getElementById(event.target.id.toString()+'content');
-   content.classList.toggle('active');
-   
+  collapse(event: any) {
+    let collap = document.getElementById(event.target.id.toString());
+    collap.classList.toggle('active');
+    let content = document.getElementById(event.target.id.toString() + 'content');
+    content.classList.toggle('active');
+
   }
 
 }

@@ -70,6 +70,38 @@
     text-align: left;
     outline: none;
     font-size: 15px;
+    position: relative;
+}
+
+.collapsible i {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    transition: all .3s ease-in-out;
+}
+
+.collapsible i.bi-plus {
+    display: block;
+    opacity: 1;
+    transition: all .3s ease-in-out;
+}
+
+.collapsible i.bi-dash {
+    display: none;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+}
+
+.collapsible.active i.bi-plus {
+    display: none;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+}
+
+.collapsible.active i.bi-dash {
+    display: block;
+    opacity: 1;
+    transition: all .3s ease-in-out;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -140,4 +172,37 @@ input[type=number] {
     bottom: 0;
     right: 15px;
     color: var(--theme-color);
+}
+
+.imagenes {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.imagenes .imagen {
+    width: 25%;
+    position: relative;
+    height: auto;
+    margin: 5px;
+}
+
+.hover {
+    opacity: 0;
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--firstcolor-hover);
+    transition: all 0.3s ease;
+}
+
+.imagenes .imagen:hover .hover {
+    opacity: 0.5;
+    cursor: pointer;
+    background-color: var(--firstcolor-hover);
+    transition: all 0.3s ease;
 }

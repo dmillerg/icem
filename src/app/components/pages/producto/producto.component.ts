@@ -18,15 +18,15 @@ import { ApiService } from 'src/app/services/api.service';
   animations: [
     trigger(
       'scaleAnimation', [
-        transition(':enter', [
-          style({transform: 'translateX(100%)', opacity: 0}),
-          animate('500ms', style({transform: 'translateX(0%)', opacity: 1}))
-        ]),
-        transition(':leave', [
-          style({transform: 'scale(1)', opacity: 1}),
-          animate('500ms', style({transform: 'scale(0)', opacity: 0}))
-        ])
-      ]
+      transition(':enter', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ transform: 'scale(1)', opacity: 1 }),
+        animate('500ms', style({ transform: 'scale(0)', opacity: 0 }))
+      ])
+    ]
     )]
 })
 export class ProductoComponent implements OnInit {
@@ -38,17 +38,20 @@ export class ProductoComponent implements OnInit {
     private api: ApiService,
     public storage: SessionStorageService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
       this.id = '0' + this.producto.id;
     } else this.id = this.producto.id.toString();
-    this.api.getProductoFoto(this.producto.id).subscribe(
+    this.api.getProductoFotoName(this.producto.imagen.split(',')[0]).subscribe(
       (result) => {
         console.log(result);
       },
-      (error) => (this.producto.imagen = error.url)
+      (error) => {
+        this.producto.url = error.url;
+        
+      }
     );
   }
 

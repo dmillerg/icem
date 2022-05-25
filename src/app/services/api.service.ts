@@ -113,6 +113,16 @@ export class ApiService {
   }
 
   /**
+ * Obtener foto de un producto
+ * @param name de la foto del producto
+ * @returns
+ */
+  getProductoFotoName(name: string = ''): Observable<any> {
+    let direccion = this.url + 'productoFoto';
+    return this.http.get(direccion, { params: { name: name } });
+  }
+
+  /**
    * Activa o desactiva el producto para mostrar a la venta
    * @param id del producto
    * @param activo estado del producto

@@ -1,37 +1,53 @@
-<div class="container"  [@scaleAnimation]="'enter'">
+<div class="container" [@scaleAnimation]="'enter'">
     <div class="row">
         <div class="col-sm-5" style="padding: 10px;">
             <div class="contenedor-img">
                 <h3 class="h3">{{categoria}}</h3>
                 <h4 class="h4" *ngIf="producto.disponibilidad==0" [@scaleAnimation]="'enter'">Agotado</h4>
-                <img [src]="producto.imagen" alt="">
+                <img [src]="producto.url" alt="producto" style="background-color: var(--theme-color);">
                 <label class="disponible">Disponibles: {{producto.disponibilidad}}</label>
+            </div>
+            <div class="imagenes">
+                <div *ngFor="let item of imagenes; let i = index" class="imagen" (click)="cambiarVista(i)">
+                    <img style="width: 100%;height: 100%;" [src]="item" alt="producto">
+                    <div class="hover"></div>
+                </div>
             </div>
         </div>
         <div class="col-sm-7">
             <div class="column">
                 <h1 class="h1 text-firstcolor">{{producto.titulo}}</h1>
                 <label class="text">{{producto.fecha| date:'dd/MM/YYYY hh:mm a'}}</label>
-                <strong style="display: flex;flex-direction: row;font-size: 18px;"><div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio}}.00</strong>
+                <strong style="display: flex;flex-direction: row;font-size: 18px;">
+                    <div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio}}.00
+                </strong>
                 <p class="text">{{producto.descripcion}}</p>
                 <div class="contenedor-carrito" *ngIf="storage.retrieve('usuario')" [@scaleAnimation]="'enter'">
-                    <button class="btn-cart" [disabled]="cantidad==0" (click)="cant('less')"><i class="bi bi-dash"></i></button>
+                    <button class="btn-cart" [disabled]="cantidad==0" (click)="cant('less')"><i
+                            class="bi bi-dash"></i></button>
                     <input type="number" [(ngModel)]="cantidad">
-                    <button class="btn-cart" [disabled]="cantidad>=producto.disponibilidad" (click)="cant('more')"><i class="bi bi-plus"></i></button>
-                    <button class="btn-cart"[disabled]="cantidad==0 || cantidad>producto.disponibilidad" (click)="addCarrito();"><i class="bi bi-cart"> </i>Añadir al carrito</button>
+                    <button class="btn-cart" [disabled]="cantidad>=producto.disponibilidad" (click)="cant('more')"><i
+                            class="bi bi-plus"></i></button>
+                    <button class="btn-cart" [disabled]="cantidad==0 || cantidad>producto.disponibilidad"
+                        (click)="addCarrito();"><i class="bi bi-cart"> </i>Añadir al carrito</button>
                 </div>
-                <button type="button" id="especificaciones" class="collapsible" (click)="collapse($event)">Especificaciones <i class="bi"></i></button>
+                <button type="button" id="especificaciones" class="collapsible"
+                    (click)="collapse($event)">Especificaciones <i class="bi bi-plus"></i> <i
+                        class="bi bi-dash"></i></button>
                 <div id="especificacionescontent" class="content">
-                  <p class="text">{{producto.especificaciones.length>0?producto.especificaciones:'No hay especificaciones definidas'}}</p>
-                </div> 
-                <button type="button" id="usos" class="collapsible" (click)="collapse($event)">Usos</button>
+                    <p class="text">{{producto.especificaciones.length>0?producto.especificaciones:'No hay
+                        especificaciones definidas'}}</p>
+                </div>
+                <button type="button" id="usos" class="collapsible" (click)="collapse($event)">Usos <i
+                        class="bi bi-plus"></i> <i class="bi bi-dash"></i></button>
                 <div id="usoscontent" class="content">
-                  <p class="text">{{producto.usos.length>0?producto.usos:'No hay usos definidos'}}</p>
-                </div> 
-                <button type="button" id="garantia" class="collapsible" (click)="collapse($event)">Garantía</button>
+                    <p class="text">{{producto.usos.length>0?producto.usos:'No hay usos definidos'}}</p>
+                </div>
+                <button type="button" id="garantia" class="collapsible" (click)="collapse($event)">Garantía <i
+                        class="bi bi-plus"></i> <i class="bi bi-dash"></i></button>
                 <div id="garantiacontent" class="content">
-                  <p class="text">{{producto.garantia.length>0?producto.garantia:'No hay garantias definidas'}}</p>
-                </div> 
+                    <p class="text">{{producto.garantia.length>0?producto.garantia:'No hay garantias definidas'}}</p>
+                </div>
             </div>
         </div>
     </div>
