@@ -25,7 +25,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ProductoHomeComponent implements OnInit {
 
-  @Input() producto: Producto;
+  @Input() producto: any;
   @Input() direccion = false;
   @Input() cont = -1;
   contador: string = ''
@@ -37,10 +37,10 @@ export class ProductoHomeComponent implements OnInit {
       this.contador = '0' + this.cont;
     }
     // console.log(this.id+'\n'+this.titulo+'\n'+this.descripcion+'\n'+this.src_producto+'\n');
-    this.api.getProductoFoto(this.producto.id).subscribe((result) => {
+    this.api.getProductoFotoName(this.producto.imagen.split(',')[0]).subscribe((result) => {
       // console.log(result);
-      this.producto.imagen = result.url;
-    }, error => this.producto.imagen = error.url)
+      this.producto.url = result.url;
+    }, error => this.producto.url = error.url)
     if (this.direccion) {
       this.color = 'bg-osc';
     } else {

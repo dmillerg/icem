@@ -132,6 +132,9 @@ body {
 
 .btn-outline-firstcolor:disabled,
 .btn-outline-firstcolor:hover:disabled {
+  background-color: #c1c1c1;
+  color: white;
+  box-shadow: 0 0 0 0 white;
   cursor: not-allowed;
 }
 

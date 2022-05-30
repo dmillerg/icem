@@ -1,9 +1,12 @@
-
 .title-text {
     width: 100%;
     float: left;
     position: relative;
+    background-color: var(--firstcolor);
+    color: var(--theme-color);
     padding-inline: 20px;
+    border-top-left-radius: 0.2em;
+    border-top-right-radius: 0.2em;
 }
 
 .descripcion-text {
@@ -13,6 +16,8 @@
 .linea {
     height: 5px;
     width: 90%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .btn-firstcolor{
@@ -31,11 +36,14 @@
 
 .img {
     position: relative;
+    margin-top: 0;
+    /* max-height: 250px;
+    overflow: hidden; */
 }
 
 .img-backlogo-bottom-rigth{
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 40%;
+    width: 20%;
 }

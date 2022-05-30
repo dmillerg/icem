@@ -83,7 +83,6 @@
 .side form .input-perfil .in {
     width: 220px;
     text-overflow: ellipsis;
-    color: var(--firstcolor);
     border: none;
     border-bottom: 1px solid var(--firstcolor);
     outline: none;
@@ -93,7 +92,6 @@
 }
 
 .side form .input-perfil .in:read-only {
-    color: var(--firstcolor);
     border: none;
     transition: all .3s ease;
 }
@@ -108,7 +106,7 @@
 }
 
 .side .user-data.data {
-    color: #9b999e;
+    color: #c1c1c1;
 }
 
 .imagen-triangulo {

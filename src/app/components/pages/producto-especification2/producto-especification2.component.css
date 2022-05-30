@@ -182,9 +182,9 @@ input[type=number] {
 }
 
 .imagenes .imagen {
-    width: 25%;
+    width: 100px;
     position: relative;
-    height: auto;
+    height: 100px;
     margin: 2px;
 }
 

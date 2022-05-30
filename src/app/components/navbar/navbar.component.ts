@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
@@ -16,7 +16,7 @@ import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-regis
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit,OnDestroy {
   activo: string = 'inicio';
   cont_activo = 0;
   @Input() back_class = '';
@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
     minuto: '00',
     segundo: '00'
   }
-  intervalo: any;
+  intervalo: any = undefined;
   timeConfig: number = 0;
 
   searched: boolean= false;
@@ -48,6 +48,10 @@ export class NavbarComponent implements OnInit {
     private modalService: NgbModal,
     private api: ApiService) {
     this.storage2 = storage;
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.intervalo);
+    this.intervalo = undefined;
   }
 
   ngOnInit(): void {
@@ -65,14 +69,14 @@ export class NavbarComponent implements OnInit {
       this.carrito = this.storage.retrieve('carrito');
     }
     this.storage.observe('carrito').subscribe((e) => {
-      // if (e.length != this.carrito.length || e[0].cantidad) {
+      if(e.length>0){
         this.carrito = e;
         this.total_pagar = 0;
         this.carrito.forEach(i => {
           this.total_pagar += i.cantidad * i.precio;
         })
         this.cargarTiempoRestante();
-      // }
+      }
     });
     this.listarCategoriasProductos();
     this.listarCarrito();
@@ -133,8 +137,11 @@ export class NavbarComponent implements OnInit {
   }
 
   cargarTiempoRestante() {
+    console.log('TIEMPO RESTANTE');
+    
     clearInterval(this.intervalo);
-    if (this.carrito.length > 0) {
+    this.intervalo = undefined;
+    if (this.carrito.length > 0 && this.intervalo == undefined) {
       let date = new Date(Date.parse(this.carrito[0].fecha));
       let fecha: string = date.getFullYear().toString() + '-' + ((date.getMonth() + 1 < 10) ? '0' + (date.getMonth() + 1) : date.getMonth() + 1).toString() + '-' + ((date.getDate() < 10) ? '0' + date.getDate() : date.getDate()).toString()
       let hora: string = ((date.getHours() < 10) ? '0' + date.getHours() : date.getHours()).toString() + ':' + ((date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()).toString() + ':' + ((date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds()).toString()
@@ -255,7 +262,7 @@ export class NavbarComponent implements OnInit {
         if (this.carrito.length > 0) {
           console.log('entro');
 
-          this.cargarTiempoRestante();
+          // this.cargarTiempoRestante();
         }
       });
     }

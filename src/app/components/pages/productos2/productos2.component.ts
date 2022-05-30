@@ -116,6 +116,10 @@ export class Productos2Component implements OnInit {
         this.producto = result;
       });
     }
+    setTimeout(()=>{
+      document.getElementById('especification').scrollIntoView({behavior:'smooth'})
+    },500)
+   
   }
 
   loadProductos() {

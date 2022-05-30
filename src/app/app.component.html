@@ -1,5 +1,5 @@
 <div [@scaleAnimation]="'enter'" *ngIf="!loading" class="scroll-mine" (scroll)="onScrolling()" id="scroll" style="overflow-y: scroll;height: 100%;overflow-x: none;">
-    <div #scroll></div>
+    <div id="scroll" #scroll></div>
     <app-navbar [back_class]="back_final"></app-navbar>
     <div class="row p-4" style="width: 100%;"></div>
     <router-outlet></router-outlet>

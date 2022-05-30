@@ -26,7 +26,11 @@
     width: 100%;
     float: left;
     position: relative;
+    background-color: var(--firstcolor);
+    color: var(--theme-color);
     padding-inline: 20px;
+    border-top-left-radius: 0.2em;
+    border-top-right-radius: 0.2em;
 }
 
 .btn-firstcolor{
@@ -35,11 +39,30 @@
 
 .descripcion-text {
     font-size: small;
+    /* max-height: 200px; */
+    word-wrap: break-word;
+    /* overflow: hidden; */
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    height: 3.9em; /* Fallback for non-webkit, line-height * 2 */
+    line-height: 1.3em;
+    -webkit-line-clamp: 3; /* if you change this, make sure to change the fallback line-height and height */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+/* .descripcion-text::after{
+    content: "...";
+    position: absolute;
+    right: 0;
+} */
 
 .linea {
     height: 5px;
     width: 90%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .linea-active {
@@ -56,6 +79,7 @@
 
 .img {
     position: relative;
+    margin-bottom: 10px;
 }
 
 .card-mine .h4{
@@ -75,7 +99,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 40%;
+    width: 20%;
 }
 
 .img-backlogo-top-left{

@@ -16,7 +16,7 @@
         </div> -->
 
         <div class="container">
-            <div class="titulo-categorias">
+            <div class="titulo-categorias" style="margin-bottom: 20px;">
                 <h3 class="text-section">Categorías</h3>
             </div>
             <div class="contenedor-categoria">
@@ -36,7 +36,7 @@
 
 
 
-    <section class="especifications" *ngIf="storage.retrieve('producto')">
+    <section class="especifications" *ngIf="storage.retrieve('producto')" id="especification">
         <div class="container">
             <div class="row">
                 <div id="producto-especification" class="producto-especification">
@@ -47,7 +47,7 @@
                             <div class="pista pista-off pista-bottom">Ver comentarios</div>
                             <i class="bi bi-chat-square-text"></i>
                         </button>
-                        <button class="btn btn-outline-firstcolor centrado" [disabled]="producto.ficha == null"
+                        <button class="btn-outline-firstcolor centrado" [disabled]="producto.ficha == null"
                             style="position: relative;margin-right: 10px;">
                             <div class="pista pista-off pista-bottom" *ngIf="producto && producto.ficha != null">
                                 Descargar ficha técnica</div>
