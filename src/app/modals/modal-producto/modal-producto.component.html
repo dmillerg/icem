@@ -32,7 +32,14 @@
           <path
             d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
         </svg> Imagen</label>
-      <input class="form-control" name="imagen" type="file" id="formFile" accept="image/*" (change)="fileEvent($event)" multiple>
+      <input class="form-control" style="display: none;" name="imagen" type="file" id="formFile" #formFile accept="image/*" (change)="fileEvent($event)" multiple>
+      <div class="imagen-contenedor">
+        <div *ngFor="let item of imagenes" class="img-pic cont">
+          <button class="btn-del" type="button" (click)="eliminarFoto(item)"><i class="bi bi-x"></i></button>
+          <img  class="img-pic" [src]="item" [alt]="item">
+        </div>
+        <div class="img-pic add" (click)="formFile.click()"><i class="bi bi-plus"></i></div>
+      </div>
     </div>
     <div class="mb-3">
       <label for="categoria_select" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
