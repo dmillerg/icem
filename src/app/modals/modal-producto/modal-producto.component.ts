@@ -166,12 +166,12 @@ export class ModalProductoComponent implements OnInit {
 
     if (this.producto.imagen.split(',').filter((e) => e == nombre).length > 0) {
       let i = this.producto.imagen.split(',').indexOf(nombre);
-      this.producto.imagen = this.producto.imagen.split(',').splice(i, i + 1).toString();
+      this.producto.imagen = this.producto.imagen.split(',').splice(i).toString();
       this.imagenes_eliminadas.push(nombre);
     }
     let pos = this.imagenes.indexOf(name);
     console.log(pos);
 
-    this.imagenes.splice(pos, pos + 1);
+    this.imagenes.splice(pos);
   }
 }
