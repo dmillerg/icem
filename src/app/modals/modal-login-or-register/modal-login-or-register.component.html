@@ -127,8 +127,8 @@
     <div class="content-blue"
         style="background: linear-gradient(0, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo8.png');background-blend-mode: multiply;">
         <button id="autenticarse" class="li" [ngClass]="{'active': activo}" (click)="loginOrRegister()">
-            <label *ngIf="activo" style="cursor: pointer;">autenticarse</label>
-            <label *ngIf="!activo" style="cursor: pointer;">registrarse</label>
+            <label *ngIf="!activo">autenticarse</label>
+            <label *ngIf="activo">registrarse</label>
         </button>
         <!-- <button id="registrarse" class="li" [ngClass]="{'active': !activo}"
             (click)="loginOrRegister()">registrarse</button> -->

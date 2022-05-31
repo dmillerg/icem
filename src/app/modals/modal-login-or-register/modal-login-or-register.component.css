@@ -100,13 +100,17 @@
 }
 
 .content-total.active .content-blue button {
+    list-style: none;
+    line-height: 50px;
     border-top-left-radius: 0em;
     border-bottom-left-radius: 0em;
     border-top-right-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
     color: var(--firstcolor);
     position: absolute;
+    width: fit-content;
     left: 0;
+    padding: 9px;
     cursor: pointer;
     transition: all .3s ease;
 }
