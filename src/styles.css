@@ -426,3 +426,19 @@ img {
   visibility: visible;
   transition: all .3s ease;
 }
+
+.searching{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.searching img{
+  max-width: 200px;
+  height: auto;
+}

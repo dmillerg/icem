@@ -54,6 +54,7 @@ export class NoticiasComponent implements OnInit {
   img: boolean = true;
   noticia_filtro: string = '';
   image: string = '';
+  searching: boolean = false;
   constructor(private api: ApiService, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
@@ -61,9 +62,15 @@ export class NoticiasComponent implements OnInit {
   }
 
   loadNoticiasScrap() {
+    this.noticia_column1 =[];
+    this.noticia_column2 =[];
+    this.noticia_column3 =[];
+    this.noticia_column4 =[];
+    this.searching = true;
     this.api.getNoticias(0, this.noticia_filtro).subscribe((result) => {
         this.noticiaScrap = result;
       this.rellenarColumns();
+      this.searching= false;
       if (this.storage.retrieve('noticias')) {
         let not: string = this.storage.retrieve('noticia').id;
         document.getElementById(not.toString()).scrollIntoView({ behavior: 'smooth' });
@@ -72,10 +79,6 @@ export class NoticiasComponent implements OnInit {
   }
 
   rellenarColumns() {
-    this.noticia_column1 =[];
-    this.noticia_column2 =[];
-    this.noticia_column3 =[];
-    this.noticia_column4 =[];
     let cant = this.noticiaScrap.length / 4;
     for (let i = 0; i < this.noticiaScrap.length; i++) {
       if (i <= cant) {
