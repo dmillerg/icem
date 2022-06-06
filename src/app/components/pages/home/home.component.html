@@ -127,7 +127,7 @@
         <div class="col-sm-4 text-start container-image">
             <img class="logo text-white text-center svg-shadow" [src]="noticia.logo" [alt]="noticia.fuente"
                 style="background-color: --firstcolor;">
-            <img class="imagen2 img-fluid noticia-image text-white text-center" [alt]="noticia.titulo"
+            <img class="imagen2 img-fluid noticia-image text-white text-center" style="background: url('assets/icon-icem-blue.png');" [alt]="noticia.titulo"
                 [src]="img_noti" />
         </div>
         <div class="col-sm-8" style="
@@ -142,7 +142,7 @@
                 <strong>{{ titulo_noti }}</strong>
             </h3>
             <p class="text">{{ desc_noti }}</p>
-            <button class="btn btn-firstcolor" (click)="verMas(noticia)">Ver mas</button>
+            <button class="btn btn-firstcolor" style="padding: 15px;" (click)="verMas(noticia)">Ver mas</button>
         </div>
     </div>
 </div>

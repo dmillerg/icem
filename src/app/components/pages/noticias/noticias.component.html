@@ -1,6 +1,10 @@
 <div class="container" [@scaleAnimation]="'enter'">
   <div class="producto-section">
     <h1 class="title-section2 text-section"><strong>Noticias...</strong></h1>
+    <div class="search-box">
+      <input type="text" placeholder="Buscar noticia por título, descripción o fuente..." name="noticia" [(ngModel)]="noticia_filtro" (ngModelChange)="loadNoticiasScrap()" class="in">
+      <b><i class="bi bi-search"></i></b>
+    </div>
     <div class="row p-4"></div>
   </div>
   <div class="row p-2"></div>

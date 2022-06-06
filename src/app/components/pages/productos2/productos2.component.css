@@ -110,6 +110,7 @@
     opacity: 0;
     position: absolute;
     right: -350px;
+    bottom: 160px;
     visibility: hidden;
     transition: all .3s ease-in-out;
 }

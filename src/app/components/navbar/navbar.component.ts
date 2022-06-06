@@ -16,7 +16,7 @@ import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-regis
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit,OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy {
   activo: string = 'inicio';
   cont_activo = 0;
   @Input() back_class = '';
@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
   intervalo: any = undefined;
   timeConfig: number = 0;
 
-  searched: boolean= false;
+  searched: boolean = false;
 
   total_pagar: number = 0;
 
@@ -69,13 +69,15 @@ export class NavbarComponent implements OnInit,OnDestroy {
       this.carrito = this.storage.retrieve('carrito');
     }
     this.storage.observe('carrito').subscribe((e) => {
-      if(e.length>0){
+      if (e.length > 0) {
         this.carrito = e;
         this.total_pagar = 0;
         this.carrito.forEach(i => {
           this.total_pagar += i.cantidad * i.precio;
         })
         this.cargarTiempoRestante();
+      }else{
+        this.carrito = []
       }
     });
     this.listarCategoriasProductos();
@@ -102,8 +104,8 @@ export class NavbarComponent implements OnInit,OnDestroy {
 
   activate(url) {
     if (this.activo !== url) {
-      if(document.getElementById(url)) document.getElementById(url).classList.add('active');
-      if(document.getElementById(this.activo)) document.getElementById(this.activo).classList.remove('active');
+      if (document.getElementById(url)) document.getElementById(url).classList.add('active');
+      if (document.getElementById(this.activo)) document.getElementById(this.activo).classList.remove('active');
       this.activo = url;
     }
 
@@ -138,7 +140,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
 
   cargarTiempoRestante() {
     console.log('TIEMPO RESTANTE');
-    
+
     clearInterval(this.intervalo);
     this.intervalo = undefined;
     if (this.carrito.length > 0 && this.intervalo == undefined) {
@@ -258,15 +260,13 @@ export class NavbarComponent implements OnInit,OnDestroy {
           this.total_pagar += e.precio * e.cantidad;
           this.getProductoFoto(e.producto_id, i);
         });
-        this.storage.store('carrito', this.carrito);
-        if (this.carrito.length > 0) {
-          console.log('entro');
-
-          // this.cargarTiempoRestante();
-        }
       });
     }
-
+    this.storage.store('carrito', this.carrito);
+    if (this.carrito.length > 0) {
+      console.log('entro');
+      // this.cargarTiempoRestante();
+    }
   }
 
   getProductoFoto(id: number, position: number) {

@@ -1,8 +1,9 @@
 <div class="list-posts">
+    <h3 class="h3">Comentarios</h3>
     <div class="barra-superior">
 
         <form id="form" class="form-filter"><input id="input" name="filtro" [(ngModel)]="filtro"
-                (ngModelChange)="filtrar()" class="filter-input" placeholder="alias..."></form>
+                (ngModelChange)="filtrar()" class="filter-input" placeholder="Buscar por alias..."></form>
         <button class="btn" [ngClass]="{ 'btn-firstcolor': comentar , 'btn-outline-firstcolor' : !comentar}"
         (click)="comentar=!comentar"
             style="position: relative;">
@@ -22,7 +23,7 @@
 
         <form class="box-outline" [@scaleAnimation]="'enter'" *ngIf="comentar"
             style="padding: 15px;position: relative;margin-bottom: 20px;">
-            <label class="text-firstcolor"><i class="bi bi-person"></i> alias:</label>
+            <label class="text-firstcolor"><i class="bi bi-person"></i>alias:</label>
             <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')" [(ngModel)]="alias"
                 class="input-outline input" required>
             <label class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</label>
@@ -51,10 +52,10 @@
                 <p>{{item.comentario}}</p>
 
                 <div class="barra-inferior">
-                    <p class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}} <i
-                            (click)="openResponder(item)"
+                    <button class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}} <i
+                            (click)="responderComentario(item)"
                             *ngIf="storage.retrieve('usuario')&&storage.retrieve('usuario').rol=='admin'"
-                            class="bi bi-pencil"></i></p>
+                            class="bi bi-pencil"></i></button>
                 </div> 
                 <ol class="lista-respuesta" *ngFor="let item2 of item.respuestas">
                     <li>{{item2.respuesta}}</li>

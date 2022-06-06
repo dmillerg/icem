@@ -201,10 +201,12 @@ export class ApiService {
    * @param limit cantidad de noticias a devolver
    * @returns
    */
-  getNoticias(limit: number = 0): Observable<Noticia[]> {
+  getNoticias(limit: number = 0, search: string = ''): Observable<Noticia[]> {
+    console.log('ee');
+    
     const headers = { 'content-type': 'application/json' };
     let direccion = this.url + 'noticias/' + limit.toString();
-    return this.http.get<Noticia[]>(direccion, { headers: headers });
+    return this.http.get<Noticia[]>(direccion, { headers: headers, params: {search: search} });
   }
 
   /**

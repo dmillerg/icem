@@ -1,6 +1,8 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
+import { ModalRespuestaComponent } from 'src/app/modals/modal-respuesta/modal-respuesta.component';
 import { Posts } from 'src/app/models/posts';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
@@ -68,7 +70,9 @@ export class PostsComponent implements OnInit {
 
 
 
-  constructor(private api: ApiService, public storage: SessionStorageService) { }
+  constructor(private api: ApiService,
+    public storage: SessionStorageService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     if (this.storage.retrieve('usuario')) {
@@ -155,6 +159,16 @@ export class PostsComponent implements OnInit {
           respuestas: result,
         });
       })
+    })
+  }
+
+  responderComentario(item) {
+    let modal = this.modalService.open(ModalRespuestaComponent, { size: 'sm' });
+    modal.componentInstance.id_post = item.id;
+    modal.result.then((result) => {
+      if (result) {
+        this.loadPosts();
+      }
     })
   }
 }

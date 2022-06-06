@@ -1,7 +1,9 @@
 .producto-section {
   margin-left: 3%;
   transform: translateY(20px);
+  position: relative;
 }
+
 .title-section2 {
   font-style: oblique;
   font-size: 4vw 7vh;
@@ -16,4 +18,35 @@
 .image-off {
   transform: scale(0);
   transition: ease-in-out 0.3s;
+}
+
+.search-box {
+  width: 30%;
+  min-width: 100px;
+  height: auto;
+  padding: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.search-box .in{
+  padding: 10px;
+  padding-left: 25px;
+  border: none;
+  width: 100%;
+  border-bottom: 1px solid var(--firstcolor);
+  color: var(--firstcolor);
+  outline: none;
+}
+
+.search-box b .bi{
+  position: absolute;
+  left: 10px;
+  color: var(--firstcolor);
+  bottom: 15px;
+}
+
+.search-box .in::placeholder{
+  color: var(--firstcolor-section);
 }

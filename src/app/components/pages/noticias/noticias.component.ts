@@ -52,7 +52,7 @@ export class NoticiasComponent implements OnInit {
     logo: '',
   };
   img: boolean = true;
-
+  noticia_filtro: string = '';
   image: string = '';
   constructor(private api: ApiService, private storage: SessionStorageService) { }
 
@@ -61,9 +61,8 @@ export class NoticiasComponent implements OnInit {
   }
 
   loadNoticiasScrap() {
-    this.api.cargaNoticias().subscribe((result) => {
-      console.log('scrap', result);
-      this.noticiaScrap = result;
+    this.api.getNoticias(0, this.noticia_filtro).subscribe((result) => {
+        this.noticiaScrap = result;
       this.rellenarColumns();
       if (this.storage.retrieve('noticias')) {
         let not: string = this.storage.retrieve('noticia').id;
@@ -73,6 +72,10 @@ export class NoticiasComponent implements OnInit {
   }
 
   rellenarColumns() {
+    this.noticia_column1 =[];
+    this.noticia_column2 =[];
+    this.noticia_column3 =[];
+    this.noticia_column4 =[];
     let cant = this.noticiaScrap.length / 4;
     for (let i = 0; i < this.noticiaScrap.length; i++) {
       if (i <= cant) {

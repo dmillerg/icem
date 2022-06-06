@@ -76,10 +76,8 @@ export class ModalCarritoComponent implements OnInit {
       formData.append('id_carrito', item.id);
       this.api.addPedido(formData).subscribe((result) => {
         if (i == this.carrito.length - 1) {
-          this.api.getCarrito(item.user_id).subscribe((result) => {
-            this.storage.store('carrito', result);
-          });
-          this.carrito = this.carrito.filter(i => i.id == item.id)
+          this.carrito = [];
+          this.storage.store('carrito',this.carrito)
           this.activeModal.close();
         }
       })

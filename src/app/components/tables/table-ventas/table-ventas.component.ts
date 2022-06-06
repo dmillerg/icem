@@ -37,7 +37,7 @@ export class TableVentasComponent implements OnInit {
         this.ventas = result;
         result.forEach((e, i) => {
           this.getProductoFoto(e.producto_id, i);
-          this.ventas[i].usuario = this.usuarios.filter(r => r.id == e.user_id)[0].usuario;
+          // this.ventas[i].usuario = this.usuarios.filter(r => r.id == e.user_id)[0].usuario;
         })
       }
       else this.ventas = [];

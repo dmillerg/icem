@@ -3,11 +3,13 @@
         <thead class="table-dark">
             <th>id</th>
             <th>nombre</th>
+            <th>descripcion</th>
             <th>acciones</th>
         </thead>
         <tr *ngFor="let item of categorias">
             <td>{{item.id}}</td>
             <td>{{item.nombre}}</td>
+            <td>{{item.descripcion}}</td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateCategoria(item)">
                     <i class="bi bi-pencil svg-shadow"></i>
