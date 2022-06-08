@@ -33,6 +33,8 @@ export class ProductoComponent implements OnInit {
   @Input() producto;
   @Output() emisor: EventEmitter<Producto> = new EventEmitter();
   id: string = '';
+  today: Date = new Date();
+  date: Date = new Date();
 
   constructor(
     private api: ApiService,
@@ -46,11 +48,11 @@ export class ProductoComponent implements OnInit {
     } else this.id = this.producto.id.toString();
     this.api.getProductoFotoName(this.producto.imagen.split(',')[0]).subscribe(
       (result) => {
-        console.log(result);
+        console.log(result, this.today, this.producto.fecha, this.today==this.producto.fecha);
       },
       (error) => {
         this.producto.url = error.url;
-        
+        this.date= new Date(this.producto.fecha);
       }
     );
   }
