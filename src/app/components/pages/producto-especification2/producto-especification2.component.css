@@ -104,7 +104,7 @@
 
 .content.active {
     /* padding-top: 18px; */
-    max-height: 400px;
+    /* max-height: 400px; */
     transition: all .3s ease-in-out;
 }
 
