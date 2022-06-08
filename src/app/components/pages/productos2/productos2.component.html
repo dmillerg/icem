@@ -19,7 +19,7 @@
             <div class="titulo-categorias" style="margin-bottom: 20px;">
                 <h3 class="text-section">Categorías</h3>
             </div>
-            <div class="contenedor-categoria">
+            <div class="contenedor-categoria" [@listAnimation]="categorias.length">
                 <button *ngFor="let item of categorias" class="btn-categoria" (click)="cambiarCategoria(item.id)"
                     [ngClass]="{'active': (storage.retrieve('categoria') && storage.retrieve('categoria').nombre== item.nombre)}">
                     <strong style="font-size: 16px;">{{item.nombre}}</strong>
@@ -36,7 +36,7 @@
 
 
 
-    <section class="especifications" *ngIf="storage.retrieve('producto')" id="especification">
+    <section class="especifications" *ngIf="storage.retrieve('producto')" id="especification" [@scaleAnimation]="'enter'">
         <div class="container">
             <div class="row">
                 <div id="producto-especification" class="producto-especification">
@@ -49,7 +49,7 @@
                         </button>
                         <button class="btn-outline-firstcolor centrado" [disabled]="producto.ficha == null"
                             style="position: relative;margin-right: 10px;">
-                            <div class="pista pista-off pista-bottom" *ngIf="producto && producto.ficha != null">
+                            <div class="pista pista-off pista-bottom" *ngIf="producto && producto.ficha != null && producto.ficha.length>0">
                                 Descargar ficha técnica</div>
                             <i class="bi bi-journal-text"></i>
                         </button>
@@ -93,16 +93,16 @@
     <section class="products animado">
         <div class="titulo-categorias"  >
             <h3 class="text-section" *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'">Quizas también pueda interesarte</h3>
-            <h3 class="text-section" *ngIf="!storage.retrieve('producto')" [@scaleAnimation]="'enter'">Productos</h3>
+            <h3 class="text-section" *ngIf="!storage.retrieve('producto')" [@scaleAnimation]="'enter'">Productos de la categoría {{storage.retrieve('categoria').nombre}}</h3>
         </div>
 
 
         <h3 class="number text-section text-center" *ngIf="productos.length==0"><strong>No hay productos en esta
                 categoria</strong></h3>
         <div class="container">
-            <div class="row" [@listAnimation]="productos.length" style="justify-content: center;">
-                <div *ngFor="let item of productos" class="col-sm-6 col-md-4 col-lg-3">
-                    <app-producto [producto]="item" style="margin-inline: 20px;"
+            <div class="row" [@listAnimation]="productos.length">
+                <div *ngFor="let item of productos" class="col-sm-6 col-md-4 col-lg-3" [id]="item.id">
+                    <app-producto [producto]="item"
                         (emisor)="swicthEspecification($event, especification)">
                     </app-producto>
                 </div>

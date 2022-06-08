@@ -1,10 +1,11 @@
 <div class="container" [@scaleAnimation]="'enter'">
     <div class="row">
-        <div class="col-sm-4" style="padding: 10px;">
+        <div class="col-sm-12 col-md-4 col-lg-4" style="padding: 10px;">
             <div class="contenedor-img">
                 <h3 class="h3">{{categoria}}</h3>
                 <h4 class="h4" *ngIf="producto.disponibilidad==0" [@scaleAnimation]="'enter'">Agotado</h4>
-                <img [src]="producto.url" alt="producto" class="img-fluid" style="background-color: var(--theme-color);max-height: 450px;">
+                <img [src]="producto.url" alt="producto" class="img-fluid"
+                    style="background-color: var(--theme-color);height: 350px;">
                 <label class="disponible">Disponibles: {{producto.disponibilidad}}</label>
             </div>
             <div class="imagenes">
@@ -14,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-12 col-md-8 col-lg-8">
             <div class="column">
                 <h1 class="h1 text-firstcolor">{{producto.titulo}}</h1>
                 <label class="text">{{producto.fecha| date:'dd/MM/YYYY hh:mm a'}}</label>
@@ -33,19 +34,18 @@
                 </div>
 
                 <button type="button" id="especificaciones" class="collapsible"
-                    (click)="collapse($event)">Especificaciones <i class="bi bi-plus"></i> <i
-                        class="bi bi-dash"></i></button>
+                    (click)="collapse('especificaciones')">Especificaciones <i class="bi bi-chevron-down"></i></button>
                 <div id="especificacionescontent" class="content">
                     <p class="text">{{producto.especificaciones.length>0?producto.especificaciones:'No hay
                         especificaciones definidas'}}</p>
                 </div>
-                <button type="button" id="usos" class="collapsible" (click)="collapse($event)">Usos <i
-                        class="bi bi-plus" ></i> <i class="bi bi-dash"></i></button>
+                <button type="button" id="usos" class="collapsible" (click)="collapse('usos')">Usos <i
+                        class="bi bi-chevron-down"></i></button>
                 <div id="usoscontent" class="content">
                     <p class="text">{{producto.usos.length>0?producto.usos:'No hay usos definidos'}}</p>
                 </div>
-                <button type="button" id="garantia" class="collapsible" (click)="collapse($event)">Garantía <i
-                        class="bi bi-plus"></i> <i class="bi bi-dash"></i></button>
+                <button type="button" id="garantia" class="collapsible" (click)="collapse('garantia')">Garantía<i
+                        class="bi bi-chevron-down"></i></button>
                 <div id="garantiacontent" class="content">
                     <p class="text">{{producto.garantia.length>0?producto.garantia:'No hay garantias definidas'}}</p>
                 </div>

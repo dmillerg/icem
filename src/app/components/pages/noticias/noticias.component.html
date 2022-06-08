@@ -14,8 +14,8 @@
         <div class="searching">
           <img *ngIf="searching" src="assets/clip-actions/searching.png" alt="">
           <p *ngIf="searching" class="text-section">Buscando</p>
-          <img *ngIf="noticia_column1.length==0 && noticia_column2.length==0 && noticia_column3.length==0 && noticia_column4.length==0 " src="assets/clip-actions/empty.png" alt="">
-          <p *ngIf="noticia_column1.length==0 && noticia_column2.length==0 && noticia_column3.length==0 && noticia_column4.length==0 " class="text-section">No hay noticias</p>
+          <img *ngIf="noticia_column1.length==0 && noticia_column2.length==0 && noticia_column3.length==0 && noticia_column4.length==0 && !searching" src="assets/clip-actions/empty.png" alt="">
+          <p *ngIf="noticia_column1.length==0 && noticia_column2.length==0 && noticia_column3.length==0 && noticia_column4.length==0 && !searching" class="text-section">No hay noticias</p>
         
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3"  [@listAnimation]="noticia_column1.length">

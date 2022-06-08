@@ -377,6 +377,10 @@ img {
   image-rendering: -webkit-optimize-contrast;
 }
 
+button{
+  outline: none;
+}
+
 .message-content {
   width: 100%;
   position: absolute;

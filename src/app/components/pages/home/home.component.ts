@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cargaInicial()
-    this.api.getProducto(4).subscribe((result) => {
+    this.api.getProducto(4,-1,-1, true).subscribe((result) => {
       if (result.length > 0) {
         var direccion = false;
         var cont = 1;

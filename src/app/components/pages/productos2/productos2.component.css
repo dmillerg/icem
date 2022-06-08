@@ -138,11 +138,13 @@
     background-color: var(--firstcolor);
     color: var(--theme-color);
     display: flex;
+    cursor: pointer;
     flex-direction: column;
     gap: 10px;
     justify-content: center;
     align-items: center;
     border-radius: 0.5em;
+    outline: none;
     box-shadow: 0 8px 32px 0 var(--firstcolor-section);
     transition: all .3s ease-in-out;
 }
@@ -320,4 +322,14 @@ p.center-date {
 
 .titulo-categorias .h3 {
     color: var(--firstcolor-hover);
+}
+
+.sugerencias {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 20px;
+    overflow-x: auto;
+    padding-left: 15rem;
 }

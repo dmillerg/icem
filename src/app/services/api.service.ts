@@ -39,12 +39,14 @@ export class ApiService {
   getProducto(
     limit: number = 0,
     categoria: number = -1,
-    excluir: number = -1
+    excluir: number = -1,
+    activo: boolean = false
   ): Observable<Producto[]> {
     const headers = { 'content-type': 'application/json' };
     const params = {
       categoria: categoria,
       excluir: excluir,
+      activo: activo
     };
     let direccion = this.url + 'productos/' + limit.toString();
     return this.http.get<Producto[]>(direccion, {

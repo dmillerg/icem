@@ -49,7 +49,7 @@ export class QuienesSomosComponent implements OnInit {
         this.scrollInicial(this.storage.retrieve('quienes'));
       }
       this.storage.observe('quienes').subscribe((result)=>{
-        // this.scrollInicial(result);
+        this.scrollInicial(result);
       })
     }, 600)
   }

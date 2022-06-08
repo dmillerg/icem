@@ -27,7 +27,7 @@ const scaleAnimation = trigger(
   ]),
   transition(':leave', [
     style({ transform: 'scale(1)', opacity: 1 }),
-    animate('250ms', style({ transform: 'scale(0)', opacity: 0 }))
+    animate('500ms', style({ transform: 'scale(0)', opacity: 0 }))
   ])
 ]
 );
@@ -42,6 +42,7 @@ export class Productos2Component implements OnInit {
 
 
   productos: Producto[] = [];
+  productos_all: Producto[] = [];
   categorias: Categoria[] = [];
   categorias4: Categoria[] = [];
   posts: any[] = [];
@@ -110,25 +111,27 @@ export class Productos2Component implements OnInit {
         }
       });
     }
-    if(this.storage.retrieve('producto')){
+    if (this.storage.retrieve('producto')) {
       this.producto = this.storage.retrieve('producto');
       this.storage.observe('producto').subscribe((result) => {
         this.producto = result;
       });
     }
-    setTimeout(()=>{
-      document.getElementById('especification').scrollIntoView({behavior:'smooth'})
-    },500)
-   
+    setTimeout(() => {
+      document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
+    }, 500)
+
   }
 
   loadProductos() {
-    this.api.getProducto(-1, this.categoriaId, -1).subscribe(result => {
+    this.api.getProducto(-1, this.categoriaId, -1, true).subscribe(result => {
       if (result.length > 0) {
         this.productos = result;
+        this.productos_all = result;
         // this.storage.clear('producto');
       } else {
         this.productos = [];
+        this.productos_all = [];
         // this.producto = null;
       }
     });
@@ -158,6 +161,7 @@ export class Productos2Component implements OnInit {
     this.categoriaId = id;
     this.storage.store('categoria', this.categorias.filter(e => e.id == id)[0])
     this.loadProductos();
+    this.storage.clear('producto')
   }
 
   cargaInicial() {
@@ -181,6 +185,7 @@ export class Productos2Component implements OnInit {
 
   swicthEspecification(sss, especification: HTMLElement) {
     especification.scrollIntoView({ behavior: "smooth" });
+    this.productos = this.productos_all.filter(e => e.id != this.storage.retrieve('producto').id)
     //   try {
     //     if (this.storage.retrieve('producto')) {
     //       this.producto = this.storage.retrieve('producto');

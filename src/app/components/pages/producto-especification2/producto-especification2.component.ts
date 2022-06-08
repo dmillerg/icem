@@ -161,12 +161,11 @@ export class ProductoEspecification2Component implements OnInit {
     }
   }
 
-  collapse(event: any) {
-    let collap = document.getElementById(event.target.id.toString());
+  collapse(id: string) {
+    let collap = document.getElementById(id.toString());
     collap.classList.toggle('active');
-    let content = document.getElementById(event.target.id.toString() + 'content');
+    let content = document.getElementById(id + 'content');
     content.classList.toggle('active');
-
   }
 
 }
