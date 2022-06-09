@@ -1,3 +1,4 @@
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -23,34 +24,128 @@ import { ModalQuienesComponent } from '../modal-quienes/modal-quienes.component'
 import { ModalScrapComponent } from '../modal-scrap/modal-scrap.component';
 import { ModalUsuarioComponent } from '../modal-usuario/modal-usuario.component';
 
+const scaleAnimation =  trigger('scaleAnimation', [
+  transition(':enter', [
+    style({ transform: 'translateX(-50%)', opacity: 0 }),
+    animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
+  ]),
+  transition(':leave', [
+    style({ transform: 'scale(1)', opacity: 1 }),
+    animate('500ms', style({ transform: 'scale(0)', opacity: 0 })),
+  ]),
+]);
+
+const listAnimation = trigger('listAnimation', [
+  transition('* <=> *', [
+    query(':enter',
+      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 })))],
+      { optional: true }
+    ),
+    query(':leave',
+      animate('200ms', style({ opacity: 0 })),
+      { optional: true }
+    )
+  ])
+]);
+
 @Component({
   selector: 'app-modal-admin',
   templateUrl: './modal-admin.component.html',
   styleUrls: ['./modal-admin.component.css'],
+  animations: [listAnimation, scaleAnimation]
 })
 export class ModalAdminComponent implements OnInit {
   modalHeader: string = '';
   modalSubHeader: string = '';
 
+  buttons: any[] = [
+    {
+      titulo: 'Productos',
+      icono: 'bi-bicycle',
+      pista: '',
+      activo: true,
+    },
+    {
+      titulo: 'Noticias',
+      icono: 'bi-newspaper',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Categorías',
+      icono: 'bi-bookmark',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Desarrollos',
+      icono: 'bi-graph-up',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Usuarios',
+      icono: 'bi-person',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Mensajería',
+      icono: 'bi-chat-square-dots',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Quienes',
+      icono: 'bi-people',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Recogida',
+      icono: 'bi-bar-chart-steps',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Comentarios',
+      icono: 'bi-file-earmark-text',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Pedidos',
+      icono: 'bi-cart',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Configuración',
+      icono: 'bi-gear',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Ventas',
+      icono: 'bi-receipt',
+      pista: '',
+      activo: false,
+    },
+    {
+      titulo: 'Cerrar Sesión',
+      icono: 'bi-door-closed',
+      pista: '',
+      activo: false,
+    },
+  ]
+
   actiModal: NgbActiveModal;
-  productos: boolean = true;
-  noticias: boolean = false;
-  categorias: boolean = false;
-  desarrollos: boolean = false;
-  usuarios: boolean = false;
-  chat: boolean = false;
-  quienes: boolean = false;
-  scrap: boolean = false;
-  posts: boolean = false;
-  pedidos: boolean = false;
-  configuracion: boolean = false;
-  ventas: boolean = false;
 
   usuario: Usuario;
   @Output() emisor: EventEmitter<string> = new EventEmitter<string>();
   add_disable: boolean = false;
 
-  activo: string = 'Productos';
+  activo: string = this.buttons[0].titulo;
   productosarray: Producto[] = [];
   noticiasarray: Noticia[] = [];
   categoriaarray: Categoria[] = [];
@@ -76,66 +171,18 @@ export class ModalAdminComponent implements OnInit {
     this.usuario = this.storage.retrieve('usuario');
   }
 
-  cambiarTabla(event) {
-    // console.log(event.target.innerText);
-    this.cambiarFalseAll();
-    console.log(event.target.innerText);
-    
-    switch (event.target.innerText) {
-      case ' Productos':
-        this.productos = true;
-        break;
-      case ' Noticias':
-        this.noticias = true;
-        break;
-      case ' Categorias':
-        this.categorias = true;
-        break;
-      case ' Desarrollos':
-        this.desarrollos = true;
-        break;
-      case ' Usuarios':
-        this.usuarios = true;
-        break;
-      case ' Chat':
-        this.chat = true;
-        break;
-      case ' Quienes':
-        this.quienes = true;
-        break;
-      case ' Scraps':
-        this.scrap = true;
-        break;
-      case ' Posts':
-        this.posts = true;
-        break;
-      case ' Pedidos':
-        this.pedidos = true;
-        break;
-      case ' Configuracion':
-        this.configuracion = true;
-        break;
-      case ' Ventas':
-        this.ventas = true;
-        break;
+  cambiarTabla(titulo: string = '', i: number = -1) {
+    if (titulo == 'Cerrar Sesión') {
+      this.logout();
+    } else {
+      this.buttons.forEach(e => {
+        e.activo = false;
+      })
+      this.buttons[i].activo = true;
+      this.activo = titulo;
     }
-    this.activo = event.target.innerText.toString().substring(1,event.target.innerText.toString().length);
   }
 
-  cambiarFalseAll() {
-    this.productos = false;
-    this.categorias = false;
-    this.noticias = false;
-    this.desarrollos = false;
-    this.usuarios = false;
-    this.chat = false;
-    this.quienes = false;
-    this.scrap = false
-    this.posts = false;
-    this.pedidos = false;
-    this.ventas = false;
-    this.configuracion = false;
-  }
 
   agregar() {
     var modal = undefined;
@@ -161,7 +208,7 @@ export class ModalAdminComponent implements OnInit {
           }
         });
         break;
-      case 'Categorias':
+      case 'Categorías':
         modal = this.modalService.open(ModalCategoriaComponent, { size: 'md' });
         modal.componentInstance.modalHeader = 'Categoria';
         modal.componentInstance.modalSubHeader =
@@ -205,7 +252,7 @@ export class ModalAdminComponent implements OnInit {
           }
         });
         break;
-      case 'Scraps':
+      case 'Recogida':
         modal = this.modalService.open(ModalScrapComponent, { size: 'lg' });
         modal.componentInstance.modalHeader = 'Scraps';
         modal.componentInstance.modalSubHeader = 'Scraps de los sitios';
@@ -215,7 +262,7 @@ export class ModalAdminComponent implements OnInit {
           }
         });
         break;
-      case 'Posts':
+      case 'Comentarios':
         modal = this.modalService.open(ModalPostsComponent, { size: 'md', backdrop: 'static' });
         modal.componentInstance.modalHeader = 'Posts';
         modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
@@ -246,7 +293,7 @@ export class ModalAdminComponent implements OnInit {
     })
   }
 
-  loadAll(){
+  loadAll() {
     this.loadCategorias();
     this.loadDesarrollo();
     this.loadNoticia();

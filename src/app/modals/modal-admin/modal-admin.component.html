@@ -1,7 +1,8 @@
 <div class="modal-header bg dark">
   <div class="row">
     <div class="col-sm-3">
-      <img [hidden]="usuario.usuario != 'kuroko'" class="svg-shadow" style="width: 60px;height: 35px;" src="assets/icono-kuroko.png" />
+      <img [hidden]="usuario.usuario != 'kuroko'" class="svg-shadow" style="width: 60px;height: 35px;"
+        src="assets/icono-kuroko.png" />
       <div class="fav-icon" [hidden]="usuario.usuario == 'kuroko'">
         <span class="fav-letter">{{ usuario.usuario[0].toUpperCase() }}</span>
       </div>
@@ -22,98 +23,29 @@
     </button>
   </div>
 </div>
+
 <div class="modal-body" style="height: 100%; overflow-y: auto; padding-block: 0; padding-bottom: 20px">
   <div class="row">
-    <div class="sidebar scroll-mine text-center">
-      <button [ngClass]="{
-          'btn-primary': productos,
-          'btn-outline-primary': !productos
-        }" class="btn" (click)="cambiarTabla($event)">
-        <i class="bi bi-bicycle"></i> Productos
-      </button>
-      <button [ngClass]="{
-          'btn-primary': categorias,
-          'btn-outline-primary': !categorias
-        }" class="btn" (click)="cambiarTabla($event)">
-        <i class="bi bi-bookmark"></i> Categorias
-      </button>
-      <button [ngClass]="{
-          'btn-primary': noticias,
-          'btn-outline-primary': !noticias
-        }" class="btn" (click)="cambiarTabla($event)">
-        <i class="bi bi-newspaper"></i> Noticias
-      </button>
-      <button [ngClass]="{
-          'btn-primary': desarrollos,
-          'btn-outline-primary': !desarrollos
-        }" class="btn" (click)="cambiarTabla($event)">
-        <i class="bi bi-graph-up"></i> Desarrollos
-      </button>
-      <button [ngClass]="{
-          'btn-primary': usuarios,
-          'btn-outline-primary': !usuarios
-        }" class="btn" (click)="cambiarTabla($event)">
-        <i class="bi bi-person"></i> Usuarios
-      </button>
-      <button [ngClass]="{ 'btn-primary': chat, 'btn-outline-primary': !chat }" class="btn"
-        (click)="cambiarTabla($event)" [hidden]="usuario.usuario != 'kuroko'">
-        <i class="bi bi-chat-square-dots"></i> Chat
-      </button>
-      <button [ngClass]="{ 'btn-primary': quienes, 'btn-outline-primary': !quienes }" class="btn"
-        (click)="cambiarTabla($event)">
-        <i class="bi bi-people"></i> Quienes
-      </button>
-      <button [ngClass]="{ 'btn-primary': scrap, 'btn-outline-primary': !scrap }" class="btn"
-        (click)="cambiarTabla($event)">
-        <i class="bi bi-bar-chart-steps"></i> Scraps
-      </button>
-      <button [ngClass]="{ 'btn-primary': posts, 'btn-outline-primary': !posts }" class="btn"
-        (click)="cambiarTabla($event)">
-        <i class="bi bi-file-earmark-text"></i> Posts
-      </button>
-      <button [ngClass]="{ 'btn-primary': pedidos, 'btn-outline-primary': !pedidos }" class="btn"
-        (click)="cambiarTabla($event)">
-        <i class="bi bi-cart"></i> Pedidos
-      </button>
-      <button [ngClass]="{ 'btn-primary': ventas, 'btn-outline-primary': !ventas }" class="btn"
-        (click)="cambiarTabla($event)">
-        <i class="bi bi-receipt"></i> Ventas
-      </button>
-      <button [ngClass]="{ 'btn-primary': configuracion, 'btn-outline-primary': !configuracion }" class="btn"
-        (click)="cambiarTabla($event)">
-        <i class="bi bi-gear"></i> Configuracion
-      </button>
-      <button class="btn btn-outline-primary" (click)="logout()">
-        <i class="bi bi-door-closed"></i> Cerrar Sesion
-      </button>
+    <div class="sidebar scroll-mine text-center" [@listAnimation]="buttons.length">
+      <button *ngFor="let item of buttons; let i = index" class="btn"
+        [ngClass]="{ 'btn-primary': buttons[i].activo, 'btn-outline-primary': !buttons[i].activo }"
+        (click)="cambiarTabla(item.titulo, i)"> <i class="bi" [class]="item.icono"></i>
+        {{item.titulo}}</button>
     </div>
+
     <div class="tabs-content" style="position: relative;">
-      <app-table-producto [productos]="productosarray" [ngClass]="{ 'fade-in-element': productos }"
-        [hidden]="!productos"></app-table-producto>
-      <app-table-categoria [categorias]="categoriaarray" [ngClass]="{ 'fade-in-element': categorias }"
-        [hidden]="!categorias"></app-table-categoria>
-      <app-table-noticia [noticias]="noticiasarray" [ngClass]="{ 'fade-in-element': noticias }" [hidden]="!noticias">
-      </app-table-noticia>
-      <app-table-desarrollo [desarrollos]="desarrolloarray" [ngClass]="{ 'fade-in-element': desarrollos }"
-        [hidden]="!desarrollos"></app-table-desarrollo>
-      <app-table-usuario [usuarios]="usuariosarray" [ngClass]="{ 'fade-in-element': usuarios }" [hidden]="!usuarios">
-      </app-table-usuario>
-      <app-chat [ngClass]="{ 'fade-in-element': chat }" [hidden]="!chat"></app-chat>
-      <app-table-quienes [quienes]="quienesarray" [ngClass]="{ 'fade-in-element': quienes }" [hidden]="!quienes">
-      </app-table-quienes>
-      <app-table-scrap [scraps]="scraparray" [ngClass]="{ 'fade-in-element': scrap }" [hidden]="!scrap">
-      </app-table-scrap>
-      <app-table-posts [posts]="postsarray" [ngClass]="{ 'fade-in-element': posts }" [hidden]="!posts">
-      </app-table-posts>
-      <app-table-pedido [pedidos]="pedidosarray" [usuarios]="usuariosarray" [ngClass]="{ 'fade-in-element': pedidos }"
-        [hidden]="!pedidos">
-      </app-table-pedido>
-      <app-table-configuracion [configuraciones]="configuracionesarray" [ngClass]="{ 'fade-in-element': configuracion }"
-        [hidden]="!configuracion">
-      </app-table-configuracion>
-      <app-table-ventas [ventas]="ventasarray" [usuarios]="usuariosarray" [ngClass]="{ 'fade-in-element': pedidos }"
-        [hidden]="!ventas">
-      </app-table-ventas>
+      <app-table-producto [productos]="productosarray" *ngIf="activo=='Productos'" [@scaleAnimation]="'enter'"></app-table-producto>
+      <app-table-categoria [categorias]="categoriaarray" *ngIf="activo=='Categorías'" [@scaleAnimation]="'enter'"></app-table-categoria>
+      <app-table-noticia [noticias]="noticiasarray" *ngIf="activo=='Noticias'" [@scaleAnimation]="'enter'"> </app-table-noticia>
+      <app-table-desarrollo [desarrollos]="desarrolloarray" *ngIf="activo=='Desarrollos'" [@scaleAnimation]="'enter'"></app-table-desarrollo>
+      <app-table-usuario [usuarios]="usuariosarray" *ngIf="activo=='Usuarios'" [@scaleAnimation]="'enter'"> </app-table-usuario>
+      <app-chat *ngIf="activo=='Mensajería'" [@scaleAnimation]="'enter'"></app-chat>
+      <app-table-quienes [quienes]="quienesarray" *ngIf="activo=='Quienes'" [@scaleAnimation]="'enter'"> </app-table-quienes>
+      <app-table-scrap [scraps]="scraparray" *ngIf="activo=='Recogida'" [@scaleAnimation]="'enter'"> </app-table-scrap>
+      <app-table-posts [posts]="postsarray" *ngIf="activo=='Comentarios'" [@scaleAnimation]="'enter'"> </app-table-posts>
+      <app-table-pedido [pedidos]="pedidosarray" [usuarios]="usuariosarray" *ngIf="activo=='Pedidos'" [@scaleAnimation]="'enter'"> </app-table-pedido>
+      <app-table-configuracion [configuraciones]="configuracionesarray" *ngIf="activo=='Configuración'" [@scaleAnimation]="'enter'"> </app-table-configuracion>
+      <app-table-ventas [ventas]="ventasarray" [usuarios]="usuariosarray" *ngIf="activo=='Ventas'" [@scaleAnimation]="'enter'"> </app-table-ventas>
     </div>
   </div>
 </div>
