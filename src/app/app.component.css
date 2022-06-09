@@ -24,3 +24,33 @@
     transform: rotate(270deg);
 }
 
+.chat-fixed-position{
+    position: fixed;
+    max-width: 300px;
+    width: 30%;
+    min-width: 300px;
+    height: auto;
+    bottom: 80px;
+    right: 10px;
+    border-radius: 0.5em;
+    background-color: white;
+    /* overflow: hidden; */
+    padding-top: 60px;
+    box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
+}
+
+.chat-fixed-position .header-chat{
+    position: absolute;
+    width: fit-content;
+    padding: 10px;
+    background-color: var(--firstcolor);
+    box-shadow: 0 5px 15px 0 var(--firstcolor);
+    border-radius: 0.5em;
+    top: -20px;
+    left: -20px;
+}
+
+.chat-fixed-position .header-chat .h3{
+    color: var(--theme-color);
+}
+    

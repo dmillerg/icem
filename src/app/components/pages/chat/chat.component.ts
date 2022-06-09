@@ -182,4 +182,8 @@ export class ChatComponent implements OnInit, OnDestroy {
       (error) => console.log(error)
     );
   }
+
+  verMensaje(id: number){
+    document.getElementById(id.toString()).scrollIntoView({behavior: 'smooth'});
+  }
 }
