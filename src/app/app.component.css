@@ -54,3 +54,19 @@
     color: var(--theme-color);
 }
     
+.chat-fixed-position .close{
+    border-radius: 0.5em;
+    border: none;
+    color: var(--theme-color);
+    background-color: var(--firstcolor);
+    box-shadow: 0 5px 15px 0 var(--firstcolor);
+    padding: 10px;
+    position: absolute;
+    top: -20px;
+    right: 20px;
+}
+
+.chat-fixed-position .close:hover{
+    background-color: var(--firstcolor-hover);
+    
+}
