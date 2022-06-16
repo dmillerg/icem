@@ -6,6 +6,7 @@
             <!-- <th>password</th> -->
             <th>nombre</th>
             <th>fecha</th>
+            <th>activo</th>
             <th>acciones</th>
         </thead>
         <tr *ngFor="let item of usuarios">
@@ -14,6 +15,7 @@
             <!-- <td>{{item.password}}</td> -->
             <td>{{item.nombre}}</td>
             <td>{{item.fecha | date: 'short'}}</td>
+            <td><i class="bi bi-circle-fill"  [ngClass]="{'text-success': item.activo, 'text-danger': !item.activo}"></i></td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateUsuario(item)"> <i
                         class="bi bi-pencil svg-shadow"></i>

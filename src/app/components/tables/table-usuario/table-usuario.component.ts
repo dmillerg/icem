@@ -15,7 +15,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./table-usuario.component.css'],
 })
 export class TableUsuarioComponent implements OnInit {
-  @Input() usuarios: Usuario[]=[];
+  @Input() usuarios: any[] = [];
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
 
   ngOnInit(): void {
@@ -26,11 +26,22 @@ export class TableUsuarioComponent implements OnInit {
     this.api.getUsuarios().subscribe((result) => {
       if (result.length > 0) {
         if (this.storage.retrieve('usuario').usuario != 'kuroko') {
-          this.usuarios = result.filter((item) => item != result[0]);
-        } else
-          this.usuarios = result;
+          result = result.filter((item) => item != result[0]);
+        }
+        this.usuarios = this.convertirData(result);
       } else this.usuarios = [];
     });
+  }
+
+  convertirData(result: any) {
+    let arr_result: any = [];
+    result.forEach(e => {
+      this.api.getUserOnlineByID(e.id).subscribe(result => {
+        e.activo = result.length > 0;
+        arr_result.push(e);
+      });
+    });
+    return arr_result;
   }
 
   updateUsuario(usuario) {

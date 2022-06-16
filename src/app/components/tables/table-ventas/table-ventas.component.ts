@@ -123,11 +123,11 @@ export class TableVentasComponent implements OnInit {
       let a = document.createElement('a');
       a.download = 'ventas.xlsx';
       a.href = window.URL.createObjectURL(blob)
-      a.target="_blank"
+      a.target = "_blank"
       a.click();
-      this.api.deleteFile('ventas.xlsx').subscribe((result)=>{
+      this.api.deleteFile('ventas.xlsx').subscribe((result) => {
         console.log(result);
-        
+
       })
     }, error => {
       console.log(error);

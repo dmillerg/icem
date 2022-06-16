@@ -1101,4 +1101,14 @@ export class ApiService {
     return this.http.delete(direccion, { headers: headers, params: params });
   }
 
+/**
+ * Verifica que el usuario este online
+ * @param id del usuario
+ * @returns 
+ */
+  getUserOnlineByID(id: number): Observable<any>{
+    let direccion = this.url + 'useronline/'+id.toString();
+    const headers = { 'content-type': 'application/json' };
+    return this.http.get(direccion);
+  }
 }
