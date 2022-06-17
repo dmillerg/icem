@@ -31,6 +31,7 @@ export class ModalUsuarioComponent implements OnInit {
     rol: '',
     activo: false,
     cant_visitas: 0,
+    ultima_compra_id: -1,
   };
 
   usuario_pasado: Usuario = {
@@ -47,6 +48,7 @@ export class ModalUsuarioComponent implements OnInit {
     rol: '',
     activo: false,
     cant_visitas: 0,
+    ultima_compra_id: -1,
   };
 
   confirm: string = '';

@@ -12,4 +12,5 @@ export interface Usuario {
   rol: string;
   activo: boolean;
   cant_visitas: number;
+  ultima_compra_id: number;
 }

@@ -26,6 +26,7 @@ export class ModalActivationComponent implements OnInit {
     rol: '',
     activo: false,
     cant_visitas: 0,
+    ultima_compra_id: -1,
   };
   activando: boolean = false;
   actiModal: NgbActiveModal;

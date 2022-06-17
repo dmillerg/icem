@@ -76,9 +76,13 @@ export class ProductoEspecification2Component implements OnInit {
   }
 
   cambiarVista(position: number) {
-    let medio = this.producto.url;
-    this.producto.url = this.imagenes[position];
-    this.imagenes[position] = medio;
+    console.log(this.producto.url != this.imagenes[position]);
+    
+    if (this.producto.url != this.imagenes[position]) {
+      let medio = this.producto.url;
+      this.producto.url = this.imagenes[position];
+      this.imagenes[position] = medio;
+    }
   }
 
   loadImageProducto(id: number) {

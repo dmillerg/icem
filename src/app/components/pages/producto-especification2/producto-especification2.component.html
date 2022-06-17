@@ -9,8 +9,9 @@
                 <label class="disponible">Disponibles: {{producto.disponibilidad}}</label>
             </div>
             <div class="imagenes">
+                <!-- (mouseenter) ="cambiarVista(i)" -->
                 <div *ngFor="let item of imagenes; let i = index" class="imagen" (click)="cambiarVista(i)">
-                    <img style="width: 100%;height: 100%;" [src]="item" alt="producto">
+                    <img style="width: 100%;height: 100%;cursor: pointer;" [src]="item" alt="producto">
                     <div class="hover"></div>
                 </div>
             </div>

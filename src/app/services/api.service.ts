@@ -994,15 +994,17 @@ export class ApiService {
    * @param correo del destinatario
    * @param asunto del correo
    * @param mensaje del correo con la informacion pertinente
+   * @param infoadd del correo con la informacion pertinente
    * @returns 
    */
-  sendEmail(correo: string, asunto: string = '', mensaje: string = '') {
+  sendEmail(correo: string, asunto: string = '', mensaje: string = '', infoadd: string = '') {
     let direccion = this.url + 'send';
     const headers = { 'content-type': 'application/json' };
     const params = {
       correo: correo,
       asunto: asunto,
       mensaje: mensaje,
+      infoadd: infoadd,
     };
     return this.http.get(direccion, { headers: headers, params: params });
   }

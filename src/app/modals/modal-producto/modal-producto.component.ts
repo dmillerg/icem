@@ -132,6 +132,7 @@ export class ModalProductoComponent implements OnInit {
     } else {
       this.api.addProducto(formData).subscribe((result) => {
         console.log(result);
+        this.darPublicidadNuevoProducto();
         this.actiModal.close('Productos');
       }, (error) => {
         console.log(error);
@@ -139,6 +140,22 @@ export class ModalProductoComponent implements OnInit {
       })
     }
 
+  }
+
+  darPublicidadNuevoProducto() {
+    let asunto: string = 'Un nuevo producto ha sido puesto en venta'
+    this.api.getUsuarios().subscribe(result => {
+      result.forEach(e => {
+        let mensaje: string = `Hola ${e.nombre} hemos visto que te interesan los productos de la categoría ${this.categorias.filter(i => i.id == this.producto.categoria)[0].nombre}, un nuevo producto de esta categoría ha sido agregado recientemente y no podíamos dejar de avisarte, te dejamos el nombre aquí debajo, puedes obtener mas información en nuestro sitio web https://wwww.icem.cu. Gracias por tu preferencia. \n El nombre del producto es: "${this.producto.titulo}" `;
+        if (e.ultima_compra_id == this.producto.categoria) {
+          console.log('email enviado');
+          
+          this.api.sendEmail(e.correo, asunto, mensaje, 'publicidad').subscribe(result2 => {
+
+          })
+        }
+      })
+    })
   }
 
   fileEvent(fileInput) {
