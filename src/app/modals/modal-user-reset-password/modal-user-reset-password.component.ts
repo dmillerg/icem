@@ -29,6 +29,7 @@ export class ModalUserResetPasswordComponent implements OnInit {
     telefono: '',
     rol: '',
     activo: false,
+    cant_visitas: 0,
   };
 
   constructor(private api: ApiService,

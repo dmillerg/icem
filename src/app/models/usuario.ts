@@ -11,4 +11,5 @@ export interface Usuario {
   telefono: string;
   rol: string;
   activo: boolean;
+  cant_visitas: number;
 }

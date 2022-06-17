@@ -38,6 +38,8 @@ export class TableUsuarioComponent implements OnInit {
     result.forEach(e => {
       this.api.getUserOnlineByID(e.id).subscribe(result => {
         e.activo = result.length > 0;
+        console.log((result.length));
+        
         arr_result.push(e);
       });
     });

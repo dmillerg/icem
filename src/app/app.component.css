@@ -37,6 +37,13 @@
     /* overflow: hidden; */
     padding-top: 60px;
     box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
+    transition: all .3s ease-in-out;
+}
+
+.chat-fixed-position.closed{
+    position: fixed;
+    right: -100%;
+    transition: all .5s ease-in-out;
 }
 
 .chat-fixed-position .header-chat{

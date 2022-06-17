@@ -1,16 +1,17 @@
-<div style="overflow: auto;width: 100%; display: flex;flex-direction: column;" class="scroll-mine">
-    <div class="seleccionable">
-        <select name="usuario" id="user" [(ngModel)]="user_id" (change)="change()" class="selecc">
-            <option value="-1">usuario</option>
-            <option *ngFor="let item of usuarios" [value]="item.id">{{item.usuario}}</option>
-        </select>
-       <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha">
-        <select name="producto" id="producto" [(ngModel)]="producto_id" (change)="changeprod()" class="selecc">
-            <option value="-1">producto</option>
-            <option *ngFor="let item of productos" [value]="item.id">{{item.titulo}}</option>
-        </select>
+<div class="seleccionable">
+    <select name="usuario" id="user" [(ngModel)]="user_id" (change)="change()" class="selecc">
+        <option value="-1">usuario</option>
+        <option *ngFor="let item of usuarios" [value]="item.id">{{item.usuario}}</option>
+    </select>
+    <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha">
+    <select name="producto" id="producto" [(ngModel)]="producto_id" (change)="changeprod()" class="selecc">
+        <option value="-1">producto</option>
+        <option *ngFor="let item of productos" [value]="item.id">{{item.titulo}}</option>
+    </select>
     <button class="btn btn-firstcolor" (click)="generarReportes()" [disabled]="ventas.length==0">Reportes</button>
-    </div>
+</div>
+<div style="overflow: auto;width: 100%; display: flex;flex-direction: column;position: relative;" class="scroll-mine">
+
     <table class="table table-dark text-center  table-mine" style="overflow: auto;width: 100%;">
         <thead>
             <th>id</th>
@@ -27,7 +28,7 @@
             <td>{{item.cantidad}}</td>
             <td>{{item.fecha | date: 'short'}}</td>
             <!-- <td> -->
-                <!-- <button hidden class="btn btn-outline-primary" (click)="updateProducto(item)"> <i
+            <!-- <button hidden class="btn btn-outline-primary" (click)="updateProducto(item)"> <i
                         class="bi bi-pencil svg-shadow"></i>
                 </button>
                 <button class="btn btn-outline-info" (click)="cambiarEstadoPedido(item)"> <i

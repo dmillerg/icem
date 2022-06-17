@@ -14,11 +14,11 @@
 <app-loading [@scaleAnimation]="'enter'" *ngIf="loading"></app-loading>
 
 <!-- <app-producto-especification2></app-producto-especification2> -->
-<div class="chat-fixed-position">
+<div class="chat-fixed-position closed">
     <div class="header-chat">
         <h3 class="h3">Mensajería Exclusiva</h3>
        
     </div>
-    <button class="close"><i class="bi bi-x"></i></button>
+    <button class="close" (click)="closeChat()"><i class="bi bi-x"></i></button>
     <app-chat></app-chat>
 </div>

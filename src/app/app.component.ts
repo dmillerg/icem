@@ -124,4 +124,8 @@ export class AppComponent implements OnInit {
       this.activate();
     })
   }
+
+  closeChat(){
+    document.querySelector('.chat-fixed-position').classList.toggle('closed');
+  }
 }

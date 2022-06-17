@@ -25,6 +25,7 @@ export class ModalActivationComponent implements OnInit {
     telefono: '',
     rol: '',
     activo: false,
+    cant_visitas: 0,
   };
   activando: boolean = false;
   actiModal: NgbActiveModal;

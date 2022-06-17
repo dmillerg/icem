@@ -30,6 +30,7 @@ export class ModalUsuarioComponent implements OnInit {
     telefono: '',
     rol: '',
     activo: false,
+    cant_visitas: 0,
   };
 
   usuario_pasado: Usuario = {
@@ -45,6 +46,7 @@ export class ModalUsuarioComponent implements OnInit {
     telefono: '',
     rol: '',
     activo: false,
+    cant_visitas: 0,
   };
 
   confirm: string = '';
