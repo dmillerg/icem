@@ -128,6 +128,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
       } else {
         this.errorLogin = true;
       }
+      this.loginLoading = false;
     })
   }
 

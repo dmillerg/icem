@@ -1,15 +1,16 @@
 <div class="card card-mine" [@scaleAnimation]="'enter'">
+    <h4 class="h4" *ngIf="producto.disponibilidad==0" [@scaleAnimation]="'enter'">Agotado</h4>
+    <h4 class="h4-new" *ngIf="date.getDate()==today.getDate() && date.getMonth()==today.getMonth() && date.getFullYear()==today.getFullYear() && producto.disponibilidad!=0" [@scaleAnimation]="'enter'">Nuevo</h4>
+
     <div class="title-text text-start">
         <!-- <h1 class="number text-section"><strong>{{contador}}</strong></h1> -->
-        <h1><strong>{{producto.titulo}}</strong></h1>
+       <strong>{{producto.titulo}}</strong>
     </div>
    
     <img class="img-backlogo-bottom-rigth" src="assets/logo-mitad-left.png">
     <div class="img">
-        <img [src]="producto.url" class="img-fluid">
-        <button class="btn btn-firstcolor" (click)="verMas()"
-            style="position: absolute;right: 10px;bottom: 0;box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);">Ver
-            mas</button>
+        <img [src]="producto.url" class="img-fluid" style="max-height: 200px;">
+        
     </div>
     <div class="row linea">
         <div class="col-sm-6 linea-active bg-firstcolor"></div>
@@ -18,6 +19,11 @@
     
     <div class="container">
         <div class="row">
+            <strong style="display: flex;flex-direction: row;font-size: 18px;">
+                <div style="font-size: 15px;margin-right: 2px;">$</div>{{producto.precio%1==0?producto.precio+'.00':producto.precio}}
+            </strong>
+        </div>
+        <div class="row" style="position: relative;">
             <div class="col-sm-12 descripcion-text">
                 <p class="text">{{producto.descripcion}}</p>
             </div>
@@ -30,5 +36,8 @@
             <button class="btn btn-firstcolor" (click)="verMas()" style="position: absolute;right: 10px;bottom: 0;box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);">Ver mas</button>
         </div>
     </div> -->
-    <div class="row p-4"></div>
+    <div class="row p-1"></div>
+    <button class="btn btn-firstcolor" (click)="verMas(producto)"
+            >Ver
+            mas</button>
 </div>

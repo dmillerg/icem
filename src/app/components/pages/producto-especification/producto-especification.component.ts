@@ -29,12 +29,12 @@ const scaleAnimation = trigger('scaleAnimation', [
 ]);
 
 @Component({
-  selector: 'app-producto-especification2',
-  templateUrl: './producto-especification2.component.html',
-  styleUrls: ['./producto-especification2.component.css'],
+  selector: 'app-producto-especification',
+  templateUrl: './producto-especification.component.html',
+  styleUrls: ['./producto-especification.component.css'],
   animations: [listAnimation, scaleAnimation]
 })
-export class ProductoEspecification2Component implements OnInit {
+export class ProductoEspecificationComponent implements OnInit {
 
   producto: any = {
     id: -1,

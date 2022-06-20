@@ -4,19 +4,16 @@ import { BusquedaComponent } from './components/pages/busqueda/busqueda.componen
 import { DesarrollosComponent } from './components/pages/desarrollos/desarrollos.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { NoticiasComponent } from './components/pages/noticias/noticias.component';
-import { ProductosEspecificacionComponent } from './components/pages/productos-especificacion/productos-especificacion.component';
 import { ProductosComponent } from './components/pages/productos/productos.component';
-import { Productos2Component } from './components/pages/productos2/productos2.component';
 import { QuienesSomosComponent } from './components/pages/quienes-somos/quienes-somos.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: 'inicio', component: HomeComponent },
-  { path: 'productos', component: Productos2Component },
+  { path: 'productos', component: ProductosComponent },
   { path: 'quienes', component: QuienesSomosComponent },
   { path: 'noticias', component: NoticiasComponent },
-  { path: 'producto', component: ProductosEspecificacionComponent },
   { path: 'nuevos', component: DesarrollosComponent },
   { path: 'buscar', component: BusquedaComponent },
 ];

@@ -4,7 +4,7 @@
 
     <div class="title-text text-start">
         <!-- <h1 class="number text-section"><strong>{{contador}}</strong></h1> -->
-        <h1><strong>{{producto.titulo}}</strong></h1>
+       <strong>{{producto.titulo}}</strong>
     </div>
    
     <img class="img-backlogo-bottom-rigth" src="assets/logo-mitad-left.png">
@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row">
             <strong style="display: flex;flex-direction: row;font-size: 18px;">
-                <div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio}}.00
+                <div style="font-size: 15px;margin-right: 2px;">$</div>{{producto.precio%1==0?producto.precio+'.00':producto.precio}}
             </strong>
         </div>
         <div class="row" style="position: relative;">

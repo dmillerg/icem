@@ -16,6 +16,7 @@
     right: -50px;
     top: 25px;
     background-color: var(--alertcolor);
+    box-shadow: 0 5px 10px 0 var(--alertcolor);
     color: var(--theme-color);
     z-index: 2;
     padding: 10px;
@@ -160,12 +161,13 @@ input[type=number] {
     flex-direction: row;
     width: 100%;
     margin-top: 10px;
+    overflow-x: auto;
 }
 
 .imagenes .imagen {
     width: 100px;
     position: relative;
-    height: 100px;
+    height: auto;
     margin: 2px;
 }
 

@@ -11,7 +11,7 @@
             <div class="imagenes">
                 <!-- (mouseenter) ="cambiarVista(i)" -->
                 <div *ngFor="let item of imagenes; let i = index" class="imagen" (click)="cambiarVista(i)">
-                    <img style="width: 100%;height: 100%;cursor: pointer;" [src]="item" alt="producto">
+                    <img style="cursor: pointer;" [src]="item" alt="producto">
                     <div class="hover"></div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <h1 class="h1 text-firstcolor">{{producto.titulo}}</h1>
                 <label class="text">{{producto.fecha| date:'dd/MM/YYYY hh:mm a'}}</label>
                 <strong style="display: flex;flex-direction: row;font-size: 18px;">
-                    <div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio}}.00
+                    <div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio%1==0?producto.precio+'.00':producto.precio}}
                 </strong>
                 <p class="text">{{producto.descripcion}}</p>
                 <div class="contenedor-carrito" *ngIf="storage.retrieve('usuario')" [@scaleAnimation]="'enter'">

@@ -15,14 +15,12 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { HomeComponent } from './components/pages/home/home.component';
 import { ProductoComponent } from './components/pages/producto/producto.component';
 import { MenuInicioComponent } from './components/pages/menu-inicio/menu-inicio.component';
-import { ProductosComponent } from './components/pages/productos/productos.component';
 import { ProductoHomeComponent } from './components/pages/producto-home/producto-home.component';
 import { NoticiaHomeComponent } from './components/pages/noticia-home/noticia-home.component';
 import { QuienesSomosComponent } from './components/pages/quienes-somos/quienes-somos.component';
 import { QuienesItemComponent } from './components/pages/quienes-item/quienes-item.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgxWebstorageModule } from 'ngx-webstorage';
-import { ProductosEspecificacionComponent } from './components/pages/productos-especificacion/productos-especificacion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalMapaComponent } from './modals/modal-mapa/modal-mapa.component';
 import { ModalProductoComponent } from './modals/modal-producto/modal-producto.component';
@@ -67,9 +65,9 @@ import { ModalActivationComponent } from './modals/modal-activation/modal-activa
 import { ModalUserResetPasswordComponent } from './modals/modal-user-reset-password/modal-user-reset-password.component';
 import { ModalEstadoPedidoComponent } from './modals/modal-estado-pedido/modal-estado-pedido.component';
 import { TableVentasComponent } from './components/tables/table-ventas/table-ventas.component';
-import { Productos2Component } from './components/pages/productos2/productos2.component';
+import { ProductosComponent } from './components/pages/productos/productos.component';
 import { PostsComponent } from './components/pages/posts/posts.component';
-import { ProductoEspecification2Component } from './components/pages/producto-especification2/producto-especification2.component';
+import { ProductoEspecificationComponent } from './components/pages/producto-especification/producto-especification.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -81,12 +79,10 @@ import { ProductoEspecification2Component } from './components/pages/producto-es
     HomeComponent,
     ProductoComponent,
     MenuInicioComponent,
-    ProductosComponent,
     ProductoHomeComponent,
     NoticiaHomeComponent,
     QuienesSomosComponent,
     QuienesItemComponent,
-    ProductosEspecificacionComponent,
     ModalMapaComponent,
     ModalProductoComponent,
     ModalAdminComponent,
@@ -128,9 +124,9 @@ import { ProductoEspecification2Component } from './components/pages/producto-es
     ModalActivationComponent,
     ModalUserResetPasswordComponent,
     ModalEstadoPedidoComponent,
-    Productos2Component,
+    ProductosComponent,
     PostsComponent,
-    ProductoEspecification2Component,
+    ProductoEspecificationComponent,
   ],
   imports: [
     BrowserModule,

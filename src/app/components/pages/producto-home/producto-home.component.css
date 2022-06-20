@@ -1,13 +1,53 @@
+.card-mine {
+    width: 95%;
+    /* max-width: 18rem;
+    min-width: 18rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5em;
+    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
+}
+
+/* .card-mine.active{
+    transition: all .3s ease;
+    transform: scale(1.05);
+    box-shadow: 0 0 32px 0 var(--firstcolor-hover);
+} */
+
+.card-mine:hover{
+    transform: scale(1.05);
+    transition: all .3s ease;
+
+}
+
+
 .title-text {
     width: 100%;
-    float: left;
-    position: relative;
+    word-wrap: break-word;
+    text-transform: uppercase;
     background-color: var(--firstcolor);
+    padding: 10px;
     color: var(--theme-color);
-    padding-inline: 20px;
     border-top-left-radius: 0.2em;
     border-top-right-radius: 0.2em;
-    text-transform: uppercase;
+    font-size: 150%;
+    padding-bottom: 60px;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    height: 3.2em; /* Fallback for non-webkit, line-height * 2 */
+    line-height: 1.4em;
+    -webkit-line-clamp: 2; /* if you change this, make sure to change the fallback line-height and height */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-firstcolor{
+    padding: 15px;
+    box-shadow: 0 5px 15px 0 var(--firstcolor);
+    transform: translateY(20px);
 }
 
 .descripcion-text {
@@ -25,15 +65,17 @@
     text-overflow: ellipsis;
 }
 
+/* .descripcion-text::after{
+    content: "...";
+    position: absolute;
+    right: 0;
+} */
+
 .linea {
     height: 5px;
     width: 90%;
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.btn-firstcolor{
-    padding: 15px;
 }
 
 .linea-active {
@@ -44,13 +86,41 @@
 .image {
     margin-top: 30px;
     width: 90%;
+   
+    margin-left: 0;
+    /* box-shadow: 0 8px 2px 0 var(--firstcolor-hover); */
 }
 
 .img {
     position: relative;
-    margin-top: 0;
-    /* max-height: 250px;
-    overflow: hidden; */
+    margin-bottom: 10px;
+}
+
+.card-mine .h4{
+    position: absolute;
+    right: -5px;
+    top: 10px;
+    background-color: var(--alertcolor);
+    box-shadow: 0 5px 10px 0 var(--alertcolor);
+    color: var(--theme-color);
+    z-index: 2;
+    padding: 10px;
+    border-radius: 5px;
+    transform: rotate(45deg);
+    transition: all .3s ease-in-out;
+}
+
+.card-mine .h4-new{
+    position: absolute;
+    left: -20px;
+    box-shadow: 0 5px 10px 0 var(--alertcolor);
+    top: 70px;
+    background-color: var(--alertcolor);
+    color: var(--theme-color);
+    z-index: 2;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
 }
 
 .img-backlogo-bottom-rigth{
@@ -58,4 +128,12 @@
     bottom: 0;
     right: 0;
     width: 20%;
+}
+
+.img-backlogo-top-left{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateZ(180deg) rotateY(180deg);
+    width: 40%;
 }
