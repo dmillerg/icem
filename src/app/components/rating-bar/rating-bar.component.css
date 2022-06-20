@@ -1,0 +1,14 @@
+.rating-content{
+    width: 100%;
+    min-width: 200px;
+    display: flex;
+    flex-direction: row;
+}
+
+.rating-content .rating-star{
+    color: var(--firstcolor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

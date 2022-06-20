@@ -41,6 +41,7 @@ export class PostsComponent implements OnInit {
 
   alias: string = '';
   correo: string = '';
+  calificacion: number = 0;
   comentario: string = '';
 
   comentar: boolean = false;
@@ -124,6 +125,7 @@ export class PostsComponent implements OnInit {
     let formData: FormData = new FormData();
     formData.append('alias', this.alias);
     formData.append('correo', this.correo);
+    formData.append('calificacion', this.calificacion.toString());
     formData.append('comentario', this.comentario);
     this.correo = '';
     formData.append('id_producto', this.producto.id.toString());

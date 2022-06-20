@@ -1,0 +1,22 @@
+<div class="rating-content">
+    <div class="rating-star">
+        <i class="bi" [ngClass]="{'bi-star': calif<0.5, 'bi-star-half': calif==0.5, 'bi-star-fill': calif>=1}"></i>
+        <strong>1</strong>
+    </div>
+    <div class="rating-star">
+        <i class="bi" [ngClass]="{'bi-star': calif<1, 'bi-star-half': calif==1.5, 'bi-star-fill': calif>=2}"></i>
+        <strong>2</strong>
+    </div>
+    <div class="rating-star">
+        <i class="bi" [ngClass]="{'bi-star': calif<2, 'bi-star-half': calif==2.5, 'bi-star-fill': calif>=3}"></i>
+        <strong>3</strong>
+    </div>
+    <div class="rating-star">
+        <i class="bi" [ngClass]="{'bi-star': calif<3, 'bi-star-half': calif==3.5, 'bi-star-fill': calif>=4}"></i>
+        <strong>4</strong>
+    </div>
+    <div class="rating-star">
+        <i class="bi" [ngClass]="{'bi-star': calif<4, 'bi-star-half': calif==4.5, 'bi-star-fill': calif>=5}" (click)="calif=2.5"></i>
+        <strong>5</strong>
+    </div>
+</div>

@@ -43,3 +43,12 @@
     font-size: 15px;
 
 }
+
+h3.h3{
+    transform: translateY(-20px) translateX(-40px);
+    background-color: var(--firstcolor);
+    color: var(--theme-color);
+    border-radius: 0.5em;
+    box-shadow: 0 5px 10px 0 var(--firstcolor);
+    padding: 20px;
+}

@@ -110,14 +110,14 @@
     opacity: 0;
     position: absolute;
     right: -350px;
-    bottom: 160px;
+    bottom: 100px;
     visibility: hidden;
     transition: all .3s ease-in-out;
 }
 
 .posts.active {
     right: 10px;
-    bottom: 160px;
+    bottom: 100px;
     opacity: 1;
     visibility: visible;
     transition: all .3s ease-in-out;

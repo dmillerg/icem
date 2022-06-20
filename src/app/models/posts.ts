@@ -6,4 +6,5 @@ export interface Posts {
   fecha:string;
   id_producto: number;
   cant_resp: number;
+  calificacion: number;
 }

@@ -5,14 +5,11 @@
         <form id="form" class="form-filter"><input id="input" name="filtro" [(ngModel)]="filtro"
                 (ngModelChange)="filtrar()" class="filter-input" placeholder="Buscar por alias..."></form>
         <button class="btn" [ngClass]="{ 'btn-firstcolor': comentar , 'btn-outline-firstcolor' : !comentar}"
-        (click)="comentar=!comentar"
-            style="position: relative;">
+            (click)="comentar=!comentar" style="position: relative;">
             <div class="pista pista-off pista-bottom">Comentar producto</div>
             <i class="bi bi-pen"></i>
         </button>
-        <button class="btn btn-outline-firstcolor"
-        (click)=" this.emisor.emit();"
-            style="position: relative;">
+        <button class="btn btn-outline-firstcolor" (click)=" this.emisor.emit();" style="position: relative;">
             <div class="pista pista-off pista-bottom">Cerrar</div>
             <i class="bi bi-x"></i>
         </button>
@@ -29,6 +26,10 @@
             <label class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</label>
             <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')"
                 [(ngModel)]="correo" class="input-outline input" required>
+            <label class="text-firstcolor"><i class="bi bi-star"></i> calificación:</label>
+            <app-rating-bar></app-rating-bar>
+            <input placeholder="1,2,3..." type="number" name="calificacion" [(ngModel)]="calificacion"
+                class="input-outline input" required>
             <label class="text-firstcolor"><i class="bi bi-chat-dots"></i> comentario:</label>
             <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline"
                 style="color: var(--firstcolor);" required></textarea>
@@ -39,8 +40,7 @@
 
         </form>
 
-        <div 
-            [@listAnimation]="posts.length">
+        <div [@listAnimation]="posts.length">
 
             <div *ngFor="let item of posts" class="burbuja-comentario bg-firstcolor text-white"
                 style="position: relative;">
@@ -56,7 +56,7 @@
                             (click)="responderComentario(item)"
                             *ngIf="storage.retrieve('usuario')&&storage.retrieve('usuario').rol=='admin'"
                             class="bi bi-pencil"></i></button>
-                </div> 
+                </div>
                 <ol class="lista-respuesta" *ngFor="let item2 of item.respuestas">
                     <li>{{item2.respuesta}}</li>
                 </ol>

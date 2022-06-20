@@ -23,6 +23,7 @@ export class ModalPostsComponent implements OnInit {
     fecha: '',
     id_producto: -1,
     cant_resp: 0,
+    calificacion: 0,
   };
 
   posts_pasado: Posts = {
@@ -33,6 +34,7 @@ export class ModalPostsComponent implements OnInit {
     fecha: '',
     id_producto: -1,
     cant_resp: 0,
+    calificacion: 0,
   };
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
@@ -56,6 +58,7 @@ export class ModalPostsComponent implements OnInit {
     formData.append('id', this.posts.id.toString());
     formData.append('alias', this.posts.alias.toString());
     formData.append('correo', this.posts.correo.toString());
+    formData.append('calificacion', this.posts.calificacion.toString());
     formData.append('comentario', this.posts.comentario.toString());
     formData.append('fecha', this.posts.fecha.toString());
     formData.append('id_producto', this.posts.id_producto.toString());

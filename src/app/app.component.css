@@ -1,6 +1,6 @@
 .btn-up {
     position: absolute;
-    bottom: 8%;
+    bottom: 20px;
     right: 5%;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4);
 }

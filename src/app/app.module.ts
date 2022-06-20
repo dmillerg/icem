@@ -68,6 +68,7 @@ import { TableVentasComponent } from './components/tables/table-ventas/table-ven
 import { ProductosComponent } from './components/pages/productos/productos.component';
 import { PostsComponent } from './components/pages/posts/posts.component';
 import { ProductoEspecificationComponent } from './components/pages/producto-especification/producto-especification.component';
+import { RatingBarComponent } from './components/rating-bar/rating-bar.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -127,6 +128,7 @@ import { ProductoEspecificationComponent } from './components/pages/producto-esp
     ProductosComponent,
     PostsComponent,
     ProductoEspecificationComponent,
+    RatingBarComponent,
   ],
   imports: [
     BrowserModule,
