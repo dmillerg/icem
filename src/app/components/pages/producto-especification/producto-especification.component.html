@@ -15,13 +15,64 @@
                     <div class="hover"></div>
                 </div>
             </div>
+            <div class="container-fluid">
+               
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="progreso">
+                            <label>5</label>
+                            <div class="progress">
+                                <div class="progress-bar" id="cinco" [style.width.%]="(cinco_estrellas/all_estrellas)*100" role="progressbar"  aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="progreso">
+                            <label>4</label>
+                            <div class="progress">
+                                <div class="progress-bar" id="cuatro" [style.width.%]="(cuatro_estrellas/all_estrellas)*100" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="progreso">
+                            <label>3</label>
+                            <div class="progress">
+                                <div class="progress-bar" id="tres" [style.width.%]="(tres_estrellas/all_estrellas)*100" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="progreso">
+                            <label>2</label>
+                            <div class="progress">
+                                <div class="progress-bar" id="2" [style.width.%]="(dos_estrellas/all_estrellas)*100" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="progreso">
+                            <label>1</label>
+                            <div class="progress">
+                                <div class="progress-bar" id="uno" [style.width.%]="(uno_estrellas/all_estrellas)*100" role="progressbar" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 puntuacion">
+                        <label>Calificación promedio</label>
+                        <h1 class="h1">{{promedio}}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="text">Calificacion promedio acerca de la calidad de este producto, {{all_estrellas}} calificaciones</p>
+                </div>
+            </div>
         </div>
         <div class="col-sm-12 col-md-8 col-lg-8">
             <div class="column">
                 <h1 class="h1 text-firstcolor">{{producto.titulo}}</h1>
-                <label class="text">{{producto.fecha| date:'dd/MM/YYYY hh:mm a'}}</label>
+                <label class="text">{{producto.fecha | date:'dd/MM/YYYY hh:mm a'}}</label>
                 <strong style="display: flex;flex-direction: row;font-size: 18px;">
-                    <div style="font-size: 15px;margin-right: 2px;">$</div> {{producto.precio%1==0?producto.precio+'.00':producto.precio}}
+                    <div style="font-size: 15px;margin-right: 2px;">$</div>
+                    {{producto.precio%1==0?producto.precio+'.00':producto.precio}}
                 </strong>
                 <p class="text">{{producto.descripcion}}</p>
                 <div class="contenedor-carrito" *ngIf="storage.retrieve('usuario')" [@scaleAnimation]="'enter'">

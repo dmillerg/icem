@@ -81,7 +81,7 @@
     transition: all .2s ease-in-out;
 }
 
-.collapsible.active i{
+.collapsible.active i {
     transform: rotate(180deg);
     transition: all .2s ease-in-out;
 }
@@ -188,4 +188,35 @@ input[type=number] {
     cursor: pointer;
     background-color: var(--firstcolor-hover);
     transition: all 0.3s ease;
+}
+
+.progress {
+    height: 15px;
+    width: 100%;
+}
+
+.progress .progress-bar {
+    background-color: var(--firstcolor);
+}
+
+.progreso {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.progreso label {
+    color: var(--firstcolor);
+}
+
+.puntuacion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--firstcolor);
+    white-space: nowrap;
 }

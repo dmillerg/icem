@@ -27,9 +27,9 @@
             <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')"
                 [(ngModel)]="correo" class="input-outline input" required>
             <label class="text-firstcolor"><i class="bi bi-star"></i> calificación:</label>
-            <app-rating-bar></app-rating-bar>
-            <input placeholder="1,2,3..." type="number" name="calificacion" [(ngModel)]="calificacion"
-                class="input-outline input" required>
+            <app-rating-bar [calif]="calificacion" (emisor)="calificar($event)"></app-rating-bar>
+            <!-- <input placeholder="1,2,3..." type="number" name="calificacion" [(ngModel)]="calificacion"
+                class="input-outline input" required> -->
             <label class="text-firstcolor"><i class="bi bi-chat-dots"></i> comentario:</label>
             <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline"
                 style="color: var(--firstcolor);" required></textarea>
@@ -50,7 +50,7 @@
                 <p>{{item.correo}}</p>
 
                 <p>{{item.comentario}}</p>
-
+                <app-rating-bar [calif]="item.calificacion"></app-rating-bar>
                 <div class="barra-inferior">
                     <button class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}} <i
                             (click)="responderComentario(item)"

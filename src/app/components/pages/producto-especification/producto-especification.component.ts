@@ -57,6 +57,14 @@ export class ProductoEspecificationComponent implements OnInit {
   cantidad: number = 0;
   imagenes: string[] = [];
 
+  cinco_estrellas: number = 0;
+  cuatro_estrellas: number = 0;
+  tres_estrellas: number = 0;
+  dos_estrellas: number = 0;
+  uno_estrellas: number = 0;
+  all_estrellas: number = 0;
+  promedio: number = 0;
+
   constructor(private api: ApiService, public storage: SessionStorageService) { }
 
   ngOnInit(): void {
@@ -67,7 +75,10 @@ export class ProductoEspecificationComponent implements OnInit {
       this.producto = this.storage.retrieve('producto');
       this.loadImageProducto(this.producto.id);
       this.storage.observe('producto').subscribe((result) => {
+        this.loadPost();
         if (result != undefined && result != null) {
+          
+
           this.producto = result;
           this.loadImageProducto(this.producto.id);
         }
@@ -76,8 +87,8 @@ export class ProductoEspecificationComponent implements OnInit {
   }
 
   cambiarVista(position: number) {
-    console.log(this.producto.url != this.imagenes[position]);
-    
+    // console.log(this.producto.url != this.imagenes[position]);
+
     if (this.producto.url != this.imagenes[position]) {
       let medio = this.producto.url;
       this.producto.url = this.imagenes[position];
@@ -86,7 +97,6 @@ export class ProductoEspecificationComponent implements OnInit {
   }
 
   loadImageProducto(id: number) {
-    console.log(this.producto.imagen.split(','));
     this.imagenes = [];
     this.producto.imagen.split(',').forEach((e, i) => {
       this.api.getProductoFotoName(e).subscribe((result) => {
@@ -170,6 +180,40 @@ export class ProductoEspecificationComponent implements OnInit {
     collap.classList.toggle('active');
     let content = document.getElementById(id + 'content');
     content.classList.toggle('active');
+  }
+
+  loadPost() {
+    this.cinco_estrellas = 0
+    this.cuatro_estrellas = 0
+    this.tres_estrellas = 0
+    this.dos_estrellas = 0
+    this.uno_estrellas = 0
+    this.all_estrellas = 0
+    this.promedio = 0
+    console.log('Entro en el calculo');
+    console.log('cinco',this.cinco_estrellas);
+    console.log('cuatro',this.cuatro_estrellas);
+    console.log('tres',this.tres_estrellas);
+    console.log('dos',this.dos_estrellas);
+    console.log('uno',this.uno_estrellas);
+
+    this.api.getPosts(this.storage.retrieve('producto').id).subscribe(result => {
+      if (result.length > 0) {
+        this.cinco_estrellas = result.filter(e => e.calificacion == 5).length;
+        this.cuatro_estrellas = result.filter(e => e.calificacion == 4).length;
+        this.tres_estrellas = result.filter(e => e.calificacion == 3).length;
+        this.dos_estrellas = result.filter(e => e.calificacion == 2).length;
+        this.uno_estrellas = result.filter(e => e.calificacion == 1).length;
+        this.all_estrellas = result.length;
+        this.promedio = Math.round(((this.cinco_estrellas*5+this.cuatro_estrellas*4+this.tres_estrellas*3+this.dos_estrellas*2+this.uno_estrellas*1)/this.all_estrellas)*10)/10
+        console.log('cinco',this.cinco_estrellas);
+        console.log('cuatro',this.cuatro_estrellas);
+        console.log('tres',this.tres_estrellas);
+        console.log('dos',this.dos_estrellas);
+        console.log('uno',this.uno_estrellas);
+        
+      }
+    })
   }
 
 }

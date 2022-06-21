@@ -123,6 +123,8 @@ export class PostsComponent implements OnInit {
 
   enviarPosts() {
     let formData: FormData = new FormData();
+    console.log(this.calificacion);
+
     formData.append('alias', this.alias);
     formData.append('correo', this.correo);
     formData.append('calificacion', this.calificacion.toString());
@@ -172,5 +174,9 @@ export class PostsComponent implements OnInit {
         this.loadPosts();
       }
     })
+  }
+
+  calificar(event) {
+    this.calificacion = event
   }
 }
