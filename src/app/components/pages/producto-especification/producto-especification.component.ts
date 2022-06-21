@@ -68,8 +68,10 @@ export class ProductoEspecificationComponent implements OnInit {
   constructor(private api: ApiService, public storage: SessionStorageService) { }
 
   ngOnInit(): void {
+    this.loadPost();
     setInterval(() => {
       this.loadEspecification();
+      // this.loadPost()
     }, 5000)
     if (this.storage.retrieve('producto')) {
       this.producto = this.storage.retrieve('producto');
@@ -188,14 +190,8 @@ export class ProductoEspecificationComponent implements OnInit {
     this.tres_estrellas = 0
     this.dos_estrellas = 0
     this.uno_estrellas = 0
-    this.all_estrellas = 0
+    this.all_estrellas = 100
     this.promedio = 0
-    console.log('Entro en el calculo');
-    console.log('cinco',this.cinco_estrellas);
-    console.log('cuatro',this.cuatro_estrellas);
-    console.log('tres',this.tres_estrellas);
-    console.log('dos',this.dos_estrellas);
-    console.log('uno',this.uno_estrellas);
 
     this.api.getPosts(this.storage.retrieve('producto').id).subscribe(result => {
       if (result.length > 0) {
@@ -206,12 +202,6 @@ export class ProductoEspecificationComponent implements OnInit {
         this.uno_estrellas = result.filter(e => e.calificacion == 1).length;
         this.all_estrellas = result.length;
         this.promedio = Math.round(((this.cinco_estrellas*5+this.cuatro_estrellas*4+this.tres_estrellas*3+this.dos_estrellas*2+this.uno_estrellas*1)/this.all_estrellas)*10)/10
-        console.log('cinco',this.cinco_estrellas);
-        console.log('cuatro',this.cuatro_estrellas);
-        console.log('tres',this.tres_estrellas);
-        console.log('dos',this.dos_estrellas);
-        console.log('uno',this.uno_estrellas);
-        
       }
     })
   }

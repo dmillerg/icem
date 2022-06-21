@@ -8,16 +8,22 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class RatingBarComponent implements OnInit {
 
   @Input() calif: number = 0;
+  @Input() disable: boolean = false;
   @Output() emisor: EventEmitter<number> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   calificar(califi: number) {
-    this.calif = califi;
-    console.log(this.calif);
-    this.emisor.emit(this.calif)
+    console.log(this.disable);
+    
+    if (!this.disable) {
+      this.calif = califi;
+      console.log(this.calif);
+      this.emisor.emit(this.calif)
+    }
   }
 
 }

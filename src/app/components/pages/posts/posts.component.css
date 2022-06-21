@@ -33,15 +33,15 @@
 }
 
 .burbuja-comentario {
-    padding: 10px;
-    border-radius: 1em;
-    font-size: 12px;
+    padding: 5px;
+    border-radius: .2em;
     margin-top: 10px;
+    box-shadow: 0 2px 2px 0 var(--firstcolor-hover);
+    color: var(--color-gray);
 }
 
 .burbuja-comentario h5{
     font-size: 15px;
-
 }
 
 h3.h3{

@@ -90,9 +90,10 @@ export class PostsComponent implements OnInit {
         }
       })
     }
-    this.loadPosts();
+    
     if (this.storage.retrieve('producto')) {
       this.producto = this.storage.retrieve('producto');
+      this.loadPosts();
     }
     this.storage.observe('producto').subscribe((result) => {
       if (result != undefined && result != null) {
@@ -149,6 +150,7 @@ export class PostsComponent implements OnInit {
           alias: element.alias,
           correo: element.correo,
           comentario: element.comentario,
+          calificacion: element.calificacion,
           fecha: element.fecha,
           id_producto: element.id_producto,
           respuestas: result,
@@ -158,6 +160,7 @@ export class PostsComponent implements OnInit {
           alias: element.alias,
           correo: element.correo,
           comentario: element.comentario,
+          calificacion: element.calificacion,
           fecha: element.fecha,
           id_producto: element.id_producto,
           respuestas: result,

@@ -42,20 +42,21 @@
 
         <div [@listAnimation]="posts.length">
 
-            <div *ngFor="let item of posts" class="burbuja-comentario bg-firstcolor text-white"
-                style="position: relative;">
-                <h5 class="h5"><i class="bi bi-person"></i>
+            <div *ngFor="let item of posts" class="burbuja-comentario" style="position: relative;">
+                <h5 class="h5" style="color: black;">
                     <strong>{{item.alias}}</strong>
                 </h5>
                 <p>{{item.correo}}</p>
 
                 <p>{{item.comentario}}</p>
-                <app-rating-bar [calif]="item.calificacion"></app-rating-bar>
+                <div style="width: 100%;height: 50px;">
+                    <app-rating-bar [calif]="item.calificacion" [disable]="true"></app-rating-bar>
+                </div>
                 <div class="barra-inferior">
-                    <button class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}} <i
+                    <!-- <button class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}} <i
                             (click)="responderComentario(item)"
                             *ngIf="storage.retrieve('usuario')&&storage.retrieve('usuario').rol=='admin'"
-                            class="bi bi-pencil"></i></button>
+                            class="bi bi-pencil"></i></button> -->
                 </div>
                 <ol class="lista-respuesta" *ngFor="let item2 of item.respuestas">
                     <li>{{item2.respuesta}}</li>
