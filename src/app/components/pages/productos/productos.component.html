@@ -41,12 +41,12 @@
             <div class="row">
                 <div id="producto-especification" class="producto-especification">
                     <div class="barra-superior">
-                        <button class="btn centrado"
+                        <!-- <button class="btn centrado"
                             [ngClass]="{ 'btn-outline-firstcolor': !comentarios , 'btn-firstcolor' : comentarios}"
                             (click)="abrirComentarios()" style="position: relative;">
                             <div class="pista pista-off pista-bottom">Ver comentarios</div>
                             <i class="bi bi-chat-square-text"></i>
-                        </button>
+                        </button> -->
                         <button class="btn-outline-firstcolor centrado" [disabled]="producto.ficha == null"
                             style="position: relative;margin-right: 10px;">
                             <div class="pista pista-off pista-bottom" *ngIf="producto && producto.ficha != null && producto.ficha.length>0">
@@ -60,6 +60,7 @@
                     <app-posts (emisor)="abrirComentarios()"></app-posts>
                 </div>
             </div>
+           
         </div>
     </section>
 
@@ -105,6 +106,36 @@
                     <app-producto [producto]="item"
                         (emisor)="swicthEspecification($event, especification)">
                     </app-producto>
+                </div>
+            </div>
+            <div class="row mt-4" *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'">
+                <div class="col-sm-4">
+                    <h3><strong>Comenta</strong></h3>
+                    <p class="text">Nos interesa saber que piensas, dejanos tu comentario sobre que crees de este producto. ¿Fue de utilidad para ti?</p>
+                    <form  [@scaleAnimation]="'enter'"
+                    style="padding: 15px;position: relative;margin-bottom: 20px;">
+                    <label class="text-firstcolor"><i class="bi bi-person"></i>alias:</label>
+                    <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')" [(ngModel)]="alias"
+                        class="input-outline input" required>
+                    <label class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</label>
+                    <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')"
+                        [(ngModel)]="correo" class="input-outline input" required>
+                    <label class="text-firstcolor"><i class="bi bi-star"></i> calificación:</label>
+                    <app-rating-bar [calif]="calificacion" (emisor)="calificar($event)"></app-rating-bar>
+                    <!-- <input placeholder="1,2,3..." type="number" name="calificacion" [(ngModel)]="calificacion"
+                        class="input-outline input" required> -->
+                    <label class="text-firstcolor"><i class="bi bi-chat-dots"></i> comentario:</label>
+                    <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline"
+                        style="color: var(--firstcolor);min-height: 200px;" required></textarea>
+                    <button class="btn btn-firstcolor" (click)="enviarPosts()" style="width: 100%;"
+                        [disabled]="!validarComentario()">
+                        <i class="bi bi-send"></i> Comentar
+                    </button>
+        
+                </form>
+                </div>
+                <div class="col-sm-8">
+                    <app-posts></app-posts>
                 </div>
             </div>
         </div>

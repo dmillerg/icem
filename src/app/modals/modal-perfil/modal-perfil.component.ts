@@ -132,9 +132,9 @@ export class ModalPerfilComponent implements OnInit {
     this.api.changePassword(formData).subscribe((result) => {
       console.log(result);
       this.mostrarFormPass();
-      this.message.success('', result.message)
+      this.message.success('Notificación', result.message)
     }, (error) => {
-      this.message.error('', error.error.message)
+      this.message.error('Error', error.error.message)
       console.log(error);
     }
     )
@@ -165,12 +165,11 @@ export class ModalPerfilComponent implements OnInit {
     formData.append('telefono', this.usuario.telefono.toString());
     formData.append('rol', this.usuario.rol.toString());
     this.api.updateUsuarioWithOutPass(formData, this.usuario.id).subscribe((result) => {
-      this.message.success('', 'Datos del perfil actualizados satisfactoriamente');
-      this.edit = !this.edit;
+      this.message.success('Notificación', 'Datos del perfil actualizados satisfactoriamente');
       this.storage.store('usuario', this.usuario);
     }, error => {
-      this.message.error('', 'En estos momentos no se puede editar el perfil por favor intentelo mas tarde');
-      this.edit = !this.edit;
+      this.message.error('Error', 'En estos momentos no se puede editar el perfil por favor intentelo mas tarde');
+      // this.edit = !this.edit;
     });
   }
 

@@ -83,13 +83,14 @@ export class ProductosComponent implements OnInit {
     descripcion: '',
   };
 
-  alias: string = '';
-  correo: string = '';
-  comentario: string = '';
-  comentarios: boolean = false;
 
   categoriaId: number = -1;
   position: number = 4;
+
+  alias: string = '';
+  correo: string = '';
+  calificacion: number = 0;
+  comentario: string = '';
 
   constructor(private api: ApiService, public storage: SessionStorageService, private modalService: NgbModal) { }
 
@@ -120,7 +121,20 @@ export class ProductosComponent implements OnInit {
     setTimeout(() => {
       document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
     }, 500)
-
+    if (this.storage.retrieve('usuario')) {
+      let user = this.storage.retrieve('usuario');
+      this.alias = user.usuario;
+      this.correo = user.correo;
+    }
+    this.storage.observe('usuario').subscribe((result) => {
+      if (result) {
+        this.alias = result.usuario;
+        this.correo = result.correo;
+      } else {
+        this.alias = '';
+        this.correo = '';
+      }
+    })
   }
 
   loadProductos() {
@@ -128,6 +142,9 @@ export class ProductosComponent implements OnInit {
       if (result.length > 0) {
         this.productos = result;
         this.productos_all = result;
+        if (this.storage.retrieve('producto')) {
+          this.productos = this.productos_all.filter(e => e.id != this.storage.retrieve('producto').id)
+        }
         // this.storage.clear('producto');
       } else {
         this.productos = [];
@@ -204,5 +221,34 @@ export class ProductosComponent implements OnInit {
 
   abrirComentarios() {
     document.getElementById('posts').classList.toggle('active');
+  }
+
+  calificar(event) {
+    this.calificacion = event
+  }
+
+  validarComentario() {
+    return this.alias.length > 0 && this.correo.length > 0 && this.comentario.length > 0;
+  }
+
+  enviarPosts() {
+    let formData: FormData = new FormData();
+    console.log(this.calificacion);
+    formData.append('alias', this.alias);
+    formData.append('correo', this.correo);
+    formData.append('calificacion', this.calificacion.toString());
+    formData.append('comentario', this.comentario);
+    formData.append('id_producto', this.producto.id.toString());
+    this.api.addPosts(formData).subscribe((result) => {
+      // this.loadPosts();
+      // this.comentar = !this.comentar;
+      this.comentario = ''
+      this.calificacion = 0;
+      let p = this.storage.retrieve('producto');
+      this.storage.store('producto', p);
+      // this.emisor.emit(true);
+    }, (error) => {
+      console.log(error);
+    })
   }
 }

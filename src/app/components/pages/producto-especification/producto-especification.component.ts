@@ -79,7 +79,7 @@ export class ProductoEspecificationComponent implements OnInit {
       this.storage.observe('producto').subscribe((result) => {
         this.loadPost();
         if (result != undefined && result != null) {
-          
+
 
           this.producto = result;
           this.loadImageProducto(this.producto.id);
@@ -190,7 +190,7 @@ export class ProductoEspecificationComponent implements OnInit {
     this.tres_estrellas = 0
     this.dos_estrellas = 0
     this.uno_estrellas = 0
-    this.all_estrellas = 100
+    this.all_estrellas = 0
     this.promedio = 0
 
     this.api.getPosts(this.storage.retrieve('producto').id).subscribe(result => {
@@ -201,7 +201,13 @@ export class ProductoEspecificationComponent implements OnInit {
         this.dos_estrellas = result.filter(e => e.calificacion == 2).length;
         this.uno_estrellas = result.filter(e => e.calificacion == 1).length;
         this.all_estrellas = result.length;
-        this.promedio = Math.round(((this.cinco_estrellas*5+this.cuatro_estrellas*4+this.tres_estrellas*3+this.dos_estrellas*2+this.uno_estrellas*1)/this.all_estrellas)*10)/10
+        this.promedio = Math.round(((this.cinco_estrellas * 5 + this.cuatro_estrellas * 4 + this.tres_estrellas * 3 + this.dos_estrellas * 2 + this.uno_estrellas * 1) / this.all_estrellas) * 10) / 10;
+        this.cinco_estrellas = isNaN((this.cinco_estrellas / this.all_estrellas) * 100) ? 100 : (this.cinco_estrellas / this.all_estrellas) * 100
+        this.cuatro_estrellas = isNaN((this.cuatro_estrellas / this.all_estrellas) * 100) ? 100 : (this.cuatro_estrellas / this.all_estrellas) * 100
+        this.tres_estrellas = isNaN((this.tres_estrellas / this.all_estrellas) * 100) ? 100 : (this.tres_estrellas / this.all_estrellas) * 100
+        this.dos_estrellas = isNaN((this.dos_estrellas / this.all_estrellas) * 100) ? 100 : (this.dos_estrellas / this.all_estrellas) * 100
+        this.uno_estrellas = isNaN((this.uno_estrellas / this.all_estrellas) * 100) ? 100 : (this.uno_estrellas / this.all_estrellas) * 100
+        
       }
     })
   }

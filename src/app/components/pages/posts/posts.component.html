@@ -1,22 +1,22 @@
 <div class="list-posts">
     <h3 class="h3">Comentarios</h3>
     <div class="barra-superior">
-
-        <form id="form" class="form-filter"><input id="input" name="filtro" [(ngModel)]="filtro"
-                (ngModelChange)="filtrar()" class="filter-input" placeholder="Buscar por alias..."></form>
-        <button class="btn" [ngClass]="{ 'btn-firstcolor': comentar , 'btn-outline-firstcolor' : !comentar}"
+        <!-- <button class="btn" [ngClass]="{ 'btn-firstcolor': comentar , 'btn-outline-firstcolor' : !comentar}"
             (click)="comentar=!comentar" style="position: relative;">
             <div class="pista pista-off pista-bottom">Comentar producto</div>
             <i class="bi bi-pen"></i>
-        </button>
-        <button class="btn btn-outline-firstcolor" (click)=" this.emisor.emit();" style="position: relative;">
+        </button> -->
+        <form id="form" class="form-filter"><input id="input" name="filtro" [(ngModel)]="filtro"
+                (ngModelChange)="filtrar()" class="filter-input" placeholder="Buscar por alias..."></form>
+
+        <!-- <button class="btn btn-outline-firstcolor" (click)=" this.emisor.emit();" style="position: relative;">
             <div class="pista pista-off pista-bottom">Cerrar</div>
             <i class="bi bi-x"></i>
-        </button>
+        </button> -->
     </div>
     <div class="bg-firstcolor fila" style="width: 90%;"></div>
     <div class="bg-firstcolor fila" style="width: 80%;"></div>
-    <div class="scroll-mine" style="max-height: 350px;overflow-y: auto;">
+    <div class="scroll-mine">
 
         <form class="box-outline" [@scaleAnimation]="'enter'" *ngIf="comentar"
             style="padding: 15px;position: relative;margin-bottom: 20px;">
@@ -45,13 +45,13 @@
             <div *ngFor="let item of posts" class="burbuja-comentario" style="position: relative;">
                 <h5 class="h5" style="color: black;">
                     <strong>{{item.alias}}</strong>
+                    <p style="font-size: small;">{{item.correo}}</p>
                 </h5>
-                <p>{{item.correo}}</p>
-
-                <p>{{item.comentario}}</p>
                 <div style="width: 100%;height: 50px;">
                     <app-rating-bar [calif]="item.calificacion" [disable]="true"></app-rating-bar>
                 </div>
+                <p>{{item.comentario}}</p>
+
                 <div class="barra-inferior">
                     <!-- <button class="btn btn-firstcolor">Cantidad de respuestas: {{item.respuestas.length}} <i
                             (click)="responderComentario(item)"
@@ -61,7 +61,7 @@
                 <ol class="lista-respuesta" *ngFor="let item2 of item.respuestas">
                     <li>{{item2.respuesta}}</li>
                 </ol>
-                <p style="font-size: small;position: absolute;top: 5px;right: 5px;">
+                <p style="font-size: small;position: absolute;top: 15px;right: 15px;">
                     {{item.fecha | date: 'dd/MM/YYYY'}}</p>
             </div>
             <p class="text-firstcolor text-center" style="font-size: 12px;" *ngIf="posts.length==0">No hay comentarios

@@ -80,17 +80,17 @@ export class PostsComponent implements OnInit {
       let user = this.storage.retrieve('usuario');
       this.alias = user.usuario;
       this.correo = user.correo;
-      this.storage.observe('usuario').subscribe((result) => {
-        if (result) {
-          this.alias = result.usuario;
-          this.correo = result.correo;
-        } else {
-          this.alias = '';
-          this.correo = '';
-        }
-      })
     }
-    
+    this.storage.observe('usuario').subscribe((result) => {
+      if (result) {
+        this.alias = result.usuario;
+        this.correo = result.correo;
+      } else {
+        this.alias = '';
+        this.correo = '';
+      }
+    })
+
     if (this.storage.retrieve('producto')) {
       this.producto = this.storage.retrieve('producto');
       this.loadPosts();
@@ -125,16 +125,17 @@ export class PostsComponent implements OnInit {
   enviarPosts() {
     let formData: FormData = new FormData();
     console.log(this.calificacion);
-
     formData.append('alias', this.alias);
     formData.append('correo', this.correo);
     formData.append('calificacion', this.calificacion.toString());
     formData.append('comentario', this.comentario);
-    this.correo = '';
     formData.append('id_producto', this.producto.id.toString());
     this.api.addPosts(formData).subscribe((result) => {
       this.loadPosts();
       this.comentar = !this.comentar;
+      this.comentario = ''
+      this.calificacion = 0;
+      // this.emisor.emit(true);
     }, (error) => {
       console.log(error);
     })
