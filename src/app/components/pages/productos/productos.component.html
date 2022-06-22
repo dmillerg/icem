@@ -110,21 +110,22 @@
             </div>
             <div class="row mt-4" *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'">
                 <div class="col-sm-4">
+                    <hr>
                     <h3><strong>Comenta</strong></h3>
                     <p class="text">Nos interesa saber que piensas, dejanos tu comentario sobre que crees de este producto. ¿Fue de utilidad para ti?</p>
                     <form  [@scaleAnimation]="'enter'"
-                    style="padding: 15px;position: relative;margin-bottom: 20px;">
-                    <label class="text-firstcolor"><i class="bi bi-person"></i>alias:</label>
+                    style="position: relative;margin-bottom: 20px;">
+                    <label class="text-firstcolor"><i class="bi bi-person-fill"></i>alias:</label>
                     <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')" [(ngModel)]="alias"
                         class="input-outline input" required>
-                    <label class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</label>
+                    <label class="text-firstcolor"><i class="bi bi-envelope-fill"></i> correo:</label>
                     <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')"
                         [(ngModel)]="correo" class="input-outline input" required>
-                    <label class="text-firstcolor"><i class="bi bi-star"></i> calificación:</label>
+                    <label class="text-firstcolor"><i class="bi bi-star-fill"></i> calificación:</label>
                     <app-rating-bar [calif]="calificacion" (emisor)="calificar($event)"></app-rating-bar>
                     <!-- <input placeholder="1,2,3..." type="number" name="calificacion" [(ngModel)]="calificacion"
                         class="input-outline input" required> -->
-                    <label class="text-firstcolor"><i class="bi bi-chat-dots"></i> comentario:</label>
+                    <label class="text-firstcolor"><i class="bi bi-chat-dots-fill"></i> comentario:</label>
                     <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline"
                         style="color: var(--firstcolor);min-height: 200px;" required></textarea>
                     <button class="btn btn-firstcolor" (click)="enviarPosts()" style="width: 100%;"

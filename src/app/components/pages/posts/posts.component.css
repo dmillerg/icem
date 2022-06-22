@@ -47,6 +47,8 @@
 
 .burbuja-comentario h5{
     color: var(--firstcolor);
+    display: flex;
+    flex-direction: column;
 }
 
 h3.h3{

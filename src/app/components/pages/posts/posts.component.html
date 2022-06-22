@@ -43,13 +43,14 @@
         <div [@listAnimation]="posts.length">
 
             <div *ngFor="let item of posts" class="burbuja-comentario" style="position: relative;">
-                <h5 class="h5" style="color: black;">
+                <h5 class="h5">
                     <strong>{{item.alias}}</strong>
-                    <p style="font-size: small;">{{item.correo}}</p>
+                    <label style="font-size: small;">{{item.correo}}</label>
+                    <div style="width: 100%;">
+                        <app-rating-bar [calif]="item.calificacion" [disable]="true"></app-rating-bar>
+                    </div>
                 </h5>
-                <div style="width: 100%;height: 50px;">
-                    <app-rating-bar [calif]="item.calificacion" [disable]="true"></app-rating-bar>
-                </div>
+                
                 <p>{{item.comentario}}</p>
 
                 <div class="barra-inferior">
