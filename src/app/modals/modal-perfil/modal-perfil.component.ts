@@ -130,7 +130,7 @@ export class ModalPerfilComponent implements OnInit {
     formData.append('pass_old', this.pass_old);
     formData.append('new_password', this.new_password);
     this.api.changePassword(formData).subscribe((result) => {
-      console.log(result);
+      console.log('cambio de password success ', result);
       this.mostrarFormPass();
       this.message.success('Notificación', result.message)
     }, (error) => {

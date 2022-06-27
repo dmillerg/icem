@@ -207,9 +207,8 @@ export class ProductoEspecificationComponent implements OnInit {
         this.tres_estrellas = isNaN((this.tres_estrellas / this.all_estrellas) * 100) ? 100 : (this.tres_estrellas / this.all_estrellas) * 100
         this.dos_estrellas = isNaN((this.dos_estrellas / this.all_estrellas) * 100) ? 100 : (this.dos_estrellas / this.all_estrellas) * 100
         this.uno_estrellas = isNaN((this.uno_estrellas / this.all_estrellas) * 100) ? 100 : (this.uno_estrellas / this.all_estrellas) * 100
-        
       }
-    })
+    });
   }
 
 }

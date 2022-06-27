@@ -47,7 +47,7 @@ export class ProductosComponent implements OnInit {
   categorias4: Categoria[] = [];
   posts: any[] = [];
 
-  producto: Producto = {
+  producto: any = {
     id: -1,
     titulo: '',
     descripcion: '',
@@ -62,7 +62,7 @@ export class ProductosComponent implements OnInit {
     usos: '',
     activo: false,
   };
-  producto2: Producto = {
+  producto2: any = {
     id: -1,
     titulo: '',
     descripcion: '',
@@ -244,11 +244,12 @@ export class ProductosComponent implements OnInit {
       // this.comentar = !this.comentar;
       this.comentario = ''
       this.calificacion = 0;
-      let p = this.storage.retrieve('producto');
-      this.storage.store('producto', p);
+      // this.producto.calificacion = this.promedio;
+      this.storage.store('producto', this.producto)
       // this.emisor.emit(true);
     }, (error) => {
       console.log(error);
     })
   }
+
 }

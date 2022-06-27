@@ -36,9 +36,10 @@
 
 
 
-    <section class="especifications" *ngIf="storage.retrieve('producto')" id="especification" [@scaleAnimation]="'enter'">
+    <section class="especifications" *ngIf="storage.retrieve('producto')" id="especification"
+        [@scaleAnimation]="'enter'">
         <div class="container">
-            <div class="row">
+            <div class="row overflow-auto">
                 <div id="producto-especification" class="producto-especification">
                     <div class="barra-superior">
                         <!-- <button class="btn centrado"
@@ -47,9 +48,10 @@
                             <div class="pista pista-off pista-bottom">Ver comentarios</div>
                             <i class="bi bi-chat-square-text"></i>
                         </button> -->
-                        <button class="btn-outline-firstcolor centrado" [disabled]="producto.ficha == null"
+                        <button class="btn-outline-firstcolor centrado" [disabled]="producto && producto.ficha == null"
                             style="position: relative;margin-right: 10px;">
-                            <div class="pista pista-off pista-bottom" *ngIf="producto && producto.ficha != null && producto.ficha.length>0">
+                            <div class="pista pista-off pista-bottom"
+                                *ngIf="producto && producto.ficha != null && producto.ficha.length>0">
                                 Descargar ficha técnica</div>
                             <i class="bi bi-journal-text"></i>
                         </button>
@@ -60,7 +62,7 @@
                     <app-posts (emisor)="abrirComentarios()"></app-posts>
                 </div>
             </div>
-           
+
         </div>
     </section>
 
@@ -92,9 +94,11 @@
     </section> -->
 
     <section class="products animado">
-        <div class="titulo-categorias"  >
-            <h3 class="text-section" *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'">Quizas también pueda interesarte</h3>
-            <h3 class="text-section" *ngIf="!storage.retrieve('producto')" [@scaleAnimation]="'enter'">Productos de la categoría {{storage.retrieve('categoria').nombre}}</h3>
+        <div class="titulo-categorias">
+            <h3 class="text-section" *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'">Quizas también
+                pueda interesarte</h3>
+            <h3 class="text-section" *ngIf="!storage.retrieve('producto')" [@scaleAnimation]="'enter'">Productos de la
+                categoría {{storage.retrieve('categoria').nombre}}</h3>
         </div>
 
 
@@ -103,37 +107,38 @@
         <div class="container">
             <div class="row" [@listAnimation]="productos.length">
                 <div *ngFor="let item of productos" class="col-sm-6 col-md-4 col-lg-3" [id]="item.id">
-                    <app-producto [producto]="item"
-                        (emisor)="swicthEspecification($event, especification)">
+                    <app-producto [producto]="item" (emisor)="swicthEspecification($event, especification)">
                     </app-producto>
                 </div>
             </div>
             <div class="row mt-4" *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'">
                 <div class="col-sm-4">
+           
                     <hr>
-                    <h3><strong>Comenta</strong></h3>
-                    <p class="text">Nos interesa saber que piensas, dejanos tu comentario sobre que crees de este producto. ¿Fue de utilidad para ti?</p>
-                    <form  [@scaleAnimation]="'enter'"
-                    style="position: relative;margin-bottom: 20px;">
-                    <label class="text-firstcolor"><i class="bi bi-person-fill"></i>alias:</label>
-                    <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')" [(ngModel)]="alias"
-                        class="input-outline input" required>
-                    <label class="text-firstcolor"><i class="bi bi-envelope-fill"></i> correo:</label>
-                    <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')"
-                        [(ngModel)]="correo" class="input-outline input" required>
-                    <label class="text-firstcolor"><i class="bi bi-star-fill"></i> calificación:</label>
-                    <app-rating-bar [calif]="calificacion" (emisor)="calificar($event)"></app-rating-bar>
-                    <!-- <input placeholder="1,2,3..." type="number" name="calificacion" [(ngModel)]="calificacion"
+                    <h3><strong>Déjanos saber que tal te fue:</strong></h3>
+                    <p class="text">Nos interesa saber que piensas, dejanos tu opinión acerca de este producto. ¿Fue de
+                        utilidad para ti?</p>
+                    <form [@scaleAnimation]="'enter'" style="position: relative;margin-bottom: 20px;">
+                        <label class="text-firstcolor"><i class="bi bi-person-fill"></i>alias:</label>
+                        <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')"
+                            [(ngModel)]="alias" class="input-outline input" required>
+                        <label class="text-firstcolor"><i class="bi bi-envelope-fill"></i> correo:</label>
+                        <input placeholder="correo" type="email" name="correo" [disabled]="storage.retrieve('usuario')"
+                            [(ngModel)]="correo" class="input-outline input" required>
+                        <label class="text-firstcolor"><i class="bi bi-star-fill"></i> calificación:</label>
+                        <app-rating-bar [calif]="calificacion" (emisor)="calificar($event)"></app-rating-bar>
+                        <!-- <input placeholder="1,2,3..." type="number" name="calificacion" [(ngModel)]="calificacion"
                         class="input-outline input" required> -->
-                    <label class="text-firstcolor"><i class="bi bi-chat-dots-fill"></i> comentario:</label>
-                    <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario" class="input-outline"
-                        style="color: var(--firstcolor);min-height: 200px;" required></textarea>
-                    <button class="btn btn-firstcolor" (click)="enviarPosts()" style="width: 100%;"
-                        [disabled]="!validarComentario()">
-                        <i class="bi bi-send"></i> Comentar
-                    </button>
-        
-                </form>
+                        <label class="text-firstcolor"><i class="bi bi-chat-dots-fill"></i> comentario:</label>
+                        <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario"
+                            class="input-outline" style="color: var(--firstcolor);min-height: 200px;"
+                            required></textarea>
+                        <button class="btn btn-firstcolor" (click)="enviarPosts()" style="width: 100%;"
+                            [disabled]="!validarComentario()">
+                            <i class="bi bi-send"></i> Opinar
+                        </button>
+
+                    </form>
                 </div>
                 <div class="col-sm-8">
                     <app-posts></app-posts>

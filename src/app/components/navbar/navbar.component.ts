@@ -74,7 +74,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.total_pagar = 0;
         this.carrito.forEach(i => {
           this.total_pagar += i.cantidad * i.precio;
-        })
+        });
+        this.total_pagar = Math.round(this.total_pagar * 100)/100;
         this.cargarTiempoRestante();
       }else{
         this.carrito = []

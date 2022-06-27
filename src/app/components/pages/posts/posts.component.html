@@ -1,5 +1,5 @@
 <div class="list-posts">
-    <h3 class="h3">Comentarios</h3>
+    <h3 class="h3">Opiniones</h3>
     <div class="barra-superior">
         <!-- <button class="btn" [ngClass]="{ 'btn-firstcolor': comentar , 'btn-outline-firstcolor' : !comentar}"
             (click)="comentar=!comentar" style="position: relative;">
@@ -44,13 +44,16 @@
 
             <div *ngFor="let item of posts" class="burbuja-comentario" style="position: relative;">
                 <h5 class="h5">
+                    <div class="user-icon">
+                        <i class="bi bi-person"></i>
+                    </div>
                     <strong>{{item.alias}}</strong>
                     <label style="font-size: small;">{{item.correo}}</label>
-                    <div style="width: 100%;">
+                    <div style="width: 100%;font-size: 12px;">
                         <app-rating-bar [calif]="item.calificacion" [disable]="true"></app-rating-bar>
                     </div>
                 </h5>
-                
+
                 <p>{{item.comentario}}</p>
 
                 <div class="barra-inferior">
@@ -65,7 +68,7 @@
                 <p style="font-size: small;position: absolute;top: 15px;right: 15px;">
                     {{item.fecha | date: 'dd/MM/YYYY'}}</p>
             </div>
-            <p class="text-firstcolor text-center" style="font-size: 12px;" *ngIf="posts.length==0">No hay comentarios
+            <p class="text-firstcolor text-center" style="font-size: 12px;" *ngIf="posts.length==0">No hay opiniones
                 acerca de este
                 producto</p>
         </div>
