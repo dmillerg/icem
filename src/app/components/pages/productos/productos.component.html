@@ -105,15 +105,23 @@
         <h3 class="number text-section text-center" *ngIf="productos.length==0"><strong>No hay productos en esta
                 categoria</strong></h3>
         <div class="container">
-            <div class="row" [@listAnimation]="productos.length">
-                <div *ngFor="let item of productos" class="col-sm-6 col-md-4 col-lg-3" [id]="item.id">
-                    <app-producto [producto]="item" (emisor)="swicthEspecification($event, especification)">
-                    </app-producto>
+            <div style="width: 100%;position: relative;">
+                <div class="productos-similares scroll-mine" [@listAnimation]="productos.length">
+                    <div id="left-top" style="width: 50px;"></div>
+                    <div *ngFor="let item of productos; let i= index" class="col-sm-6 col-md-4 col-lg-3" [id]="i+'scroll'">
+                        <app-producto [producto]="item" (emisor)="swicthEspecification($event, especification)">
+                        </app-producto>
+                    </div>
+                    <div id="right-top" style="width: 50px;"></div>
                 </div>
+
+                <button class="btn-scroll btn-prev" (click)="scrollPrevNext('prev')"><i class="bi bi-chevron-left"></i></button>
+                <button class="btn-scroll btn-right" (click)="scrollPrevNext('next')"><i class="bi bi-chevron-right"></i></button>
             </div>
+
             <div class="row mt-4" *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'">
                 <div class="col-sm-4">
-           
+
                     <hr>
                     <h3><strong>Déjanos saber que tal te fue:</strong></h3>
                     <p class="text">Nos interesa saber que piensas, dejanos tu opinión acerca de este producto. ¿Fue de

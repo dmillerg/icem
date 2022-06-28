@@ -92,6 +92,9 @@ export class ProductosComponent implements OnInit {
   calificacion: number = 0;
   comentario: string = '';
 
+  positionProductsLeft: number = -1;
+  positionProductsRight: number = -1;
+
   constructor(private api: ApiService, public storage: SessionStorageService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -113,14 +116,15 @@ export class ProductosComponent implements OnInit {
       });
     }
     if (this.storage.retrieve('producto')) {
+      setTimeout(() => {
+        document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
+      }, 500)
       this.producto = this.storage.retrieve('producto');
       this.storage.observe('producto').subscribe((result) => {
         this.producto = result;
       });
     }
-    setTimeout(() => {
-      document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
-    }, 500)
+  
     if (this.storage.retrieve('usuario')) {
       let user = this.storage.retrieve('usuario');
       this.alias = user.usuario;
@@ -144,7 +148,10 @@ export class ProductosComponent implements OnInit {
         this.productos_all = result;
         if (this.storage.retrieve('producto')) {
           this.productos = this.productos_all.filter(e => e.id != this.storage.retrieve('producto').id)
+
         }
+        this.positionProductsLeft = 4;
+        this.positionProductsRight = 0;
         // this.storage.clear('producto');
       } else {
         this.productos = [];
@@ -252,4 +259,19 @@ export class ProductosComponent implements OnInit {
     })
   }
 
+  scrollPrevNext(action: string) {
+    console.log(this.positionProductsLeft, this.positionProductsRight);
+    if (action == 'next') {
+      let p = this.positionProductsLeft + 1;
+      this.positionProductsLeft = (p < this.productos.length) ? p : this.positionProductsLeft;
+      this.positionProductsRight = p < this.productos.length ? this.positionProductsRight + 1 : this.positionProductsRight;
+      document.getElementById(this.positionProductsLeft.toString() + 'scroll').scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    } else {
+      let p = this.positionProductsRight - 1;
+      this.positionProductsRight = (p >= 0) ? p : this.positionProductsRight;
+      this.positionProductsLeft = p >= 0 ? this.positionProductsLeft - 1 : this.positionProductsLeft;
+      document.getElementById(this.positionProductsRight.toString() + 'scroll').scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    }
+    console.log(this.positionProductsLeft, this.positionProductsRight);
+  }
 }

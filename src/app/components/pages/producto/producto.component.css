@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 0.5em;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
+    box-shadow: 0 5px 5px 0 var(--firstcolor-section);
 }
 
 /* .card-mine.active{

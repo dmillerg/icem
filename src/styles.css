@@ -65,6 +65,7 @@ body {
   --firstcolor: rgb(59, 65, 142);
   --firstcolor-hover: rgb(94, 102, 216);
   --firstcolor-section: rgba(59, 64, 142, 0.281);
+  --firstcolor-section2: rgba(59, 64, 142, 0.11);
   --color-gray: #777;
   --alertcolor: #9d0208;
   --theme-color: rgb(255, 255, 255);

@@ -143,3 +143,16 @@
 .input:placeholder{
     color: var(--firstcolor);
 }
+
+.btn-catalogo{
+    color: var(--firstcolor);
+    background-color: var(--theme-color);
+    border-radius: 0.2em;
+    outline: none;
+    transition: all .3s ease;
+}
+
+.btn-catalogo:hover{
+    transform: scale(1.1);
+    transition: all .3s ease;
+}

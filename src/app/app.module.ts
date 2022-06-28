@@ -69,6 +69,7 @@ import { ProductosComponent } from './components/pages/productos/productos.compo
 import { PostsComponent } from './components/pages/posts/posts.component';
 import { ProductoEspecificationComponent } from './components/pages/producto-especification/producto-especification.component';
 import { RatingBarComponent } from './components/rating-bar/rating-bar.component';
+import { ContactenosComponent } from './components/pages/contactenos/contactenos.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -129,6 +130,7 @@ import { RatingBarComponent } from './components/rating-bar/rating-bar.component
     PostsComponent,
     ProductoEspecificationComponent,
     RatingBarComponent,
+    ContactenosComponent,
   ],
   imports: [
     BrowserModule,
