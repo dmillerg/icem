@@ -19,6 +19,7 @@ import { Pedido } from '../models/pedido';
 import { Configuracion } from '../models/configuracion';
 import { environment } from 'src/environments/environment';
 import { Ventas } from '../models/ventas';
+import { Mensaje } from '../models/mensaje';
 @Injectable({
   providedIn: 'root',
 })
@@ -205,10 +206,10 @@ export class ApiService {
    */
   getNoticias(limit: number = 0, search: string = ''): Observable<Noticia[]> {
     console.log('ee');
-    
+
     const headers = { 'content-type': 'application/json' };
     let direccion = this.url + 'noticias/' + limit.toString();
-    return this.http.get<Noticia[]>(direccion, { headers: headers, params: {search: search} });
+    return this.http.get<Noticia[]>(direccion, { headers: headers, params: { search: search } });
   }
 
   /**
@@ -1103,14 +1104,46 @@ export class ApiService {
     return this.http.delete(direccion, { headers: headers, params: params });
   }
 
-/**
- * Verifica que el usuario este online
- * @param id del usuario
- * @returns 
- */
-  getUserOnlineByID(id: number): Observable<any>{
-    let direccion = this.url + 'useronline/'+id.toString();
+  /**
+   * Verifica que el usuario este online
+   * @param id del usuario
+   * @returns 
+   */
+  getUserOnlineByID(id: number): Observable<any> {
+    let direccion = this.url + 'useronline/' + id.toString();
     const headers = { 'content-type': 'application/json' };
     return this.http.get(direccion);
+  }
+
+  /**
+   * Agrega un mensaje
+   * @param formData datos del mensaje del usuario
+   * @returns 
+   */
+  addMensaje(formData: FormData) {
+    let direccion = this.url + 'mensajes'
+    return this.http.post(direccion, formData);
+  }
+
+  /**
+   * Devuelve todos los mensajes 
+   * @returns 
+   */
+  getMensajes(): Observable<Mensaje[]> {
+    let direccion = this.url + 'mensajes'
+    const headers = { 'content-type': 'application/json' };
+    return this.http.get<Mensaje[]>(direccion, { headers: headers, params: { token: this.storage.retrieve('usuario').token } });
+  }
+
+  /**
+   * Actualiza un mensaje
+   * @param id del mensaje
+   * @param formData datos
+   * @returns 
+   */
+  updateMensaje(id: number = -1, formData: FormData) {
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'mensajes/' + id.toString();
+    return this.http.put(direccion, formData);
   }
 }
