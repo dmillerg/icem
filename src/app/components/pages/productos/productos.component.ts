@@ -260,7 +260,6 @@ export class ProductosComponent implements OnInit {
   }
 
   scrollPrevNext(action: string) {
-    console.log(this.positionProductsLeft, this.positionProductsRight);
     if (action == 'next') {
       let p = this.positionProductsLeft + 1;
       this.positionProductsLeft = (p < this.productos.length) ? p : this.positionProductsLeft;
@@ -272,6 +271,5 @@ export class ProductosComponent implements OnInit {
       this.positionProductsLeft = p >= 0 ? this.positionProductsLeft - 1 : this.positionProductsLeft;
       document.getElementById(this.positionProductsRight.toString() + 'scroll').scrollIntoView({ block: 'nearest', behavior: 'smooth' })
     }
-    console.log(this.positionProductsLeft, this.positionProductsRight);
   }
 }

@@ -1,4 +1,4 @@
-<div class="card card-mine" [@scaleAnimation]="'enter'">
+<div class="card shadow-sm d-flex flex-column justify-content-center align-items-center card-mine" [@scaleAnimation]="'enter'">
     <h4 class="h4" *ngIf="producto.disponibilidad==0" [@scaleAnimation]="'enter'">Agotado</h4>
     <h4 class="h4-new" *ngIf="date.getDate()==today.getDate() && date.getMonth()==today.getMonth() && date.getFullYear()==today.getFullYear() && producto.disponibilidad!=0" [@scaleAnimation]="'enter'">Nuevo</h4>
 
