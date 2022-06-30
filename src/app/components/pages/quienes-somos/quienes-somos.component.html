@@ -58,30 +58,12 @@
   </div>
 </section>
 
-<section>
-  <div class="container p-4">
-    <div class="row animado" id="miembros">
-      <div class="col-sm-12" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
-        <img src="assets/empresa-miembros-rem.png" class="img-fluid svg-shadow">
-        <h1 class="display-2 text-firstcolor"><strong>Miembros del equipo</strong> </h1>
-      </div>
-    </div>
-
-    <div class="row animado centrado" [@listAnimation]="integrantes.length">
-      <div *ngFor="let item of integrantes" class="col-sm-3">
-        <app-quienes-item [quienes]="item"></app-quienes-item>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section style="background-color: var(--firstcolor);">
-  <div class="container p-4">
+  <div class="container p-4"  id="actividades">
     <div class="row">
       <div class="col-sm-5 d-flex flex-column justify-content-center align-items-center">
         <img src="assets/empresa-actividades-rem.png" class="img-fluid svg-shadow">
-        <h5 class="display-4 text-white text-center" style="transform: translateY(-50px);"><strong>Las actividades secundarias y de apoyo aprobadas por Resolución 280 del año 2017, dictada
-          por el Director General, son:</strong></h5>
+        <h5 class="display-4 text-white text-center" style="transform: translateY(-50px);"><strong>Actividades secundarias y de apoyo aprobadas por Resolución 280 del año 2017</strong></h5>
       </div>
       <div class="col-sm-7 d-flex flex-column justify-content-center align-items-center">
         <ul style="list-style: none;" class="text-white">
@@ -115,6 +97,25 @@
 </section>
 
 <section>
+  <div class="container p-4">
+    <div class="row animado" id="miembros">
+      <div class="col-sm-12" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
+        <img src="assets/empresa-miembros-rem.png" class="img-fluid svg-shadow">
+        <h1 class="display-2 text-firstcolor"><strong>Miembros del equipo</strong> </h1>
+      </div>
+    </div>
+
+    <div class="row animado centrado" [@listAnimation]="integrantes.length">
+      <div *ngFor="let item of integrantes" class="col-sm-3">
+        <app-quienes-item [quienes]="item"></app-quienes-item>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- <section>
   <div class="container p-4">
     <div class="row animado" id="actividades">
       <div class="row">
@@ -159,7 +160,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <section>
   <app-contactenos></app-contactenos>
