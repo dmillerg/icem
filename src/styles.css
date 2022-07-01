@@ -140,6 +140,20 @@ body {
   cursor: not-allowed;
 }
 
+.btn-outline-secondary{
+  padding: 15px;
+  background-color: var(--theme-color);
+  color: var(--firstcolor);
+  border: 1px var(--firstcolor) solid;
+  transition: all .3s ease;
+}
+
+.btn-outline-secondary:hover{
+  color: var(--theme-color);
+  background-color: var(--firstcolor);
+  transition: all .3s ease-in;
+}
+
 .text-firstcolor {
   color: var(--firstcolor);
 }

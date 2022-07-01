@@ -1,13 +1,12 @@
 .card-mine {
-    width: 95%;
-    /* max-width: 18rem;
-    min-width: 18rem; */
+    width: 100%;
+    /* /* max-width: 18rem; */
+    min-width: 18rem; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 0.5em;
-    box-shadow: 0 8px 32px 0 var(--firstcolor-section);
 }
 
 /* .card-mine.active{
@@ -16,7 +15,7 @@
     box-shadow: 0 0 32px 0 var(--firstcolor-hover);
 } */
 
-.card-mine:hover{
+.card-mine:hover {
     transform: scale(1.05);
     transition: all .3s ease;
 
@@ -25,41 +24,38 @@
 
 .title-text {
     width: 100%;
-    word-wrap: break-word;
     text-transform: uppercase;
-    background-color: var(--firstcolor);
-    padding: 10px;
-    color: var(--theme-color);
-    border-top-left-radius: 0.2em;
-    border-top-right-radius: 0.2em;
-    font-size: 150%;
-    padding-bottom: 60px;
-    display: block; /* Fallback for non-webkit */
+    padding-left: 10px;
+    padding-right: 10px;
+    word-wrap: break-word;
+    /* overflow: hidden; */
+    display: block;
+    /* Fallback for non-webkit */
     display: -webkit-box;
-    height: 3.2em; /* Fallback for non-webkit, line-height * 2 */
-    line-height: 1.4em;
-    -webkit-line-clamp: 2; /* if you change this, make sure to change the fallback line-height and height */
+    max-height: 2.6em;
+    /* Fallback for non-webkit, line-height * 2 */
+    line-height: 1.3em;
+    -webkit-line-clamp: 2;
+    /* if you change this, make sure to change the fallback line-height and height */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.btn-firstcolor{
-    padding: 15px;
-    box-shadow: 0 5px 15px 0 var(--firstcolor);
-    transform: translateY(20px);
-}
 
 .descripcion-text {
     font-size: small;
     /* max-height: 200px; */
     word-wrap: break-word;
     /* overflow: hidden; */
-    display: block; /* Fallback for non-webkit */
+    display: block;
+    /* Fallback for non-webkit */
     display: -webkit-box;
-    height: 3.9em; /* Fallback for non-webkit, line-height * 2 */
+    height: 3.9em;
+    /* Fallback for non-webkit, line-height * 2 */
     line-height: 1.3em;
-    -webkit-line-clamp: 3; /* if you change this, make sure to change the fallback line-height and height */
+    -webkit-line-clamp: 3;
+    /* if you change this, make sure to change the fallback line-height and height */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -74,19 +70,17 @@
 .linea {
     height: 5px;
     width: 90%;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .linea-active {
     height: 100%;
-    background: linear-gradient(-90deg, rgb(59, 65, 142) 70%, black );
+    background: linear-gradient(-90deg, rgb(59, 65, 142) 70%, black);
 }
 
 .image {
     margin-top: 30px;
     width: 90%;
-   
+
     margin-left: 0;
     /* box-shadow: 0 8px 2px 0 var(--firstcolor-hover); */
 }
@@ -96,7 +90,7 @@
     margin-bottom: 10px;
 }
 
-.card-mine .h4{
+.card-mine .h4 {
     position: absolute;
     right: -5px;
     top: 10px;
@@ -110,7 +104,7 @@
     transition: all .3s ease-in-out;
 }
 
-.card-mine .h4-new{
+.card-mine .h4-new {
     position: absolute;
     left: -20px;
     box-shadow: 0 5px 10px 0 var(--alertcolor);
@@ -123,14 +117,14 @@
     transition: all .3s ease-in-out;
 }
 
-.img-backlogo-bottom-rigth{
+.img-backlogo-bottom-rigth {
     position: absolute;
     bottom: 0;
     right: 0;
     width: 20%;
 }
 
-.img-backlogo-top-left{
+.img-backlogo-top-left {
     position: absolute;
     top: 0;
     left: 0;

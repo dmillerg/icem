@@ -1,6 +1,6 @@
 <section>
     <div class="container" [@scaleAnimation]="'enter'">
-        <div class="row contenedor-cards">
+        <div class="row contenedor-cards shadow-sm">
             <div class="card card-mine">
                 <div class="text-center text-firstcolor" style="
             width: 100%;
@@ -120,34 +120,28 @@
     </div>
 </section>
 
+<h1 class="title-section title-section-right text-section animado pb-5">
+    <strong>Noticia más reciente...</strong>
+</h1>
 
-<section>
-    <h1 class="title-section title-section-right text-section animado">
-        <strong>Noticia más reciente...</strong>
-    </h1>
+<section class="mt-4" style="background-color: #e1e1e1;">
+   
 
     <!-- Noticia mas reciente -->
-    <div class="container animado" style="width: 100%; padding-block: 20px;">
-        <div class="row">
+    <div class="container animado p-5">
+        <div class="row d-flex flex-row justify-content-center align-items-center">
             <div class="col-sm-4 text-start container-image">
                 <img class="logo text-white text-center svg-shadow" [src]="noticia.logo" [alt]="noticia.fuente"
                     style="background-color: --firstcolor;">
                 <img class="imagen2 img-fluid noticia-image text-white text-center"
                     style="background: url('assets/icon-icem-blue.png');" [alt]="noticia.titulo" [src]="img_noti" />
             </div>
-            <div class="col-sm-8" style="
-        border-radius: 0.5em;
-        box-shadow: 0 8px 32px 0 var(--firstcolor-section);
-        background-color: #e1e1e1;
-        padding-inline: 12%;
-        padding-block: 4%;
-        margin-block: 30px;
-      ">
-                <h3>
+            <div class="col-sm-8 px-5">
+                <h1 class="display-4 text-firstcolor">
                     <strong>{{ titulo_noti }}</strong>
-                </h3>
-                <p class="text">{{ desc_noti }}</p>
-                <button class="btn btn-firstcolor" style="padding: 15px;" (click)="verMas(noticia)">Ver mas</button>
+                </h1>
+                <h3 class="text">{{ desc_noti }}</h3>
+                <button class="btn btn-firstcolor p-3 w-75" (click)="verMas(noticia)">Ver mas</button>
             </div>
         </div>
     </div>
@@ -160,7 +154,7 @@
             <h1 class="title-section2 text-section"><strong>Productos recientes...</strong></h1>
         </div>
         <div class="row p-4"></div>
-        <div *ngIf="productos_recientes.length>0" class="row" style="justify-content: center;"
+        <div *ngIf="productos_recientes.length>0" class="row d-flex flex-row justify-content-center align-items-center"
             [@listAnimation]="productos_recientes.length">
             <div *ngFor="let item of productos_recientes" class="col-sm-6 col-md-4 col-lg-3">
                 <app-producto-home [producto]="item" [direccion]="item.direccion" [cont]="item.cont">

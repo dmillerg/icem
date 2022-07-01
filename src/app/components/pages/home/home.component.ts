@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.desc_noti = result[0].descripcion;
         this.noticia = result[0];
         this.noticia.logo = this.noticia.logo==null?'assets/icon-icem-gray.png':this.noticia.logo;
-        result[0].imagen.includes('http') ?result[0].imagen : this.cargarImagen(result[0]);
+        this.img_noti =result[0].imagen.includes('http') ?result[0].imagen : this.cargarImagen(result[0]);
       }
     });
   }
