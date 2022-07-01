@@ -1,6 +1,6 @@
 <section>
     <div class="container" [@scaleAnimation]="'enter'">
-        <div class="row contenedor-cards shadow-sm">
+        <div class="row contenedor-cards">
             <div class="card card-mine">
                 <div class="text-center text-firstcolor" style="
             width: 100%;
@@ -71,7 +71,7 @@
     </div>
 
     <div class="container animado">
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleCaptions" class="carousel slide  shadow-sm" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <div style="border-radius: 100%;background-color:white;width: 10px;height: 10px;border: 1px solid rgba(255, 255, 255, 0.692)"
                     data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true">
@@ -174,7 +174,7 @@
                 <div class="p-4"></div>
                 <h1 class="display-2"> No encontraste lo que buscas </h1>
                 <h5 class="h5">Consulta nuestro catálogo para encontrar más fácilmente lo que estas buscando</h5>
-                <button class="btn-catalogo p-2 mt-3">Ver catálogo</button>
+                <button class="btn-catalogo px-4 p-3 mt-3" routerLink="/productos">Ver catálogo</button>
                 <div class="p-4"></div>
             </div>
         </div>

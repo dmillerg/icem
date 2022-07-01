@@ -102,8 +102,8 @@
         </div>
 
 
-        <h3 class="number text-section text-center" *ngIf="productos.length==0"><strong>No hay productos en esta
-                categoria</strong></h3>
+        <h3 class="number text-section text-center" *ngIf="productos.length==0">No hay productos en esta
+                categoria</h3>
         <div class="container">
             <div style="width: 100%;position: relative;">
                 <div class="productos-similares scroll-mine" [@listAnimation]="productos.length">
@@ -115,8 +115,8 @@
                     <div id="right-top" style="width: 50px;"></div>
                 </div>
 
-                <button class="btn-scroll btn-prev" (click)="scrollPrevNext('prev')"><i class="bi bi-chevron-left"></i></button>
-                <button class="btn-scroll btn-right" (click)="scrollPrevNext('next')"><i class="bi bi-chevron-right"></i></button>
+                <button *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'" class="btn-scroll btn-prev" (click)="scrollPrevNext('prev')"><i class="bi bi-chevron-left"></i></button>
+                <button *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'" class="btn-scroll btn-right" (click)="scrollPrevNext('next')"><i class="bi bi-chevron-right"></i></button>
             </div>
 
             <div class="row mt-4" *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'">

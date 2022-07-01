@@ -19,20 +19,19 @@
 
 .title-text {
     width: 100%;
-    word-wrap: break-word;
     text-transform: uppercase;
-    background-color: var(--firstcolor);
-    padding: 10px;
-    color: var(--theme-color);
-    border-top-left-radius: 0.2em;
-    border-top-right-radius: 0.2em;
-    font-size: 150%;
-    padding-bottom: 60px;
-    display: block; /* Fallback for non-webkit */
+    padding-left: 10px;
+    padding-right: 10px;
+    word-wrap: break-word;
+    /* overflow: hidden; */
+    display: block;
+    /* Fallback for non-webkit */
     display: -webkit-box;
-    height: 3.2em; /* Fallback for non-webkit, line-height * 2 */
-    line-height: 1.4em;
-    -webkit-line-clamp: 2; /* if you change this, make sure to change the fallback line-height and height */
+    max-height: 2.6em;
+    /* Fallback for non-webkit, line-height * 2 */
+    line-height: 1.3em;
+    -webkit-line-clamp: 2;
+    /* if you change this, make sure to change the fallback line-height and height */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

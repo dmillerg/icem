@@ -1,17 +1,15 @@
 <div class="card shadow-sm d-flex flex-column justify-content-center align-items-center card-mine" [@scaleAnimation]="'enter'">
     <h4 class="h4" *ngIf="producto.disponibilidad==0" [@scaleAnimation]="'enter'">Agotado</h4>
     <h4 class="h4-new" *ngIf="date.getDate()==today.getDate() && date.getMonth()==today.getMonth() && date.getFullYear()==today.getFullYear() && producto.disponibilidad!=0" [@scaleAnimation]="'enter'">Nuevo</h4>
-
-    <div class="title-text text-start">
-        <!-- <h1 class="number text-section"><strong>{{contador}}</strong></h1> -->
-       <strong>{{producto.titulo}}</strong>
-    </div>
    
     <img class="img-backlogo-bottom-rigth" src="assets/logo-mitad-left.png">
     <div class="img">
-        <img [src]="producto.url" class="img-fluid" style="max-height: 200px;">
+        <img [src]="producto.url" class="img-fluid w-100">
         
     </div>
+    <h1 class="title-text text-start text-firstcolor">
+        <strong>{{producto.titulo}}</strong>
+      </h1>
     <div class="row linea">
         <div class="col-sm-6 linea-active bg-firstcolor"></div>
         <div class="col-sm-6"></div>
@@ -37,6 +35,6 @@
         </div>
     </div> -->
     <div class="row p-1"></div>
-    <button class="btn btn-firstcolor" (click)="verMas(producto)"
+    <button class="btn btn-outline-secondary mb-2 shadow-sm" style="width: 90%;" (click)="verMas(producto)"
             >Ver mas</button>
 </div>

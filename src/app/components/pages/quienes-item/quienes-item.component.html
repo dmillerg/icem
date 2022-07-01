@@ -1,7 +1,9 @@
-<div style="width: 100%;" class="contenedor">
-    <img [src]="src" class="img-fluid img-cargo" style="font-size: small;" alt="...">
-    <div class="card-body text-center">
-        <h5 class="card-title">{{quienes.nombre}}</h5>
-        <p class="card-text text">{{quienes.cargo}}</p>
+<div class="row w-100 d-flex flex-row justify-content-center align-items-center">
+    <div class="col-sm-5">
+        <img [src]="src" class="img-fluid" style="font-size: small;" width="300px" alt="...">
+    </div>
+    <div class="col-sm-7 d-flex flex-column align-items-center">
+        <h5 class="display-1">{{quienes.nombre}}</h5>
+        <h1 class="h1 text">{{quienes.cargo}}</h1>
     </div>
 </div>
