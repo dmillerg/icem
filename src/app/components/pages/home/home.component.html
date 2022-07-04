@@ -156,7 +156,7 @@
         <div class="row p-4"></div>
         <div *ngIf="productos_recientes.length>0" class="row d-flex flex-row justify-content-center align-items-center"
             [@listAnimation]="productos_recientes.length">
-            <div *ngFor="let item of productos_recientes" class="col-sm-6 col-md-4 col-lg-3">
+            <div *ngFor="let item of productos_recientes" class="col-sm-6 col-md-5 col-lg-3">
                 <app-producto-home [producto]="item" [direccion]="item.direccion" [cont]="item.cont">
                 </app-producto-home>
             </div>

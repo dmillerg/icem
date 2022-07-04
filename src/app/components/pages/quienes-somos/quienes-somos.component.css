@@ -75,3 +75,23 @@ p{
 
 }
 
+
+.carousel-indicators li {
+  width : 20px!important;
+  height: 20px !important;
+  border-radius: 50% !important
+}
+
+.carousel-indicators li {
+  width : 20px!important;
+  background-color: black;
+  height: 20px !important;
+  border-radius: 50% !important
+}
+
+.carousel-indicators .active {
+  width : 20px!important;
+  background-color: yellow;
+  height: 20px !important;
+  border-radius: 50% !important
+}

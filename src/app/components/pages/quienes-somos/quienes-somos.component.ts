@@ -1,5 +1,6 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Quienes } from 'src/app/models/quienes';
 import { ApiService } from 'src/app/services/api.service';
@@ -35,9 +36,21 @@ const listAnimation = trigger('listAnimation', [
 })
 export class QuienesSomosComponent implements OnInit {
   integrantes: Quienes[] = [];
+  integrante: Quienes  = {
+    id: -1,
+    nombre: '',
+    cargo: '',
+    imagen: '',
+    orden: 0,
+  };
 
   video: string = '';
-  constructor(private api: ApiService, private storage: SessionStorageService) { }
+  constructor(private api: ApiService, private storage: SessionStorageService,config: NgbCarouselConfig ) {
+    config.interval = 3000;
+    config.showNavigationIndicators = true;
+    config.keyboard = true;
+    config.pauseOnHover = true;
+   }
 
   ngOnInit(): void {
     this.cargaInicial();
@@ -56,7 +69,9 @@ export class QuienesSomosComponent implements OnInit {
 
   loadQuienes() {
     this.api.getQuienes().subscribe((result) => {
-      this.integrantes = result;
+      // this.integrante = result[0];
+      // this.integrantes = result.filter(e=>e.id != this.integrante.id);
+      this.integrantes = result
     })
   }
 
@@ -92,4 +107,5 @@ export class QuienesSomosComponent implements OnInit {
     
     target.scrollIntoView({behavior: 'smooth'});
   }
+
 }

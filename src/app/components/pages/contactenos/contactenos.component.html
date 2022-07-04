@@ -1,10 +1,9 @@
 <div class="container">
     <div class="row  flex-nowrap p-4">
-        <div
-            class="d-sm-none d-md-none d-lg-flex col-lg-4 col-sm-0 col-md-0 flex-column justify-content-center align-items-center">
+        <div class="d-sm-none d-md-none d-lg-flex col-lg-4  flex-lg-column justify-content-center align-items-center">
             <img src="assets/contactus.png" alt="" class="img-fluid svg-shadow">
         </div>
-        <div class="col-lg-8 col-md-12 col-sm-12 d-flex flex-column justify-content-center align-items-center">
+        <div class="col-lg-8 d-flex flex-column justify-content-center align-items-center">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
@@ -20,10 +19,6 @@
                             <label class="text-firstcolor"><i class="bi bi-envelope"></i> asunto:</label>
                             <input placeholder="asunto" type="text" name="asunto" [(ngModel)]="asunto"
                                 class="input-outline input" required>
-                            <!-- <label class="text-firstcolor"><i class="bi bi-star"></i> calificación:</label>
-                        <app-rating-bar [calif]="calificacion" (emisor)="calificar($event)"></app-rating-bar> -->
-                            <!-- <input placeholder="1,2,3..." type="number" name="calificacion" [(ngModel)]="calificacion"
-                            class="input-outline input" required> -->
                             <label class="text-firstcolor"><i class="bi bi-chat-dots"></i> Mensaje:</label>
                             <textarea placeholder="mensaje" name="mensaje" [(ngModel)]="mensaje" class="input-outline"
                                 style="color: var(--firstcolor);" required></textarea>
@@ -39,12 +34,15 @@
                         <p class="text w-100">Recuerda que puedes escribirnos en cualquier momento y nos aseguraremos de
                             responderte lo más rápido posible.</p>
                         <hr>
-                        <div class="text text-start w-100" ><i class="bi bi-phone-fill"></i>: (+53)7 260-04 21 al 29 </div>
-                        <div class="text text-start w-100"><i class="bi bi-envelope-fill"></i>: empresaicem@gmail.com, comercial@icem.cu </div>
+                        <div class="text text-start w-100"><i class="bi bi-phone-fill"></i>: (+53)7 260-04 21 al 29
+                        </div>
+                        <div class="text text-start w-100"><i class="bi bi-envelope-fill"></i>: empresaicem@gmail.com,
+                            comercial@icem.cu </div>
                         <div class="text text-start w-100"><i class="bi bi-clock-history"></i>: 7:00 am - 7:00 pm </div>
                         <hr>
                         <h3 class="h3 w-100">¿Necesitas ayuda? </h3>
-                        <p class="text w-100">Contacta con nuestro equipo y estaremos encantados de responderte lo más pronto posible.</p>
+                        <p class="text w-100">Contacta con nuestro equipo y estaremos encantados de responderte lo más
+                            pronto posible.</p>
                     </div>
                 </div>
             </div>

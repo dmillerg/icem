@@ -148,7 +148,6 @@ export class ProductosComponent implements OnInit {
         this.productos_all = result;
         if (this.storage.retrieve('producto')) {
           this.productos = this.productos_all.filter(e => e.id != this.storage.retrieve('producto').id)
-
         }
         this.positionProductsLeft = 4;
         this.positionProductsRight = 0;

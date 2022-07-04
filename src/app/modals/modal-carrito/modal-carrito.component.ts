@@ -67,7 +67,9 @@ export class ModalCarritoComponent implements OnInit {
   }
 
   reservar() {
+    
     this.carrito.forEach((item, i) => {
+      
       let formData = new FormData();
       formData.append('user_id', item.user_id.toString());
       formData.append('producto_id', item.producto_id.toString());
@@ -75,11 +77,15 @@ export class ModalCarritoComponent implements OnInit {
       formData.append('estado', 'reservado');
       formData.append('id_carrito', item.id);
       this.api.addPedido(formData).subscribe((result) => {
-        if (i == this.carrito.length - 1) {
+        
+        if (i+1 == this.carrito.length) {
           this.carrito = [];
           this.storage.store('carrito',this.carrito)
           this.activeModal.close();
         }
+      }, error=>{
+        console.log(error);
+        
       })
     })
   }

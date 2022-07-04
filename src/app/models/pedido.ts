@@ -5,4 +5,5 @@ export interface Pedido {
    cantidad: number;
    estado: string;
    fecha: string;
+   precio_total: number;
 }

@@ -105,7 +105,7 @@
         <h3 class="number text-section text-center" *ngIf="productos.length==0">No hay productos en esta
                 categoria</h3>
         <div class="container">
-            <div style="width: 100%;position: relative;">
+            <div style="width: 100%;position: relative;" *ngIf="storage.retrieve('producto')">
                 <div class="productos-similares scroll-mine" [@listAnimation]="productos.length">
                     <div id="left-top" style="width: 50px;"></div>
                     <div *ngFor="let item of productos; let i= index" class="col-sm-6 col-md-4 col-lg-3 g-4" [id]="i+'scroll'">
@@ -115,8 +115,15 @@
                     <div id="right-top" style="width: 50px;"></div>
                 </div>
 
-                <button *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'" class="btn-scroll btn-prev" (click)="scrollPrevNext('prev')"><i class="bi bi-chevron-left"></i></button>
-                <button *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'" class="btn-scroll btn-right" (click)="scrollPrevNext('next')"><i class="bi bi-chevron-right"></i></button>
+                <button *ngIf="productos.length>0" [@scaleAnimation]="'enter'" class="btn-scroll btn-prev" (click)="scrollPrevNext('prev')"><i class="bi bi-chevron-left"></i></button>
+                <button *ngIf="productos.length>0" [@scaleAnimation]="'enter'" class="btn-scroll btn-right" (click)="scrollPrevNext('next')"><i class="bi bi-chevron-right"></i></button>
+            </div>
+
+            <div class="row" *ngIf="!storage.retrieve('producto')">
+                <div *ngFor="let item of productos; let i= index" class="col-sm-6 col-md-4 col-lg-3 g-4">
+                    <app-producto [producto]="item" (emisor)="swicthEspecification($event, especification)">
+                    </app-producto>
+                </div>
             </div>
 
             <div class="row mt-4" *ngIf="storage.retrieve('producto')" [@scaleAnimation]="'enter'">

@@ -1,9 +1,11 @@
-<div class="row w-100 d-flex flex-row justify-content-center align-items-center">
-    <div class="col-sm-5">
-        <img [src]="src" class="img-fluid" style="font-size: small;" width="300px" alt="...">
-    </div>
-    <div class="col-sm-7 d-flex flex-column align-items-center">
-        <h5 class="display-1">{{quienes.nombre}}</h5>
-        <h1 class="h1 text">{{quienes.cargo}}</h1>
+<div class="container">
+    <div class="row w-100 d-flex flex-row justify-content-center align-items-center">
+        <div class="col-sm-5">
+            <img [src]="src" class="img-fluid svg-shadow" style="font-size: small;" alt="...">
+        </div>
+        <div class="col-sm-7 d-flex flex-column ">
+            <h5 class="display-1 text-white">{{quienes.nombre}}</h5>
+            <h1 class="h1 text-white">{{quienes.cargo}}</h1>
+        </div>
     </div>
 </div>
