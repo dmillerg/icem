@@ -87,11 +87,6 @@
     transition: all 0.3s ease;
 }
 
-.text-section {
-    /* margin-top: 60px; */
-    font-size: 30px;
-}
-
 .barra-superior {
     display: flex;
     flex-direction: row-reverse;

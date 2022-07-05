@@ -17,10 +17,11 @@
 
         <div class="container">
             <div class="titulo-categorias" style="margin-bottom: 20px;">
-                <h3 class="text-section">Categorías</h3>
+                <h1 class="text-section display-4">Categorías</h1>
             </div>
             <div class="contenedor-categoria" [@listAnimation]="categorias.length">
-                <button *ngFor="let item of categorias" class="btn-categoria" (click)="cambiarCategoria(item.id)"
+                <button *ngFor="let item of categorias" class="btn-categoria shadow-lg"
+                    (click)="cambiarCategoria(item.id)"
                     [ngClass]="{'active': (storage.retrieve('categoria') && storage.retrieve('categoria').nombre== item.nombre)}">
                     <strong style="font-size: 16px;">{{item.nombre}}</strong>
                     <label style="font-size: 12px;padding-left: 5px;padding-right: 5px;max-height: 20px;">
@@ -100,23 +101,31 @@
             <h3 class="text-section" *ngIf="!storage.retrieve('producto')" [@scaleAnimation]="'enter'">Productos de la
                 categoría {{storage.retrieve('categoria').nombre}}</h3>
         </div>
-
-
-        <h3 class="number text-section text-center" *ngIf="productos.length==0">No hay productos en esta
+        <div class="container">
+            <div class="row d-flex flex-column justify-content-center align-items-center">
+                <div class="col-sm-6">
+            <img *ngIf="productos.length==0" src="assets/clip-actions/empty.png" [@scaleAnimation]="'enter'" alt="">
+            <h3 class="text-section text-center" *ngIf="productos.length==0">No hay productos en esta
                 categoria</h3>
+            </div>
+        </div>
+        </div>
         <div class="container">
             <div style="width: 100%;position: relative;" *ngIf="storage.retrieve('producto')">
                 <div class="productos-similares scroll-mine" [@listAnimation]="productos.length">
                     <div id="left-top" style="width: 50px;"></div>
-                    <div *ngFor="let item of productos; let i= index" class="col-sm-6 col-md-4 col-lg-3 g-4" [id]="i+'scroll'">
+                    <div *ngFor="let item of productos; let i= index" class="col-sm-6 col-md-4 col-lg-3 g-4"
+                        [id]="i+'scroll'">
                         <app-producto [producto]="item" (emisor)="swicthEspecification($event, especification)">
                         </app-producto>
                     </div>
                     <div id="right-top" style="width: 50px;"></div>
                 </div>
 
-                <button *ngIf="productos.length>0" [@scaleAnimation]="'enter'" class="btn-scroll btn-prev" (click)="scrollPrevNext('prev')"><i class="bi bi-chevron-left"></i></button>
-                <button *ngIf="productos.length>0" [@scaleAnimation]="'enter'" class="btn-scroll btn-right" (click)="scrollPrevNext('next')"><i class="bi bi-chevron-right"></i></button>
+                <button *ngIf="productos.length>0" [@scaleAnimation]="'enter'" class="btn-scroll btn-prev"
+                    (click)="scrollPrevNext('prev')"><i class="bi bi-chevron-left"></i></button>
+                <button *ngIf="productos.length>0" [@scaleAnimation]="'enter'" class="btn-scroll btn-right"
+                    (click)="scrollPrevNext('next')"><i class="bi bi-chevron-right"></i></button>
             </div>
 
             <div class="row" *ngIf="!storage.retrieve('producto')">

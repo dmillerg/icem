@@ -95,3 +95,7 @@ p{
   height: 20px !important;
   border-radius: 50% !important
 }
+
+.min-height-section{
+min-height: 500px;
+}

@@ -4,11 +4,11 @@
         <div class="col-sm-12">
             <p style="padding-left: 1%;"><span class="text-firstcolor">Cantidad de coincidencias: </span>{{busqueda.length}}</p>
             <div class="contenedor-busq">
-            <div *ngFor="let item of busqueda" class="card card-mine text-start" (click)="verMas(item)">
+            <div *ngFor="let item of busqueda" class="card card-mine shadow-sm text-start" (click)="verMas(item)">
                 <img [src]="item.imagen" alt="">
-                <h3 class="h3">{{item.titulo}}</h3>
+                <h3 class="h3 text-descripcion">{{item.titulo}}</h3>
                 <p style="font-size: small;">{{item.fecha | date: 'short'}}</p>
-                <p>{{item.descripcion}}</p>
+                <p class="text-descripcion">{{item.descripcion}}</p>
                 <p>localizacion: {{item.tipo}}</p>
             </div>
         </div>

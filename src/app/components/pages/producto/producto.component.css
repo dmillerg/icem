@@ -37,11 +37,6 @@
     text-overflow: ellipsis;
 }
 
-.btn-firstcolor{
-    padding: 15px;
-    box-shadow: 0 5px 15px 0 var(--firstcolor);
-    transform: translateY(20px);
-}
 
 .descripcion-text {
     font-size: small;

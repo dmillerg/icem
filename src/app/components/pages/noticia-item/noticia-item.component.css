@@ -35,3 +35,11 @@ img{
   font-size: small;
   color: var(--firstcolor-section);
 }
+
+.card-mine.active{
+  transform: scale(1.2);
+  z-index: 99;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+  background-color: var(--firstcolor-section);
+}

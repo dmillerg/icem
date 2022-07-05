@@ -62,15 +62,15 @@ export class NoticiasComponent implements OnInit {
   }
 
   loadNoticiasScrap() {
-    this.noticia_column1 =[];
-    this.noticia_column2 =[];
-    this.noticia_column3 =[];
-    this.noticia_column4 =[];
+    this.noticia_column1 = [];
+    this.noticia_column2 = [];
+    this.noticia_column3 = [];
+    this.noticia_column4 = [];
     this.searching = true;
     this.api.getNoticias(0, this.noticia_filtro).subscribe((result) => {
-        this.noticiaScrap = result;
+      this.noticiaScrap = result;
       this.rellenarColumns();
-      this.searching= false;
+      this.searching = false;
       if (this.storage.retrieve('noticias')) {
         let not: string = this.storage.retrieve('noticia').id;
         document.getElementById(not.toString()).scrollIntoView({ behavior: 'smooth' });
@@ -94,6 +94,13 @@ export class NoticiasComponent implements OnInit {
         this.noticia_column4.push(this.noticiaScrap[i]);
       }
     }
+    setTimeout(() => {
+      if (this.storage.retrieve('noticia')) {
+        document.getElementById(this.storage.retrieve('noticia').id).scrollIntoView({ behavior: 'smooth' });
+        document.getElementById(this.storage.retrieve('noticia').id).classList.toggle('active')
+      }
+    }, 500)
+
   }
 
   click() {

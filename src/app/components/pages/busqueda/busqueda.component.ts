@@ -31,8 +31,8 @@ export class BusquedaComponent implements OnInit {
     if (this.storage.retrieve('titulo')) {
       this.titulo = this.storage.retrieve('titulo');
     }
-    this.storage.observe('titulo').subscribe((result)=>{
-      if(result && result.length>0){
+    this.storage.observe('titulo').subscribe((result) => {
+      if (result && result.length > 0) {
         this.titulo = result;
         this.loadProductos();
       }
@@ -41,7 +41,7 @@ export class BusquedaComponent implements OnInit {
   }
 
   loadProductos() {
-   this.busqueda = [];
+    this.busqueda = [];
     this.api.searchProductos(this.titulo).subscribe(result => {
       result.result.forEach(element => {
         this.api.getProductoFoto(element.id).subscribe(result2 => console.log(result2), error => {
@@ -72,7 +72,8 @@ export class BusquedaComponent implements OnInit {
           titulo: element.titulo,
           descripcion: element.descripcion,
           fecha: element.fecha,
-          tipo: 'noticias'
+          tipo: 'noticias',
+          imagen: element.imagen,
         });
       });
       this.loadDesarrollos();
@@ -82,12 +83,15 @@ export class BusquedaComponent implements OnInit {
   loadDesarrollos() {
     this.api.searchDesarrollos(this.titulo).subscribe(result => {
       result.result.forEach(element => {
-        this.busqueda.push({
-          id: element.id,
-          titulo: element.titulo,
-          descripcion: element.descripcion,
-          fecha: element.fecha,
-          tipo: 'desarrollos'
+        this.api.getDesarrolloFoto(element.id).subscribe(result2 => console.log(result2), error => {
+          this.busqueda.push({
+            id: element.id,
+            titulo: element.titulo,
+            descripcion: element.descripcion,
+            fecha: element.fecha,
+            imagen: error.url,
+            tipo: 'desarrollos'
+          });
         });
       });
     });
