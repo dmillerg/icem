@@ -1,4 +1,4 @@
-<section class="min-height-section">
+<!-- <section class="min-height-section">
   <div class="container p-4" [@scaleAnimation]="'enter'">
     <div class="row" id="mision">
       <div class="col-sm-7 text-start"
@@ -106,25 +106,18 @@
       </div>
     </div>
   </div>
-</section>
-<section class="bg-firstcolor">
+</section> -->
+<!-- <section class="bg-firstcolor">
   <div class="container-fluid animado">
     <div class="row">
       <ngb-carousel class="p-4 d-flex justify-content-center align-items-center" style="height: 500px;">
         <ng-template ngbSlide *ngFor="let image of integrantes">
-          <!-- <div class="wrapper">
-          <img [src]="image.imagen" alt="Random first slide">
-        </div>
-        <div class="carousel-caption">
-          <h3>{{ image.nombre }}</h3>
-          <p>{{ image.cargo }}</p>
-        </div> -->
           <app-quienes-item [quienes]="image"></app-quienes-item>
         </ng-template>
       </ngb-carousel>
     </div>
   </div>
-</section>
+</section> -->
 
 
 
@@ -174,6 +167,84 @@
     </div>
   </div>
 </section> -->
+
+
+<div class="container">
+  <div class="timeline">
+    <div class="timeline-item" id="mision">
+      <h1 class="display-4 text-firstcolor animado">Misión</h1>
+      <h1 class="text animado">Declara que es una “organización líder del país en fabricación y comercialización de
+        equipos médicos,
+        instrumentos ortopédicos y ayudas técnicas, mobiliario clínico, gastronómicos y de oficina, estanterías,
+        soluciones constructivas diversas, perfiles
+        conformados en frío y servicios a sus clientes nacionales, distintiva por su calidad, versatilidad, rapidez,
+        competitividad y seguridad a sus clientes.</h1>
+    </div>
+    <div class="timeline-item" id="vision">
+      <h1 class="display-4 text-firstcolor animado">Visión </h1>
+      <h1 class="text animado"> Modernizará la tecnología y la ingeniería de fabricación de la gama de equipos,
+        instrumentos y medios,
+        muebles,
+        estanterías, productos metálicos y perfiles para satisfacer con competitividad las exigencias del mercado
+        interno y la exportación.</h1>
+    </div>
+    <div class="timeline-item" id="objetivo">
+      <h1 class="display-4 text-firstcolor animado">Objetivo</h1>
+      <h1 class="text animado">Producir y comercializar equipos, instrumentos y mobiliarios, tanto médicos como de
+        oficina; piezas y
+        accesorios
+        de laboratorio, así como componentes para la ortopedia técnica.</h1>
+    </div>
+    <div class="timeline-item" id="actividades">
+      <h1 class="display-4 text-firstcolor animado">Actividades
+        secundarias y de apoyo aprobadas por Resolución 280 del año 2017</h1>
+      <ul style="list-style: none;" class="text animado">
+        <li>Servicio de levantamiento de las necesidades, medición, fabricación, montaje, reparación y mantenimiento
+          de
+          todas nuestras producciones.</li>
+        <li>Servicio de diseño y proyectos en 3D, de toldos, cortinas y mobiliario.</li>
+        <li>Servicio de arrendamiento de toldos y kioscos.</li>
+        <li>Servicio de trabajos especializados en actividades relacionadas con la tornería, fresado, erosión
+          rectificación y tratamiento térmico de metales.</li>
+        <li>Servicio de trabajos especializados en temas eléctricos y mecánicos.</li>
+        <li>Servicio de reparación y montaje de mobiliario.</li>
+        <li>Prestar servicio de elaboración de planos de muebles y espacios.</li>
+        <li>Prestar servicio de conformación, ponche, dobles y acabado superficial.</li>
+        <li>Prestar servicio de post-venta a las producciones.</li>
+
+        <li>Montaje y reparación de techos y paredes de panelería ligera.</li>
+        <li>Comercializar perfiles, canales, montantes y luminarias.</li>
+        <li>Producir y comercializar mobiliario gastronómico.</li>
+        <li>Realización del diseño, fabricación y montaje de señaléticas y vinilos.</li>
+        <li>Prestar servicio de parqueo.</li>
+        <li>Prestar servicio de arrendamiento del teatro y los almacenes.</li>
+        <li>Prestar servicios de asesoría especializada para el funcionamiento y puesta en marcha de sus producciones.
+        </li>
+        <li>Prestar servicios gastronómicos a los trabajadores.</li>
+        <li>Producir y comercializar artículos con sobrantes y desechos de materias primas.</li>
+      </ul>
+    </div>
+    <div class="timeline-item" id="miembros">
+      <h1 class="display-4 text-firstcolor animado">Miembros</h1>
+      <h1 class="text animado">Conoce a los integrantes de nuestro equipo</h1>
+    </div>
+    <div class="timeline-item">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-sm-6 col-md-4" *ngFor="let item of integrantes">
+            <app-quienes-item [quienes]="item"></app-quienes-item>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item" style="width: 50%;">
+      <h1 class="display-4 text-firstcolor animado">En caso de dudas</h1>
+      <h1 class="text animado">No dudes en contactarnos</h1>
+    </div>
+  </div>
+</div>
+
+
 
 <section class="min-height-section">
   <app-contactenos></app-contactenos>
