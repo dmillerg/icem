@@ -1,30 +1,16 @@
 <div class="container-fluid">
 
     <section class="categorys animado">
-        <!-- <div class="contenedor">
-            <div class="rows">
-                <h3 class="h3">Categorias</h3>
-            </div>
-            <div class="rows linea">
-                <div *ngFor="let item of categorias" class="categoria" (click)="cambiarCategoria(item.id)"
-                    [ngClass]="{'active': (storage.retrieve('categoria') && storage.retrieve('categoria').nombre== item.nombre)}">
-                    {{item.nombre}}
-                </div>
-                <div class="square"></div>
-                <div class="square2"></div>
-            </div>
-        </div> -->
-
         <div class="container">
             <div class="titulo-categorias" style="margin-bottom: 20px;">
                 <h1 class="text-section display-4">Categorías</h1>
             </div>
             <div class="contenedor-categoria" [@listAnimation]="categorias.length">
-                <button *ngFor="let item of categorias" class="btn-categoria shadow-lg"
+                <button *ngFor="let item of categorias" class="btn-categoria shadow-sm"
                     (click)="cambiarCategoria(item.id)"
                     [ngClass]="{'active': (storage.retrieve('categoria') && storage.retrieve('categoria').nombre== item.nombre)}">
                     <strong style="font-size: 16px;">{{item.nombre}}</strong>
-                    <label style="font-size: 12px;padding-left: 5px;padding-right: 5px;max-height: 20px;">
+                    <label class="descripcion-cat">
                         {{item.descripcion}}</label>
                 </button>
             </div>
@@ -43,12 +29,6 @@
             <div class="row overflow-auto">
                 <div id="producto-especification" class="producto-especification">
                     <div class="barra-superior">
-                        <!-- <button class="btn centrado"
-                            [ngClass]="{ 'btn-outline-firstcolor': !comentarios , 'btn-firstcolor' : comentarios}"
-                            (click)="abrirComentarios()" style="position: relative;">
-                            <div class="pista pista-off pista-bottom">Ver comentarios</div>
-                            <i class="bi bi-chat-square-text"></i>
-                        </button> -->
                         <button class="btn-outline-firstcolor centrado" [disabled]="producto && producto.ficha == null"
                             style="position: relative;margin-right: 10px;">
                             <div class="pista pista-off pista-bottom"
@@ -67,32 +47,6 @@
         </div>
     </section>
 
-    <!-- <section class="ventas">
-        <div class="ventas-contenedor"> -->
-    <!-- <div class="grafico"></div> -->
-    <!-- PORCIONES GRAFICO CIRCULAR
-      ELIMINADO #donut-chart
-      MODIFICADO CSS de .donut-chart -->
-    <!-- <div class="donut-chart">
-                <div id="porcion1" class="recorte">
-                    <div class="quesito ios" data-rel="3"></div>
-                </div>
-                <div id="porcion2" class="recorte">
-                    <div class="quesito mac" data-rel="3"></div>
-                </div>
-                <div id="porcion3" class="recorte">
-                    <div class="quesito win" data-rel="4"></div>
-                </div>
-                <div id="porcionFin" class="recorte">
-                    <div class="quesito linux" data-rel="90"></div>
-                </div> -->
-    <!-- FIN AÑADIDO GRÄFICO -->
-    <!-- <p class="center-date">JUNE<br><span class="scnd-font-color">2013</span></p>
-            </div>
-
-
-        </div>
-    </section> -->
 
     <section class="products animado">
         <div class="titulo-categorias">
@@ -151,8 +105,6 @@
                             [(ngModel)]="correo" class="input-outline input" required>
                         <label class="text-firstcolor"><i class="bi bi-star-fill"></i> calificación:</label>
                         <app-rating-bar [calif]="calificacion" (emisor)="calificar($event)"></app-rating-bar>
-                        <!-- <input placeholder="1,2,3..." type="number" name="calificacion" [(ngModel)]="calificacion"
-                        class="input-outline input" required> -->
                         <label class="text-firstcolor"><i class="bi bi-chat-dots-fill"></i> comentario:</label>
                         <textarea placeholder="comentario" name="comentario" [(ngModel)]="comentario"
                             class="input-outline" style="color: var(--firstcolor);min-height: 200px;"
