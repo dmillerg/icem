@@ -2,6 +2,7 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
+import { Desarrollo } from 'src/app/models/desarrollo';
 import { Noticia } from 'src/app/models/noticias';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
@@ -51,6 +52,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     logo: '',
   };
 
+  desarrollo: any;
 
   constructor(private api: ApiService, private storage: SessionStorageService, private router: Router) { }
 
@@ -128,4 +130,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.storage.store('producto', this.productos_recientes[0]);
     this.storage.store('categoria', { id: -1, nombre: 'Todos' });
   }
+
+  // loadLastDevelop(){
+  //   this.api.getDesarrollos().subscribe(result=>{
+  //     this.desarrollo = result[0];
+  //   })
+  // }
 }

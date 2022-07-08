@@ -166,3 +166,7 @@
     height: auto;
     min-height: 150px;
 }
+
+.min-heigh-section{
+    min-height: 400px;
+}
