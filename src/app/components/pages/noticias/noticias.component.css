@@ -21,13 +21,11 @@
 }
 
 .search-box {
-  width: 30%;
+  width: 100%;
   min-width: 100px;
   height: auto;
   padding: 5px;
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: relative;
 }
 
 .search-box .in{

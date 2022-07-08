@@ -1,16 +1,18 @@
-<div class="card card-mine" [id]="noticia.id"  [@scaleAnimation]="'enter'" (click)="cambiarNoticia(noticia)">
-  <div class="ribbon" >
+<hr *ngIf="noticia.fuente!='ICEM'" >
+<div class="my-2 position-relative border rounded p-2" [id]="noticia.id"  [@scaleAnimation]="'enter'" (click)="cambiarNoticia(noticia)">
+  <div class="ribbon" *ngIf="noticia.fuente!='ICEM'" >
     <img [src]="noticia.logo" class="svg-shadow" [alt]="noticia.fuente">  
   </div>
   <div class="row">
 
     <img *ngIf="noticia.imagen.length>0" class="image" style="text-align: center;" [src]="noticia.imagen" [alt]="noticia.titulo" />
 
-    <div class="body-text" style="padding: 20px;">
-      <h5 class="text-firstcolor">{{ noticia.titulo }}</h5>
+    <div class="body-text" >
+      <h5 *ngIf="noticia.fuente!='ICEM'" class="text-firstcolor">{{ noticia.titulo }}</h5>
+      <h1 *ngIf="noticia.fuente=='ICEM'" class="text-firstcolor">{{ noticia.titulo }}</h1>
       <p class="text-section">{{noticia.fecha| date: 'short'}}</p>
-      <p class="scroll-mine text" style="padding-inline: 10px; max-height: 150px;
-      overflow-y: auto;">{{ noticia.descripcion }}</p>
+      <p class="scroll-mine text" [ngClass]="{'descripcion-not': noticia.fuente!='ICEM'}" >{{ noticia.descripcion }}</p>
     </div>
   </div>
 </div>
+<hr *ngIf="noticia.fuente=='ICEM'" >

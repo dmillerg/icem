@@ -22,7 +22,7 @@
                             <label class="text-firstcolor"><i class="bi bi-chat-dots"></i> Mensaje:</label>
                             <textarea placeholder="mensaje" name="mensaje" [(ngModel)]="mensaje" class="input-outline"
                                 style="color: var(--firstcolor);" required></textarea>
-                            <button class="btn btn-firstcolor mt-3" (click)="enviarMensaje()" style="width: 100%;"
+                            <button class="btn-firstcolor mt-3 p-3 rounded w-100" (click)="enviarMensaje()" style="width: 100%;"
                                 [disabled]="!validarMensaje()">
                                 <i class="bi bi-send"></i> Enviar mensaje
                             </button>

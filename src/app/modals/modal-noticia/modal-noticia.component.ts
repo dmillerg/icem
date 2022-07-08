@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SessionStorageService } from 'ngx-webstorage';
 import { Categoria } from 'src/app/models/categoria';
 import { Noticia } from 'src/app/models/noticias';
 import { Producto } from 'src/app/models/producto';
@@ -24,7 +25,7 @@ export class ModalNoticiaComponent implements OnInit {
     fecha: '',
     imagen: '',
     enlace: '',
-    fuente: '',
+    fuente: 'ICEM',
     logo: '',
   };
 
@@ -37,10 +38,10 @@ export class ModalNoticiaComponent implements OnInit {
     fecha: '',
     imagen: '',
     enlace: '',
-    fuente: '',
+    fuente: 'ICEM',
     logo: '',
   };
-  constructor(private activeModal: NgbActiveModal, private api: ApiService) {
+  constructor(private activeModal: NgbActiveModal, private api: ApiService, public storage: SessionStorageService) {
     this.actiModal = activeModal;
   }
 
@@ -69,6 +70,9 @@ export class ModalNoticiaComponent implements OnInit {
     formData.append('id', this.noticia.id.toString());
     formData.append('titulo', this.noticia.titulo.toString());
     formData.append('descripcion', this.noticia.descripcion.toString());
+    formData.append('logo', this.noticia.logo.toString());
+    formData.append('fuente', this.noticia.fuente.toString());
+    formData.append('enlace', this.noticia.enlace.toString());
     // console.log("formData :",formData);
     // console.log("producto :",this.producto);
     if (this.modalAction == 'Editar') {

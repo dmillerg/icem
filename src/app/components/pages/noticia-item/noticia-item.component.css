@@ -5,8 +5,7 @@
 }
 
 .body-text{
-  padding: 20px;
-  margin-bottom: 20px;
+  padding-top: 0;
 }
 
 .ribbon{
@@ -19,6 +18,15 @@
   right: 0;
   border: none;
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.text{
+  text-indent: 20px;
+}
+
+.text::first-letter{
+  font-size: 150%;
+  font-weight: 900;
 }
 
 .card-mine:hover{
@@ -42,4 +50,21 @@ img{
   cursor: pointer;
   transition: ease-in-out 0.3s;
   background-color: var(--firstcolor-section);
+}
+
+.descripcion-not{
+    /* max-height: 200px; */
+    word-wrap: break-word;
+    /* overflow: hidden; */
+    display: block;
+    /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-height: 2.6.em;
+    /* Fallback for non-webkit, line-height * 2 */
+    line-height: 1.3em;
+    -webkit-line-clamp: 2;
+    /* if you change this, make sure to change the fallback line-height and height */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

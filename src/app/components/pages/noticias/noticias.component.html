@@ -1,37 +1,26 @@
-<div class="container" [@scaleAnimation]="'enter'">
-  <div class="producto-section">
-    <h1 class="title-section2 text-section"><strong>Noticias...</strong></h1>
-    <div class="search-box">
-      <input type="text" placeholder="Buscar noticia por título, descripción o fuente..." name="noticia" [(ngModel)]="noticia_filtro" (ngModelChange)="loadNoticiasScrap()" class="in">
-      <b><i class="bi bi-search"></i></b>
-    </div>
-    <div class="row p-4"></div>
-  </div>
-  <div class="row p-2"></div>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="row" >
-        <div class="searching">
-          <img *ngIf="searching" src="assets/clip-actions/searching.png" alt="">
-          <p *ngIf="searching" class="text-section">Buscando</p>
-          <img *ngIf="noticia_column1.length==0 && noticia_column2.length==0 && noticia_column3.length==0 && noticia_column4.length==0 && !searching" src="assets/clip-actions/empty.png" alt="">
-          <p *ngIf="noticia_column1.length==0 && noticia_column2.length==0 && noticia_column3.length==0 && noticia_column4.length==0 && !searching" class="text-section">No hay noticias</p>
-        
+<!-- <img *ngIf="searching" src="assets/clip-actions/searching.png" alt="">
+  <p *ngIf="searching" class="text-section">Buscando</p>
+  <img *ngIf="noticia_column1.length==0 && noticia_column2.length==0 && noticia_column3.length==0 && noticia_column4.length==0 && !searching" src="assets/clip-actions/empty.png" alt="">
+  <p *ngIf="noticia_column1.length==0 && noticia_column2.length==0 && noticia_column3.length==0 && noticia_column4.length==0 && !searching" class="text-section">No hay noticias</p> -->
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="h1 text-firstcolor">Noticias de nuestra empresa</h1>
+        <app-noticia-item [noticia]="item" *ngFor="let item of noticias_icem" (emisor)="cambiarNoticia($event)">
+        </app-noticia-item>
+      </div>
+      <div class="col-sm-4 position-relative">
+        <h1 class="h1 text-firstcolor">Otras noticias de su interés</h1>
+        <div class="search-box">
+          <input type="text" placeholder="Buscar noticia por título, descripción o fuente..." name="noticia"
+            [(ngModel)]="noticia_filtro" (ngModelChange)="loadNoticiasScrap()" class="in">
+          <b><i class="bi bi-search"></i></b>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3"  [@listAnimation]="noticia_column1.length">
-          <app-noticia-item [noticia]="item"  *ngFor="let item of noticia_column1" (emisor)="cambiarNoticia($event)"></app-noticia-item>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3" [@listAnimation]="noticia_column2.length">
-          <app-noticia-item [noticia]="item"  *ngFor="let item of noticia_column2" (emisor)="cambiarNoticia($event)"></app-noticia-item>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3" [@listAnimation]="noticia_column3.length">
-          <app-noticia-item [noticia]="item"  *ngFor="let item of noticia_column3" (emisor)="cambiarNoticia($event)"></app-noticia-item>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3" [@listAnimation]="noticia_column4.length">
-          <app-noticia-item [noticia]="item"  *ngFor="let item of noticia_column4" (emisor)="cambiarNoticia($event)"></app-noticia-item>
-        </div>
+        <app-noticia-item [noticia]="item" *ngFor="let item of noticias_no_icem" (emisor)="cambiarNoticia($event)">
+        </app-noticia-item>
       </div>
     </div>
   </div>
-  <div class="row p-4"></div>
-</div>
+</section>
