@@ -10,7 +10,7 @@
     <div class="body-text  d-flex flex-column justify-content-center align-items-center" >
       <h5 *ngIf="noticia.fuente!='ICEM'" class="text-firstcolor w-100">{{ noticia.titulo }}</h5>
       <h1 *ngIf="noticia.fuente=='ICEM'" class="text-firstcolor display-4 w-100">{{ noticia.titulo }}</h1>
-      <p class="text-section w-100">{{noticia.fecha| date: 'short'}}</p>
+      <p class="text-section w-100">{{noticia.fecha | date: 'short'}}</p>
       <p class="scroll-mine text w-100" [ngClass]="{'descripcion-not': noticia.fuente!='ICEM'}" >{{ noticia.descripcion }}</p>
       <button *ngIf="noticia.fuente!='ICEM'" class="btn-firstcolor w-75 p-3 m-2 rounded" (click)="cambiarNoticia(noticia)">Visitar</button>
     </div>

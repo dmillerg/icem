@@ -24,7 +24,7 @@ import { ModalQuienesComponent } from '../modal-quienes/modal-quienes.component'
 import { ModalScrapComponent } from '../modal-scrap/modal-scrap.component';
 import { ModalUsuarioComponent } from '../modal-usuario/modal-usuario.component';
 
-const scaleAnimation =  trigger('scaleAnimation', [
+const scaleAnimation = trigger('scaleAnimation', [
   transition(':enter', [
     style({ transform: 'translateX(-50%)', opacity: 0 }),
     animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
@@ -132,6 +132,12 @@ export class ModalAdminComponent implements OnInit {
       activo: false,
     },
     {
+      titulo: 'Preguntas',
+      icono: 'bi-question-square',
+      pista: '',
+      activo: false,
+    },
+    {
       titulo: 'Cerrar Sesión',
       icono: 'bi-door-closed',
       pista: '',
@@ -156,6 +162,7 @@ export class ModalAdminComponent implements OnInit {
   postsarray: Posts[] = [];
   pedidosarray: Pedido[] = [];
   ventasarray: any[] = [];
+  mensajesarray: any[] = [];
   configuracionesarray: Configuracion[] = [];
 
   constructor(
@@ -304,6 +311,7 @@ export class ModalAdminComponent implements OnInit {
     this.loadScraps();
     this.loadUsuario();
     this.loadVentas();
+    this.loadMensajes();
   }
 
   logout() {
@@ -392,6 +400,15 @@ export class ModalAdminComponent implements OnInit {
           this.getProductoFoto(e.producto_id, i);
         })
       } else this.ventasarray = [];
+    });
+  }
+
+  loadMensajes() {
+    this.mensajesarray = [];
+    this.api.getMensajes().subscribe((result) => {
+      if (result.length > 0) {
+        this.mensajesarray = result
+      } else this.mensajesarray = [];
     });
   }
 }

@@ -1,0 +1,68 @@
+td {
+    width: 6%;
+}
+
+.table-mine {}
+
+.seleccionable {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.seleccionable .selecc {
+    line-height: 45px;
+    width: 150px;
+    padding: 10px;
+    margin: 10px;
+    background-color: var(--firstcolor-hover);
+    color: var(--theme-color);
+    border: none;
+    text-overflow: ellipsis;
+    border-radius: 0.5em;
+    outline: none;
+    /* box-shadow: 0 0 2px 2px var(--firstcolor); */
+}
+
+.seleccionable .selecc2 {
+    line-height: 40px;
+    width: 150px;
+    outline: none;
+    background-color: var(--firstcolor-hover);
+    color: var(--theme-color);
+    border: none;
+    text-overflow: ellipsis;
+    border-radius: 0.5em;
+    /* box-shadow: 0 0 2px 2px var(--firstcolor); */
+    padding-left: 10px;
+}
+
+.blink {
+    background-color: var(--firstcolor);
+    padding: 15px;
+    text-align: center;
+    line-height: 50px;
+    background-color: transparent;
+}
+
+span {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

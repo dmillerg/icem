@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
 import { ApiService } from 'src/app/services/api.service';
+import { MessageServiceService } from 'src/app/services/message-service.service';
 
 @Component({
   selector: 'app-contactenos',
@@ -13,8 +14,9 @@ export class ContactenosComponent implements OnInit {
   correo: string = '';
   asunto: string = '';
   mensaje: string = '';
+  disable: boolean = false;
 
-  constructor(public storage: SessionStorageService, private api: ApiService) { }
+  constructor(public storage: SessionStorageService, private api: ApiService, private message: MessageServiceService) { }
 
   ngOnInit(): void {
     if (this.storage.retrieve('usuario')) {
@@ -22,6 +24,17 @@ export class ContactenosComponent implements OnInit {
       this.alias = user.usuario;
       this.correo = user.correo;
     }
+    this.storage.observe('usuario').subscribe(() => {
+      let user = this.storage.retrieve('usuario');
+      if (user) {
+        this.alias = user.usuario;
+        this.correo = user.correo;
+        this.disable = false;
+      } else {
+        this.alias = '';
+        this.correo = '';
+      }
+    })
   }
 
   validarMensaje() {
@@ -50,5 +63,12 @@ export class ContactenosComponent implements OnInit {
     }
     this.asunto = '';
     this.mensaje = '';
+  }
+
+  autenticarseBefore() {
+    if (!this.storage.retrieve('usuario')) {
+      this.message.success('¿Quién eres?', 'Para poder atender tu pregunta por favor dejanos saber quien eres');
+      this.disable = true;
+    }
   }
 }

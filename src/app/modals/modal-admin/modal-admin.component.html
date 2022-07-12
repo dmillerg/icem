@@ -46,6 +46,7 @@
       <app-table-pedido [pedidos]="pedidosarray" [usuarios]="usuariosarray" *ngIf="activo=='Pedidos'" [@scaleAnimation]="'enter'"> </app-table-pedido>
       <app-table-configuracion [configuraciones]="configuracionesarray" *ngIf="activo=='Configuración'" [@scaleAnimation]="'enter'"> </app-table-configuracion>
       <app-table-ventas [ventas]="ventasarray" [usuarios]="usuariosarray" *ngIf="activo=='Ventas'" [@scaleAnimation]="'enter'"> </app-table-ventas>
+      <app-table-mensajes [mensajes]="mensajesarray" [usuarios]="usuariosarray" *ngIf="activo=='Preguntas'" [@scaleAnimation]="'enter'"> </app-table-mensajes>
     </div>
   </div>
 </div>

@@ -6,21 +6,21 @@
         <div class="col-lg-8 d-flex flex-column justify-content-center align-items-center">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6" (click)="autenticarseBefore()">
                         <form style="padding: 15px;position: relative;margin-bottom: 20px;">
                             <h3 class="h3">Escríbenos</h3>
                             <label class="text-firstcolor"><i class="bi bi-person"></i>alias:</label>
-                            <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario')"
+                            <input placeholder="alias" name="alias" [disabled]="storage.retrieve('usuario') || disable"
                                 [(ngModel)]="alias" class="input-outline input" required>
                             <label class="text-firstcolor"><i class="bi bi-envelope"></i> correo:</label>
                             <input placeholder="correo" type="email" name="correo"
-                                [disabled]="storage.retrieve('usuario')" [(ngModel)]="correo"
+                                [disabled]="storage.retrieve('usuario') || disable" [(ngModel)]="correo"
                                 class="input-outline input" required>
                             <label class="text-firstcolor"><i class="bi bi-envelope"></i> asunto:</label>
-                            <input placeholder="asunto" type="text" name="asunto" [(ngModel)]="asunto"
+                            <input placeholder="asunto" type="text" name="asunto" [(ngModel)]="asunto" [disabled]="disable"
                                 class="input-outline input" required>
                             <label class="text-firstcolor"><i class="bi bi-chat-dots"></i> Mensaje:</label>
-                            <textarea placeholder="mensaje" name="mensaje" [(ngModel)]="mensaje" class="input-outline"
+                            <textarea placeholder="mensaje" name="mensaje" [(ngModel)]="mensaje" class="input-outline" [disabled]="disable"
                                 style="color: var(--firstcolor);" required></textarea>
                             <button class="btn-firstcolor mt-3 p-3 rounded w-100" (click)="enviarMensaje()" style="width: 100%;"
                                 [disabled]="!validarMensaje()">

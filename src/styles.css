@@ -433,6 +433,7 @@ button{
   z-index: 9999;
   color: var(--firstcolor);
   background-color: var(--theme-color);
+  box-shadow: 0 5px 8px 0 var(--firstcolor);
   opacity: 0;
   visibility: none;
   display: flex;

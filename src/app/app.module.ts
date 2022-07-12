@@ -70,6 +70,8 @@ import { PostsComponent } from './components/pages/posts/posts.component';
 import { ProductoEspecificationComponent } from './components/pages/producto-especification/producto-especification.component';
 import { RatingBarComponent } from './components/rating-bar/rating-bar.component';
 import { ContactenosComponent } from './components/pages/contactenos/contactenos.component';
+import { TableMensajesComponent } from './components/tables/table-mensajes/table-mensajes.component';
+import { ModalMensajeComponent } from './modals/modal-mensaje/modal-mensaje.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -102,6 +104,7 @@ import { ContactenosComponent } from './components/pages/contactenos/contactenos
     TablePostsComponent,
     TablePedidoComponent,
     TableConfiguracion,
+    TableMensajesComponent,
     TableVentasComponent,
     ModalDeleteComponent,
     ModalCategoriaComponent,
@@ -126,6 +129,7 @@ import { ContactenosComponent } from './components/pages/contactenos/contactenos
     ModalActivationComponent,
     ModalUserResetPasswordComponent,
     ModalEstadoPedidoComponent,
+    ModalMensajeComponent,
     ProductosComponent,
     PostsComponent,
     ProductoEspecificationComponent,

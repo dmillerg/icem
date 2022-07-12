@@ -1,0 +1,40 @@
+<!-- <div class="seleccionable">
+    <select name="usuario" id="user" [(ngModel)]="user_id" (change)="change()" class="selecc">
+        <option value="-1">usuario</option>
+        <option *ngFor="let item of usuarios" [value]="item.id">{{item.usuario}}</option>
+    </select>
+    <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha">
+    <select name="producto" id="producto" [(ngModel)]="producto_id" (change)="changeprod()" class="selecc">
+        <option value="-1">producto</option>
+        <option *ngFor="let item of productos" [value]="item.id">{{item.titulo}}</option>
+    </select>
+    <button class="btn btn-firstcolor" (click)="generarReportes()" [disabled]="ventas.length==0">Reportes</button>
+</div> -->
+<div style="overflow: auto;width: 100%; display: flex;flex-direction: column;position: relative;" class="scroll-mine">
+
+    <table class="table table-dark text-center  table-mine" style="overflow: auto;width: 100%;">
+        <thead>
+            <th>id</th>
+            <th>correo</th>
+            <th>mensaje</th>
+            <th>visto</th>
+            <th>fecha</th>
+            <th>acciones</th>
+        </thead>
+        <tr *ngFor="let item of mensajes">
+            <td>{{item.id}}</td>
+            <td>{{item.correo}}</td>
+            <td>{{item.mensaje}}</td>
+            <td [ngClass]="{'blink': item.visto==0}"><span *ngIf="item.visto==0">{{item.visto==0?'nuevo': 'visto'}}</span><label *ngIf="item.visto==1">visto</label></td>
+            <td>{{item.fecha | date: 'short'}}</td>
+            <td>
+                <button class="btn btn-outline-primary" (click)="responderMensaje(item)"> <i
+                        class="bi bi-pencil svg-shadow"></i>
+                </button>
+                <button class="btn btn-outline-danger" (click)="delete(item)"> <i
+                    class="bi bi-trash svg-shadow"></i>
+            </button>
+            </td>
+        </tr>
+    </table>
+</div>

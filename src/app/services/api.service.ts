@@ -1146,4 +1146,18 @@ export class ApiService {
     let direccion = this.url + 'mensajes/' + id.toString();
     return this.http.put(direccion, formData);
   }
+
+  /**
+   * Elimina un mensaje por su id
+   * @param id del mensaje
+   * @returns 
+   */
+  deleteMensaje(id) {
+    let direccion = this.url + 'mensajes/' + id.toString();
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+    };
+    return this.http.delete(direccion, { headers: headers, params: params });
+  }
 }

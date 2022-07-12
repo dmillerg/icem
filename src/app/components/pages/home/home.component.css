@@ -170,3 +170,16 @@
 .min-heigh-section{
     min-height: 550px;
 }
+
+.logo-half{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 99;
+}
+
+.bg-firstcolor-cat{
+    background: radial-gradient(circle at 1% 0%,#3b418e, #1e2147)
+}
