@@ -325,3 +325,21 @@ p {
     width: 100%;
     height: 100%;
 }
+
+.min-heigh-section{
+    min-height: 450px;
+
+}
+
+.bg-firstcolor-cat{
+    background: radial-gradient(circle at 0% 0%,#3b418e, #272842, rgba(4,4,5,1))
+}
+
+.rect1{
+    position: absolute;
+    width: 30%;
+    top: -20px;
+    height: 50px;
+    transform: rotate(80deg) skew(5deg);
+    background: linear-gradient(45deg, #3b418e, rgba(0, 0, 0, 0))
+}
