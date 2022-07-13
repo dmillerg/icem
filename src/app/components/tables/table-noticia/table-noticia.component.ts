@@ -12,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TableNoticiaComponent implements OnInit {
   @Input() noticias: Noticia[];
-  constructor(private api: ApiService, private modalService: NgbModal) {}
+  constructor(private api: ApiService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.loadNoticia();
@@ -20,7 +20,7 @@ export class TableNoticiaComponent implements OnInit {
 
   loadNoticia() {
     this.api.getNoticias().subscribe((result) => {
-      if (result.length > 0) this.noticias = result;
+      if (result.length > 0) this.noticias = this.convertNoticias(result);
       else this.noticias = [];
     });
   }
@@ -47,5 +47,20 @@ export class TableNoticiaComponent implements OnInit {
         this.loadNoticia();
       }
     });
+  }
+
+  convertNoticias(result: Noticia[]) {
+    result.forEach(e => {
+      if (e.fuente == 'ICEM') {
+        this.api.getNoticiaFoto(e.id).subscribe(
+          (result) => {
+          },
+          (error) => {
+            e.imagen = error.url;
+          }
+        );
+      }
+    });
+    return result;
   }
 }

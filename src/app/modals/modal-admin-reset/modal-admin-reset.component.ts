@@ -27,7 +27,9 @@ export class ModalAdminResetComponent implements OnInit {
     let formData = new FormData();
     formData.append('id_usuario', this.usuario.id.toString())
     formData.append('new_password', this.password)
-    this.api.adminResetPassword(formData, this.storage.retrieve('token')).subscribe((result) => {
+    this.api.adminResetPassword(formData, this.storage.retrieve('usuario').token).subscribe((result) => {
+      console.log(result);
+      
       this.actiModal.close();
     }, err => {
       console.error(err);
