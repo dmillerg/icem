@@ -340,6 +340,24 @@ p {
     width: 30%;
     top: -20px;
     height: 50px;
-    transform: rotate(80deg) skew(5deg);
+    transform: rotate(80deg) skew(50deg);
+    background: linear-gradient(45deg, #3b418e, rgba(0, 0, 0, 0))
+}
+
+.rect2{
+    position: absolute;
+    width: 27%;
+    top: -20px;
+    height: 50px;
+    transform: rotate(80deg) skew(50deg) translateY(-60px);
+    background: linear-gradient(45deg, #3b418e, rgba(0, 0, 0, 0))
+}
+
+.rect3{
+    position: absolute;
+    width: 25%;
+    top: -20px;
+    height: 50px;
+    transform: rotate(80deg) skew(50deg) translateY(-120px);
     background: linear-gradient(45deg, #3b418e, rgba(0, 0, 0, 0))
 }
