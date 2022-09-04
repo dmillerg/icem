@@ -368,11 +368,12 @@ h4 {
 }
 
 .scroll-mine::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 .scroll-mine::-webkit-scrollbar-track {
   background-color: transparent;
+ 
 }
 
 .scroll-mine::-webkit-scrollbar-thumb {
