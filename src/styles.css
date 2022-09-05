@@ -490,3 +490,42 @@ button{
   max-width: 200px;
   height: auto;
 }
+
+.filtros{
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.filtros.in{
+  color: black;
+}
+
+.filtros .selecc {
+  line-height: 45px;
+  width: 150px;
+  padding: 10px;
+  margin: 10px;
+  background-color: var(--firstcolor-hover);
+  color: var(--theme-color);
+  border: none;
+  text-overflow: ellipsis;
+  border-radius: 0.5em;
+  outline: none;
+  /* box-shadow: 0 0 2px 2px var(--firstcolor); */
+}
+
+.contenedor-filtro{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.contenedor-filtro label{
+  margin-left: 15px;
+}

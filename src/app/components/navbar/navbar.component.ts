@@ -16,7 +16,7 @@ import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-regis
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements AfterViewInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy {
   activo: string = 'inicio';
   cont_activo = 0;
   @Input() back_class = '';
@@ -54,7 +54,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
     this.intervalo = undefined;
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     if (this.storage.retrieve('configuraciones')) {
       let result = this.storage.retrieve('configuraciones');
       this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config)

@@ -1,3 +1,19 @@
+<div class="filtros">
+
+    <div class="contenedor-filtro"> <label for="titulo">Título</label>
+        <input type="text" style="color: black;" class="forms-control" placeholder="Buscar.." [(ngModel)]="titulo"
+            name="filterpost" />
+    </div>
+
+    <!-- <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha"> -->
+    <div class="contenedor-filtro"> <label for="fecha">Fecha</label>
+        <select [(ngModel)]="fecha" name="fecha" id="fecha" class="selecc">
+            <option value="">Todas las fechas</option>
+            <option *ngFor="let item of desarrollos" [value]="item.fecha">{{item.fecha| date: 'short'}}</option>
+        </select>
+    </div>
+
+</div>
 <div style="overflow: auto;width: 100%;" class="table-mine scroll-mine">
     <table class="table table-dark text-center table-mine">
         <thead>
@@ -8,7 +24,7 @@
             <!-- <th>imagen</th> -->
             <th>acciones</th>
         </thead>
-        <tr *ngFor="let item of desarrollos">
+        <tr *ngFor="let item of desarrollos | fecha_filter: fecha | desarrollo_titulo_filter: titulo">
             <td>{{item.id}}</td>
             <td>{{item.titulo}}</td>
             <!-- <td>{{item.descripcion}}</td> -->

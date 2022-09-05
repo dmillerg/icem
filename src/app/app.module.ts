@@ -72,6 +72,12 @@ import { RatingBarComponent } from './components/rating-bar/rating-bar.component
 import { ContactenosComponent } from './components/pages/contactenos/contactenos.component';
 import { TableMensajesComponent } from './components/tables/table-mensajes/table-mensajes.component';
 import { ModalMensajeComponent } from './modals/modal-mensaje/modal-mensaje.component';
+import { UserActiveFilter, UserFilter } from './pipes/usuario/userfilter.pipe';
+import { FechaPipe } from './pipes/fecha/fecha.pipe';
+import { ProductoCategoriaPipe } from './pipes/producto/producto.pipe';
+import { AllfilterPipe } from './pipes/tablefilter/allfilter.pipe';
+import { NoticiaFuentePipe } from './pipes/noticia/noticia.pipe';
+import { DesarrolloTituloFilter } from './pipes/desarrollo/desarrollo.pipe';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -135,6 +141,13 @@ import { ModalMensajeComponent } from './modals/modal-mensaje/modal-mensaje.comp
     ProductoEspecificationComponent,
     RatingBarComponent,
     ContactenosComponent,
+    UserFilter,
+    UserActiveFilter,
+    FechaPipe,
+    ProductoCategoriaPipe,
+    AllfilterPipe,
+    NoticiaFuentePipe,
+    DesarrolloTituloFilter,
   ],
   imports: [
     BrowserModule,
