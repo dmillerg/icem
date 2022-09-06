@@ -13,9 +13,10 @@ import { ApiService } from 'src/app/services/api.service';
 export class TableProductoComponent implements OnInit {
   @Input() productos: Producto[];
   categoria_query: number = -1;
-  categorias: any[];
+  categorias: any[] = [];
   actividad_query: number = -1;
   fecha_query: string = '';
+  fechas: any[] = [];
   all_query: string = '';
   constructor(private api: ApiService, private modalService: NgbModal) { }
 
@@ -27,6 +28,10 @@ export class TableProductoComponent implements OnInit {
     this.api.getProducto().subscribe((result) => {
       if (result.length > 0) this.productos = result;
       else this.productos = [];
+      result.forEach(item => {
+        if(this.fechas.indexOf(item.fecha)==-1) this.fechas.push(item.fecha);
+        if(this.categorias.indexOf(item.categoria)==-1) this.categorias.push(item.categoria);
+      })
     });
   }
 

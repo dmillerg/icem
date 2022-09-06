@@ -14,6 +14,7 @@ export class TableDesarrolloComponent implements OnInit {
   @Input() desarrollos: Desarrollo[];
   titulo_query: string = '';
   fecha_query: string = '';
+  fechas: any[] = [];
   all_query: string = '';
   constructor(private api: ApiService, private modalService: NgbModal) {}
 
@@ -25,6 +26,9 @@ export class TableDesarrolloComponent implements OnInit {
     this.api.getDesarrollos().subscribe((result) => {
       if (result.length > 0) this.desarrollos = result;
       else this.desarrollos = [];
+      result.forEach(item => {
+        if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
+      });
     });
   }
 

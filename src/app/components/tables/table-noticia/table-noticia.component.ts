@@ -13,9 +13,10 @@ import { ApiService } from 'src/app/services/api.service';
 export class TableNoticiaComponent implements OnInit {
   @Input() noticias: Noticia[];
   fuente_query: string = '';
+  fuentes: any[] = [];
   categorias: any[];
-  actividad_query: number = -1;
   fecha_query: string = '';
+  fechas: any[] = [];
   all_query: string = '';
   constructor(private api: ApiService, private modalService: NgbModal) { }
 
@@ -27,6 +28,10 @@ export class TableNoticiaComponent implements OnInit {
     this.api.getNoticias().subscribe((result) => {
       if (result.length > 0) this.noticias = this.convertNoticias(result);
       else this.noticias = [];
+      result.forEach(item => {
+        if (this.fuentes.indexOf(item.fuente) == -1) this.fuentes.push(item.fuente);
+        if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
+      });
     });
   }
 

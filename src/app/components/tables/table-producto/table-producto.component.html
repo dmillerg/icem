@@ -17,14 +17,14 @@
     <div class="contenedor-filtro"> <label for="fecha">Fecha</label>
         <select [(ngModel)]="fecha_query" name="fecha" id="fecha" class="selecc">
             <option value="">Todas las fechas</option>
-            <option *ngFor="let item of productos" [value]="item.fecha">{{item.fecha| date: 'short'}}</option>
+            <option *ngFor="let item of fechas" [value]="item">{{item| date: 'short'}}</option>
         </select>
     </div>
 
     <div class="contenedor-filtro"> <label for="categoria">Categorías</label>
         <select [(ngModel)]="categoria_query" name="categoria" id="categoria" class="selecc">
             <option value="-1">Todas las categorías</option>
-            <option *ngFor="let item of productos" [value]="item.categoria">{{item.categoria}}</option>
+            <option *ngFor="let item of categorias" [value]="item">{{item}}</option>
         </select>
     </div>
 </div>

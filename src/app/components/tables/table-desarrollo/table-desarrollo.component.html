@@ -9,7 +9,7 @@
     <div class="contenedor-filtro"> <label for="fecha">Fecha</label>
         <select [(ngModel)]="fecha_query" name="fecha" id="fecha" class="selecc">
             <option value="">Todas las fechas</option>
-            <option *ngFor="let item of desarrollos" [value]="item.fecha">{{item.fecha| date: 'short'}}</option>
+            <option *ngFor="let item of fechas" [value]="item">{{item| date: 'short'}}</option>
         </select>
     </div>
 
