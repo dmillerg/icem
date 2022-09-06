@@ -72,12 +72,12 @@ import { RatingBarComponent } from './components/rating-bar/rating-bar.component
 import { ContactenosComponent } from './components/pages/contactenos/contactenos.component';
 import { TableMensajesComponent } from './components/tables/table-mensajes/table-mensajes.component';
 import { ModalMensajeComponent } from './modals/modal-mensaje/modal-mensaje.component';
-import { UserActiveFilter, UserFilter } from './pipes/usuario/userfilter.pipe';
+import { UserActivePipe, UserPipe } from './pipes/usuario/userfilter.pipe';
 import { FechaPipe } from './pipes/fecha/fecha.pipe';
 import { ProductoCategoriaPipe } from './pipes/producto/producto.pipe';
-import { AllfilterPipe } from './pipes/tablefilter/allfilter.pipe';
+import { AllPipe } from './pipes/tablefilter/allfilter.pipe';
 import { NoticiaFuentePipe } from './pipes/noticia/noticia.pipe';
-import { DesarrolloTituloFilter } from './pipes/desarrollo/desarrollo.pipe';
+import { DesarrolloTituloPipe } from './pipes/desarrollo/desarrollo.pipe';
 import { PostsCorreoPipe, PostsUsuarioPipe, PostsVistoPipe } from './pipes/posts/posts.pipe';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
@@ -142,13 +142,13 @@ import { PostsCorreoPipe, PostsUsuarioPipe, PostsVistoPipe } from './pipes/posts
     ProductoEspecificationComponent,
     RatingBarComponent,
     ContactenosComponent,
-    UserFilter,
-    UserActiveFilter,
+    UserPipe,
+    UserActivePipe,
     FechaPipe,
     ProductoCategoriaPipe,
-    AllfilterPipe,
+    AllPipe,
     NoticiaFuentePipe,
-    DesarrolloTituloFilter,
+    DesarrolloTituloPipe,
     PostsUsuarioPipe,
     PostsCorreoPipe,
     PostsVistoPipe,

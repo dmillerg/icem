@@ -1,8 +1,8 @@
-import { AllfilterPipe } from './allfilter.pipe';
+import { AllPipe } from './allfilter.pipe';
 
-describe('AllfilterPipe', () => {
+describe('AllPipe', () => {
   it('create an instance', () => {
-    const pipe = new AllfilterPipe();
+    const pipe = new AllPipe();
     expect(pipe).toBeTruthy();
   });
 });

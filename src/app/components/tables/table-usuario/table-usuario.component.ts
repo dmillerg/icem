@@ -16,9 +16,9 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TableUsuarioComponent implements OnInit {
   @Input() usuarios: any[] = [];
-  usuario: string = '';
-  actividad: number = -1;
-  fecha: string = '';
+  usuario_query: string = '';
+  actividad_query: number = -1;
+  fecha_query: string = '';
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
 
   ngOnInit(): void {

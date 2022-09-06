@@ -2,12 +2,12 @@
     <div class="filtros">
 
         <div class="contenedor-filtro"> <label for="usuario">Usuario</label>
-            <input type="text" style="color: black;" class="forms-control" placeholder="Buscar.." [(ngModel)]="usuario"
+            <input type="text" style="color: black;" class="forms-control" placeholder="Buscar.." [(ngModel)]="usuario_query"
                 name="filterpost" />
         </div>
 
         <div class="contenedor-filtro"> <label for="actividad">Actividad</label>
-            <select [(ngModel)]="actividad" name="usuario" id="actividad" class="selecc">
+            <select [(ngModel)]="actividad_query" name="usuario" id="actividad" class="selecc">
                 <option value="-1">todos</option>
                 <option value="0">inactivo</option>
                 <option value="1">activo</option>
@@ -16,9 +16,9 @@
 
         <!-- <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha"> -->
         <div class="contenedor-filtro"> <label for="fecha">Fecha</label>
-            <select [(ngModel)]="fecha" name="fecha" id="fecha" class="selecc">
+            <select [(ngModel)]="fecha_query" name="fecha" id="fecha" class="selecc">
                 <option value="">Todas las fechas</option>
-                <option *ngFor="let item of usuarios" [value]="item.fecha">{{item.fecha| date: 'short'}}</option>
+                <option *ngFor="let item of usuarios" [value]="item.fecha_query">{{item.fecha| date: 'short'}}</option>
             </select>
         </div>
     </div>
@@ -33,7 +33,7 @@
             <th>activo</th>
             <th>acciones</th>
         </thead>
-        <tr *ngFor="let item of usuarios | user_filter: usuario | user_active_filter: actividad | fecha_filter: fecha">
+        <tr *ngFor="let item of usuarios | user_pipe: usuario_query | user_active_pipe: actividad_query | fecha_pipe: fecha_query">
             <td>{{item.id}}</td>
             <td>{{item.usuario}}</td>
             <!-- <td>{{item.password}}</td> -->

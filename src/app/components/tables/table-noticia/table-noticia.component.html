@@ -1,12 +1,12 @@
 <div class="filtros">
 
     <div class="contenedor-filtro"> <label for="all">Todo</label>
-        <input type="text" style="color: black;" class="forms-control" placeholder="Buscar.." [(ngModel)]="all"
+        <input type="text" style="color: black;" class="forms-control" placeholder="Buscar.." [(ngModel)]="all_query"
             name="filterpost" />
     </div>
 
     <div class="contenedor-filtro"> <label for="actividad">Actividad</label>
-        <select [(ngModel)]="actividad" name="usuario" id="actividad" class="selecc">
+        <select [(ngModel)]="actividad_query" name="usuario" id="actividad" class="selecc">
             <option value="-1">todos</option>
             <option value="0">inactivo</option>
             <option value="1">activo</option>
@@ -15,14 +15,14 @@
 
     <!-- <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha"> -->
     <div class="contenedor-filtro"> <label for="fecha">Fecha</label>
-        <select [(ngModel)]="fecha" name="fecha" id="fecha" class="selecc">
+        <select [(ngModel)]="fecha_query" name="fecha" id="fecha" class="selecc">
             <option value="">Todas las fechas</option>
             <option *ngFor="let item of noticias" [value]="item.fecha">{{item.fecha| date: 'short'}}</option>
         </select>
     </div>
 
     <div class="contenedor-filtro"> <label for="categoria">Fuente</label>
-        <select [(ngModel)]="fuente" name="fuentes" id="fuentes" class="selecc">
+        <select [(ngModel)]="fuente_query" name="fuentes" id="fuentes" class="selecc">
             <option value="">Todas las fuentes</option>
             <option *ngFor="let item of noticias" [value]="item.fuente">{{item.fuente}}</option>
         </select>
@@ -38,7 +38,7 @@
             <th>imagen</th>
             <th>acciones</th>
         </thead>
-        <tr *ngFor="let item of noticias | user_active_filter: actividad | fecha_filter : fecha | noticia_fuente_filter: fuente">
+        <tr *ngFor="let item of noticias | user_active_pipe: actividad_query | fecha_pipe : fecha_query | noticia_fuente_pipe: fuente_query">
             <td>{{item.id}}</td>
             <td >{{item.titulo}}</td>
             <td >{{item.descripcion}}</td>

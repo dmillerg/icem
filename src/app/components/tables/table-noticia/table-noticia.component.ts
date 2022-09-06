@@ -12,11 +12,11 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TableNoticiaComponent implements OnInit {
   @Input() noticias: Noticia[];
-  fuente: string = '';
+  fuente_query: string = '';
   categorias: any[];
-  actividad: number = -1;
-  fecha: string = '';
-  all: string = '';
+  actividad_query: number = -1;
+  fecha_query: string = '';
+  all_query: string = '';
   constructor(private api: ApiService, private modalService: NgbModal) { }
 
   ngOnInit(): void {

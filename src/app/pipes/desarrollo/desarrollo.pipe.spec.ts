@@ -1,8 +1,8 @@
-import { DesarrolloTituloFilter } from './desarrollo.pipe';
+import { DesarrolloTituloPipe } from './desarrollo.pipe';
 
-describe('DesarrolloTituloFilter', () => {
+describe('DesarrolloTituloPipe', () => {
   it('create an instance', () => {
-    const pipe = new DesarrolloTituloFilter();
+    const pipe = new DesarrolloTituloPipe();
     expect(pipe).toBeTruthy();
   });
 });

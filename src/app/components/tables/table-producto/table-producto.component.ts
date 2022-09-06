@@ -12,11 +12,11 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TableProductoComponent implements OnInit {
   @Input() productos: Producto[];
-  categoria: number = -1;
+  categoria_query: number = -1;
   categorias: any[];
-  actividad: number = -1;
-  fecha: string = '';
-  all: string = '';
+  actividad_query: number = -1;
+  fecha_query: string = '';
+  all_query: string = '';
   constructor(private api: ApiService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
