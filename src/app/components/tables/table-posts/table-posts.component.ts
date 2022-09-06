@@ -13,6 +13,9 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TablePostsComponent implements OnInit {
   @Input() posts: Posts[];
+  correo_query: string = '';
+  usuario_query: string = '';
+  visto_query: number = -1;
   constructor(private api: ApiService, private modalService: NgbModal) {}
 
   ngOnInit(): void {

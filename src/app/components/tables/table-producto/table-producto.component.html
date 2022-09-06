@@ -1,5 +1,36 @@
+<div class="filtros">
+
+    <div class="contenedor-filtro"> <label for="all">Todo</label>
+        <input type="text" style="color: black;" class="forms-control" placeholder="Buscar.." [(ngModel)]="all"
+            name="filterpost" />
+    </div>
+
+    <div class="contenedor-filtro"> <label for="actividad">Actividad</label>
+        <select [(ngModel)]="actividad" name="usuario" id="actividad" class="selecc">
+            <option value="-1">todos</option>
+            <option value="0">inactivo</option>
+            <option value="1">activo</option>
+        </select>
+    </div>
+
+    <!-- <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha"> -->
+    <div class="contenedor-filtro"> <label for="fecha">Fecha</label>
+        <select [(ngModel)]="fecha" name="fecha" id="fecha" class="selecc">
+            <option value="">Todas las fechas</option>
+            <option *ngFor="let item of productos" [value]="item.fecha">{{item.fecha| date: 'short'}}</option>
+        </select>
+    </div>
+
+    <div class="contenedor-filtro"> <label for="categoria">Categorías</label>
+        <select [(ngModel)]="categoria" name="categoria" id="categoria" class="selecc">
+            <option value="-1">Todas las categorías</option>
+            <option *ngFor="let item of productos" [value]="item.categoria">{{item.categoria}}</option>
+        </select>
+    </div>
+</div>
 <div style="overflow: auto;width: 100%;" class="table-mine scroll-mine">
-    <table class="table table-dark text-center  table-mine">
+    
+    <table class="table table-dark text-center table-mine">
         <thead>
             <th>id</th>
             <th>titulo</th>
@@ -13,7 +44,7 @@
             <th>activo</th>
             <th>acciones</th>
         </thead>
-        <tr *ngFor="let item of productos">
+        <tr *ngFor="let item of productos | user_active_filter: actividad | fecha_filter: fecha | producto_categoria: categoria | allfilter: all">
             <td>{{item.id}}</td>
             <td>{{item.titulo}}</td>
             <!-- <td>{{item.descripcion}}</td> -->

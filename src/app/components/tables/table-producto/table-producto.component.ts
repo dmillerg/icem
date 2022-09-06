@@ -12,7 +12,12 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TableProductoComponent implements OnInit {
   @Input() productos: Producto[];
-  constructor(private api: ApiService, private modalService: NgbModal) {}
+  categoria: number = -1;
+  categorias: any[];
+  actividad: number = -1;
+  fecha: string = '';
+  all: string = '';
+  constructor(private api: ApiService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.loadProductos();
@@ -49,8 +54,8 @@ export class TableProductoComponent implements OnInit {
     });
   }
 
-  activarProducto(item: Producto){
-    this.api.activarProducto(item.id, !item.activo).subscribe(result=>{
+  activarProducto(item: Producto) {
+    this.api.activarProducto(item.id, !item.activo).subscribe(result => {
       this.loadProductos();
     })
   }

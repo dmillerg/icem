@@ -11,13 +11,12 @@ export class LoadingComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngAfterViewInit(): void {
-    this.loading = false;
-  }
-
-  ngOnInit(): void {
     this.loading = true;
     setTimeout(() => {
       document.querySelector('.img').classList.toggle('active');
-    }, 500)
+    }, 500);
+  }
+
+  ngOnInit(): void {
   }
 }

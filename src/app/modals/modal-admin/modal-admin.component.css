@@ -123,4 +123,6 @@
   transform: scale(2.2) ;
 }
 
-
+tr{
+    max-height: 100px;
+}
