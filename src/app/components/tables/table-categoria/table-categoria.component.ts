@@ -12,6 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TableCategoriaComponent implements OnInit {
   @Input() categorias: Categoria[];
+  all_query: string = "";
   constructor(private api: ApiService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
