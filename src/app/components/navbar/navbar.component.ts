@@ -167,7 +167,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   disminuirSec() {
-    if (this.tiempo.hora == 0 && this.tiempo.minuto == 0 && this.tiempo.segundo == 0) {
+    if (this.tiempo.hora <= 0 && this.tiempo.minuto <= 0 && this.tiempo.segundo <= 0) {
       clearInterval(this.intervalo);
       this.deleteCarritoTime();
     } else {
