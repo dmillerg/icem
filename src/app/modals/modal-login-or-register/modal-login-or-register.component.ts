@@ -159,17 +159,23 @@ export class ModalLoginOrRegisterComponent implements OnInit {
   }
 
   sendEmailActivacion(link, correo) {
-    this.api.sendEmail(correo, 'Activacion de la cuenta de usuario para ' + this.register.usuario, `Para activar su cuenta y poder acceder a nuestro sitio debe presionar el link que se le manda a continuacion \n ${environment.url_page}/#/inicio?link=${link}`).subscribe((resul) => {
-      this.errorRegisterUser = true;
-      this.success = true;
-      this.registerLoading = false;
-      this.activateLoading = false;
-      this.activarCuenta = false;
-    }, error=>{
-      this.registerLoading = false;
-      this.activateLoading = false;
-      this.message.error('', 'No se pudo mandar el correo de verificación, por favor intentelo mas tarde');
-    });
+    this.api.sendEmail(correo,
+      'Activación de la cuenta de usuario',
+      `Hola ${this.register.usuario ? this.register.usuario : this.login.usuario}, estamos encantados de recibir a un nuevo cliente en nuestra empresa. Para confirmar la activación de su cuenta por favor presione el botón que se le presenta debajo. Esperamos su visita pronto!!.`,
+      'Si usted no es el que pidió la activación de la cuenta simplemente borre este correo, no se preocupe su correo no podrá ser usado sin su autorización.',
+      'link',
+      link,
+      `${environment.url_page}/#/inicio?link=${link}`).subscribe((resul) => {
+        this.errorRegisterUser = true;
+        this.success = true;
+        this.registerLoading = false;
+        this.activateLoading = false;
+        this.activarCuenta = false;
+      }, error => {
+        this.registerLoading = false;
+        this.activateLoading = false;
+        this.message.error('', 'No se pudo mandar el correo de verificación, por favor intentelo mas tarde');
+      });
   }
 
   activateAccount() {
@@ -227,7 +233,13 @@ export class ModalLoginOrRegisterComponent implements OnInit {
 
   sendEmailForgotPassword(user: Usuario) {
     let reset = this.generarLink(user.id);
-    this.api.sendEmail(user.correo, 'Contraseña olvidada por el usuario ' + this.login.usuario, `Para restablecer su contraseña por favor presione el link a continuación: \n http://localhost:4200/#/inicio?reset=${reset}`).subscribe((resul) => {
+    this.api.sendEmail(user.correo,
+      'Contraseña olvidada por el usuario',
+      'Contraseña olvidada por el usuario ' + this.login.usuario, `Para restablecer su contraseña por favor presione el link a continuación: \n http://localhost:4200/#/inicio?reset=${reset}`,
+      'reset',
+      reset,
+      `${environment.url_page}/#/inicio?link=${reset}`
+    ).subscribe((resul) => {
       this.errorRegisterUser = true;
       this.cargaemail = false;
       this.success = true;

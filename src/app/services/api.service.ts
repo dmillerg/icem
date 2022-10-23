@@ -991,23 +991,27 @@ export class ApiService {
   }
 
   /**
-   * Envia un correo para dar una informacion
-   * @param correo del destinatario
+   * Envia un correo desde la cuenta oficial de ICEM
+   * @param correo del remitente
    * @param asunto del correo
-   * @param mensaje del correo con la informacion pertinente
-   * @param infoadd del correo con la informacion pertinente
+   * @param mensaje del correo
+   * @param infoadd algo mas que se quiera agregar
+   * @param tipo de correo ejemplo: reset o link
+   * @param link del correo
+   * @param url a redireccionar
    * @returns 
    */
-  sendEmail(correo: string, asunto: string = '', mensaje: string = '', infoadd: string = '') {
+  sendEmail(correo: string, asunto: string = '', mensaje: string = '', infoadd: string = '', tipo: string = '', link: string='' , url: string ='') {
     let direccion = this.url + 'send';
-    const headers = { 'content-type': 'application/json' };
-    const params = {
-      correo: correo,
-      asunto: asunto,
-      mensaje: mensaje,
-      infoadd: infoadd,
-    };
-    return this.http.get(direccion, { headers: headers, params: params });
+    const formData = new FormData();
+    formData.append('correo', correo);
+    formData.append('asunto', asunto);
+    formData.append('mensaje', mensaje);
+    formData.append('infoadd', infoadd);
+    formData.append('tipo', tipo);
+    formData.append('link', link);
+    formData.append('url', url);
+    return this.http.post(direccion, formData);
   }
 
   /**
