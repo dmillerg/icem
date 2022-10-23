@@ -234,11 +234,12 @@ export class ModalLoginOrRegisterComponent implements OnInit {
   sendEmailForgotPassword(user: Usuario) {
     let reset = this.generarLink(user.id);
     this.api.sendEmail(user.correo,
-      'Contraseña olvidada por el usuario',
-      'Contraseña olvidada por el usuario ' + this.login.usuario, `Para restablecer su contraseña por favor presione el link a continuación: \n http://localhost:4200/#/inicio?reset=${reset}`,
+      'Contraseña olvidada por el usuario ' + this.login.usuario,
+       `Hola ${this.login.usuario}, hemos notado que ha olvidado su contraseña, no hay de que preocuparse solo presione el botón a continuación para confirmar su identidad.`,
+      `En caso de que el botón no funcionará solo siga el link: ${environment.url_page}/#/inicio?reset=${reset}`,
       'reset',
       reset,
-      `${environment.url_page}/#/inicio?link=${reset}`
+      `${environment.url_page}/#/inicio?reset=${reset}`
     ).subscribe((resul) => {
       this.errorRegisterUser = true;
       this.cargaemail = false;
