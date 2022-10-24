@@ -11,7 +11,7 @@
             <td>{{item.id}}</td>
             <td>{{item.nombre}}</td>
             <td>{{item.descripcion}}</td>
-            <td>{{item.config}}</td>
+            <td>{{(item.config/24)>=1?(item.config/24)+'dia(s)':(item.config*60)>=1?(item.config*60)+' min': (item.config*3600)+' seg'}} </td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateConfiguracion(item)"> <i
                         class="bi bi-pencil svg-shadow"></i>
