@@ -90,7 +90,7 @@
                 </li>
                 <li *ngIf="acceso!='acceder/registrarse'" class="nav-item nav-mine" style="position: relative;"><i
                         class="bi bi-cart3 svg-shadow">
-                        <div class="cant-cart">{{carrito.length}}</div>
+                        <div class="cant-cart" *ngIf="carrito.length>0">{{carrito.length}}</div>
                     </i>
                     <ul class="menu"
                         [ngClass]="{'menu-left': calcularWindowWidthSize() && !calcularWindowHeightSize(), 'menu-right': !calcularWindowWidthSize(), 'menu-top': calcularWindowWidthSize() && calcularWindowHeightSize()}">
