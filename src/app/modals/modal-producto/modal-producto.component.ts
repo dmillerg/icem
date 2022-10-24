@@ -53,7 +53,6 @@ export class ModalProductoComponent implements OnInit {
 
   imagenes: any[] = [];
   imagenes_eliminadas: any[] = [];
-  position: number = 0;
 
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
@@ -64,7 +63,6 @@ export class ModalProductoComponent implements OnInit {
     this.api.getCategorias().subscribe((result) => {
       this.categorias = result;
     });
-    this.position = this.producto.imagen.split(',').length;
   }
 
   rellenarSiEditas() {
@@ -121,7 +119,8 @@ export class ModalProductoComponent implements OnInit {
     console.log(this.modalAction, this.modalAction == "Editar");
     if (this.modalAction == "Editar") {
       formData.append('eliminadas', this.imagenes_eliminadas.toString());
-      formData.append('position', this.position.toString());
+      console.log(this.producto.imagen);
+      
       this.api.updateProducto(formData, this.producto.id).subscribe((result) => {
         console.log(result);
         this.actiModal.close('Productos');
@@ -178,6 +177,8 @@ export class ModalProductoComponent implements OnInit {
 
 
   eliminarFoto(name: string) {
+    console.log(name);
+    
     let nombre = name.substring(name.indexOf('=') + 1, name.length)
     console.log(name);
 
@@ -186,9 +187,6 @@ export class ModalProductoComponent implements OnInit {
       this.producto.imagen = this.producto.imagen.split(',').splice(i).toString();
       this.imagenes_eliminadas.push(nombre);
     }
-    let pos = this.imagenes.indexOf(name);
-    console.log(pos);
-
-    this.imagenes.splice(pos);
+    this.imagenes= this.imagenes.filter(e=>e!=name)
   }
 }
