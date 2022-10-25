@@ -112,15 +112,17 @@ export class ModalProductoComponent implements OnInit {
     formData.append('especificaciones', this.producto.especificaciones.toString());
     formData.append('garantia', this.producto.garantia.toString());
     formData.append('precio', this.producto.precio.toString());
-    formData.append('imagen', this.producto.imagen.toString());
     formData.append('disponibilidad', this.producto.disponibilidad.toString());
     // console.log("formData :",formData);
     // console.log("producto :",this.producto);
     console.log(this.modalAction, this.modalAction == "Editar");
     if (this.modalAction == "Editar") {
+      let pasadas = 
+      // formData.append('imagen', this.imagenes.toString());
+      console.log('imagenes=>',this.imagenes);
+      console.log('imagen=>',this.producto.imagen);
       formData.append('eliminadas', this.imagenes_eliminadas.toString());
-      console.log(this.producto.imagen);
-      
+
       this.api.updateProducto(formData, this.producto.id).subscribe((result) => {
         console.log(result);
         this.actiModal.close('Productos');
@@ -129,6 +131,7 @@ export class ModalProductoComponent implements OnInit {
         this.actiModal.close('Productos');
       });
     } else {
+    formData.append('imagen', this.producto.imagen.toString());
       this.api.addProducto(formData).subscribe((result) => {
         console.log(result);
         this.darPublicidadNuevoProducto();
@@ -148,7 +151,7 @@ export class ModalProductoComponent implements OnInit {
         let mensaje: string = `Hola ${e.nombre} hemos visto que te interesan los productos de la categoría ${this.categorias.filter(i => i.id == this.producto.categoria)[0].nombre}, un nuevo producto de esta categoría ha sido agregado recientemente y no podíamos dejar de avisarte, te dejamos el nombre aquí debajo, puedes obtener mas información en nuestro sitio web https://wwww.icem.cu. Gracias por tu preferencia. \n El nombre del producto es: "${this.producto.titulo}" `;
         if (e.ultima_compra_id == this.producto.categoria) {
           console.log('email enviado');
-          
+
           this.api.sendEmail(e.correo, asunto, mensaje, 'publicidad').subscribe(result2 => {
 
           })
@@ -178,7 +181,7 @@ export class ModalProductoComponent implements OnInit {
 
   eliminarFoto(name: string) {
     console.log(name);
-    
+
     let nombre = name.substring(name.indexOf('=') + 1, name.length)
     console.log(name);
 
@@ -187,6 +190,6 @@ export class ModalProductoComponent implements OnInit {
       this.producto.imagen = this.producto.imagen.split(',').splice(i).toString();
       this.imagenes_eliminadas.push(nombre);
     }
-    this.imagenes= this.imagenes.filter(e=>e!=name)
+    this.imagenes = this.imagenes.filter(e => e != name)
   }
 }
