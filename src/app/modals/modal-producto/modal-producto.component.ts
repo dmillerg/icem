@@ -113,15 +113,10 @@ export class ModalProductoComponent implements OnInit {
     formData.append('garantia', this.producto.garantia.toString());
     formData.append('precio', this.producto.precio.toString());
     formData.append('disponibilidad', this.producto.disponibilidad.toString());
-    // console.log("formData :",formData);
-    // console.log("producto :",this.producto);
     console.log(this.modalAction, this.modalAction == "Editar");
     if (this.modalAction == "Editar") {
-      console.log('imagenes=>',this.imagenes);
-      console.log('imagen=>',this.producto.imagen);
-      
-    // formData.append('imagen', this.producto.imagen.toString());
-
+      // console.log('imagenes=>',this.imagenes);
+      // console.log('imagen=>',this.producto.imagen);
       formData.append('eliminadas', this.imagenes_eliminadas.toString());
       formData.append('anteriores', this.producto_pasado.imagen.toString());
       console.log(this.producto.imagen);
