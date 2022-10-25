@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Categoria } from 'src/app/models/categoria';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-modal-producto',
@@ -53,6 +54,8 @@ export class ModalProductoComponent implements OnInit {
 
   imagenes: any[] = [];
   imagenes_eliminadas: any[] = [];
+
+  error_cantidad_img = '';
 
   constructor(private activeModal: NgbActiveModal, private api: ApiService) {
     this.actiModal = activeModal;
@@ -131,48 +134,36 @@ export class ModalProductoComponent implements OnInit {
     } else {
       formData.append('imagen', this.producto.imagen.toString());
       this.api.addProducto(formData).subscribe((result) => {
-        console.log(result);
-        this.darPublicidadNuevoProducto();
+        // console.log(result);
         this.actiModal.close('Productos');
       }, (error) => {
-        console.log(error);
+        // console.log(error);
         this.actiModal.close('Productos');
       })
     }
 
   }
 
-  darPublicidadNuevoProducto() {
-    let asunto: string = 'Un nuevo producto ha sido puesto en venta'
-    this.api.getUsuarios().subscribe(result => {
-      result.forEach(e => {
-        let mensaje: string = `Hola ${e.nombre} hemos visto que te interesan los productos de la categoría ${this.categorias.filter(i => i.id == this.producto.categoria)[0].nombre}, un nuevo producto de esta categoría ha sido agregado recientemente y no podíamos dejar de avisarte, te dejamos el nombre aquí debajo, puedes obtener mas información en nuestro sitio web https://wwww.icem.cu. Gracias por tu preferencia. \n El nombre del producto es: "${this.producto.titulo}" `;
-        if (e.ultima_compra_id == this.producto.categoria) {
-          console.log('email enviado');
-
-          this.api.sendEmail(e.correo, asunto, mensaje, 'publicidad').subscribe(result2 => {
-
-          })
-        }
-      })
-    })
-  }
-
   fileEvent(fileInput) {
     // this.imagenes = []
     let files = (<HTMLInputElement>fileInput.target).files;
-    for (let i = 0; i < files.length; i++) {
-      let file = files[i];
-      //  console.log(fileInput);
-      this.uploadFiles = fileInput.target.files;
-      console.log(this.uploadFiles);
+    if (this.imagenes.length <= 10 && (this.imagenes.length + files.length) <= 10) {
+      this.error_cantidad_img = ''
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        //  console.log(fileInput);
+        this.uploadFiles = fileInput.target.files;
+        console.log(this.uploadFiles);
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        // this.producto.imagen = reader.result as string;
-        this.imagenes.push(reader.result as string);
+        const reader = new FileReader();
+        reader.onload = () => {
+          // this.producto.imagen = reader.result as string;
+          this.imagenes.push(reader.result as string);
+        }
+        reader.readAsDataURL(file);
       }
-      reader.readAsDataURL(file);
+    } else {
+      this.error_cantidad_img = 'El máximo de imagenes por producto es de 10';
     }
   }
 

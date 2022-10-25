@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   url_backend: 'http://localhost:9707/apis/',
-  url_page: 'http://nuevo.icem.cu/',
+  url_page: 'http://localhost:4200/',
 };
 
 /*
