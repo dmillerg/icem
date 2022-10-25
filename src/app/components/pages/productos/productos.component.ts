@@ -287,6 +287,9 @@ export class ProductosComponent implements OnInit {
       const p = this.productos_all.filter(e=>e.id==id)[0];
       this.storage.store('producto',p)
       if(p) this.producto = p;
+      setTimeout(() => {
+        document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
+      }, 500)
     });
   }
 }
