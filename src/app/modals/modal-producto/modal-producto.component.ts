@@ -115,19 +115,11 @@ export class ModalProductoComponent implements OnInit {
     formData.append('disponibilidad', this.producto.disponibilidad.toString());
     console.log(this.modalAction, this.modalAction == "Editar");
     if (this.modalAction == "Editar") {
-<<<<<<< HEAD
-      let pasadas = 
-      // formData.append('imagen', this.imagenes.toString());
-      console.log('imagenes=>',this.imagenes);
-      console.log('imagen=>',this.producto.imagen);
-      formData.append('eliminadas', this.imagenes_eliminadas.toString());
-=======
       // console.log('imagenes=>',this.imagenes);
       // console.log('imagen=>',this.producto.imagen);
       formData.append('eliminadas', this.imagenes_eliminadas.toString());
       formData.append('anteriores', this.producto_pasado.imagen.toString());
       console.log(this.producto.imagen);
->>>>>>> fb3915c914de3210c28c93c86699e90ed66c5b29
 
       this.api.updateProducto(formData, this.producto.id).subscribe((result) => {
         console.log(result);
@@ -137,11 +129,7 @@ export class ModalProductoComponent implements OnInit {
         this.actiModal.close('Productos');
       });
     } else {
-<<<<<<< HEAD
-    formData.append('imagen', this.producto.imagen.toString());
-=======
       formData.append('imagen', this.producto.imagen.toString());
->>>>>>> fb3915c914de3210c28c93c86699e90ed66c5b29
       this.api.addProducto(formData).subscribe((result) => {
         console.log(result);
         this.darPublicidadNuevoProducto();
