@@ -1,5 +1,6 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Categoria } from 'src/app/models/categoria';
@@ -95,7 +96,10 @@ export class ProductosComponent implements OnInit {
   positionProductsLeft: number = -1;
   positionProductsRight: number = -1;
 
-  constructor(private api: ApiService, public storage: SessionStorageService, private modalService: NgbModal) { }
+  constructor(private api: ApiService,
+    public storage: SessionStorageService,
+    private modalService: NgbModal,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadCategorias();
@@ -124,7 +128,7 @@ export class ProductosComponent implements OnInit {
         this.producto = result;
       });
     }
-  
+
     if (this.storage.retrieve('usuario')) {
       let user = this.storage.retrieve('usuario');
       this.alias = user.usuario;
@@ -139,6 +143,8 @@ export class ProductosComponent implements OnInit {
         this.correo = '';
       }
     })
+    this.navigateToProduct();
+
   }
 
   loadProductos() {
@@ -151,6 +157,7 @@ export class ProductosComponent implements OnInit {
         }
         this.positionProductsLeft = 4;
         this.positionProductsRight = 0;
+        this.navigateToProduct()
         // this.storage.clear('producto');
       } else {
         this.productos = [];
@@ -270,5 +277,19 @@ export class ProductosComponent implements OnInit {
       this.positionProductsLeft = p >= 0 ? this.positionProductsLeft - 1 : this.positionProductsLeft;
       document.getElementById(this.positionProductsRight.toString() + 'scroll').scrollIntoView({ block: 'nearest', behavior: 'smooth' })
     }
+  }
+
+  navigateToProduct() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      let id = params['id'];
+      this.storage.store('categoria',{id:-1,nombre:'Todos'})
+      console.log('idd =>',id);
+      const p = this.productos_all.filter(e=>e.id==id)[0];
+      this.storage.store('producto',p)
+      if(p) this.producto = p;
+      setTimeout(() => {
+        document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
+      }, 500)
+    });
   }
 }
