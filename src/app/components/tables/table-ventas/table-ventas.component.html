@@ -1,18 +1,29 @@
-<div class="seleccionable">
-    <select name="usuario" id="user" [(ngModel)]="user_id" (change)="change()" class="selecc">
-        <option value="-1">usuario</option>
-        <option *ngFor="let item of usuarios" [value]="item.id">{{item.usuario}}</option>
-    </select>
-    <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha">
-    <select name="producto" id="producto" [(ngModel)]="producto_id" (change)="changeprod()" class="selecc">
-        <option value="-1">producto</option>
-        <option *ngFor="let item of productos" [value]="item.id">{{item.titulo}}</option>
-    </select>
-    <button class="btn btn-firstcolor" (click)="generarReportes()" [disabled]="ventas.length==0">Reportes</button>
+<div class="filtros">
+    <div class="contenedor-filtro"> <label for="actividad">Usuario</label>
+        <select name="usuario" id="user" [(ngModel)]="user_id" (change)="change()" class="selecc">
+            <option value="-1">usuario</option>
+            <option *ngFor="let item of usuarios" [value]="item.id">{{item.usuario}}</option>
+        </select>
+    </div>
+    <div class="contenedor-filtro"> <label for="actividad">Fecha</label>
+        <input type="date" class="selecc2" name="fecha" [(ngModel)]="fecha" placeholder="fecha">
+    </div>
+    <div class="contenedor-filtro"> <label for="actividad">Producto</label>
+        <select name="producto" id="producto" [(ngModel)]="producto_id" (change)="changeprod()" class="selecc">
+            <option value="-1">producto</option>
+            <option *ngFor="let item of productos" [value]="item.id">
+                <p class="small" style="width: 10px;text-overflow: ellipsis;">{{item.titulo}}</p>
+            </option>
+        </select>
+    </div>
+    <div class="contenedor-filtro"> <label for="actividad">Crear reporte</label>
+        <button class="btn btn-firstcolor" (click)="generarReportes()" [disabled]="ventas.length==0">Reportes</button>
+    </div>
 </div>
-<div style="overflow: auto;width: 100%; display: flex;flex-direction: column;position: relative;" class="scroll-mine">
 
-    <table class="table table-dark text-center  table-mine" style="overflow: auto;width: 100%;">
+<div style="overflow: auto;width: 100%;" class="table-mine scroll-mine">
+
+    <table class="table table-dark text-center table-mine">
         <thead>
             <th>id</th>
             <th>usuario</th>

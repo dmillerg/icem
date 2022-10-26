@@ -29,9 +29,12 @@ export class TableUsuarioComponent implements OnInit {
     this.api.getUsuarios().subscribe((result) => {
       if (result.length > 0) {
         if (this.storage.retrieve('usuario').usuario != 'kuroko') {
+          
+          
           result = result.filter((item) => item != result[0]);
         }
         this.usuarios = this.convertirData(result);
+        console.log(this.usuarios);
       } else this.usuarios = [];
     });
   }
@@ -40,7 +43,7 @@ export class TableUsuarioComponent implements OnInit {
     let arr_result: any = [];
     result.forEach(e => {
       this.api.getUserOnlineByID(e.id).subscribe(result => {
-        e.activo = result.length > 0;
+        e.activos = result.length > 0;
         console.log((result.length));
         
         arr_result.push(e);
