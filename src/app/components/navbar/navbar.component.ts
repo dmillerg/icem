@@ -16,7 +16,7 @@ import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-regis
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   activo: string = 'inicio';
   cont_activo = 0;
   @Input() back_class = '';
@@ -49,12 +49,33 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private api: ApiService) {
     this.storage2 = storage;
   }
+  ngAfterViewInit(): void {
+    this.navigation();
+    this.cargarCarritoStorage();
+    this.cargarConfiguracionStorage();
+    this.cargarUsuarioStorage();
+    this.listarCategoriasProductos();
+    this.listarCarrito();
+  }
   ngOnDestroy(): void {
     clearInterval(this.intervalo);
     this.intervalo = undefined;
   }
 
   ngOnInit(): void {
+  }
+
+  navigation(){
+    this.activate(this.router.url.substring(1, this.router.url.length))
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        let url_actual = e.url.substring(1, e.url.length);
+        this.activate(url_actual)
+      }
+    });
+  }
+
+  cargarConfiguracionStorage(){
     if (this.storage.retrieve('configuraciones')) {
       let result = this.storage.retrieve('configuraciones');
       this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config)
@@ -64,7 +85,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config);
         // this.cargarTiempoRestante();
       }
-    })
+    });
+  }
+
+  cargarCarritoStorage(){
     if (this.storage.retrieve('carrito')) {
       this.carrito = this.storage.retrieve('carrito');
     }
@@ -81,8 +105,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.carrito = []
       }
     });
-    this.listarCategoriasProductos();
-    this.listarCarrito();
+  }
+
+  cargarUsuarioStorage(){
     if (this.storage.retrieve('usuario')) {
       this.acceso = this.storage.retrieve('usuario').nombre;
     }
@@ -91,16 +116,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.acceso = e.nombre;
       } else this.acceso = 'acceder/registrarse';
     })
-    console.log(this.router.url, 'asdasd');
-    this.activate(this.router.url.substring(1, this.router.url.length))
-    this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        console.log(e.url);
-        let url_actual = e.url.substring(1, e.url.length);
-        console.log(url_actual);
-        this.activate(url_actual)
-      }
-    });
   }
 
   activate(url) {
