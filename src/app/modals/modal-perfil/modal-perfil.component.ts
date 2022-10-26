@@ -31,6 +31,7 @@ export class ModalPerfilComponent implements OnInit {
   };
   timeUser: string = '';
   pedidos: any[] = [];
+  pedido: any = {id: -1};
   show_form_password: boolean = false;
   pass_old: string = '';
   new_password: string = '';

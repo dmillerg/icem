@@ -234,6 +234,11 @@
     justify-content: center;
 }
 
+.pedidos-detail{
+    background-color: white;
+    color: var(--firstcolor);
+}
+
 .side .sidebar-pedidos .list {
     width: 100%;
     height: 350px;

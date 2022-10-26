@@ -14,8 +14,8 @@
                 <label class="user-data user">{{usuario.usuario}}</label>
                 <label class="text data">usuario desde: {{timeUser}}</label>
                 <div class="btn-groups scroll-mine" style="z-index: 999;">
-                    <button class="btn btn-perfil" [hidden]="show_form_password || edit" (click)="edit=!edit;sidebarpedidos=false"><i
-                            class="bi bi-pencil-fill"></i> Editar
+                    <button class="btn btn-perfil" [hidden]="show_form_password || edit"
+                        (click)="edit=!edit;sidebarpedidos=false"><i class="bi bi-pencil-fill"></i> Editar
                         perfil</button>
                     <button class="btn btn-perfil" (click)="pedidosDetails()"><i class="bi bi-bag-fill"></i>
                         Ver pedidos</button>
@@ -46,13 +46,15 @@
                     <div class="input-perfil" [hidden]="show_form_password">
                         <i class="bi bi-chat-fill prev"></i>
                         <label for="">Nombre:</label>
-                        <input type="text" class="in text" name="nombre" [(ngModel)]="usuario.nombre" [disabled]="!edit">
+                        <input type="text" class="in text" name="nombre" [(ngModel)]="usuario.nombre"
+                            [disabled]="!edit">
                         <!-- <i class="bi bi-pencil-fill next"></i> -->
                     </div>
                     <div class="input-perfil" [hidden]="show_form_password">
                         <i class="bi bi-envelope-fill prev"></i>
                         <label for="">Correo:</label>
-                        <input type="text" class="in text" name="correo" [(ngModel)]="usuario.correo" [disabled]="!edit">
+                        <input type="text" class="in text" name="correo" [(ngModel)]="usuario.correo"
+                            [disabled]="!edit">
                         <!-- <i class="bi bi-pencil-fill next"></i> -->
                     </div>
                     <div class="input-perfil" [hidden]="show_form_password">
@@ -137,7 +139,8 @@
                         (click)="pedidosDetails()"><i class="bi bi-caret-left-fill"></i></button>
                     <h4 class="h4" style="text-shadow: 0 5px 5px rgba(0, 0 ,0,0.4);color: white;">Pedidos</h4>
                     <div class="list">
-                        <div class="list-pedidos scroll-mine" *ngFor="let item of pedidos">
+                        <div class="list-pedidos scroll-mine" [ngClass]="{'active': pedido.id==item.id}"
+                            *ngFor="let item of pedidos">
                             <div class="pedidos scroll-mine" *ngIf="!item.fechalist">
                                 <!-- <div class="td-pedido" style="width: 20%" *ngIf="item.fechalist">{{item.fechalist}}</div> -->
                                 <div class="td-pedido" style="width: 55%;">{{item.titulo}}</div>
@@ -145,9 +148,18 @@
                                 <div class="td-pedido" style="width: 10%;">{{item.cantidad*item.precio}}</div>
                                 <div class="td-pedido" style="width: 20%;">{{item.estado}}</div>
                                 <div class="td-pedido" style="width: 10%;"><button class="btn-trash"
+                                        (click)="pedido=item" style="color: white;"><i class="bi bi-eye"></i></button>
+                                </div>
+                                <div class="td-pedido" style="width: 10%;"><button class="btn-trash"
                                         [disabled]="item.estado==='finalizado'" (click)="eliminarPedido(item)"
                                         style="color: white;"><i class="bi bi-trash"></i></button>
                                 </div>
+                            </div>
+                            <div class="pedidos-detail d-flex flex-column text-start rounded shadow-sm p-2 mb-2" style="width: 94%;" *ngIf="pedido.id==item.id">
+                                <div class="td-pedido" style="">título: <p class="small text-muted" style="width: 80%; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;">{{item.titulo}}</p></div>
+                                <div class="td-pedido" style="width: 100%;">cantidad: <p class="small text-muted">{{item.cantidad}}</p></div>
+                                <div class="td-pedido" style="width: 100%;">total pagar: <p class="small text-muted">{{item.cantidad*item.precio}}</p></div>
+                                <div class="td-pedido" style="width: 100%;">estado: <p class="small text-muted">{{item.estado}}</p></div>
                             </div>
                             <label class="fecha" *ngIf="item.fechalist">
                                 {{item.fechalist}}
