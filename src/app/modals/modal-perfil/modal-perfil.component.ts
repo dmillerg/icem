@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SessionStorageService } from 'ngx-webstorage';
+import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { Pedido } from 'src/app/models/pedido';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
@@ -42,19 +42,24 @@ export class ModalPerfilComponent implements OnInit {
 
   fechalist: string = '';
 
-  constructor(private activeModal: NgbActiveModal, private modalService: NgbModal, public storage: SessionStorageService, private api: ApiService, private message: MessageServiceService) {
+  constructor(private activeModal: NgbActiveModal,
+    private modalService: NgbModal,
+    public storage: SessionStorageService,
+    public localstorage: LocalStorageService,
+    private api: ApiService,
+    private message: MessageServiceService) {
     this.actiModal = activeModal;
   }
 
   ngOnInit(): void {
-   this.loadDataUser();
+    this.loadDataUser();
     this.api.calcularTiempo(this.usuario.fecha).subscribe((result) => {
       this.timeUser = result[0].tiempo + ' dias'
     })
     this.loadPedidos();
   }
 
-  loadDataUser(){
+  loadDataUser() {
     if (this.storage.retrieve('usuario')) {
       let user = this.storage.retrieve('usuario');
       this.usuario.id = user.id;
@@ -167,6 +172,7 @@ export class ModalPerfilComponent implements OnInit {
     this.api.updateUsuarioWithOutPass(formData, this.usuario.id).subscribe((result) => {
       this.message.success('Notificación', 'Datos del perfil actualizados satisfactoriamente');
       this.storage.store('usuario', this.usuario);
+      this.localstorage.store('usuario', this.usuario);
     }, error => {
       this.message.error('Error', 'En estos momentos no se puede editar el perfil por favor intentelo mas tarde');
       // this.edit = !this.edit;
@@ -178,7 +184,7 @@ export class ModalPerfilComponent implements OnInit {
     let modal = this.modalService.open(ModalAdminComponent, { size: 'lg' });
   }
 
-  administrarCarrito(){
+  administrarCarrito() {
     this.actiModal.close();
     let modal = this.modalService.open(ModalCarritoComponent, { size: 'md' });
   }

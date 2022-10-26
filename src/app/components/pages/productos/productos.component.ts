@@ -102,10 +102,16 @@ export class ProductosComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loadCategorias();
-    this.loadProductos();
     this.cargaInicial();
     this.cargaInicial2();
+    this.loadCategorias();
+    this.cargarCategoriaStorage();
+    this.cargarProductoStorage();
+    this.cargarUsuarioStorage();
+    this.navigateToProduct();
+  }
+
+  cargarCategoriaStorage(){
     if (this.storage.retrieve('categoria')) {
       this.categoria = this.storage.retrieve('categoria');
       this.categoriaId = this.categoria.id;
@@ -119,6 +125,9 @@ export class ProductosComponent implements OnInit {
         }
       });
     }
+  }
+
+  cargarProductoStorage(){
     if (this.storage.retrieve('producto')) {
       setTimeout(() => {
         document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
@@ -128,7 +137,9 @@ export class ProductosComponent implements OnInit {
         this.producto = result;
       });
     }
+  }
 
+  cargarUsuarioStorage(){
     if (this.storage.retrieve('usuario')) {
       let user = this.storage.retrieve('usuario');
       this.alias = user.usuario;
@@ -143,8 +154,6 @@ export class ProductosComponent implements OnInit {
         this.correo = '';
       }
     })
-    this.navigateToProduct();
-
   }
 
   loadProductos() {
@@ -174,6 +183,7 @@ export class ProductosComponent implements OnInit {
         this.categorias.push(e);
       });
       this.categoria = result[0];
+      this.loadProductos();
       this.rellenarCategorias();
     });
   }
@@ -216,20 +226,6 @@ export class ProductosComponent implements OnInit {
   swicthEspecification(sss, especification: HTMLElement) {
     especification.scrollIntoView({ behavior: "smooth" });
     this.productos = this.productos_all.filter(e => e.id != this.storage.retrieve('producto').id)
-    //   try {
-    //     if (this.storage.retrieve('producto')) {
-    //       this.producto = this.storage.retrieve('producto');
-    //       this.api.getCategoriaById(this.producto.categoria).subscribe((result) => {
-    //         this.ca = result.nombre;
-    //       })
-    //       if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
-    //         this.id = '0' + this.producto.id;
-    //       } else this.id = this.producto.id.toString();
-    //     }
-    //     this.loadPosts();
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
   }
 
   abrirComentarios() {
@@ -282,14 +278,16 @@ export class ProductosComponent implements OnInit {
   navigateToProduct() {
     this.activatedRoute.queryParams.subscribe(params => {
       let id = params['id'];
-      this.storage.store('categoria',{id:-1,nombre:'Todos'})
-      console.log('idd =>',id);
-      const p = this.productos_all.filter(e=>e.id==id)[0];
-      this.storage.store('producto',p)
-      if(p) this.producto = p;
-      setTimeout(() => {
-        document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
-      }, 500)
+      if (id) {
+        this.storage.store('categoria', { id: -1, nombre: 'Todos' })
+        console.log('idd =>', id);
+        const p = this.productos_all.filter(e => e.id == id)[0];
+        this.storage.store('producto', p)
+        if (p) this.producto = p;
+        setTimeout(() => {
+          document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
+        }, 500)
+      }
     });
   }
 }
