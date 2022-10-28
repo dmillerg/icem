@@ -5,8 +5,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AllPipe implements PipeTransform {
 
-  transform(rows: any[], query: any): any {
-    return query ? rows.filter(item => item.indexOf(query) >-1): rows;
+  transform(value: any,args: any): any {
+    if(!value) return null;
+    if(!args) return value;
+    args=args.toLowerCase();
+
+    return value.filter(function(item:any){
+      return JSON.stringify(item).toLowerCase().includes(args);
+    })
   }
 
 }

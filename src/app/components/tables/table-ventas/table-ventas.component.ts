@@ -72,14 +72,10 @@ export class TableVentasComponent implements OnInit {
   }
 
   change() {
-    console.log(this.user_id);
     this.loadVentas();
   }
 
-  changeprod() {
-    console.log(this.user_id);
-    this.loadVentas();
-  }
+  
   // updateProducto(producto) {
   //   let modal = this.modalService.open(ModalProductoComponent, { size: 'lg' });
   //   modal.componentInstance.modalHeader = 'Producto';

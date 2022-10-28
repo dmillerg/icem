@@ -3,10 +3,6 @@
 <footer class="text-center text-lg-start text-white container-fluid bg-firstcolor" style="clip-path: polygon(0 16%, 6% 4%, 98% 4%, 98% 2%, 8% 2%, 10% 0, 100% 0, 100% 100%, 0 100%);background: linear-gradient(180deg, var(--firstcolor) 0%, var(--firstcolor) 20%), url('assets/fondo8.png');background-blend-mode: multiply;">
     <!-- Grid container -->
     <div class="container p-4 pb-0">
-
-        <!-- <div class="rounded-circle icon-footer">
-            <img class="" src="assets/icon-icem.png">
-        </div> -->
         <!-- Section: Links -->
         <section class="">
             <!--Grid row-->
@@ -15,7 +11,7 @@
             <div class="row">
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-                    <div [ngClass]="{'autenticar': showLogin, 'autenticado': !showLogin}" [hidden]="showLogin">
+                    <div class="autenticado">
                         <h5 class="text-uppercase">ICEM
                         </h5>
 
@@ -26,23 +22,6 @@
                             y servicios a sus clientes nacionales.
                         </p>
                     </div>
-                    <!-- <form #formlogin [ngClass]="{'autenticar': !showLogin, 'autenticado': showLogin}"
-                        [hidden]="!showLogin">
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Usuario</label>
-                            <input type="email" name="usuario" [(ngModel)]="usuario" class="form-control"
-                                id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                            <input type="password" name="password" [(ngModel)]="password" class="form-control"
-                                id="exampleInputPassword1">
-                            <p class="text-danger" [hidden]="!errorAuth">usuario o contraseña incorrecta</p>
-                        </div>
-                        <button type="submit" class="btn btn-firstcolor" (click)="login()">Autenticar</button>
-                        <button type="submit" class="btn btn-outline-firstcolor" (click)="cancelarLogin()"
-                            style="margin-left: 10px;">Cancelar</button>
-                    </form> -->
                 </div>
                 <!--Grid column-->
 
@@ -112,20 +91,6 @@
 
         <hr class="mb-4" />
 
-        <!-- Section: CTA -->
-        <!-- <section class="">
-            <p class="d-flex justify-content-center align-items-center">
-                <button type="button" class="btn btn-firstcolor"
-                    [ngClass]="{'autenticar': showLogin, 'autenticado': !showLogin}" (click)="showLogins(formlogin)">
-                    <i class="fa fa-user"></i>
-                    {{btn_message}}
-                </button>
-            </p>
-        </section> -->
-        <!-- Section: CTA -->
-
-        <!-- <hr class="mb-10" /> -->
-
         <!-- Section: Social media -->
         <section class="mb-4 text-center">
             <!-- Facebook -->
@@ -149,7 +114,7 @@
 
 
     <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.4)">
-        © 2020 Copyright:
+        © 2022 Copyright:
         <a class="text-white" href="https://dveloxweb.cu/">dveloXweb</a>.Todos los derechos reservados
         <p>Ultima actualización del contenido: {{fechaAct | date: 'EEEE, MMMM, dd, YYYY - hh:mm a'}}</p>
 

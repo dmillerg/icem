@@ -7,11 +7,9 @@ import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 })
 export class LoadingComponent implements OnInit, AfterViewInit {
 
-  @Input() loading: boolean = false;
   constructor() { }
 
   ngAfterViewInit(): void {
-    this.loading = true;
     setTimeout(() => {
       document.querySelector('.img').classList.toggle('active');
     }, 500);

@@ -37,7 +37,7 @@ const listAnimation = trigger('listAnimation', [
     ]),
   ],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   rate = 1;
   title = 'ICEM';
   back_class = 'navbar navbar-expand-lg navbar-dark fixed-top';
@@ -55,19 +55,29 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute) {
   }
 
+  ngAfterViewInit=async()=> {
+    await this.loadData();
+    await this.cargarConfigs();
+  //  this.loading = false;
+  }
+
   ngOnInit(): void {
-    this.loadData();
+    
     // this.activate();
-    this.cargarConfigs();
-    this.storage.observe('configuraciones').subscribe((result) => {
-      if (result && result.length != this.configuraciones.length)
-        this.cargarConfigs();
-    })
+    
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
     }, 3000);
     this.back_final = this.back_class + ' ' + this.back_transparente;
+  }
+
+  cargarConfigStorage = async()=>{
+    this.storage.observe('configuraciones').subscribe(async (result) => {
+      if (result && result.length != this.configuraciones.length)
+        await this.cargarConfigs();
+        return;
+    });
   }
 
   loadData() {
@@ -89,7 +99,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  activate() {
+  activate = async()=> {
     this.activatedRoute.queryParams.subscribe(params => {
       let link = params['link'];
       let reset = params['reset'];
@@ -118,11 +128,12 @@ export class AppComponent implements OnInit {
   }
 
   cargarConfigs() {
-    this.api.getConfiguraciones().subscribe((result) => {
+    this.api.getConfiguraciones().subscribe(async (result) => {
       this.configuraciones = result;
       this.storage.store('configuraciones', result)
-      this.activate();
-    })
+      await this.activate();
+      return
+    });
   }
 
   closeChat(){

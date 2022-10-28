@@ -111,7 +111,7 @@ export class ProductosComponent implements OnInit {
     this.navigateToProduct();
   }
 
-  cargarCategoriaStorage(){
+  cargarCategoriaStorage() {
     if (this.storage.retrieve('categoria')) {
       this.categoria = this.storage.retrieve('categoria');
       this.categoriaId = this.categoria.id;
@@ -127,7 +127,7 @@ export class ProductosComponent implements OnInit {
     }
   }
 
-  cargarProductoStorage(){
+  cargarProductoStorage() {
     if (this.storage.retrieve('producto')) {
       setTimeout(() => {
         document.getElementById('especification').scrollIntoView({ behavior: 'smooth' })
@@ -139,7 +139,7 @@ export class ProductosComponent implements OnInit {
     }
   }
 
-  cargarUsuarioStorage(){
+  cargarUsuarioStorage() {
     if (this.storage.retrieve('usuario')) {
       let user = this.storage.retrieve('usuario');
       this.alias = user.usuario;
@@ -167,11 +167,9 @@ export class ProductosComponent implements OnInit {
         this.positionProductsLeft = 4;
         this.positionProductsRight = 0;
         this.navigateToProduct()
-        // this.storage.clear('producto');
       } else {
         this.productos = [];
         this.productos_all = [];
-        // this.producto = null;
       }
     });
   }
@@ -218,7 +216,6 @@ export class ProductosComponent implements OnInit {
       let animado = <HTMLElement>animados[i]
       if (animado.offsetTop - 600 < scroll.scrollTop) {
         animado.classList.add('activoitem');
-        // console.log('scroll ', scroll.scrollTop,' animado ' , animado.offsetTop)
       }
     }
   }
@@ -242,20 +239,15 @@ export class ProductosComponent implements OnInit {
 
   enviarPosts() {
     let formData: FormData = new FormData();
-    console.log(this.calificacion);
     formData.append('alias', this.alias);
     formData.append('correo', this.correo);
     formData.append('calificacion', this.calificacion.toString());
     formData.append('comentario', this.comentario);
     formData.append('id_producto', this.producto.id.toString());
     this.api.addPosts(formData).subscribe((result) => {
-      // this.loadPosts();
-      // this.comentar = !this.comentar;
       this.comentario = ''
       this.calificacion = 0;
-      // this.producto.calificacion = this.promedio;
       this.storage.store('producto', this.producto)
-      // this.emisor.emit(true);
     }, (error) => {
       console.log(error);
     })

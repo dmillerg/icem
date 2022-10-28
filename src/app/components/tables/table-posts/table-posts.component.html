@@ -28,7 +28,7 @@
 <div style="overflow: auto;width: 100%;" class="table-mine scroll-mine">
     <table class="table table-dark text-center table-mine">
         <thead class="table-dark">
-            <th>id</th>
+            <!-- <th>id</th> -->
             <th>alias</th>
             <th>correo</th>
             <th>visto</th>
@@ -36,7 +36,7 @@
             <th>acciones</th>
         </thead>
         <tr *ngFor="let item of posts | posts_usuario_pipe: usuario_query| posts_correo_pipe: correo_query | posts_visto_pipe: visto_query">
-            <td>{{item.id}}</td>
+            <!-- <td>{{item.id}}</td> -->
             <td>{{item.alias}}</td>
             <td>{{item.correo}}</td>
             <td>

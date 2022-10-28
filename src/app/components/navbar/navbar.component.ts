@@ -1,11 +1,10 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { ModalAdminComponent } from 'src/app/modals/modal-admin/modal-admin.component';
 import { ModalCarritoComponent } from 'src/app/modals/modal-carrito/modal-carrito.component';
 import { ModalPerfilComponent } from 'src/app/modals/modal-perfil/modal-perfil.component';
-import { Carrito } from 'src/app/models/carrito';
 import { Categoria } from 'src/app/models/categoria';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-register/modal-login-or-register.component';
@@ -16,7 +15,7 @@ import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-regis
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
+export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
   activo: string = 'inicio';
   cont_activo = 0;
   @Input() back_class = '';
@@ -26,7 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   back_final = '';
   click: boolean = false;
   titulo: string = '';
-  acceso: string = 'acceder/registrarse';
+  acceso: string = '';
   storage2: SessionStorageService;
   carrito: any[] = [];
   categorias: Categoria[] = [];
@@ -49,23 +48,25 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     private api: ApiService) {
     this.storage2 = storage;
   }
-  ngAfterViewInit(): void {
-    this.navigation();
+
+  ngAfterContentInit(): void {
     this.cargarCarritoStorage();
     this.cargarConfiguracionStorage();
     this.cargarUsuarioStorage();
     this.listarCategoriasProductos();
     this.listarCarrito();
   }
+
   ngOnDestroy(): void {
     clearInterval(this.intervalo);
     this.intervalo = undefined;
   }
 
   ngOnInit(): void {
+    this.navigation();
   }
 
-  navigation(){
+  navigation() {
     this.activate(this.router.url.substring(1, this.router.url.length))
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
@@ -75,7 +76,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  cargarConfiguracionStorage(){
+  cargarConfiguracionStorage() {
     if (this.storage.retrieve('configuraciones')) {
       let result = this.storage.retrieve('configuraciones');
       this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config)
@@ -88,7 +89,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  cargarCarritoStorage(){
+  cargarCarritoStorage() {
     if (this.storage.retrieve('carrito')) {
       this.carrito = this.storage.retrieve('carrito');
     }
@@ -99,17 +100,19 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
         this.carrito.forEach(i => {
           this.total_pagar += i.cantidad * i.precio;
         });
-        this.total_pagar = Math.round(this.total_pagar * 100)/100;
+        this.total_pagar = Math.round(this.total_pagar * 100) / 100;
         this.cargarTiempoRestante();
-      }else{
+      } else {
         this.carrito = []
       }
     });
   }
 
-  cargarUsuarioStorage(){
+  cargarUsuarioStorage() {
     if (this.storage.retrieve('usuario')) {
       this.acceso = this.storage.retrieve('usuario').nombre;
+    } else {
+      this.acceso = 'acceder/registrarse'
     }
     this.storage.observe('usuario').subscribe((e) => {
       if (e != undefined) {
@@ -124,7 +127,6 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
       if (document.getElementById(this.activo)) document.getElementById(this.activo).classList.remove('active');
       this.activo = url;
     }
-
   }
 
   navigateTo(path) {
@@ -220,7 +222,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   loginOrRegister(action: string) {
-    let modal = this.modalService.open(ModalLoginOrRegisterComponent, { backdrop: 'static' , size: 'md'});
+    let modal = this.modalService.open(ModalLoginOrRegisterComponent, { backdrop: 'static', size: 'md' });
     modal.componentInstance.modalAction = action;
     modal.result.then((result) => {
       if (result) {
@@ -339,7 +341,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     return window.innerHeight < 478;
   }
 
-  openChat(){
+  openChat() {
     document.querySelector('.chat-fixed-position').classList.toggle('closed');
   }
 }

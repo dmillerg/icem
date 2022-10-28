@@ -1,14 +1,14 @@
 <div style="overflow: auto;width: 100%;" class="table-mine  scroll-mine">
     <table class="table table-dark text-center table-mine">
         <thead>
-            <th>id</th>
+            <!-- <th>id</th> -->
             <th>nombre</th>
             <th>descripcion</th>
             <th>configs</th>
             <th>acciones</th>
         </thead>
         <tr *ngFor="let item of configuraciones">
-            <td>{{item.id}}</td>
+            <!-- <td>{{item.id}}</td> -->
             <td>{{item.nombre}}</td>
             <td>{{item.descripcion}}</td>
             <td>{{(item.config/24)>=1?(item.config/24)+'dia(s)':(item.config*60)>=1?(item.config*60)+' min': (item.config*3600)+' seg'}} </td>
