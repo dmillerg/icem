@@ -10,8 +10,8 @@
     box-shadow: 0 0 32px 0 var(--firstcolor-hover);
 } */
 
-.card-mine:hover{
-    transform: scale(1.05);
+.card-mine:hover .img img{
+    transform: scale(1.1);
     transition: all .3s ease;
 
 }
@@ -82,6 +82,7 @@
 .img {
     position: relative;
     margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .card-mine .h4{
