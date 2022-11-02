@@ -99,6 +99,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
     let formData = new FormData()
     formData.append('usuario', this.login.usuario);
     formData.append('password', this.login.password);
+    formData.append('recordar', this.remember.toString());
     this.api.login(formData).subscribe((result) => {
       const user = {
         id: result.usuario[0].id,
