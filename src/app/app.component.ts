@@ -55,16 +55,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute) {
   }
 
-  ngAfterViewInit=async()=> {
+  ngAfterViewInit() {
    this.loadData();
    this.cargarConfigs();
   //  this.loading = false;
   }
 
   ngOnInit(): void {
-    
-    // this.activate();
-    
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
@@ -73,12 +70,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   cargarConfigStorage(){
-    // this.storage.observe('configuraciones').subscribe(async (result) => {
-    //   if (result && result.length != this.configuraciones.length)
-    //     this.cargarConfigs();
-    //     return;
-    // });
-    this.cargarConfigs();
+    this.storage.observe('configuraciones').subscribe(async (result) => {
+      if (result && result.length != this.configuraciones.length)
+        this.cargarConfigs();
+        return;
+    });
   }
 
   loadData() {
@@ -101,6 +97,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   activate(){
+    console.log('asd');
+    
     this.activatedRoute.queryParams.subscribe(params => {
       let link = params['link'];
       let reset = params['reset'];
@@ -129,11 +127,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   cargarConfigs() {
-    this.api.getConfiguraciones().subscribe(async (result) => {
+    this.api.getConfiguraciones().subscribe((result) => {
       this.configuraciones = result;
       this.storage.store('configuraciones', result)
       this.activate();
-      return
     });
   }
 
