@@ -56,8 +56,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit=async()=> {
-    await this.loadData();
-    await this.cargarConfigs();
+   this.loadData();
+   this.cargarConfigs();
   //  this.loading = false;
   }
 
@@ -72,12 +72,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.back_final = this.back_class + ' ' + this.back_transparente;
   }
 
-  cargarConfigStorage = async()=>{
-    this.storage.observe('configuraciones').subscribe(async (result) => {
-      if (result && result.length != this.configuraciones.length)
-        await this.cargarConfigs();
-        return;
-    });
+  cargarConfigStorage(){
+    // this.storage.observe('configuraciones').subscribe(async (result) => {
+    //   if (result && result.length != this.configuraciones.length)
+    //     this.cargarConfigs();
+    //     return;
+    // });
+    this.cargarConfigs();
   }
 
   loadData() {
@@ -99,7 +100,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
-  activate = async()=> {
+  activate(){
     this.activatedRoute.queryParams.subscribe(params => {
       let link = params['link'];
       let reset = params['reset'];
@@ -131,7 +132,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.api.getConfiguraciones().subscribe(async (result) => {
       this.configuraciones = result;
       this.storage.store('configuraciones', result)
-      await this.activate();
+      this.activate();
       return
     });
   }

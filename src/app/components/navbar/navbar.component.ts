@@ -35,7 +35,6 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
     segundo: '00'
   }
   intervalo: any = undefined;
-  timeConfig: number = 0;
 
   searched: boolean = false;
 
@@ -51,7 +50,6 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   ngAfterContentInit(): void {
     this.cargarCarritoStorage();
-    this.cargarConfiguracionStorage();
     this.cargarUsuarioStorage();
     this.listarCategoriasProductos();
     this.listarCarrito();
@@ -76,18 +74,6 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
     });
   }
 
-  cargarConfiguracionStorage() {
-    if (this.storage.retrieve('configuraciones')) {
-      let result = this.storage.retrieve('configuraciones');
-      this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config)
-    }
-    this.storage.observe('configuraciones').subscribe((result) => {
-      if (result && result.length > 0) {
-        this.timeConfig = Number(result.filter(e => e.nombre = "carrito_time")[0].config);
-        // this.cargarTiempoRestante();
-      }
-    });
-  }
 
   cargarCarritoStorage() {
     if (this.storage.retrieve('carrito')) {
@@ -169,11 +155,11 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
       formData.append('fecha', fecha + ' ' + hora)
       // console.log(this.timeConfig);
 
-      let horas = this.timeConfig
       this.api.getTiempoRestanteCarrito(formData).subscribe((result) => {
-        this.tiempo.hora = Math.floor(Math.floor(horas - (result.tiempo / 3600)))
-        this.tiempo.minuto = Math.floor(((horas - (result.tiempo / 3600)) - Math.floor(horas - (result.tiempo / 3600))) * 60)
-        this.tiempo.segundo = Math.floor(((horas - (result.tiempo / 3600)) - Math.floor(horas - (result.tiempo / 3600))) * 3600) % 60
+        console.log('carga de tiempo',result);
+        this.tiempo.hora = result.hora;
+        this.tiempo.minuto = result.minuto;
+        this.tiempo.segundo = result.segundo;
         console.log(this.tiempo);
 
         this.intervalo = setInterval(() => {
