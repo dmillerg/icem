@@ -550,3 +550,11 @@ button {
  max-width: 150px;
  text-overflow: ellipsis;
 }
+
+table th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1; 
+  background-color:#101010;
+}

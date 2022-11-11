@@ -36,6 +36,7 @@
             <th>fecha</th>
             <th>categoria</th>
             <th>activo</th>
+            <th>existencias</th>
             <th>acciones</th>
         </thead>
         <tr *ngFor="let item of productos | user_active_pipe: actividad_query | fecha_pipe: fecha_query | producto_categoria_pipe: categoria_query | allPipe: all_query">
@@ -43,6 +44,7 @@
             <td>{{item.fecha| date: 'short'}}</td>
             <td>{{item.categoria}}</td>
             <td>{{item.activo}}</td>
+            <td>{{item.disponibilidad}}</td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateProducto(item)"> <i
                         class="bi bi-pencil svg-shadow"></i>
