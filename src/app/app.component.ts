@@ -102,8 +102,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.activatedRoute.queryParams.subscribe(params => {
       let link = params['link'];
       let reset = params['reset'];
-      // console.log('link:  ', link);
-      // console.log('reset:  ', reset);
 
       if (link && link.length > 0) {
         this.api.checkLinks(link, (this.storage.retrieve('configuraciones')[2].config * 60)).subscribe((res) => {

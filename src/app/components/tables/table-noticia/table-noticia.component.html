@@ -32,8 +32,8 @@
         </thead>
         <tr *ngFor="let item of noticias | fecha_pipe : fecha_query | noticia_fuente_pipe: fuente_query">
             <!-- <td>{{item.id}}</td> -->
-            <td >{{item.titulo}}</td>
-            <td >{{item.descripcion}}</td>
+            <td class="descrip">{{item.titulo}}</td>
+            <td class="descrip">{{item.descripcion}}</td>
             <td>{{item.fecha | date: 'short'}}</td>
             <td><img [src]="item.imagen" alt=""></td>
             <td>

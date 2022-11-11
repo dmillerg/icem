@@ -43,7 +43,7 @@ export class TableUsuarioComponent implements OnInit {
     let arr_result: any = [];
     result.forEach(e => {
       this.api.getUserOnlineByID(e.id).subscribe(result => {
-        e.activos = result.length > 0;
+        e.online = result.length > 0;
         console.log((result.length));
         
         arr_result.push(e);

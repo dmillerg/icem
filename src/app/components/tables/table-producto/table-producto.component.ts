@@ -33,7 +33,7 @@ export class TableProductoComponent implements OnInit {
       else this.productos = [];
       result.forEach(item => {
         if(this.fechas.indexOf(item.fecha)==-1) this.fechas.push(item.fecha);
-        if(this.categorias.indexOf(item.categoria)==-1) this.categorias.push(item.categoria);
+        // if(this.categorias.indexOf(item.categoria)==-1) this.categorias.push(item.categoria);
       })
     });
   }

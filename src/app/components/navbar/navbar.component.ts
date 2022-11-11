@@ -49,10 +49,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    this.cargarCarritoStorage();
-    this.cargarUsuarioStorage();
-    this.listarCategoriasProductos();
-    this.listarCarrito();
+    this.init();
   }
 
   ngOnDestroy(): void {
@@ -62,6 +59,13 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   ngOnInit(): void {
     this.navigation();
+  }
+
+  public init=async()=>{
+    await this.cargarCarritoStorage();
+    await this.cargarUsuarioStorage();
+    await this.listarCategoriasProductos();
+    await this.listarCarrito();
   }
 
   navigation() {
@@ -75,7 +79,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
 
-  cargarCarritoStorage() {
+  public cargarCarritoStorage = async()=> {
     if (this.storage.retrieve('carrito')) {
       this.carrito = this.storage.retrieve('carrito');
     }
@@ -92,19 +96,21 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
         this.carrito = []
       }
     });
+    return '';
   }
 
-  cargarUsuarioStorage() {
+  public cargarUsuarioStorage = async ()=>  {
     if (this.storage.retrieve('usuario')) {
       this.acceso = this.storage.retrieve('usuario').nombre;
     } else {
-      this.acceso = 'acceder/registrarse'
+      this.acceso = 'acceder/registrarse';
     }
     this.storage.observe('usuario').subscribe((e) => {
       if (e != undefined) {
         this.acceso = e.nombre;
       } else this.acceso = 'acceder/registrarse';
-    })
+    });
+    return '';
   }
 
   activate(url) {
@@ -156,7 +162,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
       // console.log(this.timeConfig);
 
       this.api.getTiempoRestanteCarrito(formData).subscribe((result) => {
-        console.log('carga de tiempo',result);
+        console.log('carga de tiempo', result);
         this.tiempo.hora = result.hora;
         this.tiempo.minuto = result.minuto;
         this.tiempo.segundo = result.segundo;
@@ -257,13 +263,14 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
     })
   }
 
-  listarCarrito() {
+  public listarCarrito = async () => {
     if (this.storage.retrieve('usuario')) {
       this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe((result) => {
         this.carrito = result;
         this.carrito.forEach((e, i) => {
           this.total_pagar += e.precio * e.cantidad;
           this.getProductoFoto(e.producto_id, i);
+          return this.carrito;
         });
       });
     }
@@ -281,9 +288,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
     })
   }
 
-  listarCategoriasProductos() {
+  public listarCategoriasProductos = async () => {
     this.api.getCategorias().subscribe((result) => {
       this.categorias = result;
+      return this.categorias;
     });
   }
 

@@ -43,7 +43,7 @@
             <td>{{item.fecha | date: 'short'}}</td>
             <td>{{item.cant_visitas}}</td>
             <td><i class="bi bi-circle-fill" [ngClass]="{'text-success': item.activos, 'text-danger': !item.activos}"></i>
-            <td><i class="bi bi-circle-fill" [ngClass]="{'text-success': item.activo==1, 'text-danger': item.activo==0}"></i>
+            <td><i class="bi bi-circle-fill" [ngClass]="{'text-success': item.online==1, 'text-danger': item.online==0}"></i>
             </td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateUsuario(item)"> <i

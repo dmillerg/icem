@@ -15,8 +15,8 @@
         </thead>
         <tr *ngFor="let item of categorias | categoria_pipe: all_query">
             <!-- <td>{{item.id}}</td> -->
-            <td>{{item.nombre}}</td>
-            <td>{{item.descripcion}}</td>
+            <td class="descrip">{{item.nombre}}</td>
+            <td class="descrip">{{item.descripcion}}</td>
             <td>
                 <button class="btn btn-outline-primary" (click)="updateCategoria(item)">
                     <i class="bi bi-pencil svg-shadow"></i>
