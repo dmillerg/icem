@@ -97,8 +97,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   activate(){
-    console.log('asd');
-    
     this.activatedRoute.queryParams.subscribe(params => {
       let link = params['link'];
       let reset = params['reset'];

@@ -82,11 +82,12 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   public cargarCarritoStorage = async () => {
     if (this.storage.retrieve('carrito')) {
-      this.carrito = this.storage.retrieve('carrito');
+      this.carrito = this.convertir(this.storage.retrieve('carrito'));
     }
     this.storage.observe('carrito').subscribe((e) => {
       if (e.length > 0) {
         this.carrito = this.convertir(e);
+        
         this.total_pagar = 0;
         this.carrito.forEach(i => {
           this.total_pagar += i.cantidad * i.precio;
@@ -102,7 +103,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   convertir(carritos) {
     carritos.forEach(element => {
-      element = environment.url_backend + `pictures/${element.id}?tipo=productos`
+      element.url = environment.url_backend + `pictures/${element.producto_id}?tipo=productos`
     });
     return carritos;
   }
@@ -157,7 +158,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   cargarTiempoRestante() {
-    console.log('TIEMPO RESTANTE');
+    // console.log('TIEMPO RESTANTE');
 
     clearInterval(this.intervalo);
     this.intervalo = undefined;
@@ -170,11 +171,11 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
       // console.log(this.timeConfig);
 
       this.api.getTiempoRestanteCarrito(formData).subscribe((result) => {
-        console.log('carga de tiempo', result);
+        // console.log('carga de tiempo', result);
         this.tiempo.hora = result.hora;
         this.tiempo.minuto = result.minuto;
         this.tiempo.segundo = result.segundo;
-        console.log(this.tiempo);
+        // console.log(this.tiempo);
 
         this.intervalo = setInterval(() => {
           this.disminuirSec()

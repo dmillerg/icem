@@ -1165,6 +1165,13 @@ export class ApiService {
     return this.http.delete(direccion, { headers: headers, params: params });
   }
 
+  /**
+   * Obtiene la foto 
+   * @param id del producto, noticia, desarrollo o mensaje
+   * @param tipo productos, noticias, desarrollos, chat
+   * @param name nombre de la imagen especifico
+   * @returns 
+   */
   getPicture(id: number, tipo: string, name: string=undefined) {
     let direccion = environment.url_backend + 'pictures/' + id.toString();
     const headers = { 'content-type': 'application/json' };

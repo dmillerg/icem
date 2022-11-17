@@ -147,19 +147,18 @@ export class ProductoEspecificationComponent implements OnInit {
       this.api.getCarrito(this.storage.retrieve('usuario').id).subscribe((result) => {
         console.log(result)
         this.carrito = result;
-        this.carrito.forEach((e, i) => {
-          this.getProductoFoto(e.producto_id, i);
-        });
+        // this.carrito.forEach((e, i) => {
+        //   this.getProductoFoto(e.producto_id, i);
+        // });
         this.storage.store('carrito', this.carrito);
       });
     }
   }
 
   getProductoFoto(id: number, position: number) {
-    this.api.getProductoFoto(id).subscribe(result => {
-    }, error => {
-      this.carrito[position].url = error.url;
-    })
+    console.log(this.carrito[position] = environment.url_backend + `pictures/${id}?tipo=productos`  );
+    
+    this.carrito[position] = environment.url_backend + `pictures/${id}?tipo=productos`
   }
 
   loadEspecification() {
