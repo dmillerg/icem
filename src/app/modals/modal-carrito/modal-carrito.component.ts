@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Carrito } from 'src/app/models/carrito';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-modal-carrito',
@@ -20,7 +21,8 @@ export class ModalCarritoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadCarrito();
+    // this.loadCarrito();
+    this.listarCarrito();
    this.calcularTotal();
   }
 
@@ -54,10 +56,8 @@ export class ModalCarritoComponent implements OnInit {
   }
 
   getProductoFoto(id: number, position: number) {
-    this.api.getProductoFoto(id).subscribe(result => {
-    }, error => {
-      this.carrito[position].url = error.url;
-    })
+    
+    this.carrito[position].url=environment.url_backend+`pictures/${id}?tipo=productos`
   }
 
   deleteCarrito(id: number = -1, cant: number = 0) {

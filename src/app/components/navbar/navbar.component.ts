@@ -7,6 +7,7 @@ import { ModalCarritoComponent } from 'src/app/modals/modal-carrito/modal-carrit
 import { ModalPerfilComponent } from 'src/app/modals/modal-perfil/modal-perfil.component';
 import { Categoria } from 'src/app/models/categoria';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 import { ModalLoginOrRegisterComponent } from '../../modals/modal-login-or-register/modal-login-or-register.component';
 
 
@@ -61,7 +62,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
     this.navigation();
   }
 
-  public init=async()=>{
+  public init = async () => {
     await this.cargarCarritoStorage();
     await this.cargarUsuarioStorage();
     await this.listarCategoriasProductos();
@@ -79,13 +80,13 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
 
-  public cargarCarritoStorage = async()=> {
+  public cargarCarritoStorage = async () => {
     if (this.storage.retrieve('carrito')) {
       this.carrito = this.storage.retrieve('carrito');
     }
     this.storage.observe('carrito').subscribe((e) => {
       if (e.length > 0) {
-        this.carrito = e;
+        this.carrito = this.convertir(e);
         this.total_pagar = 0;
         this.carrito.forEach(i => {
           this.total_pagar += i.cantidad * i.precio;
@@ -99,7 +100,14 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
     return '';
   }
 
-  public cargarUsuarioStorage = async ()=>  {
+  convertir(carritos) {
+    carritos.forEach(element => {
+      element = environment.url_backend + `pictures/${element.id}?tipo=productos`
+    });
+    return carritos;
+  }
+
+  public cargarUsuarioStorage = async () => {
     if (this.storage.retrieve('usuario')) {
       this.acceso = this.storage.retrieve('usuario').nombre;
     } else {
@@ -178,7 +186,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
   disminuirSec() {
     if (this.tiempo.hora <= 0 && this.tiempo.minuto <= 0 && this.tiempo.segundo <= 0) {
       clearInterval(this.intervalo);
-      // this.deleteCarritoTime();
+      this.deleteCarritoTime();
       this.listarCarrito();
     } else {
       if (this.tiempo.segundo == 0) {
@@ -282,10 +290,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   getProductoFoto(id: number, position: number) {
-    this.api.getProductoFoto(id).subscribe(result => {
-    }, error => {
-      this.carrito[position].url = error.url;
-    })
+    this.carrito[position].url = environment.url_backend + `pictures/${id}?tipo=productos`
   }
 
   public listarCategoriasProductos = async () => {
@@ -296,8 +301,6 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
   }
 
   loadProducto(item) {
-    console.log(item);
-
     this.storage.store('categoria', item);
   }
 

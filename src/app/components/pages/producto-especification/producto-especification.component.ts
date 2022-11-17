@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
@@ -101,16 +102,11 @@ export class ProductoEspecificationComponent implements OnInit {
   loadImageProducto(id: number) {
     this.imagenes = [];
     this.producto.imagen.split(',').forEach((e, i) => {
-      this.api.getProductoFotoName(e).subscribe((result) => {
-        if (i == 0) { this.producto.url = result.url; } else {
-          this.imagenes.push(result.url);
-        }
-      }, error => {
-        // console.log('ERROR  ', error);
-        if (i == 0) { this.producto.url = error.url; } else {
-          this.imagenes.push(error.url);
-        }
-      })
+      if (i == 0) {
+        this.producto.url = environment.url_backend + `pictures/${this.producto.id}?tipo=productos`;
+      } else {
+        this.imagenes.push(environment.url_backend + `pictures/${this.producto.id}?tipo=productos&name=${e}`);
+      }
     });
     this.loadCategoria();
   }

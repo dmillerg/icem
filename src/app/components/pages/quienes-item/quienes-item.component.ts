@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { error } from 'protractor';
 import { Quienes } from 'src/app/models/quienes';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-quienes-item',
@@ -16,9 +17,7 @@ export class QuienesItemComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
-    this.api.getQuienesFoto(this.quienes.id).subscribe(result => {
-
-    }, error => { this.src=error.url });
+  this.src = environment.url_backend+`pictures/${this.quienes.id}?tipo=quienes`
   }
 
 }

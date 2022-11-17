@@ -2,6 +2,7 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Chat } from 'src/app/models/chat';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
@@ -70,32 +71,29 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   convertir(item, ultimo: boolean) {
-    this.api.getChatFoto(item.id).subscribe(
-      (result) => console.log('result', result),
-      (error) => {
-        item.imagen = error.url;
-        this.api.getChatByID(item.id_respondido).subscribe((result) => {
-          if (result != null) {
-            item.respuesta = result.sms;
-          }
-          // if (item.archivo.length>0) {
-            item.extension = item.archivo.substring(item.archivo.length-3, item.archivo.length);
-            console.log(item.extension);
-            
-          // }
-          this.mensajes.push(item);
-          this.cantMax = this.mensajes.length;
-          // document.getElementById("box-sms").scrollTop = document.getElementById("box-sms").scrollHeight;
-          if (ultimo) {
-            setTimeout(() => {
-              document.getElementById("final").scrollIntoView({ behavior: "smooth" });
-
-            })
-            // this.scrollBottom();
-          }
-        })
+    item.imagen = environment.url_backend + `pictures/${item.id}?tipo=chat`;
+    console.log(item.imagen);
+    
+    this.api.getChatByID(item.id_respondido).subscribe((result) => {
+      if (result != null) {
+        item.respuesta = result.sms;
       }
-    );
+      // if (item.archivo.length>0) {
+      item.extension = item.archivo.substring(item.archivo.length - 3, item.archivo.length);
+      console.log(item.extension);
+
+      // }
+      this.mensajes.push(item);
+      this.cantMax = this.mensajes.length;
+      // document.getElementById("box-sms").scrollTop = document.getElementById("box-sms").scrollHeight;
+      if (ultimo) {
+        setTimeout(() => {
+          document.getElementById("final").scrollIntoView({ behavior: "smooth" });
+
+        })
+        // this.scrollBottom();
+      }
+    })
   }
 
   comenzar() {
@@ -183,7 +181,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     );
   }
 
-  verMensaje(id: number){
-    document.getElementById(id.toString()).scrollIntoView({behavior: 'smooth'});
+  verMensaje(id: number) {
+    document.getElementById(id.toString()).scrollIntoView({ behavior: 'smooth' });
   }
 }

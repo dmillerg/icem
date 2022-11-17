@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Noticia } from 'src/app/models/noticias';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-noticia-item',
@@ -28,13 +29,8 @@ export class NoticiaItemComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.noticia.fuente == 'ICEM') {
-      this.api.getNoticiaFoto(this.noticia.id).subscribe(
-        (result) => { },
-        (error) => {
-          this.noticia.imagen = error.url;
+          this.noticia.imagen = environment.url_backend+`pictures/${this.noticia.id}?tipo=noticias`;
           this.noticia.logo = 'assets/icon-icem-gray.png'
-        }
-      );
     }
   }
 

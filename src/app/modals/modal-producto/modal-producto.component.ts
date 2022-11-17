@@ -90,11 +90,7 @@ export class ModalProductoComponent implements OnInit {
   getFotos() {
     if (this.producto.imagen != '') {
       this.producto.imagen.split(',').forEach(e => {
-        this.api.getProductoFotoName(e).subscribe(resul => {
-
-        }, error => {
-          this.imagenes.push(error.url)
-        })
+        this.imagenes.push(environment.url_backend+`pictures/${this.producto.id}?tipo=productos&name=${e}`)
       });
     }
   }

@@ -6,6 +6,7 @@ import { Desarrollo } from 'src/app/models/desarrollo';
 import { Noticia } from 'src/app/models/noticias';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
@@ -62,50 +63,49 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cargaInicial()
-    this.api.getProducto(4,-1,-1, true).subscribe((result) => {
+    this.api.getProducto(4, -1, -1, true).subscribe((result) => {
       if (result.length > 0) {
         var direccion = false;
         var cont = 1;
         result.forEach((item) => {
-          if(item.activo){
-          this.productos_recientes.push({
-            id: item.id,
-            titulo: item.titulo,
-            descripcion: item.descripcion,
-            imagen: item.imagen,
-            fecha: item.fecha,
-            categoria: item.categoria,
-            usos: item.usos,
-            especificaciones: item.especificaciones,
-            garantia: item.garantia,
-            precio: item.precio,
-            disponibilidad: item.disponibilidad,
-            direccion: direccion,
-            cont: cont,
-          });
-          this.cargarData();
-          direccion = !direccion;
-          cont++;}
+          if (item.activo) {
+            this.productos_recientes.push({
+              id: item.id,
+              titulo: item.titulo,
+              descripcion: item.descripcion,
+              imagen: item.imagen,
+              fecha: item.fecha,
+              categoria: item.categoria,
+              usos: item.usos,
+              especificaciones: item.especificaciones,
+              garantia: item.garantia,
+              precio: item.precio,
+              disponibilidad: item.disponibilidad,
+              direccion: direccion,
+              cont: cont,
+            });
+            this.cargarData();
+            direccion = !direccion;
+            cont++;
+          }
         });
       } else this.productos_recientes = [];
     });
     this.api.cargaNoticias().subscribe((result) => {
       if (result.length > 0) {
         console.log(result);
-        
+
         this.titulo_noti = result[0].titulo;
         this.desc_noti = result[0].descripcion;
         this.noticia = result[0];
-        this.noticia.logo = this.noticia.logo==null?'assets/icon-icem-gray.png':this.noticia.logo;
-        this.img_noti =result[0].imagen.includes('http') ?result[0].imagen : this.cargarImagen(result[0]);
+        this.noticia.logo = this.noticia.logo == null ? 'assets/icon-icem-gray.png' : this.noticia.logo;
+        this.img_noti = result[0].imagen.includes('http') ? result[0].imagen : this.cargarImagen(result[0]);
       }
     });
   }
 
-  cargarImagen(e: Noticia){
-    this.api.getNoticiaFoto(e.id).subscribe((result) => { }, error => {
-      this.img_noti = error.url;
-    });
+  cargarImagen(e: Noticia) {
+    this.img_noti = environment.url_backend + `pictures/${e.id}?tipo=noticias`
   }
 
   verMas(item) {

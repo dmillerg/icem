@@ -4,6 +4,7 @@ import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.c
 import { ModalNoticiaComponent } from 'src/app/modals/modal-noticia/modal-noticia.component';
 import { Noticia } from 'src/app/models/noticias';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-table-noticia',
@@ -62,13 +63,7 @@ export class TableNoticiaComponent implements OnInit {
   convertNoticias(result: Noticia[]) {
     result.forEach(e => {
       if (e.fuente == 'ICEM') {
-        this.api.getNoticiaFoto(e.id).subscribe(
-          (result) => {
-          },
-          (error) => {
-            e.imagen = error.url;
-          }
-        );
+       e.imagen =environment.url_backend+`pictures/${e.id}?tipo=noticias`
       }
     });
     return result;

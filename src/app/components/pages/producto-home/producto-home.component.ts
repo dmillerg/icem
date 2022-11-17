@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-producto-home',
@@ -46,15 +47,8 @@ export class ProductoHomeComponent implements OnInit {
     if (this.producto.id < 10 && this.producto.id.toString()[0] != '0') {
       this.id = '0' + this.producto.id;
     } else this.id = this.producto.id.toString();
-    this.api.getProductoFotoName(this.producto.imagen.split(',')[0]).subscribe(
-      (result) => {
-        console.log(result, this.today, this.producto.fecha, this.today==this.producto.fecha);
-      },
-      (error) => {
-        this.producto.url = error.url;
-        this.date= new Date(this.producto.fecha);
-      }
-    );
+      this.producto.url = environment.url_backend+`pictures/${this.producto.id}?tipo=productos`;
+      this.date= new Date(this.producto.fecha);
   }
 
   verMas(item) {

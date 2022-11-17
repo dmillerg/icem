@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-busqueda',
@@ -44,7 +45,7 @@ export class BusquedaComponent implements OnInit {
     this.busqueda = [];
     this.api.searchProductos(this.titulo).subscribe(result => {
       result.result.forEach(element => {
-        this.api.getProductoFoto(element.id).subscribe(result2 => console.log(result2), error => {
+        
           this.busqueda.push({
             id: element.id,
             titulo: element.titulo,
@@ -54,12 +55,10 @@ export class BusquedaComponent implements OnInit {
             usos: element.usos,
             especificaciones: element.especificaciones,
             garantia: element.garantia,
-            imagen: error.url,
+            imagen: environment.url_backend+`pictures/${element.id}?tipo=productos`,
             tipo: 'productos'
           });
         })
-
-      });
       this.loadNoticias();
     });
   }
@@ -73,7 +72,7 @@ export class BusquedaComponent implements OnInit {
           descripcion: element.descripcion,
           fecha: element.fecha,
           tipo: 'noticias',
-          imagen: element.imagen,
+          imagen: element.fuente=='ICEM'?environment.url_backend+`pictures/${element.id}?tipo=noticias`:element.imagen,
         });
       });
       this.loadDesarrollos();
@@ -83,17 +82,15 @@ export class BusquedaComponent implements OnInit {
   loadDesarrollos() {
     this.api.searchDesarrollos(this.titulo).subscribe(result => {
       result.result.forEach(element => {
-        this.api.getDesarrolloFoto(element.id).subscribe(result2 => console.log(result2), error => {
           this.busqueda.push({
             id: element.id,
             titulo: element.titulo,
             descripcion: element.descripcion,
             fecha: element.fecha,
-            imagen: error.url,
+            imagen: environment.url_backend+`pictures/${element.id}?tipo=desarrollos`,
             tipo: 'desarrollos'
           });
         });
-      });
     });
   }
 

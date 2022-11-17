@@ -24,7 +24,7 @@ import { Mensaje } from '../models/mensaje';
   providedIn: 'root',
 })
 export class ApiService {
-  url: string = environment.url_backend;
+  url: string = environment.url_backend+'apis/';
 
   constructor(
     private http: HttpClient,
@@ -1001,7 +1001,7 @@ export class ApiService {
    * @param url a redireccionar
    * @returns 
    */
-  sendEmail(correo: string, asunto: string = '', mensaje: string = '', infoadd: string = '', tipo: string = '', link: string='' , url: string ='') {
+  sendEmail(correo: string, asunto: string = '', mensaje: string = '', infoadd: string = '', tipo: string = '', link: string = '', url: string = '') {
     let direccion = this.url + 'send';
     const formData = new FormData();
     formData.append('correo', correo);
@@ -1164,4 +1164,15 @@ export class ApiService {
     };
     return this.http.delete(direccion, { headers: headers, params: params });
   }
+
+  getPicture(id: number, tipo: string, name: string=undefined) {
+    let direccion = environment.url_backend + 'pictures/' + id.toString();
+    const headers = { 'content-type': 'application/json' };
+    const params = {
+      tipo: tipo,
+      name: name,
+    };
+    return this.http.delete(direccion, { headers: headers, params: params });
+  }
+
 }

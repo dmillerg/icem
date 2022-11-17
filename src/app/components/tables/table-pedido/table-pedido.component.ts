@@ -8,6 +8,7 @@ import { Pedido } from 'src/app/models/pedido';
 import { Producto } from 'src/app/models/producto';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-table-pedido',
@@ -43,10 +44,7 @@ export class TablePedidoComponent implements OnInit {
   }
 
   getProductoFoto(id: number, position: number) {
-    this.api.getProductoFoto(id).subscribe(result => {
-    }, error => {
-      this.pedidos[position].url = error.url;
-    })
+    this.pedidos[position].url = environment.url_backend+`pictures/${id}?tipo=productos`
   }
 
   loadUsuario() {
