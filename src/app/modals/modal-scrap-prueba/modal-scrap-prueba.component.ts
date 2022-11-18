@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Categoria } from 'src/app/models/categoria';
 import { Scrap } from 'src/app/models/scrap';
 import { ApiService } from 'src/app/services/api.service';
 

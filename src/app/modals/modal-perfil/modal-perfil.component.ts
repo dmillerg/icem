@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
-import { Pedido } from 'src/app/models/pedido';
-import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
 import { MessageServiceService } from 'src/app/services/message-service.service';
 import { ModalAdminComponent } from '../modal-admin/modal-admin.component';

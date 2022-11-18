@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Categoria } from 'src/app/models/categoria';
 import { Scrap } from 'src/app/models/scrap';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalScrapPruebaComponent } from '../modal-scrap-prueba/modal-scrap-prueba.component';

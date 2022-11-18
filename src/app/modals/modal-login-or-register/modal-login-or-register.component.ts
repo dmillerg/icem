@@ -2,39 +2,17 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService } from 'ngx-webstorage';
+import { listAnimation, scaleAnimation } from 'src/app/animations';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
 import { MessageServiceService } from 'src/app/services/message-service.service';
 import { environment } from 'src/environments/environment';
 
-const listAnimation = trigger('listAnimation', [
-  transition('* <=> *', [
-    query(':enter',
-      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 })))],
-      { optional: true }
-    ),
-    query(':leave',
-      animate('200ms', style({ opacity: 0 })),
-      { optional: true }
-    )
-  ])
-]);
 @Component({
   selector: 'app-modal-login-or-register',
   templateUrl: './modal-login-or-register.component.html',
   styleUrls: ['./modal-login-or-register.component.css'],
-  animations: [listAnimation,
-    trigger('scaleAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateX(-50%)', opacity: 0 }),
-        animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ transform: 'translateX(0)', opacity: 1 }),
-        animate('500ms', style({ transform: 'translateX(-50%)', opacity: 0 })),
-      ]),
-    ]),
-  ],
+  animations: [listAnimation,scaleAnimation],
 })
 export class ModalLoginOrRegisterComponent implements OnInit {
 

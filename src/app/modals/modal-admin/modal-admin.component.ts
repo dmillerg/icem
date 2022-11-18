@@ -1,7 +1,7 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
+import { listAnimation, scaleAnimation } from 'src/app/animations';
 import { Categoria } from 'src/app/models/categoria';
 import { Configuracion } from 'src/app/models/configuracion';
 import { Desarrollo } from 'src/app/models/desarrollo';
@@ -23,30 +23,6 @@ import { ModalProductoComponent } from '../modal-producto/modal-producto.compone
 import { ModalQuienesComponent } from '../modal-quienes/modal-quienes.component';
 import { ModalScrapComponent } from '../modal-scrap/modal-scrap.component';
 import { ModalUsuarioComponent } from '../modal-usuario/modal-usuario.component';
-
-const scaleAnimation = trigger('scaleAnimation', [
-  transition(':enter', [
-    style({ transform: 'translateX(-50%)', opacity: 0 }),
-    animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
-  ]),
-  transition(':leave', [
-    style({ transform: 'scale(1)', opacity: 1 }),
-    animate('500ms', style({ transform: 'scale(0)', opacity: 0 })),
-  ]),
-]);
-
-const listAnimation = trigger('listAnimation', [
-  transition('* <=> *', [
-    query(':enter',
-      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 })))],
-      { optional: true }
-    ),
-    query(':leave',
-      animate('200ms', style({ opacity: 0 })),
-      { optional: true }
-    )
-  ])
-]);
 
 @Component({
   selector: 'app-modal-admin',
