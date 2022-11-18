@@ -1,5 +1,5 @@
-import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { scaleAnimation } from 'src/app/animations';
 import { Desarrollo } from 'src/app/models/desarrollo';
 import { ApiService } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';
@@ -8,19 +8,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-desarrollo-item',
   templateUrl: './desarrollo-item.component.html',
   styleUrls: ['./desarrollo-item.component.css'],
-  animations: [
-    trigger(
-      'scaleAnimation', [
-        transition(':enter', [
-          style({transform: 'scale(0)', opacity: 0}),
-          animate('500ms', style({transform: 'scale(1)', opacity: 1}))
-        ]),
-        transition(':leave', [
-          style({transform: 'scale(1)', opacity: 1}),
-          animate('500ms', style({transform: 'scale(0)', opacity: 0}))
-        ])
-      ]
-    )]
+  animations: [scaleAnimation]
 })
 export class DesarrolloItemComponent implements OnInit {
   @Input() desarrollo: Desarrollo;

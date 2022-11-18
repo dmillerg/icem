@@ -1,5 +1,5 @@
-import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { scaleAnimation } from 'src/app/animations';
 import { Noticia } from 'src/app/models/noticias';
 import { ApiService } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';
@@ -8,18 +8,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-noticia-item',
   templateUrl: './noticia-item.component.html',
   styleUrls: ['./noticia-item.component.css'],
-  animations: [
-    trigger('scaleAnimation', [
-      transition(':enter', [
-        style({ transform: 'scale(0)', opacity: 0 }),
-        animate('500ms', style({ transform: 'scale(1)', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ transform: 'scale(1)', opacity: 1 }),
-        animate('500ms', style({ transform: 'scale(0)', opacity: 0 })),
-      ]),
-    ]),
-  ],
+  animations: [scaleAnimation],
 })
 export class NoticiaItemComponent implements OnInit {
   @Input() noticia: Noticia;

@@ -1,7 +1,7 @@
-import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
+import { scaleAnimation } from 'src/app/animations';
 import { ApiService } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';
 
@@ -9,18 +9,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-busqueda',
   templateUrl: './busqueda.component.html',
   styleUrls: ['./busqueda.component.css'],
-  animations: [
-    trigger('scaleAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateX(-50%)', opacity: 0 }),
-        animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ transform: 'scale(1)', opacity: 1 }),
-        animate('500ms', style({ transform: 'scale(0)', opacity: 0 })),
-      ]),
-    ]),
-  ],
+  animations: [scaleAnimation]
 })
 export class BusquedaComponent implements OnInit {
 

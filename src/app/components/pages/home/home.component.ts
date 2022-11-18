@@ -1,41 +1,16 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
-import { Desarrollo } from 'src/app/models/desarrollo';
+import { listAnimation, scaleAnimation } from 'src/app/animations';
 import { Noticia } from 'src/app/models/noticias';
-import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';
 
-const listAnimation = trigger('listAnimation', [
-  transition('* <=> *', [
-    query(':enter',
-      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 })))],
-      { optional: true }
-    ),
-    query(':leave',
-      animate('200ms', style({ opacity: 0 })),
-      { optional: true }
-    )
-  ])
-]);
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  animations: [listAnimation,
-    trigger('scaleAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateX(50%)', opacity: 0 }),
-        animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ transform: 'scale(1)', opacity: 1 }),
-        animate('500ms', style({ transform: 'scale(0)', opacity: 0 })),
-      ]),
-    ]),
-  ],
+  animations: [listAnimation, scaleAnimation]
 })
 export class HomeComponent implements OnInit, OnDestroy {
   productos_recientes: any = [];

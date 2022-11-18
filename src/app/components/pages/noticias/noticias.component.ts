@@ -1,37 +1,14 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { SessionStorageService } from 'ngx-webstorage';
+import { listAnimation, scaleAnimation } from 'src/app/animations';
 import { Noticia } from 'src/app/models/noticias';
 import { ApiService } from 'src/app/services/api.service';
 
-const listAnimation = trigger('listAnimation', [
-  transition('* <=> *', [
-    query(':enter',
-      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 })))],
-      { optional: true }
-    ),
-    query(':leave',
-      animate('200ms', style({ opacity: 0 })),
-      { optional: true }
-    )
-  ])
-]);
 @Component({
   selector: 'app-noticias',
   templateUrl: './noticias.component.html',
   styleUrls: ['./noticias.component.css'],
-  animations: [listAnimation,
-    trigger('scaleAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateX(-50%)', opacity: 0 }),
-        animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ transform: 'scale(1)', opacity: 1 }),
-        animate('500ms', style({ transform: 'scale(0)', opacity: 0 })),
-      ]),
-    ]),
-  ],
+  animations: [listAnimation, scaleAnimation],
 })
 export class NoticiasComponent implements OnInit {
   noticias: Noticia[];
@@ -73,9 +50,9 @@ export class NoticiasComponent implements OnInit {
   }
 
   rellenarColumns() {
-    this.noticias_icem = this.noticiaScrap.filter(e=>e.fuente == 'ICEM');
-    this.noticias_no_icem = this.noticiaScrap.filter(e=>e.fuente != 'ICEM');
-    
+    this.noticias_icem = this.noticiaScrap.filter(e => e.fuente == 'ICEM');
+    this.noticias_no_icem = this.noticiaScrap.filter(e => e.fuente != 'ICEM');
+
     // let cant = this.noticiaScrap.length / 4;
     // for (let i = 0; i < this.noticiaScrap.length; i++) {
     //   if (i <= cant) {

@@ -1,21 +1,9 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { listAnimation } from 'src/app/animations';
 import { Chat } from 'src/app/models/chat';
 import { ApiService } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';
 
-const listAnimation = trigger('listAnimation', [
-  transition('* <=> *', [
-    query(':enter',
-      [style({ transform: 'translateY(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateY(0%)', opacity: 1 })))],
-      { optional: true }
-    ),
-    query(':leave',
-      animate('200ms', style({ opacity: 0 })),
-      { optional: true }
-    )
-  ])
-]);
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',

@@ -1,13 +1,7 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
+import { scaleAnimation } from 'src/app/animations';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';
@@ -16,19 +10,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-producto-home',
   templateUrl: './producto-home.component.html',
   styleUrls: ['./producto-home.component.css'],
-  animations: [
-    trigger(
-      'scaleAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 }))
-      ]),
-      transition(':leave', [
-        style({ transform: 'scale(1)', opacity: 1 }),
-        animate('500ms', style({ transform: 'scale(0)', opacity: 0 }))
-      ])
-    ]
-    )]
+  animations: [scaleAnimation]
 })
 export class ProductoHomeComponent implements OnInit {
   @Input() producto;

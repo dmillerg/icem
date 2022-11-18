@@ -1,41 +1,18 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { url } from 'inspector';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import { listAnimation, scaleAnimation } from './animations';
 import { ModalActivationComponent } from './modals/modal-activation/modal-activation.component';
 import { ModalUserResetPasswordComponent } from './modals/modal-user-reset-password/modal-user-reset-password.component';
 import { ApiService } from './services/api.service';
 
-const listAnimation = trigger('listAnimation', [
-  transition('* <=> *', [
-    query(':enter',
-      [style({ transform: 'translateX(50%)', opacity: 0 }), stagger('100ms', animate('1000ms ease-out', style({ transform: 'translateX(0%)', opacity: 1 })))],
-      { optional: true }
-    ),
-    query(':leave',
-      animate('200ms', style({ opacity: 0 })),
-      { optional: true }
-    )
-  ])
-]);
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [listAnimation,
-    trigger('scaleAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateX(-50%)', opacity: 0 }),
-        animate('500ms', style({ transform: 'translateX(0%)', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ transform: 'scale(1)', opacity: 1 }),
-        animate('500ms', style({ transform: 'scale(0)', opacity: 0 })),
-      ]),
-    ]),
-  ],
+  animations: [listAnimation, scaleAnimation],
 })
 export class AppComponent implements OnInit, AfterViewInit {
   rate = 1;
@@ -56,9 +33,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-   this.loadData();
-   this.cargarConfigs();
-  //  this.loading = false;
+    this.loadData();
+    this.cargarConfigs();
+    //  this.loading = false;
   }
 
   ngOnInit(): void {
@@ -69,11 +46,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.back_final = this.back_class + ' ' + this.back_transparente;
   }
 
-  cargarConfigStorage(){
+  cargarConfigStorage() {
     this.storage.observe('configuraciones').subscribe(async (result) => {
       if (result && result.length != this.configuraciones.length)
         this.cargarConfigs();
-        return;
+      return;
     });
   }
 
@@ -96,7 +73,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
-  activate(){
+  activate() {
     this.activatedRoute.queryParams.subscribe(params => {
       let link = params['link'];
       let reset = params['reset'];
@@ -130,7 +107,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  closeChat(){
+  closeChat() {
     document.querySelector('.chat-fixed-position').classList.toggle('closed');
   }
 }

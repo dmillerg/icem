@@ -22,8 +22,8 @@
 }
 
 .contenedor-loading .contenedor-centro .img.active {
-    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
-    transition: all 1s ease;
+    /* filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, .7));
+    transition: all 1s ease; */
 }
 
 .contenedor-loading .contenedor-centro .loading {
