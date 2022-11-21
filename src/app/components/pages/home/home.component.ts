@@ -68,8 +68,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     this.api.cargaNoticias().subscribe((result) => {
       if (result.length > 0) {
-        console.log(result);
-
         this.titulo_noti = result[0].titulo;
         this.desc_noti = result[0].descripcion;
         this.noticia = result[0];

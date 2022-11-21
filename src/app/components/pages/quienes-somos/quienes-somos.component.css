@@ -8,6 +8,7 @@ min-height: 500px;
   font-size: 180%;
   line-height: 25px;
   margin-top: 10px;
+  position: relative;
 }
 
 .timeline {
@@ -16,7 +17,15 @@ min-height: 500px;
 }
 
 li::before{
-content: '-> ';
+content: "";
+position: absolute;
+left: -25px;
+top: 10px;
+width: 15px;
+height: 15px;
+border-top: 5px solid var(--firstcolor);
+border-right: 5px solid var(--firstcolor);
+transform: rotate(45deg);
 }
 
 .timeline-item.no-border{

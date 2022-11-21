@@ -8,6 +8,7 @@ import { Pedido } from 'src/app/models/pedido';
 import { Producto } from 'src/app/models/producto';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-table-ventas',
@@ -38,18 +39,16 @@ export class TableVentasComponent implements OnInit {
         result.forEach((e, i) => {
           this.getProductoFoto(e.producto_id, i);
           // this.ventas[i].usuario = this.usuarios.filter(r => r.id == e.user_id)[0].usuario;
-        })
+        });
+        console.log(this.ventas);
+        
       }
       else this.ventas = [];
     });
   }
 
   getProductoFoto(id: number, position: number) {
-    this.api.getProductoFoto(id).subscribe(result => {
-      this.ventas[position].url = result.url;
-    }, error => {
-      this.ventas[position].url = error.url;
-    })
+    this.ventas[position].url=environment.url_backend+ `pictures/${id}?tipo=productos`
   }
 
   loadUsuario() {

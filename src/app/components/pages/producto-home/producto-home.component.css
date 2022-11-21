@@ -15,12 +15,6 @@
     box-shadow: 0 0 32px 0 var(--firstcolor-hover);
 } */
 
-.card-mine:hover {
-    transform: scale(1.05);
-    transition: all .3s ease;
-
-}
-
 
 .title-text {
     width: 100%;
@@ -88,6 +82,12 @@
 .img {
     position: relative;
     margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.card-mine:hover img{
+    transform: scale(1.05);
+    transition: all .3s ease;
 }
 
 .card-mine .h4 {

@@ -109,7 +109,10 @@ p {
 .active {
     text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.74);
     color: rgb(59, 65, 142);
+    position: relative;
+    text-shadow: 0 1px 10px rgb(71, 78, 173);
 }
+
 
 .navbar-toggle:focus .back-transparent {
     background-color: rgba(0, 0, 0, .8);

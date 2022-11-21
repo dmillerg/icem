@@ -16,8 +16,8 @@
             </option>
         </select>
     </div>
-    <div class="contenedor-filtro"> <label for="actividad">Crear reporte</label>
-        <button class="btn btn-firstcolor" (click)="generarReportes()" [disabled]="ventas.length==0">Reportes</button>
+    <div class="contenedor-filtro"> <label for="actividad">   </label>
+        <button class="btn btn-firstcolor" (click)="generarReportes()" [disabled]="ventas.length==0">Generar reporte</button>
     </div>
 </div>
 
@@ -35,7 +35,7 @@
         <tr *ngFor="let item of ventas">
             <!-- <td>{{item.id}}</td> -->
             <td>{{item.usuario}}</td>
-            <td><img [src]="item.url" style="width: 70px;height: auto;" alt=""></td>
+            <td><img [src]="item.url" style="width: 50px;height: 50px;" alt=""></td>
             <td>{{item.cantidad}}</td>
             <td>{{item.fecha | date: 'short'}}</td>
             <!-- <td> -->

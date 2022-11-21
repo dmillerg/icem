@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -6,6 +6,8 @@ import { listAnimation, scaleAnimation } from 'src/app/animations';
 import { Categoria } from 'src/app/models/categoria';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService} from 'src/app/services/crud.service';
+import { PostsComponent } from '../posts/posts.component';
 
 
 @Component({
@@ -16,7 +18,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ProductosComponent implements OnInit {
 
-
+  @ViewChild(PostsComponent) postiti: PostsComponent;
   productos: Producto[] = [];
   productos_all: Producto[] = [];
   categorias: Categoria[] = [];
@@ -72,6 +74,7 @@ export class ProductosComponent implements OnInit {
   positionProductsRight: number = -1;
 
   constructor(private api: ApiService,
+    private crud: CrudService,
     public storage: SessionStorageService,
     private modalService: NgbModal,
     private activatedRoute: ActivatedRoute) { }
@@ -222,7 +225,8 @@ export class ProductosComponent implements OnInit {
     this.api.addPosts(formData).subscribe((result) => {
       this.comentario = ''
       this.calificacion = 0;
-      this.storage.store('producto', this.producto)
+      this.crud.emitirEvento('add-post');
+      
     }, (error) => {
       console.log(error);
     })

@@ -41,8 +41,7 @@
         </form>
 
         <div [@listAnimation]="posts.length">
-
-            <div *ngFor="let item of posts" class="burbuja-comentario shadow-sm" style="position: relative;">
+            <div *ngFor="let item of posts | allPipe: filtro" class="burbuja-comentario shadow-sm" style="position: relative;">
                 <h5 class="h5">
                     <div class="user-icon">
                         <i class="bi bi-person"></i>

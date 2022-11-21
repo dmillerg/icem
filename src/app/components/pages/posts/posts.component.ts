@@ -7,6 +7,7 @@ import { ModalRespuestaComponent } from 'src/app/modals/modal-respuesta/modal-re
 import { Posts } from 'src/app/models/posts';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 
 @Component({
@@ -21,7 +22,6 @@ export class PostsComponent implements OnInit {
   correo: string = '';
   calificacion: number = 0;
   comentario: string = '';
-
   comentar: boolean = false;
 
   producto: Producto = {
@@ -40,7 +40,7 @@ export class PostsComponent implements OnInit {
     activo: false,
   };
 
-  posts: any[] = [];
+  @Input() posts: any[] = [];
   post_complete: any[] = [];
 
   filtro: string = '';
@@ -51,7 +51,12 @@ export class PostsComponent implements OnInit {
 
   constructor(private api: ApiService,
     public storage: SessionStorageService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private crud: CrudService) {
+      crud.emitter.subscribe(()=>{
+        this.loadPosts()
+      })
+  }
 
   ngOnInit(): void {
     if (this.storage.retrieve('usuario')) {
@@ -85,11 +90,13 @@ export class PostsComponent implements OnInit {
     this.api.getPosts(this.producto.id).subscribe((result) => {
       if (result.length > 0) {
         this.convertirPost(result)
+        console.log(result);
+
       } else {
         this.posts = [];
         this.post_complete = [];
       }
-    })
+    });
   }
 
   filtrar() {
