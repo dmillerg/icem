@@ -5,7 +5,8 @@
 
         <form action="" *ngIf="!cargaemail" class="form-login">
             <p [@scaleAnimation]="'enter'" *ngIf="errorLogin"
-                style="font-size: 12px;text-align: center;width: 90%;margin-top: 20px;" class="text-danger"><i class="bi bi-info-circle-fill"></i> Usuario o
+                style="font-size: 12px;text-align: center;width: 90%;margin-top: 20px;" class="text-danger"><i
+                    class="bi bi-info-circle-fill"></i> Usuario o
                 contraseña incorrectos, pruebe de nuevo</p>
             <div class="input-content">
                 <label for="usuario-login">usuario</label>
@@ -50,7 +51,8 @@
                     [(ngModel)]="register.usuario" (ngModelChange)="errorRegisterUser=false;">
             </div>
             <label [@scaleAnimation]="'enter'" *ngIf="register.usuario.length>0 && errorRegisterUser"
-                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">El usuario ya existe, pruebe
+                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger"><i
+                    class="bi bi-info-circle-fill"></i> El usuario ya existe, pruebe
                 con otro</label>
             <div class="input-content">
                 <label for="name-register">nombre y apellidos</label>
@@ -63,13 +65,16 @@
                 <i class="bi bi-envelope-fill prefix"></i>
                 <input type="email" class="in" name="correo-login" id="correo-register" placeholder="correo"
                     [(ngModel)]="register.correo" (ngModelChange)="errorRegisterEmail=false;">
+                <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && !validateEmail()"
+                    style="font-size: 12px;text-align: center;position: absolute;margin-top: 60px;"
+                    class="text-danger"><i class="bi bi-info-circle-fill"></i> Este correo no es
+                    valido</label>
+                <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && errorRegisterEmail"
+                    style="font-size: 12px;text-align: center;position: absolute;margin-top: 60px;"
+                    class="text-danger"><i class="bi bi-info-circle-fill"></i> El correo ya esta siendo
+                    utilizado en otra cuenta</label>
             </div>
-            <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && !validateEmail()"
-                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Este correo no es
-                valido</label>
-            <label [@scaleAnimation]="'enter'" *ngIf="register.correo.length>0 && errorRegisterEmail"
-                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">El correo ya esta siendo
-                utilizado en otra cuenta</label>
+
             <div class="input-content">
                 <label for="pais-register">pais(opcional)</label>
                 <i class="bi bi-flag-fill prefix"></i>
@@ -93,22 +98,26 @@
                 <i class="bi bi-key-fill prefix"></i>
                 <input type="password" class="in" name="pass-login" id="pass-register" placeholder="contraseña"
                     [(ngModel)]="register.password">
+                <label *ngIf="register.password.length<8 && register.password.length>0" class="text-danger"
+                    style="font-size: 12px;position: absolute;margin-top: 60px;"><i class="bi bi-info-circle-fill"></i>
+                    la
+                    contraseña debe tener al menos 8 caracteres</label>
             </div>
-            <label *ngIf="register.password.length<8 && register.password.length>0" class="text-danger"
-                style="font-size: 12px; width: 150px;">la
-                contraseña debe tener al menos 8 caracteres</label>
+
             <div class="input-content">
                 <label for="pass-confirm-register">confirmar contraseña</label>
                 <i class="bi bi-key-fill prefix"></i>
                 <input type="password" class="in" name="pass-confirm-register" id="pass-confirm-register"
                     placeholder="confirmar contraseña" [(ngModel)]="register.confirm_pass">
+                <label [@scaleAnimation]="'enter'" *ngIf="register.confirm_pass!=register.password"
+                    style="font-size: 12px;text-align: center;position: absolute;margin-top: 60px;"
+                    class="text-danger"><i class="bi bi-info-circle-fill"></i> no
+                    coinciden las contraseñas</label>
             </div>
-            <label [@scaleAnimation]="'enter'" *ngIf="register.confirm_pass!=register.password"
-                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">no
-                coinciden las contraseñas</label>
             <label [@scaleAnimation]="'enter'"
-                *ngIf="register.confirm_pass!=register.password || errorRegisterEmail || errorRegisterUser"
-                style="font-size: 12px;text-align: center;width: 90%;" class="text-danger">Revisa el formulario de
+                *ngIf="register.confirm_pass!=register.password || errorRegisterEmail || errorRegisterUser || validateEmail()"
+                style="font-size: 12px;text-align: center;width: 100%;margin-top: 40px;" class="text-danger"><i
+                    class="bi bi-info-circle-fill"></i> Revisa el formulario de
                 registro hay datos mal insertados</label>
             <button class="btn btn-register"
                 [disabled]="!validateEmail() || !validateVacio() || register.confirm_pass!=register.password || register.password.length<8"
