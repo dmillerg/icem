@@ -29,7 +29,7 @@ export class ModalPerfilComponent implements OnInit {
   };
   timeUser: string = '';
   pedidos: any[] = [];
-  pedido: any = {id: -1};
+  pedido: any = { id: -1 };
   show_form_password: boolean = false;
   pass_old: string = '';
   new_password: string = '';
@@ -40,6 +40,8 @@ export class ModalPerfilComponent implements OnInit {
   sidebarpedidos: boolean = false;
 
   fechalist: string = '';
+
+  errorcorreo: boolean = false;
 
   constructor(private activeModal: NgbActiveModal,
     private modalService: NgbModal,
@@ -156,8 +158,6 @@ export class ModalPerfilComponent implements OnInit {
   }
 
   editPerfil() {
-    this.sidebarpedidos = false;
-    this.resetearFalse();
     let formData = new FormData();
     formData.append('id', this.usuario.id.toString());
     formData.append('usuario', this.usuario.usuario.toString());
@@ -172,8 +172,16 @@ export class ModalPerfilComponent implements OnInit {
       this.message.success('Notificación', 'Datos del perfil actualizados satisfactoriamente');
       this.storage.store('usuario', this.usuario);
       this.localstorage.store('usuario', this.usuario);
+      this.resetearFalse();
+
     }, error => {
-      this.message.error('Error', 'En estos momentos no se puede editar el perfil por favor intentelo mas tarde');
+
+      if (error.error.message == 'el correo ya esta siendo utilizado') {
+        this.errorcorreo = true;
+      } else {
+        this.resetearFalse();
+        this.message.error('Error', 'En estos momentos no se puede editar el perfil por favor intentelo mas tarde');
+      }
       // this.edit = !this.edit;
     });
   }

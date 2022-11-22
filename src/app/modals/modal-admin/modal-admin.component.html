@@ -27,26 +27,38 @@
 <div class="modal-body" style="height: 100%; overflow-y: auto; padding-block: 0; padding-bottom: 20px">
   <div class="row">
     <div class="sidebar scroll-mine text-center" [@listAnimation]="buttons.length">
-      <button *ngFor="let item of buttons; let i = index" class="btn"
+      <button *ngFor="let item of buttons; let i = index" class="btn position-relative"
         [ngClass]="{ 'btn-primary': buttons[i].activo, 'btn-outline-primary': !buttons[i].activo }"
-        (click)="cambiarTabla(item.titulo, i)"> <i class="bi" [class]="item.icono"></i>
+        (click)="cambiarTabla(item.titulo, i)">
+        <i class="bi" [class]="item.icono"></i>
         {{item.titulo}}</button>
     </div>
 
     <div class="tabs-content" style="position: relative;">
-      <app-table-producto [productos]="productosarray" *ngIf="activo=='Productos'" [@scaleAnimation]="'enter'"></app-table-producto>
-      <app-table-categoria [categorias]="categoriaarray" *ngIf="activo=='Categorías'" [@scaleAnimation]="'enter'"></app-table-categoria>
-      <app-table-noticia [noticias]="noticiasarray" *ngIf="activo=='Noticias'" [@scaleAnimation]="'enter'"> </app-table-noticia>
-      <app-table-desarrollo [desarrollos]="desarrolloarray" *ngIf="activo=='Desarrollos'" [@scaleAnimation]="'enter'"></app-table-desarrollo>
-      <app-table-usuario [usuarios]="usuariosarray" *ngIf="activo=='Usuarios'" [@scaleAnimation]="'enter'"> </app-table-usuario>
+      <app-table-producto [productos]="productosarray" *ngIf="activo=='Productos'" [@scaleAnimation]="'enter'">
+      </app-table-producto>
+      <app-table-categoria [categorias]="categoriaarray" *ngIf="activo=='Categorías'" [@scaleAnimation]="'enter'">
+      </app-table-categoria>
+      <app-table-noticia [noticias]="noticiasarray" *ngIf="activo=='Noticias'" [@scaleAnimation]="'enter'">
+      </app-table-noticia>
+      <app-table-desarrollo [desarrollos]="desarrolloarray" *ngIf="activo=='Desarrollos'" [@scaleAnimation]="'enter'">
+      </app-table-desarrollo>
+      <app-table-usuario [usuarios]="usuariosarray" *ngIf="activo=='Usuarios'" [@scaleAnimation]="'enter'">
+      </app-table-usuario>
       <app-chat *ngIf="activo=='Mensajería'" [@scaleAnimation]="'enter'"></app-chat>
-      <app-table-quienes [quienes]="quienesarray" *ngIf="activo=='Quienes'" [@scaleAnimation]="'enter'"> </app-table-quienes>
+      <app-table-quienes [quienes]="quienesarray" *ngIf="activo=='Quienes'" [@scaleAnimation]="'enter'">
+      </app-table-quienes>
       <app-table-scrap [scraps]="scraparray" *ngIf="activo=='Recogida'" [@scaleAnimation]="'enter'"> </app-table-scrap>
-      <app-table-posts [posts]="postsarray" *ngIf="activo=='Comentarios'" [@scaleAnimation]="'enter'"> </app-table-posts>
-      <app-table-pedido [pedidos]="pedidosarray" [usuarios]="usuariosarray" *ngIf="activo=='Pedidos'" [@scaleAnimation]="'enter'"> </app-table-pedido>
-      <app-table-configuracion [configuraciones]="configuracionesarray" *ngIf="activo=='Configuración'" [@scaleAnimation]="'enter'"> </app-table-configuracion>
-      <app-table-ventas [ventas]="ventasarray" [usuarios]="usuariosarray" *ngIf="activo=='Ventas'" [@scaleAnimation]="'enter'"> </app-table-ventas>
-      <app-table-mensajes [mensajes]="mensajesarray" [usuarios]="usuariosarray" *ngIf="activo=='Preguntas'" [@scaleAnimation]="'enter'"> </app-table-mensajes>
+      <app-table-posts [posts]="postsarray" *ngIf="activo=='Comentarios'" [@scaleAnimation]="'enter'">
+      </app-table-posts>
+      <app-table-pedido [pedidos]="pedidosarray" [usuarios]="usuariosarray" *ngIf="activo=='Pedidos'"
+        [@scaleAnimation]="'enter'"> </app-table-pedido>
+      <app-table-configuracion [configuraciones]="configuracionesarray" *ngIf="activo=='Configuración'"
+        [@scaleAnimation]="'enter'"> </app-table-configuracion>
+      <app-table-ventas [ventas]="ventasarray" [usuarios]="usuariosarray" *ngIf="activo=='Ventas'"
+        [@scaleAnimation]="'enter'"> </app-table-ventas>
+      <app-table-mensajes [mensajes]="mensajesarray" [usuarios]="usuariosarray" *ngIf="activo=='Preguntas'"
+        [@scaleAnimation]="'enter'"> </app-table-mensajes>
     </div>
   </div>
 </div>

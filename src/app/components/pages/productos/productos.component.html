@@ -25,17 +25,17 @@
 
     <section class="especifications" *ngIf="storage.retrieve('producto')" id="especification"
         [@scaleAnimation]="'enter'">
-        <div class="container">
+        <div class="w-100">
             <div class="row overflow-auto">
                 <div id="producto-especification" class="producto-especification">
                     <div class="barra-superior">
-                        <button class="btn-outline-firstcolor centrado" [disabled]="producto && producto.ficha == null"
+                        <!-- <button class="btn-outline-firstcolor centrado" [disabled]="producto && producto.ficha == null"
                             style="position: relative;margin-right: 10px;">
                             <div class="pista pista-off pista-bottom"
                                 *ngIf="producto && producto.ficha != null && producto.ficha.length>0">
                                 Descargar ficha técnica</div>
                             <i class="bi bi-journal-text"></i>
-                        </button>
+                        </button> -->
                     </div>
                     <app-producto-especification></app-producto-especification>
                 </div>

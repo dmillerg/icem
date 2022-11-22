@@ -175,10 +175,11 @@
 .contenedor-categoria .btn-categoria:hover {
     background-color: var(--firstcolor-hover);
     color: var(--theme-color);
-    transform: scale(1.1);
+    transform: scaleY(1.1);
     /* transform: translateY(-30px); */
     box-shadow: 0 8px 32px 0 var(--firstcolor-hover);
     transition: all .3s ease-in-out;
+    cursor: pointer;
 }
 
 .contenedor-categoria .btn-categoria.active:hover {

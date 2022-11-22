@@ -50,12 +50,14 @@
                             [disabled]="!edit">
                         <!-- <i class="bi bi-pencil-fill next"></i> -->
                     </div>
-                    <div class="input-perfil" [hidden]="show_form_password">
+                    <div class="input-perfil position-relative" [hidden]="show_form_password">
                         <i class="bi bi-envelope-fill prev"></i>
                         <label for="">Correo:</label>
                         <input type="text" class="in text" name="correo" [(ngModel)]="usuario.correo"
                             [disabled]="!edit">
                         <!-- <i class="bi bi-pencil-fill next"></i> -->
+                        <p *ngIf="errorcorreo" class="text-danger small" style="position: absolute;bottom: -22px;"><i
+                                class="bi bi-info-circle-fill"></i> Lo sentimos ya ese correo esta siendo utilizado, pruebe con otro.</p>
                     </div>
                     <div class="input-perfil" [hidden]="show_form_password">
                         <i class="bi bi-calendar-fill prev"></i>
@@ -155,11 +157,21 @@
                                         style="color: white;"><i class="bi bi-trash"></i></button>
                                 </div>
                             </div>
-                            <div class="pedidos-detail d-flex flex-column text-start rounded shadow-sm p-2 mb-2" style="width: 94%;" *ngIf="pedido.id==item.id">
-                                <div class="td-pedido" style="">título: <p class="small text-muted" style="width: 80%; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;">{{item.titulo}}</p></div>
-                                <div class="td-pedido" style="width: 100%;">cantidad: <p class="small text-muted">{{item.cantidad}}</p></div>
-                                <div class="td-pedido" style="width: 100%;">total pagar: <p class="small text-muted">{{item.cantidad*item.precio}}</p></div>
-                                <div class="td-pedido" style="width: 100%;">estado: <p class="small text-muted">{{item.estado}}</p></div>
+                            <div class="pedidos-detail d-flex flex-column text-start rounded shadow-sm p-2 mb-2"
+                                style="width: 94%;" *ngIf="pedido.id==item.id">
+                                <div class="td-pedido" style="">título: <p class="small text-muted"
+                                        style="width: 80%; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;">
+                                        {{item.titulo}}</p>
+                                </div>
+                                <div class="td-pedido" style="width: 100%;">cantidad: <p class="small text-muted">
+                                        {{item.cantidad}}</p>
+                                </div>
+                                <div class="td-pedido" style="width: 100%;">total pagar: <p class="small text-muted">
+                                        {{item.cantidad*item.precio}}</p>
+                                </div>
+                                <div class="td-pedido" style="width: 100%;">estado: <p class="small text-muted">
+                                        {{item.estado}}</p>
+                                </div>
                             </div>
                             <label class="fecha" *ngIf="item.fechalist">
                                 {{item.fechalist}}

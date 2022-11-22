@@ -24,9 +24,10 @@
 }
 
 .content-total .content-login {
-    width: 50%;
+    width: 21%;
     height: 100%;
     position: relative;
+    opacity: 0;
     background-color: var(--theme-color);
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
@@ -34,6 +35,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: all .3s ease-in-out;
 }
 
 .btn-activar{
@@ -58,7 +60,7 @@
 }
 
 .content-total .content-register {
-    width: 50%;
+    width: 79%;
     height: 100%;
     background-color: var(--theme-color);
     border-top-right-radius: 0.5em;
@@ -67,10 +69,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    opacity: 1;
+    transition: all .3s ease-in-out;
 }
 
 .content-total .content-blue {
-    width: 50%;
+    width: 21%;
     height: 100%;
     position: absolute;
     border-top-left-radius: 0.5em;
@@ -135,6 +139,7 @@
 } */
 
 .content-total.active .content-blue {
+    width: 50%;
     transform: translateX(100%);
     border-top-left-radius: 0em;
     border-bottom-left-radius: 0em;
@@ -142,6 +147,19 @@
     border-bottom-right-radius: 0.5em;
     transition: all .3s ease;
 }
+
+.content-total.active .content-register{
+    width: 50%;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+}
+
+.content-total.active .content-login{
+    width: 50%;
+    opacity: 1;
+    transition: all .3s ease-in-out;
+}
+
 
 
 /***
@@ -234,6 +252,7 @@ CSS del register
 *****************
 **/
 .content-total .content-register .icono-content{
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.4), inset 0 5px 20px 0 rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -253,11 +272,14 @@ CSS del register
     display: flex;
     width: 100%;
     margin-bottom: 10px;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    overflow: auto;
-    padding-top: 250px;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    justify-content: space-between;
+    padding: 5px;
+    /* overflow: auto; */
+    /* padding-top: 250px; */
 }
 
 .content-total .content-register .message-successful{
@@ -318,7 +340,7 @@ CSS del register
     background-color: var(--firstcolor);
     color: var(--theme-color);
     padding: 10px;
-    width: 70%;
+    width: 100%;
     margin-top: 20px;
 }
 

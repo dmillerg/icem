@@ -14,6 +14,7 @@ import { Scrap } from 'src/app/models/scrap';
 import { Usuario } from 'src/app/models/usuario';
 import { Ventas } from 'src/app/models/ventas';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 import { ModalCategoriaComponent } from '../modal-categoria/modal-categoria.component';
 import { ModalDesarrolloComponent } from '../modal-desarrollo/modal-desarrollo.component';
 import { ModalLoginOrRegisterComponent } from '../modal-login-or-register/modal-login-or-register.component';
@@ -269,11 +270,7 @@ export class ModalAdminComponent implements OnInit {
   }
 
   getProductoFoto(id: number, position: number) {
-    this.api.getProductoFoto(id).subscribe(result => {
-      this.ventasarray[position].url = result.url;
-    }, error => {
-      // this.ventasarray[position].url = error.url;
-    })
+    this.ventasarray[position].url = environment.url_backend + `pictures/${id}?tipo=productos`;
   }
 
   loadAll() {
@@ -299,29 +296,25 @@ export class ModalAdminComponent implements OnInit {
 
   loadProductos() {
     this.api.getProducto().subscribe((result) => {
-      if (result.length > 0) this.productosarray = result;
-      else this.productosarray = [];
+      this.productosarray =(result.length > 0)? result:[];
     });
   }
 
   loadNoticia() {
     this.api.getNoticias().subscribe((result) => {
-      if (result.length > 0) this.noticiasarray = result;
-      else this.noticiasarray = [];
+      this.noticiasarray =(result.length > 0)? result:[];
     });
   }
 
   loadCategorias() {
     this.api.getCategorias().subscribe((result) => {
-      if (result.length > 0) this.categoriaarray = result;
-      else this.categoriaarray = [];
+      this.categoriaarray =(result.length > 0)? result:[];
     });
   }
 
   loadDesarrollo() {
     this.api.getDesarrollos().subscribe((result) => {
-      if (result.length > 0) this.desarrolloarray = result;
-      else this.desarrolloarray = [];
+      this.desarrolloarray =(result.length > 0)? result:[];
     });
   }
 
@@ -338,33 +331,25 @@ export class ModalAdminComponent implements OnInit {
 
   loadQuienes() {
     this.api.getQuienes().subscribe((result) => {
-      if (result.length > 0) {
-        this.quienesarray = result;
-      } else this.quienesarray = [];
+      this.quienesarray =(result.length > 0)? result:[];
     });
   }
 
   loadScraps() {
     this.api.getScraps().subscribe((result) => {
-      if (result.length > 0) {
-        this.scraparray = result;
-      } else this.scraparray = [];
+      this.scraparray =(result.length > 0)? result:[];
     });
   }
 
   loadPosts() {
     this.api.getPosts().subscribe((result) => {
-      if (result.length > 0) {
-        this.postsarray = result;
-      } else this.postsarray = [];
+      this.postsarray =(result.length > 0)? result:[];
     });
   }
 
   loadPedidos() {
     this.api.getPedidos().subscribe((result) => {
-      if (result.length > 0) {
-        this.pedidosarray = result;
-      } else this.pedidosarray = [];
+      this.pedidosarray =(result.length > 0)? result:[];
     });
   }
 
@@ -382,9 +367,7 @@ export class ModalAdminComponent implements OnInit {
   loadMensajes() {
     this.mensajesarray = [];
     this.api.getMensajes().subscribe((result) => {
-      if (result.length > 0) {
-        this.mensajesarray = result
-      } else this.mensajesarray = [];
+      this.mensajesarray =(result.length > 0)? result:[];
     });
   }
 }

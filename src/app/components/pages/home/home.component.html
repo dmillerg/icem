@@ -175,20 +175,20 @@
     </h1>
 
     <!-- Noticia mas reciente -->
-    <div class="container animado p-5">
-        <div class="row d-flex flex-row justify-content-center align-items-center">
-            <div class="col-sm-5 text-start container-image mt-4">
+    <div class="container p-5">
+        <div class="row d-flex flex-row justify-content-center align-items-center animado">
+            <div class="col-lg-5 col-sm-12 text-start container-image mt-4">
                 <img class="logo text-white text-center svg-shadow" [src]="noticia.logo" [alt]="noticia.fuente"
                     style="background-color: --firstcolor;">
                 <img class="imagen2 img-fluid noticia-image text-white text-center"
                     style="background: url('assets/icon-icem-blue.png');" [alt]="noticia.titulo" [src]="img_noti" />
             </div>
-            <div class="col-sm-7 px-5">
-                <h1 class="display-4 text-firstcolor">
+            <div class="col-lg-7 col-sm-12 px-5">
+                <h1 class="display-4 text-firstcolor animado">
                     <strong>{{ titulo_noti }}</strong>
                 </h1>
-                <h3 class="text">{{ desc_noti }}</h3>
-                <button class="btn btn-firstcolor p-3 w-75" (click)="verMas(noticia)">Ver mas</button>
+                <h3 class="text" animado>{{ desc_noti }}</h3>
+                <button class="btn btn-firstcolor p-3 w-75 animado" (click)="verMas(noticia)">Ver mas</button>
             </div>
         </div>
     </div>
@@ -214,17 +214,17 @@
 
 <!-- Desarrollo section -->
 <section class="min-heigh-section bg-section" >
-    <div class="container animado">
+    <div class="container">
         <div class="row p-4"></div>
         <div class="row d-flex justify-content-center align-items-center p-4">
-            <div class="col-sm-8">
-                <h1 class="display-4 text-firstcolor">Desarrollo</h1>
-                <h1 class="h1 text-white">Estamos desarrollando nuevos productos que aún no están a la venta pero pueden ser
-                    de interés,
+            <div class="col-lg-8 col-sm-12">
+                <h1 class="display-4 text-firstcolor animado">Desarrollo</h1>
+                <h1 class="h1 text-white animado">Estamos desarrollando nuevos productos que aún no están a la venta pero pueden ser
+                    de su interés,
                     pásate y échales un ojo.</h1>
-                <button class="btn-firstcolor p-4 rounded mt-3 w-25" routerLink="/nuevos">Ver más</button>
+                <button class="btn-firstcolor p-4 rounded mt-3 w-25 animado" routerLink="/nuevos">Ver más</button>
             </div>
-            <div class="col-sm-4">
+            <div class="col-lg-4 col-sm-12 animado">
                 <img class="svg-shadow" src="assets/develop.png" alt="">
             </div>
         </div>

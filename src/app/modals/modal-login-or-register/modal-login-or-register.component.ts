@@ -205,7 +205,7 @@ export class ModalLoginOrRegisterComponent implements OnInit {
         });
       }
     } else {
-      this.message.error('debe rellenar el campo usuario o correo con alguno de estos elementos para poder saber quien es usted, luego presione sobre olvido su contraseña');
+      this.message.error('','debe rellenar el campo usuario o correo con alguno de estos elementos para poder saber quien es usted, luego presione sobre olvido su contraseña');
     }
 
   }
