@@ -8,6 +8,7 @@ import { Pedido } from 'src/app/models/pedido';
 import { Producto } from 'src/app/models/producto';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -21,7 +22,14 @@ export class TablePedidoComponent implements OnInit {
   @Input() usuarios: Usuario[] = [];
   user_id: number = -1;
 
-  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
+  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
+    crud.emitter.subscribe(result => {
+      if (result == 'loadpedidos' || result == 'loadall') {
+        this.loadUsuario();
+        this.loadPedidos();
+      }
+    })
+   }
 
   ngOnInit(): void {
     this.loadUsuario();

@@ -4,6 +4,7 @@ import { ModalCategoriaComponent } from 'src/app/modals/modal-categoria/modal-ca
 import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.component';
 import { Categoria } from 'src/app/models/categoria';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-table-categoria',
@@ -13,7 +14,13 @@ import { ApiService } from 'src/app/services/api.service';
 export class TableCategoriaComponent implements OnInit {
   @Input() categorias: Categoria[];
   all_query: string = "";
-  constructor(private api: ApiService, private modalService: NgbModal) {}
+  constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
+    crud.emitter.subscribe((result) => {
+      if (result == 'loadcategorias' || result == 'loadall') {
+        this.loadCategorias();
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loadCategorias();

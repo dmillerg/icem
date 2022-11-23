@@ -5,6 +5,7 @@ import { ModalPostsComponent } from 'src/app/modals/modal-posts/modal-posts.comp
 import { ModalRespuestaComponent } from 'src/app/modals/modal-respuesta/modal-respuesta.component';
 import { Posts } from 'src/app/models/posts';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-table-posts',
@@ -16,7 +17,13 @@ export class TablePostsComponent implements OnInit {
   correo_query: string = '';
   usuario_query: string = '';
   visto_query: number = -1;
-  constructor(private api: ApiService, private modalService: NgbModal) {}
+  constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
+    crud.emitter.subscribe(result => {
+      if (result == 'loadposts' || result == 'loadall') {
+        this.loadPosts();
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.loadPosts();
@@ -26,6 +33,10 @@ export class TablePostsComponent implements OnInit {
     this.api.getPosts().subscribe((result) => {
       if (result.length > 0) this.posts = result;
       else this.posts = [];
+      const noti = this.posts.filter(r => r.cant_resp == 0).length;
+      if (noti > 0) {
+        this.crud.notificacion('posts', noti);
+      }
     });
   }
 
@@ -53,7 +64,7 @@ export class TablePostsComponent implements OnInit {
     });
   }
 
-  responderPost(posts: Posts){
+  responderPost(posts: Posts) {
     let modal = this.modalService.open(ModalRespuestaComponent, { size: 'md' });
     modal.componentInstance.id_post = posts.id;
     modal.componentInstance.modalHeader = 'Responder';
@@ -64,5 +75,5 @@ export class TablePostsComponent implements OnInit {
     });
   }
 
-  
+
 }

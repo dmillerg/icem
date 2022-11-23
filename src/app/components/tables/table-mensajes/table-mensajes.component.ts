@@ -6,6 +6,7 @@ import { ModalMensajeComponent } from 'src/app/modals/modal-mensaje/modal-mensaj
 import { Mensaje } from 'src/app/models/mensaje';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-table-mensajes',
@@ -20,7 +21,14 @@ export class TableMensajesComponent implements OnInit {
   fecha: string = '';
   producto_id: number = -1;
 
-  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
+  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
+    crud.emitter.subscribe(result => {
+      if (result == 'loadmensajes' || result == 'loadall') {
+        this.loadUsuario();
+        this.loadMensajes();
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.loadUsuario();
@@ -59,7 +67,7 @@ export class TableMensajesComponent implements OnInit {
 
   responderMensaje(mensaje: Mensaje) {
     let modal = this.modalService.open(ModalMensajeComponent, { backdrop: 'static' });
-    modal.componentInstance.mensaje= mensaje;
+    modal.componentInstance.mensaje = mensaje;
     modal.result.then(result => {
       if (result) {
         this.loadMensajes();

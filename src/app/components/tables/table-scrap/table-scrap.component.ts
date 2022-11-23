@@ -7,6 +7,7 @@ import { ModalScrapPruebaComponent } from 'src/app/modals/modal-scrap-prueba/mod
 import { ModalScrapComponent } from 'src/app/modals/modal-scrap/modal-scrap.component';
 import { Scrap } from 'src/app/models/scrap';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-table-scrap',
@@ -19,7 +20,13 @@ export class TableScrapComponent implements OnInit {
   loadingScrap: boolean = false;
   messageScrap: string = 'Iniciar Scrap';
   time: number = 0;
-  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
+  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
+    crud.emitter.subscribe(result => {
+      if (result == 'loadscraps' || result == 'loadall') {
+        this.loadScrap();
+      }
+    })
+   }
 
   ngOnInit(): void {
     this.loadScrap();

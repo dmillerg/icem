@@ -8,6 +8,7 @@ import { Pedido } from 'src/app/models/pedido';
 import { Producto } from 'src/app/models/producto';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -24,7 +25,15 @@ export class TableVentasComponent implements OnInit {
   fecha: string = '';
   producto_id: number = -1;
 
-  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
+  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
+    crud.emitter.subscribe(result => {
+      if (result == 'loadventas' || result == 'loadall') {
+        this.loadUsuario();
+        this.loadProductos();
+        this.loadVentas();
+      }
+    })
+   }
 
   ngOnInit(): void {
     this.loadUsuario();
@@ -73,21 +82,7 @@ export class TableVentasComponent implements OnInit {
   change() {
     this.loadVentas();
   }
-
   
-  // updateProducto(producto) {
-  //   let modal = this.modalService.open(ModalProductoComponent, { size: 'lg' });
-  //   modal.componentInstance.modalHeader = 'Producto';
-  //   modal.componentInstance.modalSubHeader = 'para la comercializacion y venta';
-  //   modal.componentInstance.modalAction = 'Editar';
-  //   modal.componentInstance.producto = producto;
-  //   modal.result.then((result) => {
-  //     if (result) {
-  //       this.loadProductos();
-  //     }
-  //   });
-  // }
-
   delete(producto: Producto) {
     let modal = this.modalService.open(ModalDeleteComponent, { size: 'sm' });
     modal.componentInstance.modalId = producto.id;

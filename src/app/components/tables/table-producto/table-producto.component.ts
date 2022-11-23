@@ -4,6 +4,7 @@ import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.c
 import { ModalProductoComponent } from 'src/app/modals/modal-producto/modal-producto.component';
 import { Producto } from 'src/app/models/producto';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -20,7 +21,14 @@ export class TableProductoComponent implements OnInit {
   fechas: any[] = [];
   all_query: string = '';
 
-  constructor(private api: ApiService, private modalService: NgbModal) { }
+  constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
+    crud.emitter.subscribe((result) => {
+      if (result == 'loadproductos' || result == 'loadall') {
+        this.loadProductos();
+        this.loadProductos();
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loadCategorias();
@@ -32,13 +40,13 @@ export class TableProductoComponent implements OnInit {
       if (result.length > 0) this.productos = result;
       else this.productos = [];
       result.forEach(item => {
-        if(this.fechas.indexOf(item.fecha)==-1) this.fechas.push(item.fecha);
+        if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
         // if(this.categorias.indexOf(item.categoria)==-1) this.categorias.push(item.categoria);
       })
     });
   }
 
-  loadCategorias(){
+  loadCategorias() {
     this.api.getCategorias().subscribe((result) => {
       if (result.length > 0) this.categorias = result;
       else this.categorias = [];
@@ -76,7 +84,7 @@ export class TableProductoComponent implements OnInit {
     })
   }
 
-  darPublicidadNuevoProducto(producto:any) {
+  darPublicidadNuevoProducto(producto: any) {
     let asunto: string = 'Un nuevo producto ha sido puesto en venta'
     this.api.getUsuarios().subscribe(result => {
       result.forEach(e => {

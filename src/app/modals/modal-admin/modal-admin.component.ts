@@ -2,22 +2,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from 'ngx-webstorage';
 import { listAnimation, scaleAnimation } from 'src/app/animations';
-import { Categoria } from 'src/app/models/categoria';
-import { Configuracion } from 'src/app/models/configuracion';
-import { Desarrollo } from 'src/app/models/desarrollo';
-import { Noticia } from 'src/app/models/noticias';
-import { Pedido } from 'src/app/models/pedido';
-import { Posts } from 'src/app/models/posts';
-import { Producto } from 'src/app/models/producto';
-import { Quienes } from 'src/app/models/quienes';
-import { Scrap } from 'src/app/models/scrap';
 import { Usuario } from 'src/app/models/usuario';
-import { Ventas } from 'src/app/models/ventas';
 import { ApiService } from 'src/app/services/api.service';
-import { environment } from 'src/environments/environment';
+import { CrudService } from 'src/app/services/crud.service';
 import { ModalCategoriaComponent } from '../modal-categoria/modal-categoria.component';
 import { ModalDesarrolloComponent } from '../modal-desarrollo/modal-desarrollo.component';
-import { ModalLoginOrRegisterComponent } from '../modal-login-or-register/modal-login-or-register.component';
 import { ModalNoticiaComponent } from '../modal-noticia/modal-noticia.component';
 import { ModalPostsComponent } from '../modal-posts/modal-posts.component';
 import { ModalProductoComponent } from '../modal-producto/modal-producto.component';
@@ -129,30 +118,25 @@ export class ModalAdminComponent implements OnInit {
   add_disable: boolean = false;
 
   activo: string = this.buttons[0].titulo;
-  productosarray: Producto[] = [];
-  noticiasarray: Noticia[] = [];
-  categoriaarray: Categoria[] = [];
-  desarrolloarray: Desarrollo[] = [];
-  usuariosarray: Usuario[] = [];
-  quienesarray: Quienes[] = [];
-  scraparray: Scrap[] = [];
-  postsarray: Posts[] = [];
-  pedidosarray: Pedido[] = [];
-  ventasarray: any[] = [];
-  mensajesarray: any[] = [];
-  configuracionesarray: Configuracion[] = [];
 
   constructor(
     private activeModal: NgbActiveModal,
     private api: ApiService,
     private modalService: NgbModal,
-    private storage: SessionStorageService
+    private storage: SessionStorageService,
+    public crud: CrudService,
   ) {
+    crud.emitter.subscribe(result=>{
+      if(result?.tipo=='notiposts') console.log(result.cant);
+      
+    })
     this.actiModal = activeModal;
   }
 
   ngOnInit(): void {
     this.usuario = this.storage.retrieve('usuario');
+    this.loadPosts();
+    this.loadPreguntas();
   }
 
   cambiarTabla(titulo: string = '', i: number = -1) {
@@ -178,7 +162,7 @@ export class ModalAdminComponent implements OnInit {
           'para la comercializacion y venta';
         modal.result.then((result) => {
           if (result) {
-            this.loadAll();
+            this.crud.loadEvento('all');
           }
         });
         break;
@@ -188,7 +172,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'lo mas reciente en el ICEM';
         modal.result.then((result) => {
           if (result) {
-            this.loadAll();
+            this.crud.loadEvento('all');
           }
         });
         break;
@@ -199,7 +183,7 @@ export class ModalAdminComponent implements OnInit {
           'tipos de productos de la empresa';
         modal.result.then((result) => {
           if (result) {
-            this.loadAll();
+            this.crud.loadEvento('all');
           }
         });
         break;
@@ -212,7 +196,7 @@ export class ModalAdminComponent implements OnInit {
           'en pruebas para su posterior venta';
         modal.result.then((result) => {
           if (result) {
-            this.loadAll();
+            this.crud.loadEvento('all');
           }
         });
         break;
@@ -222,7 +206,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Administrador de la pagina';
         modal.result.then((result) => {
           if (result) {
-            this.loadAll();
+            this.crud.loadEvento('all');
           }
         });
         break;
@@ -232,7 +216,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Personas integrantes del equipo';
         modal.result.then((result) => {
           if (result) {
-            this.loadAll();
+            this.crud.loadEvento('all');
           }
         });
         break;
@@ -242,7 +226,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Scraps de los sitios';
         modal.result.then((result) => {
           if (result) {
-            this.loadAll();
+            this.crud.loadEvento('all');
           }
         });
         break;
@@ -252,39 +236,13 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
         modal.result.then((result) => {
           if (result) {
-            this.loadAll();
+            this.crud.loadEvento('all');
           }
         });
         break;
       case 'Pedidos':
-        // modal = this.modalService.open(ModalPostsComponent, { size: 'lg', backdrop: 'static' });
-        // modal.componentInstance.modalHeader = 'Posts';
-        // modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
-        // modal.result.then((result) => {
-        //   if (result) {
-        //     this.loadPosts();
-        //   }
-        // });
         break;
     }
-  }
-
-  getProductoFoto(id: number, position: number) {
-    this.ventasarray[position].url = environment.url_backend + `pictures/${id}?tipo=productos`;
-  }
-
-  loadAll() {
-    this.loadCategorias();
-    this.loadDesarrollo();
-    this.loadNoticia();
-    this.loadPedidos();
-    this.loadPosts();
-    this.loadProductos();
-    this.loadQuienes();
-    this.loadScraps();
-    this.loadUsuario();
-    this.loadVentas();
-    this.loadMensajes();
   }
 
   logout() {
@@ -294,80 +252,17 @@ export class ModalAdminComponent implements OnInit {
     })
   }
 
-  loadProductos() {
-    this.api.getProducto().subscribe((result) => {
-      this.productosarray =(result.length > 0)? result:[];
+  loadPosts(){
+    this.api.getPosts().subscribe(result=>{
+      const cant = result.filter(r=>r.cant_resp==0).length;
+      this.buttons.filter(e=>e.titulo=='Comentarios')[0].cant = cant;
     });
   }
 
-  loadNoticia() {
-    this.api.getNoticias().subscribe((result) => {
-      this.noticiasarray =(result.length > 0)? result:[];
-    });
-  }
-
-  loadCategorias() {
-    this.api.getCategorias().subscribe((result) => {
-      this.categoriaarray =(result.length > 0)? result:[];
-    });
-  }
-
-  loadDesarrollo() {
-    this.api.getDesarrollos().subscribe((result) => {
-      this.desarrolloarray =(result.length > 0)? result:[];
-    });
-  }
-
-  loadUsuario() {
-    this.api.getUsuarios().subscribe((result) => {
-      if (result.length > 0) {
-        if (this.storage.retrieve('usuario').usuario != 'kuroko') {
-          this.usuariosarray = result.filter((item) => item != result[0]);
-        } else
-          this.usuariosarray = result;
-      } else this.usuariosarray = [];
-    });
-  }
-
-  loadQuienes() {
-    this.api.getQuienes().subscribe((result) => {
-      this.quienesarray =(result.length > 0)? result:[];
-    });
-  }
-
-  loadScraps() {
-    this.api.getScraps().subscribe((result) => {
-      this.scraparray =(result.length > 0)? result:[];
-    });
-  }
-
-  loadPosts() {
-    this.api.getPosts().subscribe((result) => {
-      this.postsarray =(result.length > 0)? result:[];
-    });
-  }
-
-  loadPedidos() {
-    this.api.getPedidos().subscribe((result) => {
-      this.pedidosarray =(result.length > 0)? result:[];
-    });
-  }
-
-  loadVentas() {
-    this.ventasarray = [];
-    this.api.getVentas().subscribe((result) => {
-      if (result.length > 0) {
-        result.forEach((e, i) => {
-          this.getProductoFoto(e.producto_id, i);
-        })
-      } else this.ventasarray = [];
-    });
-  }
-
-  loadMensajes() {
-    this.mensajesarray = [];
-    this.api.getMensajes().subscribe((result) => {
-      this.mensajesarray =(result.length > 0)? result:[];
+  loadPreguntas(){
+    this.api.getMensajes().subscribe(result=>{
+      const cant = result.filter(r=>r.visto).length;
+      this.buttons.filter(e=>e.titulo=='Preguntas')[0].cant = cant;
     });
   }
 }

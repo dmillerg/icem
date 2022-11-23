@@ -5,6 +5,7 @@ import { ModalConfiguracionComponent } from 'src/app/modals/modal-configuracion/
 import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.component';
 import { Configuracion } from 'src/app/models/configuracion';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-table-configuracion',
@@ -12,8 +13,12 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./table-configuracion.component.css'],
 })
 export class TableConfiguracion implements OnInit {
-  @Input() configuraciones: Configuracion[]=[];
-  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
+  @Input() configuraciones: Configuracion[] = [];
+  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
+    crud.emitter.subscribe((result) => {
+      if (result == 'loadconfig' || result == 'loadall') this.loadConfiguraciones();
+    });
+  }
 
   ngOnInit(): void {
     this.loadConfiguraciones();
@@ -22,7 +27,7 @@ export class TableConfiguracion implements OnInit {
   loadConfiguraciones() {
     this.api.getConfiguraciones().subscribe((result) => {
       if (result.length > 0) {
-          this.configuraciones = result;
+        this.configuraciones = result;
       } else this.configuraciones = [];
     });
   }
@@ -38,7 +43,7 @@ export class TableConfiguracion implements OnInit {
     modal.componentInstance.configuracion.nombre = configuracion.nombre;
     modal.componentInstance.configuracion.descripcion = configuracion.descripcion;
     modal.componentInstance.configuracion.config = configuracion.config;
-    
+
     modal.result.then((result) => {
       if (result) {
         this.loadConfiguraciones();

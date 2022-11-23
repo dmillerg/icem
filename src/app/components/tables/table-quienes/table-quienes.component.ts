@@ -6,6 +6,7 @@ import { ModalQuienesComponent } from 'src/app/modals/modal-quienes/modal-quiene
 import { Producto } from 'src/app/models/producto';
 import { Quienes } from 'src/app/models/quienes';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-table-quienes',
@@ -14,7 +15,13 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TableQuienesComponent implements OnInit {
   @Input() quienes: Quienes[];
-  constructor(private api: ApiService, private modalService: NgbModal) {}
+  constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
+    crud.emitter.subscribe(result => {
+      if (result == 'loadquienes' || result == 'loadall') {
+        this.loadQuienes();
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.loadQuienes();

@@ -4,6 +4,7 @@ import { ModalDeleteComponent } from 'src/app/modals/modal-delete/modal-delete.c
 import { ModalDesarrolloComponent } from 'src/app/modals/modal-desarrollo/modal-desarrollo.component';
 import { Desarrollo } from 'src/app/models/desarrollo';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-table-desarrollo',
@@ -16,7 +17,11 @@ export class TableDesarrolloComponent implements OnInit {
   fecha_query: string = '';
   fechas: any[] = [];
   all_query: string = '';
-  constructor(private api: ApiService, private modalService: NgbModal) {}
+  constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
+    crud.emitter.subscribe(result => {
+      if (result == 'loaddesarrollos' || result == 'loadall') this.loadDesarrollo();
+    })
+  }
 
   ngOnInit(): void {
     this.loadDesarrollo();

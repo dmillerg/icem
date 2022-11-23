@@ -8,6 +8,7 @@ import { ModalUsuarioComponent } from 'src/app/modals/modal-usuario/modal-usuari
 import { Producto } from 'src/app/models/producto';
 import { Usuario } from 'src/app/models/usuario';
 import { ApiService } from 'src/app/services/api.service';
+import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
   selector: 'app-table-usuario',
@@ -19,7 +20,13 @@ export class TableUsuarioComponent implements OnInit {
   usuario_query: string = '';
   actividad_query: number = -1;
   fecha_query: string = '';
-  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService) { }
+  constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
+    crud.emitter.subscribe(result => {
+      if (result == 'loadusuarios' || result == 'loadall') {
+        this.loadUsuario();
+      }
+    })
+   }
 
   ngOnInit(): void {
     this.loadUsuario();

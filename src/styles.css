@@ -40,7 +40,7 @@
 }
 
 .modal-body {
-  background: white;
+  background: transparent;
 }
 
 .btn:disabled {
