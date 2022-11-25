@@ -6,7 +6,7 @@
                 <h1 class="text-section display-4">Categorías</h1>
             </div>
             <div class="contenedor-categoria" [@listAnimation]="categorias.length">
-                <button *ngFor="let item of categorias" class="btn-categoria shadow-sm"
+                <button *ngFor="let item of categorias" class="btn-categoria"
                     (click)="cambiarCategoria(item.id)"
                     [ngClass]="{'active': (storage.retrieve('categoria') && storage.retrieve('categoria').nombre== item.nombre)}">
                     <strong style="font-size: 16px;">{{item.nombre}}</strong>
