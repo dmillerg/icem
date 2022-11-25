@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Posts } from 'src/app/models/posts';
 import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-modal-posts',
@@ -26,6 +27,8 @@ export class ModalPostsComponent implements OnInit {
     calificacion: 0,
   };
 
+  url: string = '';
+
   posts_pasado: Posts = {
     id: -1,
     alias: '',
@@ -42,6 +45,11 @@ export class ModalPostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.rellenarSiEditas();
+    this.url= environment.url_backend +`pictures/${this.posts.id_producto}?tipo=productos`
+  }
+
+  urlChange(){
+    this.url= environment.url_backend +`pictures/${this.posts.id_producto}?tipo=productos`
   }
 
   rellenarSiEditas() {

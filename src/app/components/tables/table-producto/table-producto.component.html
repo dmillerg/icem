@@ -1,8 +1,8 @@
 <div class="filtros">
 
-    <div class="contenedor-filtro"> <label for="all">Todo</label>
-        <input type="text" style="color: black;" class="forms-control" placeholder="Buscar.." [(ngModel)]="all_query"
-            name="filterpost" />
+    <div class="contenedor-filtro">
+        <label for="all" class="small">Todo</label>
+        <input type="text" placeholder="Buscar.." [(ngModel)]="all_query" name="filterpost" />
     </div>
 
     <div class="contenedor-filtro"> <label for="actividad">Actividad</label>
@@ -29,7 +29,7 @@
     </div>
 </div>
 <div style="overflow: auto;width: 100%;" class="table-mine scroll-mine">
-    
+
     <table class="table table-dark text-center table-mine">
         <thead>
             <th>titulo</th>
@@ -39,7 +39,8 @@
             <th>existencias</th>
             <th>acciones</th>
         </thead>
-        <tr *ngFor="let item of productos | user_active_pipe: actividad_query | fecha_pipe: fecha_query | producto_categoria_pipe: categoria_query | allPipe: all_query">
+        <tr
+            *ngFor="let item of productos | user_active_pipe: actividad_query | fecha_pipe: fecha_query | producto_categoria_pipe: categoria_query | allPipe: all_query">
             <td class="descrip">{{item.titulo}}</td>
             <td>{{item.fecha| date: 'short'}}</td>
             <td>{{item.categoria}}</td>

@@ -40,7 +40,7 @@
 }
 
 .modal-body {
-  background: transparent;
+  background: #161616;
 }
 
 .btn:disabled {
@@ -497,6 +497,7 @@ button {
   display: flex;
   align-items: center;
   flex-direction: row;
+  gap: 5px;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
@@ -505,24 +506,6 @@ button {
   color: black;
 }
 
-.filtros .selecc {
-  line-height: 45px;
-  width: 150px;
-  padding: 10px;
-  margin: 10px;
-  background-color: var(--firstcolor-hover);
-  color: var(--theme-color);
-  border: none;
-  text-overflow: ellipsis;
-  border-radius: 0.5em;
-  outline: none;
-  font-family: MyriadPro-BoldCond;
-  /* box-shadow: 0 0 2px 2px var(--firstcolor); */
-}
-
-.filtros .selecc option{
-  font-family: MyriadPro-BoldCond;
-}
 
 .contenedor-filtro {
   display: flex;
@@ -546,15 +529,38 @@ button {
 
 .descrip {
   white-space: nowrap;
- overflow: hidden;
- max-width: 150px;
- text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 150px;
+  text-overflow: ellipsis;
 }
 
 table th {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 1; 
-  background-color:#101010;
+  z-index: 1;
+  background-color: #101010;
+}
+
+.modal-body input,
+.modal-body textarea,
+.modal-body select {
+  background-color: #3d3d3d;
+  border-radius: 0.2em;
+  outline: none;
+  border: none;
+  color: white;
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  /* line-height: 30px; */
+  padding: 5px;
+  padding-left: 10px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), inset 0 0 5px 0 rgba(0, 0, 0, .2);
+}
+
+.modal-body input::placeholder,
+.modal-body textarea::placeholder,
+.modal-body select::placeholder{
+  color: #949494;
 }

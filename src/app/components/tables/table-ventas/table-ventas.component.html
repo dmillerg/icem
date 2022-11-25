@@ -6,9 +6,9 @@
         </select>
     </div>
     <div class="contenedor-filtro"> <label for="actividad">Fecha</label>
-        <input type="date" style="color: black;" class="forms-control" name="fecha" [(ngModel)]="fecha" (ngModelChange)="change()"  placeholder="fecha">
+        <input type="date" name="fecha" [(ngModel)]="fecha" (ngModelChange)="change()"  placeholder="fecha">
     </div>
-    <div class="contenedor-filtro"> <label for="actividad">Producto</label>
+    <div class="contenedor-filtro w-25"> <label for="actividad">Producto</label>
         <select name="producto" id="producto" [(ngModel)]="producto_id" (change)="change()" class="selecc">
             <option value="-1">producto</option>
             <option *ngFor="let item of productos" [value]="item.id">

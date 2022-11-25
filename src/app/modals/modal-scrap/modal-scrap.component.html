@@ -1,80 +1,76 @@
-
-  <div class="modal-header bg-warn">
-      <h2 class="modal-title"><strong>{{modalAction}} {{modalHeader}}</strong></h2>
-      <button  type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="actiModal.close()">
+<div class="modal-header bg-warn">
+  <h2 class="modal-title"><strong>{{modalAction}} {{modalHeader}}</strong></h2>
+  <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="actiModal.close()">
     <span aria-hidden="true">&times;</span>
   </button>
-  </div>
-  <div class="modal-body" >
-      <form style="max-height: 250px;overflow-y: auto;">
-        <p class="w-100 small text-danger m-1"><i class="bi bi-info-circle-fill"></i> Antes de agregar algo aqui por favor asegurese de saber lo que esta haciendo, esto puede traer datos erróneos y provocar un mal funcionamiento de la página</p>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Contenedor</label>
-          <input type="text" name="contenedor" [(ngModel)]="scrap.contenedor" class="form-control" id="exampleFormControlInput1">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Título</label>
-          <input type="text" name="titulo" [(ngModel)]="scrap.titulo" class="form-control" id="exampleFormControlInput1">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Fecha</label>
-          <input type="text" name="titulo" [(ngModel)]="scrap.fecha" class="form-control" id="exampleFormControlInput1">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Descripción</label>
-          <input type="text" name="descripcion" [(ngModel)]="scrap.descripcion" class="form-control" id="exampleFormControlInput1">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Imagen selector</label>
-          <input type="text" name="iselector" [(ngModel)]="scrap.imagen_selector" class="form-control" id="exampleFormControlInput1">
-        </div><div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Imagen attr</label>
-          <input type="text" name="iattr" [(ngModel)]="scrap.imagen_attr" class="form-control" id="exampleFormControlInput1">
-        </div><div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Enlace Selector</label>
-          <input type="text" name="eselector" [(ngModel)]="scrap.enlace_selector" class="form-control" id="exampleFormControlInput1">
-        </div><div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Enlace attr</label>
-          <input type="text" name="eattr" [(ngModel)]="scrap.enlace_attr" class="form-control" id="exampleFormControlInput1">
-        </div><div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Url</label>
-          <input type="text" name="url" [(ngModel)]="scrap.url" class="form-control" id="exampleFormControlInput1">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Fuente</label>
-          <input type="text" name="fuente" [(ngModel)]="scrap.fuente" class="form-control" id="exampleFormControlInput1">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
-            <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
-          </svg>Logo</label>
-          <input type="text" name="logo" [(ngModel)]="scrap.logo" class="form-control" id="exampleFormControlInput1">
-        </div>
-      </form>
-  </div>
-  <div class="modal-footer">
-      <button class="btn btn-primary" [disabled]="disableButton" (click)="addUpdateScrap()">{{modalAction}} {{modalHeader}}</button>
-      <button class="btn btn-firstcolor" [disabled]="loadingTest" (click)="probarScrap()"><span *ngIf="loadingTest" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Probar Scrap</button>
-  </div>
-
-
+</div>
+<div class="modal-body">
+  <form class="w-100 d-flex flex-row gap-2 flex-wrap" style="max-height: 250px;overflow-y: auto;">
+    <p class="w-100 small text-danger m-1"><i class="bi bi-info-circle-fill"></i> Antes de agregar algo aqui por favor
+      asegurese de saber lo que esta haciendo, esto puede traer datos erróneos y provocar un mal funcionamiento de la
+      página</p>
+    <div class="w-50">
+      <label for="exampleFormControlInput1" class><i class="bi bi-menu-app"></i> Contenedor</label>
+      <input type="text" name="contenedor" [(ngModel)]="scrap.contenedor" id="exampleFormControlInput1"
+        placeholder="Selector del contenedor">
+    </div>
+    <div class="w-25">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-file-text"></i> Título</label>
+      <input type="text" name="titulo" [(ngModel)]="scrap.titulo" id="exampleFormControlInput1"
+        placeholder="Selector del titulo">
+    </div>
+    <div class="w-25">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-calendar"></i> Fecha</label>
+      <input type="text" name="titulo" [(ngModel)]="scrap.fecha" id="exampleFormControlInput1"
+        placeholder="Selector de la fecha">
+    </div>
+    <div class="w-25">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-file-earmark-richtext"></i>
+        Descripción</label>
+      <input type="text" name="descripcion" [(ngModel)]="scrap.descripcion" id="exampleFormControlInput1"
+        placeholder="Selector de la descripcion">
+    </div>
+    <div class="w-25">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-image"></i> Imagen selector</label>
+      <input type="text" name="iselector" [(ngModel)]="scrap.imagen_selector" id="exampleFormControlInput1"
+        placeholder="Selector de imagen">
+    </div>
+    <div class="w-75">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-card-image"></i> Imagen
+        attr</label>
+      <input type="text" name="iattr" [(ngModel)]="scrap.imagen_attr" id="exampleFormControlInput1"
+        placeholder="Selector de los atributos de la imagen">
+    </div>
+    <div class="w-25">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-link"></i> Enlace Selector</label>
+      <input type="text" name="eselector" [(ngModel)]="scrap.enlace_selector" id="exampleFormControlInput1"
+        placeholder="Selector de enlace">
+    </div>
+    <div class="w-50">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="i bi-link-45deg"></i> Enlace attr</label>
+      <input type="text" name="eattr" [(ngModel)]="scrap.enlace_attr" id="exampleFormControlInput1"
+        placeholder="Selector de los atributos del enlace">
+    </div>
+    <div class="w-25">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-browser-chrome"></i> Url</label>
+      <input type="text" name="url" [(ngModel)]="scrap.url" id="exampleFormControlInput1"
+        placeholder="Selector de la url">
+    </div>
+    <div class="w-25">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-textarea"></i> Fuente</label>
+      <input type="text" name="fuente" [(ngModel)]="scrap.fuente" id="exampleFormControlInput1"
+        placeholder="Selector de la fuente">
+    </div>
+    <div class="w-25">
+      <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-file-image"></i> Logo</label>
+      <input type="text" name="logo" [(ngModel)]="scrap.logo" id="exampleFormControlInput1"
+        placeholder="Selector del logo">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" [disabled]="disableButton" (click)="addUpdateScrap()">{{modalAction}}
+    {{modalHeader}}</button>
+  <button class="btn btn-firstcolor" [disabled]="loadingTest" (click)="probarScrap()"><span *ngIf="loadingTest"
+      class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Probar Scrap</button>
+</div>
