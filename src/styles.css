@@ -515,16 +515,16 @@ button {
 }
 
 .contenedor-filtro label {
-  margin-left: 15px;
+  /* margin-left: 15px; */
 }
 
 .contenedor-filtro input {
-  line-height: 35px;
+  /* line-height: 35px;
   outline: none;
   margin: 10px;
   border-radius: 0.5em;
   border: none;
-  padding-left: 10px;
+  padding-left: 10px; */
 }
 
 .descrip {
@@ -552,7 +552,7 @@ table th {
   color: white;
   display: block;
   width: 100%;
-  min-height: 40px;
+  height: 40px;
   /* line-height: 30px; */
   padding: 5px;
   padding-left: 10px;
