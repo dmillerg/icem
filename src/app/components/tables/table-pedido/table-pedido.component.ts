@@ -21,6 +21,7 @@ export class TablePedidoComponent implements OnInit {
   @Input() pedidos: any[];
   @Input() usuarios: Usuario[] = [];
   user_id: number = -1;
+  loading: boolean = false;
 
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
     crud.emitter.subscribe(result => {
@@ -29,7 +30,7 @@ export class TablePedidoComponent implements OnInit {
         this.loadPedidos();
       }
     })
-   }
+  }
 
   ngOnInit(): void {
     this.loadUsuario();
@@ -37,9 +38,10 @@ export class TablePedidoComponent implements OnInit {
   }
 
   loadPedidos() {
+    this.loading = true;
     this.api.getPedidos(this.user_id).subscribe((result) => {
       console.log(result);
-
+      this.loading = false;
       if (result.length > 0) {
         this.pedidos = result;
         result.forEach((e, i) => {
@@ -52,7 +54,7 @@ export class TablePedidoComponent implements OnInit {
   }
 
   getProductoFoto(id: number, position: number) {
-    this.pedidos[position].url = environment.url_backend+`pictures/${id}?tipo=productos`
+    this.pedidos[position].url = environment.url_backend + `pictures/${id}?tipo=productos`
   }
 
   loadUsuario() {
@@ -96,13 +98,13 @@ export class TablePedidoComponent implements OnInit {
   }
 
   cambiarEstadoPedido(pedido: Pedido) {
-   let modal = this.modalService.open(ModalEstadoPedidoComponent, {backdrop: 'static'});
-   modal.componentInstance.id = pedido.id;
-   modal.componentInstance.estado = pedido.estado;
-   modal.result.then(result=>{
-     if(result){
-       this.loadPedidos();
-     }
-   })
+    let modal = this.modalService.open(ModalEstadoPedidoComponent, { backdrop: 'static' });
+    modal.componentInstance.id = pedido.id;
+    modal.componentInstance.estado = pedido.estado;
+    modal.result.then(result => {
+      if (result) {
+        this.loadPedidos();
+      }
+    })
   }
 }

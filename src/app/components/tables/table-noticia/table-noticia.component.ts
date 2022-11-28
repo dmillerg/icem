@@ -20,6 +20,7 @@ export class TableNoticiaComponent implements OnInit {
   fecha_query: string = '';
   fechas: any[] = [];
   all_query: string = '';
+  loading: boolean = false;
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe(result => {
       if (result == 'loadnoticias' || result == 'loadall') {
@@ -33,6 +34,7 @@ export class TableNoticiaComponent implements OnInit {
   }
 
   loadNoticia() {
+    this.loading = true;
     this.api.getNoticias().subscribe((result) => {
       if (result.length > 0) this.noticias = this.convertNoticias(result);
       else this.noticias = [];
@@ -40,6 +42,7 @@ export class TableNoticiaComponent implements OnInit {
         if (this.fuentes.indexOf(item.fuente) == -1) this.fuentes.push(item.fuente);
         if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
       });
+      this.loading = false;
     });
   }
 

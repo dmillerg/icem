@@ -23,7 +23,7 @@ export class DesarrollosComponent implements OnInit {
   loadData() {
     this.api.getDesarrollos().subscribe((result) => {
       console.log(result)
-      this.desarrollos = result;
+      this.desarrollos = result&& result.length>0?result:[];
     }, (error) => console.log(error));
   }
 }

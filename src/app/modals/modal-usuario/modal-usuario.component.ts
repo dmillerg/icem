@@ -61,6 +61,10 @@ export class ModalUsuarioComponent implements OnInit {
     this.rellenarSiEditas();
   }
 
+  validateEmail() {
+    return this.usuario.correo.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null;
+  }
+
   rellenarSiEditas() {
     if (this.modalHeader == 'Editar') {
       this.usuario_pasado.id = this.usuario.id;

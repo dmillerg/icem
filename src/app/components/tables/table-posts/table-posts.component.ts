@@ -17,6 +17,7 @@ export class TablePostsComponent implements OnInit {
   correo_query: string = '';
   usuario_query: string = '';
   visto_query: number = -1;
+  loading: boolean = false;
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe(result => {
       if (result == 'loadposts' || result == 'loadall') {
@@ -30,6 +31,7 @@ export class TablePostsComponent implements OnInit {
   }
 
   loadPosts() {
+    this.loading = true;
     this.api.getPosts().subscribe((result) => {
       if (result.length > 0) this.posts = result;
       else this.posts = [];
@@ -37,6 +39,7 @@ export class TablePostsComponent implements OnInit {
       if (noti > 0) {
         this.crud.notificacion('posts', noti);
       }
+      this.loading = false;
     });
   }
 

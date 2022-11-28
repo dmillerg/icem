@@ -20,6 +20,7 @@ export class TableScrapComponent implements OnInit {
   loadingScrap: boolean = false;
   messageScrap: string = 'Iniciar Scrap';
   time: number = 0;
+  loading: boolean = false;
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
     crud.emitter.subscribe(result => {
       if (result == 'loadscraps' || result == 'loadall') {
@@ -36,6 +37,7 @@ export class TableScrapComponent implements OnInit {
   }
 
   loadScrap() {
+    this.loading = true;
     this.api.getScraps().subscribe((result) => {
       if (result.length > 0) {
         this.scraps = result;
@@ -45,6 +47,7 @@ export class TableScrapComponent implements OnInit {
         this.scraps = [];
         this.loadMessage();
       }
+      this.loading = false;
     });
   }
 

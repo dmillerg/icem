@@ -20,11 +20,11 @@ export class TableProductoComponent implements OnInit {
   fecha_query: string = '';
   fechas: any[] = [];
   all_query: string = '';
+  loading:boolean = false;
 
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe((result) => {
       if (result == 'loadproductos' || result == 'loadall') {
-        this.loadProductos();
         this.loadProductos();
       }
     });
@@ -36,13 +36,15 @@ export class TableProductoComponent implements OnInit {
   }
 
   loadProductos() {
+    this.loading = true;
     this.api.getProducto().subscribe((result) => {
       if (result.length > 0) this.productos = result;
       else this.productos = [];
       result.forEach(item => {
         if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
         // if(this.categorias.indexOf(item.categoria)==-1) this.categorias.push(item.categoria);
-      })
+      });
+      this.loading = false;
     });
   }
 

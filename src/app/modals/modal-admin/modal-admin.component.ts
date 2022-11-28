@@ -162,7 +162,7 @@ export class ModalAdminComponent implements OnInit {
           'para la comercializacion y venta';
         modal.result.then((result) => {
           if (result) {
-            this.crud.loadEvento('all');
+            this.crud.loadEvento('productos');
           }
         });
         break;
@@ -172,7 +172,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'lo mas reciente en el ICEM';
         modal.result.then((result) => {
           if (result) {
-            this.crud.loadEvento('all');
+            this.crud.loadEvento('noticias');
           }
         });
         break;
@@ -183,7 +183,7 @@ export class ModalAdminComponent implements OnInit {
           'tipos de productos de la empresa';
         modal.result.then((result) => {
           if (result) {
-            this.crud.loadEvento('all');
+            this.crud.loadEvento('categorias');
           }
         });
         break;
@@ -196,7 +196,7 @@ export class ModalAdminComponent implements OnInit {
           'en pruebas para su posterior venta';
         modal.result.then((result) => {
           if (result) {
-            this.crud.loadEvento('all');
+            this.crud.loadEvento('desarrollos');
           }
         });
         break;
@@ -206,7 +206,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Administrador de la pagina';
         modal.result.then((result) => {
           if (result) {
-            this.crud.loadEvento('all');
+            this.crud.loadEvento('usuarios');
           }
         });
         break;
@@ -216,7 +216,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Personas integrantes del equipo';
         modal.result.then((result) => {
           if (result) {
-            this.crud.loadEvento('all');
+            this.crud.loadEvento('quienes');
           }
         });
         break;
@@ -226,7 +226,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Scraps de los sitios';
         modal.result.then((result) => {
           if (result) {
-            this.crud.loadEvento('all');
+            this.crud.loadEvento('scraps');
           }
         });
         break;
@@ -236,7 +236,7 @@ export class ModalAdminComponent implements OnInit {
         modal.componentInstance.modalSubHeader = 'Comentarios de las personas';
         modal.result.then((result) => {
           if (result) {
-            this.crud.loadEvento('all');
+            this.crud.loadEvento('posts');
           }
         });
         break;
@@ -254,14 +254,16 @@ export class ModalAdminComponent implements OnInit {
 
   loadPosts(){
     this.api.getPosts().subscribe(result=>{
-      const cant = result.filter(r=>r.cant_resp==0).length;
+      const post = result && result.length>0?result:[];
+      const cant = post.filter(r=>r.cant_resp==0).length;
       this.buttons.filter(e=>e.titulo=='Comentarios')[0].cant = cant;
     });
   }
 
   loadPreguntas(){
     this.api.getMensajes().subscribe(result=>{
-      const cant = result.filter(r=>r.visto).length;
+      const preg = result && result.length>0?result:[];
+      const cant = preg.filter(r=>r.visto).length;
       this.buttons.filter(e=>e.titulo=='Preguntas')[0].cant = cant;
     });
   }

@@ -49,7 +49,7 @@ export class QuienesSomosComponent implements OnInit {
     this.api.getQuienes().subscribe((result) => {
       // this.integrante = result[0];
       // this.integrantes = result.filter(e=>e.id != this.integrante.id);
-      this.integrantes = result
+      this.integrantes = result&& result.length>0?result:[]
     })
   }
 

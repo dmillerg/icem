@@ -1,11 +1,11 @@
 <div class="filtros">
     <div class="contenedor-filtro"> <label for="usuario">Usuario</label>
-        <input type="text" style="color: black;" class="forms-control" placeholder="Buscar por usuario.." [(ngModel)]="usuario_query"
+        <input type="text" placeholder="Buscar por usuario.." [(ngModel)]="usuario_query"
             name="usuarip" />
     </div>
 
     <div class="contenedor-filtro"> <label for="usuario">Correo</label>
-        <input type="text" style="color: black;" class="forms-control" placeholder="Buscar por correo.." [(ngModel)]="correo_query"
+        <input type="text" placeholder="Buscar por correo.." [(ngModel)]="correo_query"
             name="correo" />
     </div>
 
@@ -56,4 +56,7 @@
             </td>
         </tr>
     </table>
+    <div style="z-index: 999;" *ngIf="loading">
+        <app-loading-table></app-loading-table>
+    </div>
 </div>

@@ -14,6 +14,7 @@ import { CrudService } from 'src/app/services/crud.service';
 export class TableCategoriaComponent implements OnInit {
   @Input() categorias: Categoria[];
   all_query: string = "";
+  loading: boolean = false;
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe((result) => {
       if (result == 'loadcategorias' || result == 'loadall') {
@@ -27,9 +28,11 @@ export class TableCategoriaComponent implements OnInit {
   }
 
   loadCategorias() {
+    this.loading = true;
     this.api.getCategorias().subscribe((result) => {
       if (result.length > 0) this.categorias = result;
       else this.categorias = [];
+      this.loading = false;
     });
   }
 

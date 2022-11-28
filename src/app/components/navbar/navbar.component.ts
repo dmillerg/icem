@@ -296,7 +296,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
 
   public listarCategoriasProductos = async () => {
     this.api.getCategorias().subscribe((result) => {
-      this.categorias = result;
+      this.categorias = result&&result.length>0?result:[];
       return this.categorias;
     });
   }

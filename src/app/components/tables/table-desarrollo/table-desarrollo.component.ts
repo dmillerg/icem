@@ -17,6 +17,7 @@ export class TableDesarrolloComponent implements OnInit {
   fecha_query: string = '';
   fechas: any[] = [];
   all_query: string = '';
+  loading: boolean = false;
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe(result => {
       if (result == 'loaddesarrollos' || result == 'loadall') this.loadDesarrollo();
@@ -28,12 +29,14 @@ export class TableDesarrolloComponent implements OnInit {
   }
 
   loadDesarrollo() {
+    this.loading = true;
     this.api.getDesarrollos().subscribe((result) => {
       if (result.length > 0) this.desarrollos = result;
       else this.desarrollos = [];
       result.forEach(item => {
         if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
       });
+      this.loading = false;
     });
   }
 

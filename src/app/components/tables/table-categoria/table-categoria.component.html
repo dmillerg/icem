@@ -1,7 +1,7 @@
 <div class="filtros">
 
     <div class="contenedor-filtro"> <label for="all">Todo</label>
-        <input type="text" style="color: black;" class="forms-control" placeholder="Buscar.." [(ngModel)]="all_query"
+        <input type="text" placeholder="Buscar.." [(ngModel)]="all_query"
             name="filterpost" />
     </div>
 </div>
@@ -27,4 +27,7 @@
             </td>
         </tr>
     </table>
+    <div style="z-index: 999;" *ngIf="loading">
+        <app-loading-table></app-loading-table>
+    </div>
 </div>

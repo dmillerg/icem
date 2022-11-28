@@ -20,6 +20,8 @@ export class TableMensajesComponent implements OnInit {
   user_id: number = -1;
   fecha: string = '';
   producto_id: number = -1;
+  loading: boolean = false;
+  all_query: string = '';
 
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
     crud.emitter.subscribe(result => {
@@ -49,8 +51,10 @@ export class TableMensajesComponent implements OnInit {
   }
 
   loadMensajes() {
+    this.loading = true;
     this.api.getMensajes().subscribe(result => {
       this.mensajes = result;
+      this.loading = false;
     })
   }
 

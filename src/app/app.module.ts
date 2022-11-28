@@ -80,6 +80,7 @@ import { NoticiaFuentePipe } from './pipes/noticia/noticia.pipe';
 import { DesarrolloTituloPipe } from './pipes/desarrollo/desarrollo.pipe';
 import { PostsCorreoPipe, PostsUsuarioPipe, PostsVistoPipe } from './pipes/posts/posts.pipe';
 import { CategoriaPipe } from './pipes/categoria/categoria.pipe';
+import { LoadingTableComponent } from './components/loading-table/loading-table.component';
 // import { AngularOpenlayersModule } from "ngx-openlayers";
 // import { AngularCesiumModule, AngularCesiumWidgetsModule } from '@angular-cesium';
 
@@ -154,6 +155,7 @@ import { CategoriaPipe } from './pipes/categoria/categoria.pipe';
     PostsCorreoPipe,
     PostsVistoPipe,
     CategoriaPipe,
+    LoadingTableComponent,
   ],
   imports: [
     BrowserModule,

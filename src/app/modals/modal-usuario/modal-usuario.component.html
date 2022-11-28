@@ -6,17 +6,17 @@
 </div>
 <div class="modal-body">
   <form class="w-100 d-flex flex-row gap-2 flex-wrap" style="max-height: 300px;overflow-y: auto;">
-    <div class="w-100">
+    <div class="w-25">
       <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-person-fill"></i> Usuario</label>
       <input type="text" name="usuario" [(ngModel)]="usuario.usuario" id="exampleFormControlInput1"
         placeholder="Usuario">
     </div>
-    <div class="w-100">
+    <div class="w-50">
       <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-card-text"></i> Nombre</label>
       <input type="text" name="nombre" [(ngModel)]="usuario.nombre" id="exampleFormControlInput1"
         placeholder="Nombre completo del usuario">
     </div>
-    <div class="w-25">
+    <div class="w-50">
       <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-envelope"></i> Correo</label>
       <input type="email" name="correo" [(ngModel)]="usuario.correo" id="exampleFormControlInput1"
         placeholder="Correo del usuario">
@@ -49,6 +49,6 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" [disabled]="disableButton" (click)="addUpdateUsuario()">{{modalAction}}
+  <button class="btn btn-primary" [disabled]="disableButton || !validateEmail()" (click)="addUpdateUsuario()">{{modalAction}}
     {{modalHeader}}</button>
 </div>

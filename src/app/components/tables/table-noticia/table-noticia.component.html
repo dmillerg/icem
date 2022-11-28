@@ -1,7 +1,7 @@
 <div class="filtros">
 
     <div class="contenedor-filtro"> <label for="all">Todo</label>
-        <input type="text" style="color: black;" class="forms-control" placeholder="Buscar.." [(ngModel)]="all_query"
+        <input type="text" class="forms-control" placeholder="Buscar.." [(ngModel)]="all_query"
             name="filterpost" />
     </div>
 
@@ -30,7 +30,7 @@
             <th>imagen</th>
             <th>acciones</th>
         </thead>
-        <tr *ngFor="let item of noticias | fecha_pipe : fecha_query | noticia_fuente_pipe: fuente_query">
+        <tr *ngFor="let item of noticias | fecha_pipe : fecha_query | noticia_fuente_pipe: fuente_query | allPipe: all_query">
             <!-- <td>{{item.id}}</td> -->
             <td class="descrip">{{item.titulo}}</td>
             <td class="descrip">{{item.descripcion}}</td>
@@ -46,4 +46,7 @@
             </td>
         </tr>
     </table>
+    <div style="z-index: 999;" *ngIf="loading">
+        <app-loading-table></app-loading-table>
+    </div>
 </div>

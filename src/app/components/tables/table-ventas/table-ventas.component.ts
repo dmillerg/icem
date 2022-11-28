@@ -24,6 +24,7 @@ export class TableVentasComponent implements OnInit {
   user_id: number = -1;
   fecha: string = '';
   producto_id: number = -1;
+  loading: boolean = false;
 
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
     crud.emitter.subscribe(result => {
@@ -33,7 +34,7 @@ export class TableVentasComponent implements OnInit {
         this.loadVentas();
       }
     })
-   }
+  }
 
   ngOnInit(): void {
     this.loadUsuario();
@@ -42,22 +43,24 @@ export class TableVentasComponent implements OnInit {
   }
 
   loadVentas() {
+    this.loading = true;
     this.api.getVentas(this.user_id, this.fecha, this.producto_id).subscribe((result) => {
       if (result.length > 0) {
-        this.ventas = result;
-        result.forEach((e, i) => {
+        this.ventas = result && result.length > 0 ? result : [];
+        this.ventas.forEach((e, i) => {
           this.getProductoFoto(e.producto_id, i);
           // this.ventas[i].usuario = this.usuarios.filter(r => r.id == e.user_id)[0].usuario;
         });
+        this.loading = false;
         console.log(this.ventas);
-        
+
       }
       else this.ventas = [];
     });
   }
 
   getProductoFoto(id: number, position: number) {
-    this.ventas[position].url=environment.url_backend+ `pictures/${id}?tipo=productos`
+    this.ventas[position].url = environment.url_backend + `pictures/${id}?tipo=productos`
   }
 
   loadUsuario() {
@@ -82,7 +85,7 @@ export class TableVentasComponent implements OnInit {
   change() {
     this.loadVentas();
   }
-  
+
   delete(producto: Producto) {
     let modal = this.modalService.open(ModalDeleteComponent, { size: 'sm' });
     modal.componentInstance.modalId = producto.id;

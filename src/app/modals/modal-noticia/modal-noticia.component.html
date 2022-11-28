@@ -11,7 +11,7 @@
       <input type="text" name="titulo" [(ngModel)]="noticia.titulo" id="exampleFormControlInput1"
         placeholder="Título de la noticia">
     </div>
-    <div class="w-25">
+    <div class="w-25" [hidden]="modalAction == 'Editar'">
       <label for="exampleFormControlInput1" class="small text-white"><i class="bi bi-calendar-day"></i> Fecha</label>
       <input type="date" name="fecha" [(ngModel)]="noticia.fecha" id="exampleFormControlInput1"
         placeholder="Fecha de la noticia">

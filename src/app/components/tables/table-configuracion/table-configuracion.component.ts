@@ -14,6 +14,7 @@ import { CrudService } from 'src/app/services/crud.service';
 })
 export class TableConfiguracion implements OnInit {
   @Input() configuraciones: Configuracion[] = [];
+  loading: boolean = false;
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
     crud.emitter.subscribe((result) => {
       if (result == 'loadconfig' || result == 'loadall') this.loadConfiguraciones();
@@ -25,10 +26,12 @@ export class TableConfiguracion implements OnInit {
   }
 
   loadConfiguraciones() {
+    this.loading = true;
     this.api.getConfiguraciones().subscribe((result) => {
       if (result.length > 0) {
         this.configuraciones = result;
       } else this.configuraciones = [];
+      this.loading = false;
     });
   }
 

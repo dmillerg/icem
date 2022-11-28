@@ -15,6 +15,7 @@ import { CrudService } from 'src/app/services/crud.service';
 })
 export class TableQuienesComponent implements OnInit {
   @Input() quienes: Quienes[];
+  loading: boolean = false;
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe(result => {
       if (result == 'loadquienes' || result == 'loadall') {
@@ -28,9 +29,11 @@ export class TableQuienesComponent implements OnInit {
   }
 
   loadQuienes() {
+    this.loading = true;
     this.api.getQuienes().subscribe((result) => {
       if (result.length > 0) this.quienes = result;
       else this.quienes = [];
+      this.loading = false;
     });
   }
 
