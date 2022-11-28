@@ -71,8 +71,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.titulo_noti = result[0].titulo;
         this.desc_noti = result[0].descripcion;
         this.noticia = result[0];
-        this.noticia.logo = this.noticia.logo == null ? 'assets/icon-icem-gray.png' : this.noticia.logo;
-        this.img_noti = result[0].imagen.includes('http') ? result[0].imagen : this.cargarImagen(result[0]);
+        this.noticia.logo = this.noticia.logo == '' ? 'assets/icon-icem-gray.png' : this.noticia.logo;
+        // console.log(this.noticia.logo);
+        
+        result[0].imagen.includes('http') ? result[0].imagen : this.cargarImagen(result[0]);
       }
     });
   }
