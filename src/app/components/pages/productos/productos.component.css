@@ -167,7 +167,7 @@
     background: var(--theme-color);
     color: var(--firstcolor);
     transform: translateY(-15px);
-    z-index: 999;
+    z-index: 9;
     border: none;
     box-shadow: 0 3px 10px var(--firstcolor-hover);
     transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
