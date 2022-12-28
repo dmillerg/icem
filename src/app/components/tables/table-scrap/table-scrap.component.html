@@ -1,13 +1,14 @@
 <div style="overflow: auto;width: 100%;" class="table-mine scroll-mine">
     <div class="init-scrap">
         <input type="number" name="time" class="in" [(ngModel)]="time" placeholder="tiempo de refresco">
-        <button class="btn btn-outline-firstcolor" [disabled]="loadingScrap || time==undefined"
+        <button class="btn btn-firstcolor" [disabled]="loadingScrap || time==undefined"
              (click)="loadScrapin()">
 
             <span *ngIf="!loadingScrap"> <i class="bi bi-binoculars svg-shadow"></i></span>
             <span *ngIf="loadingScrap" class="spinner-border spinner-border-sm svg-shadow" role="status"
                 aria-hidden="true"> </span> {{messageScrap}}
         </button>
+        <p class="text-danger small position-absolute" style="bottom: -35px;">El tiempo esta expresado en milisegundos</p>
     </div>
     <table class="table table-dark text-center table-mine">
         <thead>

@@ -27,16 +27,17 @@ export class TableScrapComponent implements OnInit {
         this.loadScrap();
       }
     })
-   }
+  }
 
   ngOnInit(): void {
     this.loadScrap();
-    this.time = Number(this.storage.retrieve('configuraciones')[1].config)*3600000
-    console.log(Number(this.storage.retrieve('configuraciones')[1].config));
-    
+    this.time = Number(this.storage.retrieve('configuraciones')[1].config) * 3600000
+    console.log(Number(this.storage.retrieve('configuraciones')[1].config) * 3600000);
+
   }
 
   loadScrap() {
+    this.comprobar();
     this.loading = true;
     this.api.getScraps().subscribe((result) => {
       if (result.length > 0) {
@@ -123,18 +124,37 @@ export class TableScrapComponent implements OnInit {
       this.loadingScrap = true;
       this.messageScrap = 'Iniciando Scrapping...'
       this.api.IniciarScrap(this.time).subscribe((result) => {
-        this.messageScrap = 'Scrapping iniciado cada '+(this.time/(1000*3600))+' horas';
-        setTimeout(() => {
-          this.messageScrap = 'Detener Scrapping';
-          this.loadingScrap = false;
-        }, 2000);
+        this.messageScrap = 'Scrapping iniciado cada ' + (this.time / (1000 * 3600)) + ' horas';
+        const formData = new FormData();
+        formData.append('nombre', 'scrap_active');
+        formData.append('descripcion', 'verificacion si la recogida de noticias esta activa');
+        formData.append('config', (this.time / (1000 * 3600)).toString());
+        this.api.addConfig(formData).subscribe(result2 => {
+          console.log(result2);
+
+          setTimeout(() => {
+            this.messageScrap = 'Detener Scrapping';
+            this.loadingScrap = false;
+          }, 2000);
+        })
       });
-      this.storage.store('messageScrap', 'Detener Scrap');
     } else {
       this.api.DetenerScrap().subscribe((result) => {
-        this.messageScrap = 'Iniciar Scrap';
-        this.storage.store('messageScrap', 'Iniciar Scrap');
+        this.api.deleteConfig('scrap_active').subscribe(result2 => {
+          this.messageScrap = 'Iniciar Scrap';
+        })
       })
     }
+  }
+
+  comprobar() {
+    this.api.getConfiguracion('scrap_active').subscribe(result => {
+      if (result) {
+        this.time = result.config * (1000 * 3600);
+        this.messageScrap = 'Detener Scrapping'
+      } else {
+        this.messageScrap = 'Iniciar Scrap'
+      }
+    });
   }
 }

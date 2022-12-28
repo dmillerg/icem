@@ -45,17 +45,13 @@ export class TableVentasComponent implements OnInit {
   loadVentas() {
     this.loading = true;
     this.api.getVentas(this.user_id, this.fecha, this.producto_id).subscribe((result) => {
-      if (result.length > 0) {
-        this.ventas = result && result.length > 0 ? result : [];
-        this.ventas.forEach((e, i) => {
-          this.getProductoFoto(e.producto_id, i);
-          // this.ventas[i].usuario = this.usuarios.filter(r => r.id == e.user_id)[0].usuario;
-        });
-        this.loading = false;
-        console.log(this.ventas);
-
-      }
-      else this.ventas = [];
+      this.ventas = result && result.length > 0 ? result : [];
+      this.ventas.forEach((e, i) => {
+        this.getProductoFoto(e.producto_id, i);
+        // this.ventas[i].usuario = this.usuarios.filter(r => r.id == e.user_id)[0].usuario;
+      });
+      console.log(this.ventas);
+      this.loading = false;
     });
   }
 

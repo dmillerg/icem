@@ -30,7 +30,10 @@ input[type=number] {
 
 .init-scrap {
     position: absolute;
-    position: absolute;
-    bottom: 10px;
+    bottom: 15px;
     right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
 }

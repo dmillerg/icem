@@ -24,7 +24,7 @@ import { Mensaje } from '../models/mensaje';
   providedIn: 'root',
 })
 export class ApiService {
-  url: string = environment.url_backend+'apis/';
+  url: string = environment.url_backend + 'apis/';
 
   constructor(
     private http: HttpClient,
@@ -964,7 +964,7 @@ export class ApiService {
    * @returns 
    */
   getConfiguraciones(): Observable<Configuracion[]> {
-    let direccion = this.url + 'configuracion';
+    let direccion = this.url + 'configuraciones';
     return this.http.get<Configuracion[]>(direccion);
   }
 
@@ -973,10 +973,10 @@ export class ApiService {
    * @param formData nombre de la configuracion a buscar
    * @returns 
    */
-  getConfiguracion(formData: FormData): Observable<Configuracion> {
+  getConfiguracion(nombre: string): Observable<Configuracion> {
     // formData.append('token', this.storage.retrieve('usuario').token);
-    let direccion = this.url + 'configuracion/'
-    return this.http.post<Configuracion>(direccion, formData);
+    let direccion = this.url + 'configuracion'
+    return this.http.get<Configuracion>(direccion, { params: { nombre: nombre } });
   }
 
   /**
@@ -988,6 +988,31 @@ export class ApiService {
     formData.append('token', this.storage.retrieve('usuario').token);
     let direccion = this.url + 'configuraciones/'
     return this.http.post<any>(direccion, formData);
+  }
+
+  /**
+   * Añade una nueva configuracion a la pagina
+   * @param formData datos de la nueva configuracion
+   * @returns 
+   */
+  addConfig(formData: FormData) {
+    formData.append('token', this.storage.retrieve('usuario').token);
+    let direccion = this.url + 'configuracion/'
+    return this.http.post<any>(direccion, formData);
+  }
+
+  /**
+   * Elimina una configuracion
+   * @param nombre de la configuracion
+   * @returns 
+   */
+  deleteConfig(nombre: string) {
+    let direccion = this.url + 'configuracion/'
+    const params = {
+      token: this.storage.retrieve('usuario').token,
+      nombre: nombre
+    }
+    return this.http.delete<any>(direccion, { params: params });
   }
 
   /**
@@ -1172,14 +1197,14 @@ export class ApiService {
    * @param name nombre de la imagen especifico
    * @returns 
    */
-  getPicture(id: number, tipo: string, name: string=undefined) {
+  getPicture(id: number, tipo: string, name: string = undefined) {
     let direccion = environment.url_backend + 'pictures/' + id.toString();
     const headers = { 'content-type': 'application/json' };
     const params = {
       tipo: tipo,
       name: name,
     };
-    return this.http.delete(direccion, { headers: headers, params: params });
+    return this.http.get(direccion, { headers: headers, params: params });
   }
 
 }

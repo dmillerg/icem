@@ -33,7 +33,7 @@ export class TableDesarrolloComponent implements OnInit {
     this.api.getDesarrollos().subscribe((result) => {
       if (result.length > 0) this.desarrollos = result;
       else this.desarrollos = [];
-      result.forEach(item => {
+      this.desarrollos.forEach(item => {
         if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
       });
       this.loading = false;

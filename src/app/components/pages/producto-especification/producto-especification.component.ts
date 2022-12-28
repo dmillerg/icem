@@ -46,6 +46,7 @@ export class ProductoEspecificationComponent implements OnInit {
   constructor(private api: ApiService, public storage: SessionStorageService) { }
 
   ngOnInit(): void {
+    
     this.loadPost();
     setInterval(() => {
       this.loadEspecification();
@@ -143,6 +144,11 @@ export class ProductoEspecificationComponent implements OnInit {
       this.api.getProductosById(this.producto.id).subscribe((result) => {
         if (result != null) {
           this.producto.disponibilidad = result.disponibilidad;
+          // this.api.getPicture(this.producto.id,'productos').subscribe((result)=>{
+          //   console.log('result',result);
+            
+          // }, error=>console.log(error)
+          // )
           this.producto.precio = Number.isInteger(result.precio) ? Number(result.precio + '.00') : result.precio;
         }
       });

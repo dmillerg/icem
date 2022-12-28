@@ -14,9 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   productos_recientes: any = [];
-  titulo_noti = '';
-  desc_noti = '';
-  img_noti = '';
+
   noticia: Noticia = {
     id: -1,
     titulo: '',
@@ -68,19 +66,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     this.api.cargaNoticias().subscribe((result) => {
       if (result.length > 0) {
-        this.titulo_noti = result[0].titulo;
-        this.desc_noti = result[0].descripcion;
         this.noticia = result[0];
         this.noticia.logo = this.noticia.logo == '' ? 'assets/icon-icem-gray.png' : this.noticia.logo;
         // console.log(this.noticia.logo);
-        
         result[0].imagen.includes('http') ? result[0].imagen : this.cargarImagen(result[0]);
+      }
+      else {
+        this.noticia.titulo = '';
       }
     });
   }
 
   cargarImagen(e: Noticia) {
-    this.img_noti = environment.url_backend + `pictures/${e.id}?tipo=noticias`
+    this.noticia.imagen = environment.url_backend + `pictures/${e.id}?tipo=noticias`
   }
 
   verMas(item) {

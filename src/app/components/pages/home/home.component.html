@@ -168,26 +168,25 @@
 </section>
 
 
-
-<section class="mt-4">
+<!-- Noticia mas reciente -->
+<section class="mt-4" [hidden]="noticia.titulo.length==0">
     <h1 class="title-section title-section-right text-section animado pb-5">
         <strong>Noticia más reciente...</strong>
     </h1>
-
-    <!-- Noticia mas reciente -->
-    <div class="container p-5">
+    <div class="container p-5" >
         <div class="row d-flex flex-row justify-content-center align-items-center animado">
             <div class="col-lg-5 col-sm-12 text-start container-image mt-4">
                 <img class="logo text-white text-center svg-shadow" [src]="noticia.logo" [alt]="noticia.fuente"
                     style="background-color: --firstcolor;">
                 <img class="imagen2 img-fluid noticia-image text-white text-center"
-                    style="background: url('assets/icon-icem-blue.png');" [alt]="noticia.titulo" [src]="img_noti" />
+                    style="background: url('assets/icon-icem-blue.png');" [alt]="noticia.titulo"
+                    [src]="noticia.imagen" />
             </div>
             <div class="col-lg-7 col-sm-12 px-5">
                 <h1 class="display-4 text-firstcolor animado">
-                    <strong>{{ titulo_noti }}</strong>
+                    <strong>{{ noticia.titulo }}</strong>
                 </h1>
-                <h3 class="text" animado>{{ desc_noti }}</h3>
+                <h3 class="text" >{{ noticia.descripcion }}</h3>
                 <button class="btn btn-firstcolor p-3 w-75 animado" (click)="verMas(noticia)">Ver mas</button>
             </div>
         </div>
@@ -195,13 +194,13 @@
 </section>
 
 <!-- Producto section -->
-<section>
+<section [hidden]="productos_recientes.length==0">
     <div class="container animado">
         <div class="producto-section">
             <h1 class="title-section2 text-section"><strong>Productos recientes...</strong></h1>
         </div>
         <div class="row p-4"></div>
-        <div *ngIf="productos_recientes.length>0" class="row d-flex flex-row justify-content-center align-items-center"
+        <div class="row d-flex flex-row justify-content-center align-items-center"
             [@listAnimation]="productos_recientes.length">
             <div *ngFor="let item of productos_recientes" class="col-sm-6 col-md-5 col-lg-3">
                 <app-producto-home [producto]="item" [direccion]="item.direccion" [cont]="item.cont">
@@ -213,13 +212,14 @@
 </section>
 
 <!-- Desarrollo section -->
-<section class="min-heigh-section bg-section" >
+<section class="min-heigh-section bg-section">
     <div class="container">
         <div class="row p-4"></div>
         <div class="row d-flex justify-content-center align-items-center p-4">
             <div class="col-lg-8 col-sm-12">
                 <h1 class="display-4 text-firstcolor animado">Desarrollo</h1>
-                <h1 class="h1 text-white animado">Estamos desarrollando nuevos productos que aún no están a la venta pero pueden ser
+                <h1 class="h1 text-white animado">Estamos desarrollando nuevos productos que aún no están a la venta
+                    pero pueden ser
                     de su interés,
                     pásate y échales un ojo.</h1>
                 <button class="btn-firstcolor p-4 rounded mt-3 w-25 animado" routerLink="/nuevos">Ver más</button>
@@ -234,7 +234,8 @@
 </section>
 
 <!-- Catalogo section-->
-<section class="bg-firstcolor-cat position-relative min-heigh-section d-flex flex-column justify-content-center align-items-center">
+<section
+    class="bg-firstcolor-cat position-relative min-heigh-section d-flex flex-column justify-content-center align-items-center">
     <div class="container">
         <!-- <div class="row p-5"></div> -->
         <div class="row">
