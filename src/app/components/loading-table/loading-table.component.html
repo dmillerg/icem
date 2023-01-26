@@ -1,5 +1,6 @@
-<div class="background-load">
-    <div class="spinner-border">
+<div class="background-load d-flex flex-column justify-content-center">
+    <div class="spinner-border" *ngIf="mensaje=='cargando...'">
         <div class="sr-only">Loading</div>
     </div>
+    <p class="text-white text-sm">{{mensaje}}</p>
 </div>

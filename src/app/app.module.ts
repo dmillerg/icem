@@ -41,7 +41,6 @@ import { ModalUsuarioComponent } from './modals/modal-usuario/modal-usuario.comp
 import { TableUsuarioComponent } from './components/tables/table-usuario/table-usuario.component';
 import { NoticiasComponent } from './components/pages/noticias/noticias.component';
 import { NoticiaItemComponent } from './components/pages/noticia-item/noticia-item.component';
-import { ChatComponent } from './components/pages/chat/chat.component';
 import { BusquedaComponent } from './components/pages/busqueda/busqueda.component';
 import { ModalQuienesComponent } from './modals/modal-quienes/modal-quienes.component';
 import { TableQuienesComponent } from './components/tables/table-quienes/table-quienes.component';
@@ -125,7 +124,6 @@ import { LoadingTableComponent } from './components/loading-table/loading-table.
     ModalScrapPruebaComponent,
     NoticiasComponent,
     NoticiaItemComponent,
-    ChatComponent,
     BusquedaComponent,
     ModalLoginOrRegisterComponent,
     LoadingComponent,

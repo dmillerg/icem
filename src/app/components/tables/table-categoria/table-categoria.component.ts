@@ -15,6 +15,7 @@ export class TableCategoriaComponent implements OnInit {
   @Input() categorias: Categoria[];
   all_query: string = "";
   loading: boolean = false;
+  loading_message: string = 'cargando...';
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe((result) => {
       if (result == 'loadcategorias' || result == 'loadall') {
@@ -32,7 +33,8 @@ export class TableCategoriaComponent implements OnInit {
     this.api.getCategorias().subscribe((result) => {
       if (result.length > 0) this.categorias = result;
       else this.categorias = [];
-      this.loading = false;
+      this.loading = this.categorias.length == 0 ? true : false;
+      this.loading_message = this.categorias.length == 0 ? 'no hay categorías registradas' : '';
     });
   }
 

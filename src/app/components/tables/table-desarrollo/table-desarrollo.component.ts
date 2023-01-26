@@ -18,6 +18,8 @@ export class TableDesarrolloComponent implements OnInit {
   fechas: any[] = [];
   all_query: string = '';
   loading: boolean = false;
+  loading_message: string = 'cargando...';
+
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe(result => {
       if (result == 'loaddesarrollos' || result == 'loadall') this.loadDesarrollo();
@@ -36,7 +38,8 @@ export class TableDesarrolloComponent implements OnInit {
       this.desarrollos.forEach(item => {
         if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
       });
-      this.loading = false;
+      this.loading = this.desarrollos.length == 0 ? true : false;
+      this.loading_message = this.desarrollos.length == 0 ? 'no hay desarrollos registrados' : ''
     });
   }
 

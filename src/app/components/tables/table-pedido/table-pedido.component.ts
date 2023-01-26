@@ -22,6 +22,7 @@ export class TablePedidoComponent implements OnInit {
   @Input() usuarios: Usuario[] = [];
   user_id: number = -1;
   loading: boolean = false;
+  loading_message: string = 'cargando...';
 
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
     crud.emitter.subscribe(result => {
@@ -41,7 +42,6 @@ export class TablePedidoComponent implements OnInit {
     this.loading = true;
     this.api.getPedidos(this.user_id).subscribe((result) => {
       console.log(result);
-      this.loading = false;
       if (result.length > 0) {
         this.pedidos = result;
         result.forEach((e, i) => {
@@ -50,6 +50,8 @@ export class TablePedidoComponent implements OnInit {
         })
       }
       else this.pedidos = [];
+      this.loading = this.pedidos.length == 0 ? true : false;
+      this.loading_message = this.pedidos.length == 0 ? 'no hay pedidos registrados' : ''
     });
   }
 
@@ -60,9 +62,6 @@ export class TablePedidoComponent implements OnInit {
   loadUsuario() {
     this.api.getUsuarios().subscribe((result) => {
       if (result.length > 0) {
-        if (this.storage.retrieve('usuario').usuario != 'kuroko') {
-          this.usuarios = result.filter((item) => item != result[0]);
-        } else
           this.usuarios = result;
       } else this.usuarios = [];
     });

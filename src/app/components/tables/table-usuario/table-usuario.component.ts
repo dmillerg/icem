@@ -21,6 +21,8 @@ export class TableUsuarioComponent implements OnInit {
   actividad_query: number = -1;
   fecha_query: string = '';
   loading: boolean = false;
+  loading_message: string = 'cargando...';
+
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
     crud.emitter.subscribe(result => {
       if (result == 'loadusuarios' || result == 'loadall') {
@@ -37,15 +39,11 @@ export class TableUsuarioComponent implements OnInit {
     this.loading = true;
     this.api.getUsuarios().subscribe((result) => {
       if (result.length > 0) {
-        if (this.storage.retrieve('usuario').usuario != 'kuroko') {
-          
-          
-          result = result.filter((item) => item != result[0]);
-        }
         this.usuarios = this.convertirData(result);
         console.log(this.usuarios);
       } else this.usuarios = [];
-      this.loading = false;
+      this.loading = result.length == 0 ? true : false;
+      this.loading_message = result.length == 0 ? 'no hay usuarios registrados' : ''
     });
   }
 

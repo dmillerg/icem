@@ -56,12 +56,6 @@ export class ModalAdminComponent implements OnInit {
       activo: false,
     },
     {
-      titulo: 'Mensajería',
-      icono: 'bi-chat-square-dots',
-      pista: '',
-      activo: false,
-    },
-    {
       titulo: 'Quienes',
       icono: 'bi-people',
       pista: '',

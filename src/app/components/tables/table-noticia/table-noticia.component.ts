@@ -21,13 +21,15 @@ export class TableNoticiaComponent implements OnInit {
   fechas: any[] = [];
   all_query: string = '';
   loading: boolean = false;
+  loading_message: string = 'cargando......';
+
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe(result => {
       if (result == 'loadnoticias' || result == 'loadall') {
         this.loadNoticia();
       }
     })
-   }
+  }
 
   ngOnInit(): void {
     this.loadNoticia();
@@ -36,13 +38,16 @@ export class TableNoticiaComponent implements OnInit {
   loadNoticia() {
     this.loading = true;
     this.api.getNoticias().subscribe((result) => {
-      if (result.length > 0) this.noticias = this.convertNoticias(result);
+      if (Array.isArray(result)) this.noticias = this.convertNoticias(result);
       else this.noticias = [];
-      result.forEach(item => {
+      this.noticias.forEach(item => {
         if (this.fuentes.indexOf(item.fuente) == -1) this.fuentes.push(item.fuente);
         if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
       });
-      this.loading = false;
+      this.loading = this.noticias.length == 0 ? true : false;
+      this.loading_message = this.noticias.length == 0 ? 'no hay noticias registradas' : '';
+      console.log(this.loading_message);
+      
     });
   }
 
@@ -73,7 +78,7 @@ export class TableNoticiaComponent implements OnInit {
   convertNoticias(result: Noticia[]) {
     result.forEach(e => {
       if (e.fuente == 'ICEM') {
-       e.imagen =environment.url_backend+`pictures/${e.id}?tipo=noticias`
+        e.imagen = environment.url_backend + `pictures/${e.id}?tipo=noticias`
       }
     });
     return result;

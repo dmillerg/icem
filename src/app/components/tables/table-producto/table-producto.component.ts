@@ -21,6 +21,7 @@ export class TableProductoComponent implements OnInit {
   fechas: any[] = [];
   all_query: string = '';
   loading:boolean = false;
+  loading_message: string = 'cargando...';
 
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe((result) => {
@@ -38,13 +39,14 @@ export class TableProductoComponent implements OnInit {
   loadProductos() {
     this.loading = true;
     this.api.getProducto().subscribe((result) => {
-      if (result.length > 0) this.productos = result;
+      if (Array.isArray(result)) this.productos = result;
       else this.productos = [];
-      result.forEach(item => {
+      this.productos.forEach(item => {
         if (this.fechas.indexOf(item.fecha) == -1) this.fechas.push(item.fecha);
         // if(this.categorias.indexOf(item.categoria)==-1) this.categorias.push(item.categoria);
       });
-      this.loading = false;
+      this.loading = this.productos.length == 0 ? true: false;
+      this.loading_message = this.productos.length==0 ? 'no hay productos registrados' : '';
     });
   }
 

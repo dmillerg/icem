@@ -10,6 +10,11 @@
         <h1 class="h1 text-firstcolor">Noticias de nuestra empresa</h1>
         <app-noticia-item [noticia]="item" *ngFor="let item of noticias_icem" (emisor)="cambiarNoticia($event)">
         </app-noticia-item>
+        <div class="w-100 d-flex flex-column justify-content-center align-items-center" *ngIf="noticias_icem.length==0">
+          <img class="w-50 svg-shadow" *ngIf="noticias_icem.length==0" src="assets/clip-actions/empty.png"
+            [@scaleAnimation]="'enter'" alt="">
+          <h3 class="text-section text-center" *ngIf="noticias_icem.length==0">No hay ninguna noticia de icem aun</h3>
+        </div>
       </div>
       <div class="col-sm-4 position-relative">
         <h1 class="h1 text-firstcolor">Otras noticias de su interés</h1>
@@ -20,6 +25,12 @@
         </div>
         <app-noticia-item [noticia]="item" *ngFor="let item of noticias_no_icem" (emisor)="cambiarNoticia($event)">
         </app-noticia-item>
+        <div class="w-100 d-flex flex-column justify-content-center align-items-center"
+          *ngIf="noticias_no_icem.length==0">
+          <img class="w-50 svg-shadow" *ngIf="noticias_no_icem.length==0" src="assets/clip-actions/empty.png"
+            [@scaleAnimation]="'enter'" alt="">
+          <h3 class="text-section text-center" *ngIf="noticias_no_icem.length==0">No hay ninguna noticia aun</h3>
+        </div>
       </div>
     </div>
   </div>

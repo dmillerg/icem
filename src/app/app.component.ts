@@ -107,7 +107,4 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-  closeChat() {
-    document.querySelector('.chat-fixed-position').classList.toggle('closed');
-  }
 }

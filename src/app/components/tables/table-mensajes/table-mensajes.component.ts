@@ -21,6 +21,7 @@ export class TableMensajesComponent implements OnInit {
   fecha: string = '';
   producto_id: number = -1;
   loading: boolean = false;
+  loading_message: string = 'cargando...';
   all_query: string = '';
 
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
@@ -53,8 +54,13 @@ export class TableMensajesComponent implements OnInit {
   loadMensajes() {
     this.loading = true;
     this.api.getMensajes().subscribe(result => {
-      this.mensajes = result;
-      this.loading = false;
+      this.mensajes = Array.isArray(result) ? result: [];
+      console.log(this.mensajes);
+      
+      this.loading = this.mensajes.length == 0 ? true : false;
+      this.loading_message = this.mensajes.length == 0 ? 'no hay preguntas registradas' : ''
+      console.log(this.loading_message);
+      
     })
   }
 

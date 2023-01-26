@@ -264,8 +264,8 @@ h4 {
 }
 
 .table-mine {
-  max-height: 300px;
-  overflow-y: scroll;
+  /* max-height: 300px;
+  overflow-y: scroll; */
 }
 
 /* Clases para usar el tooltip, el contenedor debe tener position

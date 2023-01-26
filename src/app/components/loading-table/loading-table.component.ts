@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-loading-table',
@@ -7,6 +7,7 @@ import { Component, OnInit} from '@angular/core';
 })
 export class LoadingTableComponent implements OnInit {
 
+  @Input() mensaje: string ='cargando...'
   constructor() { }
 
   ngOnInit(): void {

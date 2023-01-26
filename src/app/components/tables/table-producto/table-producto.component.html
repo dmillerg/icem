@@ -28,7 +28,7 @@
         </select>
     </div>
 </div>
-<div style="overflow: auto;width: 100%;" class="table-mine scroll-mine">
+<div style="overflow: auto;width: 100%;height: 200px;" class="table-mine scroll-mine">
 
     <table class="table table-dark text-center">
         <thead>
@@ -64,6 +64,6 @@
 
     </table>
     <div style="z-index: 999;" *ngIf="loading">
-        <app-loading-table></app-loading-table>
+        <app-loading-table [mensaje]="loading_message"></app-loading-table>
     </div>
 </div>

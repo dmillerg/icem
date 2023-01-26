@@ -25,6 +25,8 @@ export class TableVentasComponent implements OnInit {
   fecha: string = '';
   producto_id: number = -1;
   loading: boolean = false;
+  loading_message: string = 'cargando...';
+
 
   constructor(private api: ApiService, private modalService: NgbModal, private storage: SessionStorageService, private crud: CrudService) {
     crud.emitter.subscribe(result => {
@@ -50,8 +52,8 @@ export class TableVentasComponent implements OnInit {
         this.getProductoFoto(e.producto_id, i);
         // this.ventas[i].usuario = this.usuarios.filter(r => r.id == e.user_id)[0].usuario;
       });
-      console.log(this.ventas);
-      this.loading = false;
+      this.loading = this.ventas.length == 0 ? true : false;
+      this.loading_message = this.ventas.length == 0 ? 'no hay ventas registradas' : ''
     });
   }
 
@@ -62,10 +64,7 @@ export class TableVentasComponent implements OnInit {
   loadUsuario() {
     this.api.getUsuarios().subscribe((result) => {
       if (result.length > 0) {
-        if (this.storage.retrieve('usuario').usuario != 'kuroko') {
-          this.usuarios = result.filter((item) => item != result[0]);
-        } else
-          this.usuarios = result;
+        this.usuarios = result;
       } else this.usuarios = [];
     });
   }

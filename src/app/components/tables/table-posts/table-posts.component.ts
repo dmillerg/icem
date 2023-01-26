@@ -18,6 +18,8 @@ export class TablePostsComponent implements OnInit {
   usuario_query: string = '';
   visto_query: number = -1;
   loading: boolean = false;
+  loading_message: string = 'cargando...';
+
   constructor(private api: ApiService, private modalService: NgbModal, private crud: CrudService) {
     crud.emitter.subscribe(result => {
       if (result == 'loadposts' || result == 'loadall') {
@@ -39,7 +41,8 @@ export class TablePostsComponent implements OnInit {
       if (noti > 0) {
         this.crud.notificacion('posts', noti);
       }
-      this.loading = false;
+      this.loading = this.posts.length == 0 ? true : false;
+      this.loading_message = this.posts.length == 0 ? 'no hay comentarios registrados' : ''
     });
   }
 

@@ -339,7 +339,4 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterContentInit {
     return window.innerHeight < 478;
   }
 
-  openChat() {
-    document.querySelector('.chat-fixed-position').classList.toggle('closed');
-  }
 }

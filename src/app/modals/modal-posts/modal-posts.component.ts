@@ -72,16 +72,16 @@ export class ModalPostsComponent implements OnInit {
     formData.append('id_producto', this.posts.id_producto.toString());
 
     if (this.modalAction == 'Editar') {
-      // this.api.updatePosts(formData, this.posts.id).subscribe(
-      //   (result) => {
-      //     this.actiModal.close('Posts');
-      //     console.log(result);
-      //   },
-      //   (error) => {
-      //     this.actiModal.close('Posts');
-      //     console.log(error);
-      //   }
-      // );
+      this.api.updatePosts(formData, this.posts.id).subscribe(
+        (result) => {
+          this.actiModal.close('Posts');
+          console.log(result);
+        },
+        (error) => {
+          this.actiModal.close('Posts');
+          console.log(error);
+        }
+      );
     } else {
       this.api.addPosts(formData).subscribe(
         (result) => {

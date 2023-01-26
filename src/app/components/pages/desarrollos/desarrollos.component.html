@@ -1,11 +1,19 @@
 <div class="container" [@scaleAnimation]="'enter'">
     <div class="producto-section">
         <h1 class="title-section2 text-section"><strong>Nuevos desarrollos...</strong></h1>
+
+        <p class="text-lg h3  text-muted">  Algunos de los productos aun no han sido completamente desarrollados pero le mostramos un avance de lo que son y queremos que sean. Nuestro equipo de desarrollo nos ha proporcionado un poco de información acerca de estas innovaciones futuras, por esto le pedimos que si alguno le interesa sea solo un poco paciente pues posiblemente en breve este a su alcance.</p>
         <div class="row p-4"></div>
     </div>
     <div class="row" [@listAnimation]="desarrollos.length">
         <div *ngFor="let item of desarrollos" class="col-sm-6 col-md-4 col-lg-3 align-items-start" >
             <app-desarrollo-item [desarrollo]="item"></app-desarrollo-item>
+        </div>
+    </div>
+    <div class="row p-2" *ngIf="desarrollos.length==0">
+        <div class="col-sm-12 d-flex justify-content-center align-items-center flex-column">
+            <img class="w-50 svg-shadow" *ngIf="desarrollos.length==0" src="assets/clip-actions/empty.png" [@scaleAnimation]="'enter'" alt="">
+            <h3 class="text-section text-center" *ngIf="desarrollos.length==0">No hay nada en desarrollo aun</h3>
         </div>
     </div>
     <div class="row p-4"></div>

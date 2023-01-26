@@ -731,6 +731,17 @@ export class ApiService {
   }
 
   /**
+   * Actualizar un post
+   * @param formData datos del post
+   * @returns
+   */
+  updatePosts(formData, id: number) {
+    const headers = { 'content-type': 'application/json' };
+    let direccion = this.url + 'posts/'+id.toString();
+    return this.http.put(direccion, formData);
+  }
+
+  /**
   * Elimina un posts
   * @param id posts a eliminar
   * @returns
