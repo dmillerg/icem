@@ -9,6 +9,10 @@
   background-color: #304357;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
 .color-darkest {
   background-color: rgb(54, 54, 54);
 }
@@ -70,6 +74,9 @@ body {
   --alertcolor: #9d0208;
   --theme-color: rgb(255, 255, 255);
   --dimen-tooltip: -70px;
+  --text-color: white;
+  --text-color-hover: rgb(195, 195, 195);
+  --text-color-primary: rgb(59, 65, 142);
 }
 
 .bg-section {

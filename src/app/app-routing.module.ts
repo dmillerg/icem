@@ -10,7 +10,8 @@ import { QuienesSomosComponent } from './components/pages/quienes-somos/quienes-
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
-  { path: 'inicio', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
+  { path: 'inicios/:id', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
+  { path: 'inicio', component: HomeComponent },
   { path: 'productos', component: ProductosComponent },
   { path: 'quienes', component: QuienesSomosComponent },
   { path: 'noticias', component: NoticiasComponent },

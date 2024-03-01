@@ -1,0 +1,32 @@
+.title{
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.74);
+    cursor: pointer;
+    font-size: large;
+    font-family: ModernWarfare-8MM6z;
+    color: var(--text-color);
+}
+
+.menu-item{
+    color: var(--text-color);
+    transition: all .2s ease-in-out;
+}
+
+.menu-item:hover{
+    color: var(--text-color-hover);
+    transition: all .2s ease-in-out;
+}
+
+.back-transparent {
+    background: rgba(0, 0, 0, .1);
+    transition: 500ms;
+}
+
+.back-transparent:hover {
+    background: rgba(0, 0, 0, .8);
+    transition: 500ms;
+}
+
+.back-oscuro {
+    background: rgba(0, 0, 0, .9);
+    transition: 500ms;
+}
