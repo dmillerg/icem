@@ -46,8 +46,8 @@ jobs:
         with:
         # with: 
           server: www.dveloxsoft.com
-          username: {{secrets.ftp_username}}
-          password: {{secrets.ftp_password}}
+          username: kuroko
+          password: elaineYPG
         #   local-dir: './dist'
         #   remote-dir: '/dveloxsoft.com/'
       # Runs a set of commands using the runners shell
