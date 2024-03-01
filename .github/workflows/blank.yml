@@ -22,20 +22,15 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout codigo fuente
-      - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
 
-      - name: Instalar dependencias
-      - run: npm install #this installs node and npm for us
-        
-      - name: Construir aplicacion angular
-      - run: npm run build -- --prod
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
 
-      - name: Desplegar en servidor remoto 
-        uses: SamKirkland/FTP-Deploy-Action@4.1.0
-        with:
-          server: www.dveloxsoft.com
-          username: {{secrets.ftp_username}}
-          password: {{secrets.ftp_password}}
-          sever-dir: /dveloxsoft.com/
-          local-dir: "dist/"
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
