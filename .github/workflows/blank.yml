@@ -29,11 +29,14 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14.16'        
+
       # Runs a single command using the runners shell
       - name: Instalar dependencias
         run: npm install
-        with:
-          node-version: '14.16'
 
       - name: Compilando el proyecto
         run: npm run build
