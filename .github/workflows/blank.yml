@@ -39,7 +39,7 @@ jobs:
         run: npm install
 
       - name: Compilando el proyecto
-        run: npm run build
+        run: npm run build --prod
 
       - name: 📂 Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -48,7 +48,7 @@ jobs:
           server: ftp.dveloxsoft.com
           username: kuroko@dveloxsoft.com
           password: elaineYPG
-          local-dir: './dist/'
+          local-dir: './dist/ICEM/'
       # Runs a set of commands using the runners shell
       # - name: Run a multi-line script
       #   run: |
