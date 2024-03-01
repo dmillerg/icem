@@ -45,7 +45,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
         # with: 
-          server: www.dveloxsoft.com
+          server: ftp.dveloxsoft.com
           username: kuroko
           password: elaineYPG
         #   local-dir: './dist'
