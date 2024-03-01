@@ -46,7 +46,7 @@ jobs:
         with:
         # with: 
           server: ftp.dveloxsoft.com
-          username: kuroko
+          username: kuroko@dveloxsoft.com
           password: elaineYPG
         #   local-dir: './dist'
         #   remote-dir: '/dveloxsoft.com/'
