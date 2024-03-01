@@ -32,8 +32,10 @@ jobs:
       # Runs a single command using the runners shell
       - name: Instalar dependencias
         run: npm install
+        with:
+          node-version: '14.16'
 
-      - name: Instalar dependencias
+      - name: Compilando el proyecto
         run: npm run build
 
       # Runs a set of commands using the runners shell
